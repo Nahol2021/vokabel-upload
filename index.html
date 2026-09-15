@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vokabel-Scanner Upload</title>
+<style>
+  :root { color-scheme: light dark; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 24px 16px 48px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #f4f3f0; color: #1a1a1a;
+    display: flex; flex-direction: column; align-items: center;
+    min-height: 100vh;
+  }
+  @media (prefers-color-scheme: dark) {
+    body { background: #17181a; color: #f0f0f0; }
+    .card { background: #232527 !important; border-color: #34363a !important; }
+    input[type="password"] { background: #17181a !important; color: #f0f0f0 !important; border-color: #34363a !important; }
+  }
+  h1 { font-size: 1.3rem; margin: 0 0 4px; text-align: center; }
+  p.sub { color: #8a8a8a; text-align: center; margin: 0 0 24px; font-size: 0.9rem; }
+  .card {
+    width: 100%; max-width: 420px;
+    background: #fff; border: 1px solid #e4e2dd; border-radius: 16px;
+    padding: 20px; margin-bottom: 16px;
+  }
+  .card h2 { font-size: 0.95rem; margin: 0 0 12px; }
+  input[type="password"] {
+    width: 100%; padding: 12px 14px; border-radius: 10px;
+    border: 1px solid #d8d6d0; font-size: 1rem; margin-bottom: 10px;
+  }
+  button {
+    width: 100%; padding: 14px; border-radius: 12px; border: none;
+    font-size: 1rem; font-weight: 600; cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .btn-primary { background: #c0392b; color: #fff; }
+  .btn-secondary { background: #eceae5; color: #1a1a1a; }
+  @media (prefers-color-scheme: dark) { .btn-secondary { background: #34363a; color: #f0f0f0; } }
+  .btn-primary:disabled { opacity: 0.5; }
+  #captureLabel {
+    display: block; text-align: center; padding: 32px 20px; border-radius: 16px;
+    border: 2px dashed #c0392b33; background: #c0392b0d; color: #c0392b;
+    font-weight: 600; margin-bottom: 12px;
+  }
+  #status { text-align: center; font-size: 0.9rem; margin-top: 8px; min-height: 1.2em; white-space: pre-line; }
+  .status-ok { color: #1a7d3a; }
+  .status-err { color: #c0392b; }
+  a.issues-link {
+    display: block; text-align: center; margin-top: 14px; color: #c0392b;
+    font-weight: 600; text-decoration: none; font-size: 0.95rem;
+  }
+  #tokenSection.hidden, #uploadSection.hidden { display: none; }
+</style>
+</head>
+<body>
+  <h1>Vokabel-Scanner</h1>
+  <p class="sub">Foto → Gemini-Analyse → Vorschau auf GitHub</p>
+
+  <div class="card" id="tokenSection">
+    <h2>Einmalig: GitHub-Zugriff einrichten</h2>
+    <input type="password" id="tokenInput" placeholder="GitHub Token (ghp_... / github_pat_...)" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+    <button class="btn-primary" onclick="saveToken()">Speichern (nur auf diesem iPad)</button>
+    <div id="tokenStatus" style="text-align:center; font-size:0.85rem; margin-top:8px; color:#8a8a8a;">
+      Der Token wird nur lokal in Safari gespeichert, nie irgendwo anders hin gesendet.
+    </div>
+  </div>
+
+  <div class="card" id="uploadSection">
+    <h2>Vokabelfoto hochladen</h2>
+    <label id="captureLabel" for="photoInput">📷 Foto aufnehmen oder auswählen</label>
+    <input type="file" id="photoInput" accept="image/*" capture="environment" style="display:none" onchange="handleFile(event)">
+    <button class="btn-secondary" onclick="resetToken()">Token zurücksetzen</button>
+    <div id="status"></div>
+    <a class="issues-link" href="https://github.com/Nahol2021/vokabel-scanner/issues" target="_blank" rel="noopener">Offene Vorschauen ansehen →</a>
+  </div>
+
+<script>
+  const REPO = "Nahol2021/vokabel-scanner";
+  const TOKEN_KEY = "vokabel_scanner_gh_token";
+
+  function $(id) { return document.getElementById(id); }
+
+  function refreshSections() {
+    const token = localStorage.getItem(TOKEN_KEY);
+    $("tokenSection").classList.toggle("hidden", !!token);
+    $("uploadSection").classList.toggle("hidden", !token);
+  }
+
+  function saveToken() {
+    const val = $("tokenInput").value.trim();
+    if (!val) return;
+    localStorage.setItem(TOKEN_KEY, val);
+    $("tokenInput").value = "";
+    refreshSections();
+  }
+
+  function resetToken() {
+    localStorage.removeItem(TOKEN_KEY);
+    refreshSections();
+  }
+
+  function setStatus(text, cls) {
+    const el = $("status");
+    el.textContent = text;
+    el.className = cls || "";
+  }
+
+  function extFromMime(mime) {
+    if (mime === "image/png") return "png";
+    if (mime === "image/heic" || mime === "image/heif") return "heic";
+    return "jpg";
+  }
+
+  function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result.split(",")[1]);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  async function handleFile(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const token = localStorage.getItem(TOKEN_KEY);
+    if (!token) { refreshSections(); return; }
+
+    setStatus("Lade hoch ...");
+    try {
+      const base64 = await fileToBase64(file);
+      const ext = extFromMime(file.type);
+      const filename = `inbox/${Date.now()}.${ext}`;
+      const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${filename}`, {
+        method: "PUT",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Accept": "application/vnd.github+json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          message: `Vokabelfoto hochgeladen (${new Date().toLocaleString("de-DE")})`,
+          content: base64,
+        }),
+      });
+
+      if (res.status === 201) {
+        setStatus("Hochgeladen! Analyse läuft (~30 Sek.), Vorschau erscheint gleich als GitHub-Issue.", "status-ok");
+      } else if (res.status === 401) {
+        setStatus("Token ungültig oder abgelaufen. Bitte zurücksetzen und neu eintragen.", "status-err");
+      } else {
+        const body = await res.text();
+        setStatus(`Fehler (${res.status}): ${body.slice(0, 200)}`, "status-err");
+      }
+    } catch (e) {
+      setStatus("Netzwerkfehler: " + e.message, "status-err");
+    } finally {
+      event.target.value = "";
+    }
+  }
+
+  refreshSections();
+</script>
+</body>
+</html>
