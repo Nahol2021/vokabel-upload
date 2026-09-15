@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Vokabeln">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>Vokabel-Scanner Upload</title>
 <style>
   :root { color-scheme: light dark; }
@@ -163,6 +166,12 @@
   }
 
   refreshSections();
+
+  // Wenn Token schon gespeichert ist, Kamera direkt beim Oeffnen antriggern,
+  // damit ein Tap aufs Home-Bildschirm-Icon moeglichst sofort zur Kamera fuehrt.
+  if (localStorage.getItem(TOKEN_KEY)) {
+    setTimeout(() => $("photoInput").click(), 50);
+  }
 </script>
 </body>
 </html>
