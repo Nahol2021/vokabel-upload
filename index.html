@@ -43,10 +43,27 @@
   .btn-secondary { background: #eceae5; color: #1a1a1a; }
   @media (prefers-color-scheme: dark) { .btn-secondary { background: #34363a; color: #f0f0f0; } }
   .btn-primary:disabled { opacity: 0.5; }
-  #captureLabel {
-    display: block; text-align: center; padding: 32px 20px; border-radius: 16px;
+  #captureLabel, #libraryLabel {
+    display: block; text-align: center; padding: 24px 20px; border-radius: 16px;
     border: 2px dashed #c0392b33; background: #c0392b0d; color: #c0392b;
-    font-weight: 600; margin-bottom: 12px;
+    font-weight: 600; margin-bottom: 10px;
+  }
+  #libraryLabel { padding: 16px 20px; }
+  #thumbs { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+  .thumb { position: relative; width: 78px; height: 78px; border-radius: 10px; overflow: hidden; }
+  .thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .thumb button {
+    position: absolute; top: 2px; right: 2px; width: 22px; height: 22px; padding: 0;
+    border-radius: 50%; background: rgba(0,0,0,.65); color: #fff; font-size: 14px;
+    line-height: 22px; border: none;
+  }
+  .feldlabel { display: block; font-size: .85rem; color: #8a8a8a; margin-bottom: 6px; }
+  textarea {
+    width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid #d8d6d0;
+    font-size: 1rem; font-family: inherit; margin-bottom: 14px; resize: vertical;
+  }
+  @media (prefers-color-scheme: dark) {
+    textarea { background: #17181a; color: #f0f0f0; border-color: #34363a; }
   }
   #status { text-align: center; font-size: 0.9rem; margin-top: 8px; min-height: 1.2em; white-space: pre-line; }
   .status-ok { color: #1a7d3a; }
@@ -60,7 +77,7 @@
 </head>
 <body>
   <h1>Vokabel-Scanner</h1>
-  <p class="sub">Foto → Gemini-Analyse → Vorschau auf GitHub</p>
+  <p class="sub">Beliebig viele Bilder sammeln → Abschicken → eine Lektion in Navigium</p>
 
   <div class="card" id="tokenSection">
     <h2>Einmalig: GitHub-Zugriff einrichten</h2>
@@ -72,12 +89,22 @@
   </div>
 
   <div class="card" id="uploadSection">
-    <h2>Vokabelfoto hochladen</h2>
-    <label id="captureLabel" for="photoInput">📷 Foto aufnehmen oder auswählen</label>
-    <input type="file" id="photoInput" accept="image/*" capture="environment" style="display:none" onchange="handleFile(event)">
-    <button class="btn-secondary" onclick="resetToken()">Token zurücksetzen</button>
+    <h2>Neue Lektion</h2>
+
+    <label id="captureLabel" for="cameraInput">📷 Foto aufnehmen</label>
+    <input type="file" id="cameraInput" accept="image/*" capture="environment" multiple style="display:none" onchange="addFiles(event)">
+
+    <label id="libraryLabel" for="libraryInput">🖼️ Aus Fotos / Screenshots wählen</label>
+    <input type="file" id="libraryInput" accept="image/*" multiple style="display:none" onchange="addFiles(event)">
+
+    <div id="thumbs"></div>
+
+    <label class="feldlabel" for="notiz">Hinweise (optional)</label>
+    <textarea id="notiz" rows="3" placeholder="z.B. „Die Lektion beginnt bei amiga und geht bis agua“ oder „Seite 2 gehört zur selben Lektion“"></textarea>
+
+    <button class="btn-primary" id="submitBtn" onclick="submitBatch()" disabled>Abschicken</button>
     <div id="status"></div>
-    <a class="issues-link" href="https://github.com/Nahol2021/vokabel-scanner/issues" target="_blank" rel="noopener">Offene Vorschauen ansehen →</a>
+    <button class="btn-secondary" style="margin-top:14px" onclick="resetToken()">Token zurücksetzen</button>
   </div>
 
 <script>
@@ -126,51 +153,105 @@
     });
   }
 
-  async function handleFile(event) {
-    const file = event.target.files[0];
-    if (!file) return;
+  let gesammelt = [];
+
+  function renderThumbs() {
+    const box = $("thumbs");
+    box.innerHTML = "";
+    gesammelt.forEach((eintrag, i) => {
+      const div = document.createElement("div");
+      div.className = "thumb";
+      const img = document.createElement("img");
+      img.src = eintrag.url;
+      const del = document.createElement("button");
+      del.textContent = "×";
+      del.onclick = () => { URL.revokeObjectURL(eintrag.url); gesammelt.splice(i, 1); renderThumbs(); };
+      div.append(img, del);
+      box.append(div);
+    });
+    $("submitBtn").disabled = gesammelt.length === 0;
+    $("submitBtn").textContent = gesammelt.length
+      ? `Abschicken (${gesammelt.length} ${gesammelt.length === 1 ? "Bild" : "Bilder"})`
+      : "Abschicken";
+  }
+
+  function addFiles(event) {
+    for (const file of event.target.files) {
+      gesammelt.push({ file, url: URL.createObjectURL(file) });
+    }
+    event.target.value = "";
+    setStatus("");
+    renderThumbs();
+  }
+
+  async function ghPut(token, pfad, base64, nachricht) {
+    return fetch(`https://api.github.com/repos/${REPO}/contents/${pfad}`, {
+      method: "PUT",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Accept": "application/vnd.github+json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ message: nachricht, content: base64 }),
+    });
+  }
+
+  async function submitBatch() {
     const token = localStorage.getItem(TOKEN_KEY);
     if (!token) { refreshSections(); return; }
+    if (!gesammelt.length) return;
 
-    setStatus("Lade hoch ...");
+    $("submitBtn").disabled = true;
+    const stapel = String(Date.now());
+    const bilder = [];
+
     try {
-      const base64 = await fileToBase64(file);
-      const ext = extFromMime(file.type);
-      const filename = `inbox/${Date.now()}.${ext}`;
-      const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${filename}`, {
-        method: "PUT",
-        headers: {
-          "Authorization": `Bearer ${token}`,
-          "Accept": "application/vnd.github+json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          message: `Vokabelfoto hochgeladen (${new Date().toLocaleString("de-DE")})`,
-          content: base64,
-        }),
-      });
-
-      if (res.status === 201) {
-        setStatus("Hochgeladen! Analyse läuft (~30 Sek.), Vorschau erscheint gleich als GitHub-Issue.", "status-ok");
-      } else if (res.status === 401) {
-        setStatus("Token ungültig oder abgelaufen. Bitte zurücksetzen und neu eintragen.", "status-err");
-      } else {
-        const body = await res.text();
-        setStatus(`Fehler (${res.status}): ${body.slice(0, 200)}`, "status-err");
+      for (let i = 0; i < gesammelt.length; i++) {
+        setStatus(`Lade Bild ${i + 1} von ${gesammelt.length} hoch ...`);
+        const { file } = gesammelt[i];
+        const name = `${i + 1}.${extFromMime(file.type)}`;
+        const res = await ghPut(token, `inbox/${stapel}/${name}`, await fileToBase64(file),
+                                `Vokabelbild ${i + 1} (Stapel ${stapel})`);
+        if (res.status === 401) {
+          setStatus("Token ungültig oder abgelaufen. Bitte zurücksetzen und neu eintragen.", "status-err");
+          $("submitBtn").disabled = false;
+          return;
+        }
+        if (res.status !== 201) {
+          setStatus(`Fehler bei Bild ${i + 1} (${res.status}): ${(await res.text()).slice(0, 160)}`, "status-err");
+          $("submitBtn").disabled = false;
+          return;
+        }
+        bilder.push(name);
       }
+
+      // Die Marker-Datei loest erst jetzt die Verarbeitung aus - so wird aus
+      // allen Bildern zusammen genau eine Lektion.
+      setStatus("Starte Verarbeitung ...");
+      const marker = { bilder, notiz: $("notiz").value.trim(), erstellt: new Date().toISOString() };
+      const res = await ghPut(token, `inbox/${stapel}/batch.json`,
+                              btoa(unescape(encodeURIComponent(JSON.stringify(marker, null, 2)))),
+                              `Stapel ${stapel} abschicken (${bilder.length} Bilder)`);
+      if (res.status !== 201) {
+        setStatus(`Fehler beim Abschicken (${res.status})`, "status-err");
+        $("submitBtn").disabled = false;
+        return;
+      }
+
+      gesammelt.forEach((e) => URL.revokeObjectURL(e.url));
+      gesammelt = [];
+      $("notiz").value = "";
+      renderThumbs();
+      setStatus(`Abgeschickt! ${bilder.length} ${bilder.length === 1 ? "Bild wird" : "Bilder werden"} zu einer Lektion verarbeitet und in Navigium angelegt (~1 Min.).`, "status-ok");
     } catch (e) {
       setStatus("Netzwerkfehler: " + e.message, "status-err");
-    } finally {
-      event.target.value = "";
+      $("submitBtn").disabled = false;
     }
   }
 
   refreshSections();
+  renderThumbs();
 
-  // Wenn Token schon gespeichert ist, Kamera direkt beim Oeffnen antriggern,
-  // damit ein Tap aufs Home-Bildschirm-Icon moeglichst sofort zur Kamera fuehrt.
-  if (localStorage.getItem(TOKEN_KEY)) {
-    setTimeout(() => $("photoInput").click(), 50);
   }
 </script>
 </body>
