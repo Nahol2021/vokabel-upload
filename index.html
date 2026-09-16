@@ -111,7 +111,7 @@
   <p class="sub" style="margin:0"><span id="version"></span></p>
 
 <script>
-  const VERSION = "v5 (16.09. 20:05)";
+  const VERSION = "v6 (16.09. 20:25)";
   const REPO = "Nahol2021/vokabel-scanner";
   const TOKEN_KEY = "vokabel_scanner_gh_token";
 
@@ -120,11 +120,17 @@
     const box = document.getElementById("fehler");
     if (box) {
       box.style.display = "block";
-      box.textContent = `Fehler (${VERSION}), Zeile ${zeile}:\n${msg}`;
+      box.textContent = `Fehler (${VERSION}), Zeile ${zeile}:\n${msg}\n\n(antippen zum Ausblenden)`;
+      box.onclick = fehlerAusblenden;
     }
   };
 
   function $(id) { return document.getElementById(id); }
+
+  function fehlerAusblenden() {
+    const box = $("fehler");
+    if (box) { box.style.display = "none"; box.textContent = ""; }
+  }
 
   function refreshSections() {
     const token = localStorage.getItem(TOKEN_KEY);
@@ -227,6 +233,7 @@
     if (!token) { refreshSections(); return; }
     if (!gesammelt.length) return;
 
+    fehlerAusblenden();
     $("submitBtn").disabled = true;
     const stapel = String(Date.now());
     const bilder = [];
