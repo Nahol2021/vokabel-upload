@@ -108,8 +108,10 @@
     <button class="btn-secondary" style="margin-top:14px" id="resetBtn">Token zurücksetzen</button>
   </div>
 
+  <p class="sub" style="margin:0"><span id="version"></span></p>
+
 <script>
-  const VERSION = "v4 (16.09. 19:50)";
+  const VERSION = "v5 (16.09. 20:05)";
   const REPO = "Nahol2021/vokabel-scanner";
   const TOKEN_KEY = "vokabel_scanner_gh_token";
 
@@ -293,10 +295,10 @@
     $("fehler").textContent = "Fehlende Elemente: " + fehlend.join(", ");
   }
 
-  $("version").textContent = VERSION;
+  const versionsAnzeige = $("version");
+  if (versionsAnzeige) versionsAnzeige.textContent = VERSION;
   refreshSections();
   renderThumbs();
 </script>
-  <p class="sub" style="margin:0"><span id="version"></span></p>
 </body>
 </html>
