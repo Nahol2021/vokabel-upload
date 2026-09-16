@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Konjunktiv">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Konjunktiv-Werkstatt</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+  :root {
+    --ground: #f5f6f7;
+    --surface: #ffffff;
+    --surface-2: #eceef0;
+    --ink: #17212b;
+    --ink-2: #4c5a66;
+    --ink-3: #7c8892;
+    --line: #dde1e5;
+    --marker: #c0392b;
+    --endung: #2d5fa6;
+    --gut: #1a7a4c;
+    --gut-bg: #e6f3ec;
+    --schlecht: #b8342a;
+    --schlecht-bg: #fbeae8;
+    --fokus: #2d5fa6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #13191f;
+      --surface: #1b232b;
+      --surface-2: #232d36;
+      --ink: #e8edf1;
+      --ink-2: #a8b6c1;
+      --ink-3: #7b8894;
+      --line: #2e3941;
+      --marker: #f0776a;
+      --endung: #7fa9e8;
+      --gut: #5cc48d;
+      --gut-bg: #173426;
+      --schlecht: #f0867c;
+      --schlecht-bg: #35201e;
+      --fokus: #7fa9e8;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #13191f;
+    --surface: #1b232b;
+    --surface-2: #232d36;
+    --ink: #e8edf1;
+    --ink-2: #a8b6c1;
+    --ink-3: #7b8894;
+    --line: #2e3941;
+    --marker: #f0776a;
+    --endung: #7fa9e8;
+    --gut: #5cc48d;
+    --gut-bg: #173426;
+    --schlecht: #f0867c;
+    --schlecht-bg: #35201e;
+    --fokus: #7fa9e8;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .wrap {
+    max-width: 660px;
+    margin: 0 auto;
+    padding-inline: 18px;
+    padding-block: 22px 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  header h1 {
+    font-family: "IBM Plex Serif", Georgia, serif;
+    font-size: 1.55rem;
+    font-weight: 600;
+    margin: 0 0 2px;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  header p { margin: 0; color: var(--ink-2); font-size: 0.92rem; }
+
+  /* Spickzettel */
+  details.karte {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  details.karte > summary {
+    cursor: pointer;
+    padding: 13px 16px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+  details.karte > summary::-webkit-details-marker { display: none; }
+  details.karte > summary::after { content: "▾"; color: var(--ink-3); font-size: .8rem; }
+  details.karte[open] > summary::after { content: "▴"; }
+  .regeln { padding: 0 16px 16px; display: flex; flex-direction: column; gap: 14px; }
+  .regel { border-left: 3px solid var(--line); padding-left: 12px; }
+  .regel h3 {
+    margin: 0 0 4px;
+    font-size: .72rem;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: var(--ink-3);
+    font-weight: 600;
+  }
+  .formel {
+    font-family: "IBM Plex Serif", Georgia, serif;
+    font-size: 1.02rem;
+  }
+  .endungen {
+    font-size: .85rem;
+    color: var(--ink-2);
+    margin-top: 3px;
+    font-family: "IBM Plex Serif", Georgia, serif;
+  }
+  .m { color: var(--marker); font-weight: 600; }
+  .e { color: var(--endung); font-weight: 600; }
+
+  /* Modus-Umschalter */
+  .modi { display: flex; flex-wrap: wrap; gap: 7px; }
+  .modi button {
+    font: inherit;
+    font-size: .84rem;
+    font-weight: 500;
+    padding: 7px 13px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink-2);
+    cursor: pointer;
+  }
+  .modi button[aria-pressed="true"] {
+    background: var(--ink);
+    color: var(--ground);
+    border-color: var(--ink);
+  }
+
+  /* Aufgabe */
+  .aufgabe {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 20px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .typzeile {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    font-size: .72rem;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: var(--ink-3);
+    font-weight: 600;
+  }
+  .frage { font-size: 1.02rem; margin: 0; }
+  .zeigeform {
+    font-family: "IBM Plex Serif", Georgia, serif;
+    font-size: 1.85rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    word-break: break-word;
+  }
+  .satz {
+    font-family: "IBM Plex Serif", Georgia, serif;
+    font-size: 1.22rem;
+    line-height: 1.45;
+  }
+  .hinweis { font-size: .88rem; color: var(--ink-2); margin: 0; }
+
+  input[type="text"], textarea {
+    font: inherit;
+    font-family: "IBM Plex Serif", Georgia, serif;
+    font-size: 1.05rem;
+    width: 100%;
+    padding: 11px 13px;
+    border-radius: 9px;
+    border: 1px solid var(--line);
+    background: var(--ground);
+    color: var(--ink);
+  }
+  textarea { resize: vertical; min-height: 74px; line-height: 1.45; }
+  input:focus-visible, textarea:focus-visible, button:focus-visible, summary:focus-visible {
+    outline: 2px solid var(--fokus);
+    outline-offset: 2px;
+  }
+
+  .wahl { display: flex; flex-direction: column; gap: 8px; }
+  .wahl button {
+    font: inherit;
+    text-align: left;
+    padding: 11px 14px;
+    border-radius: 9px;
+    border: 1px solid var(--line);
+    background: var(--ground);
+    color: var(--ink);
+    cursor: pointer;
+  }
+  .wahl button:hover:not(:disabled) { border-color: var(--ink-3); }
+  .wahl button.richtig { background: var(--gut-bg); border-color: var(--gut); color: var(--gut); font-weight: 600; }
+  .wahl button.falsch { background: var(--schlecht-bg); border-color: var(--schlecht); color: var(--schlecht); }
+
+  .knopfreihe { display: flex; gap: 9px; flex-wrap: wrap; }
+  .knopfreihe button {
+    font: inherit;
+    font-weight: 600;
+    font-size: .93rem;
+    padding: 11px 20px;
+    border-radius: 9px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    flex: 1 1 auto;
+  }
+  .haupt { background: var(--ink); color: var(--ground); }
+  .neben { background: transparent; border-color: var(--line); color: var(--ink-2); }
+
+  .rueck { border-radius: 10px; padding: 12px 14px; font-size: .94rem; }
+  .rueck.ok { background: var(--gut-bg); color: var(--gut); border: 1px solid var(--gut); }
+  .rueck.nein { background: var(--schlecht-bg); color: var(--schlecht); border: 1px solid var(--schlecht); }
+  .rueck .loesung { font-family: "IBM Plex Serif", Georgia, serif; font-size: 1.12rem; font-weight: 600; }
+  .rueck .erklaerung { color: var(--ink-2); margin-top: 6px; font-size: .88rem; }
+  .rueck .fehlergrund {
+    font-weight: 700; font-size: 1rem; margin-top: 2px;
+    display: flex; gap: 7px; align-items: baseline;
+  }
+  .rueck .fehlergrund::before { content: "→"; opacity: .7; }
+  .vergleich { display: flex; flex-direction: column; gap: 7px; margin-top: 9px; }
+  .zeile { display: flex; gap: 10px; align-items: baseline; }
+  .zeile .etikett {
+    flex: 0 0 4.4em; font-size: .72rem; text-transform: uppercase;
+    letter-spacing: .06em; font-weight: 600; color: var(--ink-3);
+  }
+  .zeile .wert {
+    font-family: "IBM Plex Serif", Georgia, serif; font-size: 1.14rem;
+    font-weight: 600; word-break: break-word;
+  }
+  .zeile .wert.durchgestrichen { text-decoration: line-through; text-decoration-thickness: 1px; opacity: .75; }
+  .stamm { color: var(--ink); }
+  .konj {
+    color: var(--marker); font-weight: 600;
+    border-bottom: 2px solid var(--marker); padding-bottom: 1px;
+  }
+  .vokliste { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; gap: 5px; }
+  .vokliste li { display: flex; gap: 8px; align-items: baseline; font-size: .88rem; color: var(--ink-2); }
+  .vokliste .zeichen { flex: 0 0 1.1em; font-weight: 700; }
+  .vokliste li.hat .zeichen { color: var(--gut); }
+  .vokliste li.fehlt .zeichen { color: var(--schlecht); }
+  .vokliste .lat { font-family: "IBM Plex Serif", Georgia, serif; font-weight: 600; color: var(--ink); }
+  .uebersetzung { font-family: "IBM Plex Serif", Georgia, serif; font-size: 1.08rem; font-style: italic; }
+
+  .stand {
+    display: flex;
+    gap: 16px;
+    align-items: baseline;
+    font-size: .84rem;
+    color: var(--ink-2);
+    font-variant-numeric: tabular-nums;
+  }
+  .stand b { color: var(--ink); font-size: 1.05rem; font-weight: 600; }
+  .stand .reset {
+    margin-left: auto; background: none; border: none; color: var(--ink-3);
+    font: inherit; font-size: .84rem; cursor: pointer; text-decoration: underline;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .aufgabe { transition: border-color .15s ease; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <h1>Konjunktiv-Werkstatt</h1>
+    <p>Imperfekt &amp; Plusquamperfekt, Aktiv und Passiv — mit den Verben aus Lektion 8, 18 und&nbsp;19.</p>
+  </header>
+
+  <details class="karte" id="spick">
+    <summary>Spickzettel: So werden die Formen gebaut</summary>
+    <div class="regeln">
+      <div class="regel">
+        <h3>Konjunktiv Imperfekt — Aktiv</h3>
+        <div class="formel">Infinitiv Präsens <span class="m">(e)re</span> + <span class="e">m, s, t, mus, tis, nt</span></div>
+        <div class="endungen">age<span class="m">re</span><span class="e">m</span> · age<span class="m">re</span><span class="e">s</span> · age<span class="m">re</span><span class="e">t</span> · age<span class="m">re</span><span class="e">mus</span> · age<span class="m">re</span><span class="e">tis</span> · age<span class="m">re</span><span class="e">nt</span></div>
+      </div>
+      <div class="regel">
+        <h3>Konjunktiv Imperfekt — Passiv</h3>
+        <div class="formel">Infinitiv Präsens <span class="m">(e)re</span> + <span class="e">r, ris, tur, mur, mini, ntur</span></div>
+        <div class="endungen">age<span class="m">re</span><span class="e">r</span> · age<span class="m">re</span><span class="e">ris</span> · age<span class="m">re</span><span class="e">tur</span> · age<span class="m">re</span><span class="e">mur</span> · age<span class="m">re</span><span class="e">mini</span> · age<span class="m">re</span><span class="e">ntur</span></div>
+      </div>
+      <div class="regel">
+        <h3>Konjunktiv Plusquamperfekt — Aktiv</h3>
+        <div class="formel">Perfektstamm + <span class="m">isse</span> + <span class="e">m, s, t, mus, tis, nt</span></div>
+        <div class="endungen">eg<span class="m">isse</span><span class="e">m</span> · dux<span class="m">isse</span><span class="e">t</span> · laudav<span class="m">isse</span><span class="e">mus</span> — Perfektstamm aus der 3. Stammform (egi → eg-)</div>
+      </div>
+      <div class="regel">
+        <h3>Konjunktiv Plusquamperfekt — Passiv</h3>
+        <div class="formel">PPP (us, a, um / i, ae, a) + <span class="m">esse</span> + <span class="e">m, s, t, mus, tis, nt</span></div>
+        <div class="endungen">actus <span class="m">esse</span><span class="e">m</span> · ductus <span class="m">esse</span><span class="e">t</span> · empti <span class="m">esse</span><span class="e">mus</span></div>
+      </div>
+    </div>
+  </details>
+
+  <div class="modi" id="modi"></div>
+
+  <section class="aufgabe" id="aufgabe" aria-live="polite"></section>
+
+  <div class="stand">
+    <span>Richtig <b id="zRichtig">0</b></span>
+    <span>Falsch <b id="zFalsch">0</b></span>
+    <span>Serie <b id="zSerie">0</b></span>
+    <button class="reset" id="resetBtn" type="button">zurücksetzen</button>
+  </div>
+</div>
+
+<script>
+  // Verbtabelle: Infinitiv, Perfektstamm, PPP-Stamm, Bedeutung.
+  // passiv:false bei Verben ohne persoenliches Passiv (sedere intransitiv)
+  // bzw. mit abweichender Passivbildung (facere -> fieri).
+  // Verben aus den Lektionen 8, 18 und 19 (inkl. Textlexikon 19).
+  // passiv:false bei Verben ohne persoenliches Passiv bzw. abweichender Bildung.
+  const VERBEN = [
+    { inf: "ornare",      perf: "ornav",    ppp: "ornat",    bed: "schmücken", passiv: true },
+    { inf: "colere",      perf: "colu",     ppp: "cult",     bed: "pflegen, verehren", passiv: true },
+    { inf: "deligere",    perf: "deleg",    ppp: "delect",   bed: "auswählen", passiv: true },
+    { inf: "interficere", perf: "interfec", ppp: "interfect",bed: "töten", passiv: true },
+    { inf: "instruere",   perf: "instrux",  ppp: "instruct", bed: "aufstellen, ausrüsten", passiv: true },
+    { inf: "imperare",    perf: "imperav",  ppp: "imperat",  bed: "befehlen", passiv: true },
+    { inf: "mandare",     perf: "mandav",   ppp: "mandat",   bed: "auftragen", passiv: true },
+    { inf: "nuntiare",    perf: "nuntiav",  ppp: "nuntiat",  bed: "melden", passiv: true },
+    { inf: "negare",      perf: "negav",    ppp: "negat",    bed: "leugnen, verneinen", passiv: true },
+    { inf: "terrere",     perf: "terru",    ppp: "territ",   bed: "erschrecken", passiv: true },
+    { inf: "amittere",    perf: "amis",     ppp: "amiss",    bed: "verlieren", passiv: true },
+    { inf: "ponere",      perf: "posu",     ppp: "posit",    bed: "setzen, stellen, legen", passiv: true },
+    { inf: "augere",      perf: "aux",      ppp: "auct",     bed: "vergrößern, vermehren", passiv: true },
+    { inf: "mittere",     perf: "mis",      ppp: "miss",     bed: "schicken", passiv: true },
+    { inf: "concedere",   perf: "concess",  ppp: "concess",  bed: "zugestehen, weichen", passiv: true },
+    { inf: "capere",      perf: "cep",      ppp: "capt",     bed: "fassen, ergreifen, einnehmen", passiv: true },
+    { inf: "dare",        perf: "ded",      ppp: "dat",      bed: "geben", passiv: true },
+    { inf: "videre",      perf: "vid",      ppp: "vis",      bed: "sehen", passiv: true },
+    { inf: "tenere",      perf: "tenu",     ppp: "tent",     bed: "halten", passiv: true },
+    { inf: "audire",      perf: "audiv",    ppp: "audit",    bed: "hören", passiv: true },
+    { inf: "petere",      perf: "petiv",    ppp: "petit",    bed: "aufsuchen, angreifen, erbitten", passiv: true },
+    { inf: "munire",      perf: "muniv",    ppp: "munit",    bed: "befestigen", passiv: true },
+    { inf: "prohibere",   perf: "prohibu",  ppp: "prohibit", bed: "abhalten, hindern", passiv: true },
+    { inf: "conficere",   perf: "confec",   ppp: "confect",  bed: "erledigen, beenden", passiv: true },
+    { inf: "ducere",      perf: "dux",      ppp: "duct",     bed: "führen, ziehen", passiv: true },
+    { inf: "imponere",    perf: "imposu",   ppp: "imposit",  bed: "auferlegen, hineinsetzen", passiv: true },
+    { inf: "agere",       perf: "eg",       ppp: "act",      bed: "handeln, treiben", passiv: true },
+    { inf: "emere",       perf: "em",       ppp: "empt",     bed: "kaufen", passiv: true },
+    { inf: "tegere",      perf: "tex",      ppp: "tect",     bed: "bedecken, schützen", passiv: true },
+    { inf: "legere",      perf: "leg",      ppp: "lect",     bed: "lesen, sammeln", passiv: true },
+    { inf: "movere",      perf: "mov",      ppp: "mot",      bed: "bewegen", passiv: true },
+    { inf: "narrare",     perf: "narrav",   ppp: "narrat",   bed: "erzählen", passiv: true },
+    { inf: "facere",      perf: "fec",      ppp: "fact",     bed: "machen, tun", passiv: false },
+    { inf: "sedere",      perf: "sed",      ppp: "sess",     bed: "sitzen", passiv: false },
+    { inf: "flere",       perf: "flev",     ppp: "flet",     bed: "weinen, beweinen", passiv: false },
+    { inf: "esse",        perf: "fu",       ppp: null,       bed: "sein", passiv: false },
+  ];
+
+  const AKTIV_E  = ["m", "s", "t", "mus", "tis", "nt"];
+  const PASSIV_E = ["r", "ris", "tur", "mur", "mini", "ntur"];
+  const PERSONEN = ["1. Sg.", "2. Sg.", "3. Sg.", "1. Pl.", "2. Pl.", "3. Pl."];
+  const PPP_ENDE = ["us", "us", "us", "i", "i", "i"];
+
+  function bilde(verb, tempus, genus, i) {
+    if (tempus === "impf" && genus === "akt") return verb.inf + AKTIV_E[i];
+    if (tempus === "impf" && genus === "pass") return verb.inf + PASSIV_E[i];
+    if (tempus === "plqpf" && genus === "akt") return verb.perf + "isse" + AKTIV_E[i];
+    return verb.ppp + PPP_ENDE[i] + " esse" + AKTIV_E[i];
+  }
+
+  // Beim Passiv Plusquamperfekt sind auch die anderen Genera richtig.
+  function alleLoesungen(verb, tempus, genus, i) {
+    if (!(tempus === "plqpf" && genus === "pass")) return [bilde(verb, tempus, genus, i)];
+    const formen = i < 3 ? ["us", "a", "um"] : ["i", "ae", "a"];
+    return formen.map((f) => verb.ppp + f + " esse" + AKTIV_E[i]);
+  }
+
+  function bezeichnung(tempus, genus, i) {
+    const t = tempus === "impf" ? "Konj. Imperfekt" : "Konj. Plusquamperfekt";
+    return `${PERSONEN[i]} ${t} ${genus === "akt" ? "Aktiv" : "Passiv"}`;
+  }
+
+  // Alle Woerter stammen aus den Schul-Lektionen (Prima 1-19, Cursus 15).
+  // --- Fehlerdiagnose ---------------------------------------------------
+  function bauplan(verb, tempus, genus, i) {
+    if (tempus === "impf" && genus === "akt")
+      return `Infinitiv ${verb.inf} + Endung ${AKTIV_E[i]}`;
+    if (tempus === "impf" && genus === "pass")
+      return `Infinitiv ${verb.inf} + Endung ${PASSIV_E[i]}`;
+    if (tempus === "plqpf" && genus === "akt")
+      return `Perfektstamm ${verb.perf}- + isse + Endung ${AKTIV_E[i]}`;
+    return `PPP ${verb.ppp}${PPP_ENDE[i]} + esse${AKTIV_E[i]}`;
+  }
+
+  // Zerlegt eine Form in Stamm, Tempuszeichen und Personalendung -
+  // dieselbe Farblogik wie auf dem Spickzettel.
+  function zerlege(verb, tempus, genus, i) {
+    const endung = (tempus === "impf" && genus === "pass") ? PASSIV_E[i] : AKTIV_E[i];
+    if (tempus === "impf") {
+      const basis = verb.inf.slice(0, -2);
+      return [{ t: basis, k: "stamm" }, { t: verb.inf.slice(-2), k: "m" }, { t: endung, k: "e" }];
+    }
+    if (genus === "akt") {
+      return [{ t: verb.perf, k: "stamm" }, { t: "isse", k: "m" }, { t: endung, k: "e" }];
+    }
+    return [{ t: verb.ppp + PPP_ENDE[i] + " ", k: "stamm" }, { t: "esse", k: "m" }, { t: endung, k: "e" }];
+  }
+
+  function formEl(verb, tempus, genus, i) {
+    const span = el("span", "wert");
+    zerlege(verb, tempus, genus, i).forEach((teil) => span.append(el("span", teil.k, teil.t)));
+    return span;
+  }
+
+  function vergleichsblock(verb, ziel, eigene) {
+    const box = el("div", "vergleich");
+    if (eigene && eigene.trim()) {
+      const z = el("div", "zeile");
+      z.append(el("span", "etikett", "Deins"));
+      z.append(el("span", "wert durchgestrichen", eigene.trim()));
+      box.append(z);
+    }
+    const z2 = el("div", "zeile");
+    z2.append(el("span", "etikett", "Richtig"));
+    z2.append(formEl(verb, ziel.tempus, ziel.genus, ziel.i));
+    box.append(z2);
+    return box;
+  }
+
+  // Sucht, welche Form der Nutzer stattdessen gebildet hat.
+  function findeForm(verb, eingabe) {
+    for (const tempus of ["impf", "plqpf"]) {
+      for (const genus of ["akt", "pass"]) {
+        if (genus === "pass" && (!verb.passiv || (tempus === "plqpf" && !verb.ppp))) continue;
+        for (let i = 0; i < 6; i++) {
+          if (alleLoesungen(verb, tempus, genus, i).some((l) => norm(l) === norm(eingabe))) {
+            return { tempus, genus, i };
+          }
+        }
+      }
+    }
+    return null;
+  }
+
+  function unterschied(hat, soll) {
+    const teile = [];
+    if (hat.genus !== soll.genus) {
+      teile.push(soll.genus === "pass"
+        ? "Du hast Aktiv gebildet, gefragt war Passiv"
+        : "Du hast Passiv gebildet, gefragt war Aktiv");
+    }
+    if (hat.tempus !== soll.tempus) {
+      teile.push(soll.tempus === "plqpf"
+        ? "Du bist im Imperfekt geblieben — das Plusquamperfekt braucht den Perfektstamm bzw. das PPP"
+        : "Du hast das Plusquamperfekt gebildet — das Imperfekt geht vom Infinitiv aus");
+    }
+    if (hat.i !== soll.i) {
+      teile.push(`Person und Zahl stimmen nicht: du hast ${PERSONEN[hat.i]}, gefragt war ${PERSONEN[soll.i]}`);
+    }
+    return teile.join(". ") + ".";
+  }
+
+  function diagnose(verb, ziel, eingabe) {
+    const roh = (eingabe || "").trim();
+    if (!roh) return `Nichts eingetragen. So wird die Form gebaut: ${bauplan(verb, ziel.tempus, ziel.genus, ziel.i)}.`;
+    const gefunden = findeForm(verb, roh);
+    if (gefunden) {
+      return `${roh} ist ${bezeichnung(gefunden.tempus, gefunden.genus, gefunden.i)}. `
+        + unterschied(gefunden, ziel);
+    }
+    const soll = bilde(verb, ziel.tempus, ziel.genus, ziel.i);
+    const basis = ziel.tempus === "impf" ? verb.inf
+      : (ziel.genus === "akt" ? verb.perf : verb.ppp);
+    if (norm(roh).startsWith(norm(basis).slice(0, Math.max(3, basis.length - 1)))) {
+      const endung = ziel.genus === "pass" && ziel.tempus === "impf" ? PASSIV_E[ziel.i] : AKTIV_E[ziel.i];
+      return `Der Stamm passt, die Endung nicht: für ${PERSONEN[ziel.i]} braucht es -${endung}. `
+        + `Aufbau: ${bauplan(verb, ziel.tempus, ziel.genus, ziel.i)}.`;
+    }
+    return `Der Stamm passt noch nicht. Aufbau: ${bauplan(verb, ziel.tempus, ziel.genus, ziel.i)}.`;
+  }
+
+  // Alle Inhaltswoerter stammen aus Lektion 8, 18 und 19; nur die
+  // Funktionswoerter cum, cur, quid, in kommen aus frueheren Lektionen.
+  const SAETZE = [
+    { lat: "Senator imperavit, ut templum ornaretur.",
+      de: "Der Senator befahl, dass der Tempel geschmückt werde.",
+      form: "ornaretur", erkl: "Konj. Imperfekt Passiv, 3. Sg. — Infinitiv ornare + tur. Nach imperare steht ut mit Konjunktiv." ,
+      woerter: [{ lat: "senator", de: "der Senator", st: ["senator"] }, { lat: "imperavit", de: "befahl", st: ["befahl", "befiehl", "anordn", "gebot", "aufgetragen"] }, { lat: "templum", de: "der Tempel", st: ["tempel"] }, { lat: "ornaretur", de: "geschmückt werde", st: ["schmuck", "schmück", "verzier"] }] },
+    { lat: "Scire volui, unde comites venissent.",
+      de: "Ich wollte wissen, woher die Begleiter gekommen waren.",
+      form: "venissent", erkl: "Konj. Plusquamperfekt Aktiv, 3. Pl. — Perfektstamm ven- + issent. Indirekter Fragesatz, vorzeitig." ,
+      woerter: [{ lat: "scire volui", de: "ich wollte wissen", st: ["wissen", "wusst", "wüsst"] }, { lat: "unde", de: "woher", st: ["woher"] }, { lat: "comites", de: "die Begleiter", st: ["begleiter", "gefahrt", "gefährt", "kameraden"] }, { lat: "venissent", de: "gekommen waren", st: ["gekommen", "kamen", "komm"] }] },
+    { lat: "Cum hostes urbem peterent, cives muros muniebant.",
+      de: "Während die Feinde die Stadt angriffen, befestigten die Bürger die Mauern.",
+      form: "peterent", erkl: "Konj. Imperfekt Aktiv, 3. Pl. — Infinitiv petere + nt. Gleichzeitig zum Hauptsatz." ,
+      woerter: [{ lat: "hostes", de: "die Feinde", st: ["feind"] }, { lat: "urbem", de: "die Stadt", st: ["stadt"] }, { lat: "peterent", de: "angriffen", st: ["angriff", "angegriffen", "griffen an", "aufsuch", "erbitt"] }, { lat: "cives", de: "die Bürger", st: ["burger", "bürger"] }, { lat: "muros", de: "die Mauern", st: ["mauer"] }, { lat: "muniebant", de: "befestigten", st: ["befestig", "sicher", "bauten"] }] },
+    { lat: "Nuntiatum est, ubi agmen instructum esset.",
+      de: "Es wurde gemeldet, wo der Heereszug aufgestellt worden war.",
+      form: "instructum esset", erkl: "Konj. Plusquamperfekt Passiv — PPP instructum (Neutrum zu agmen) + esset." ,
+      woerter: [{ lat: "nuntiatum est", de: "es wurde gemeldet", st: ["gemeldet", "meldung", "verkundet", "verkündet", "berichtet"] }, { lat: "ubi", de: "wo", st: ["wo"] }, { lat: "agmen", de: "der Heereszug", st: ["heereszug", "heer", "zug", "kolonne", "marschkolonne"] }, { lat: "instructum esset", de: "aufgestellt worden war", st: ["aufgestellt", "aufstell", "ausgerustet", "ausgerüstet", "geordnet"] }] },
+    { lat: "Cum preces ad deos mitterentur, multitudo tacebat.",
+      de: "Während die Gebete zu den Göttern geschickt wurden, schwieg die Menge.",
+      form: "mitterentur", erkl: "Konj. Imperfekt Passiv, 3. Pl. — Infinitiv mittere + ntur." ,
+      woerter: [{ lat: "preces", de: "die Gebete", st: ["gebet", "bitt"] }, { lat: "deos", de: "zu den Göttern", st: ["gott", "götter", "gotter"] }, { lat: "mitterentur", de: "geschickt wurden", st: ["geschickt", "schick", "gesendet", "sandt", "gesandt"] }, { lat: "multitudo", de: "die Menge", st: ["menge", "vielzahl", "masse"] }, { lat: "tacebat", de: "schwieg", st: ["schwieg", "schweig", "still"] }] },
+    { lat: "Poeta narravit, qualis laus civibus data esset.",
+      de: "Der Dichter erzählte, was für ein Lob den Bürgern gegeben worden war.",
+      form: "data esset", erkl: "Konj. Plusquamperfekt Passiv — PPP data (Femininum zu laus) + esset." ,
+      woerter: [{ lat: "poeta", de: "der Dichter", st: ["dichter", "poet"] }, { lat: "narravit", de: "erzählte", st: ["erzahlt", "erzählt", "berichtet"] }, { lat: "qualis", de: "was für ein", st: ["was fur", "was für", "welch"] }, { lat: "laus", de: "das Lob", st: ["lob"] }, { lat: "civibus", de: "den Bürgern", st: ["burger", "bürger"] }, { lat: "data esset", de: "gegeben worden war", st: ["gegeben", "gab", "zuteil"] }] },
+    { lat: "Cum liber emptus esset, poeta verba legit.",
+      de: "Als das Buch gekauft worden war, las der Dichter die Worte.",
+      form: "emptus esset", erkl: "Konj. Plusquamperfekt Passiv — PPP emptus (Maskulinum zu liber) + esset." ,
+      woerter: [{ lat: "liber", de: "das Buch", st: ["buch"] }, { lat: "emptus esset", de: "gekauft worden war", st: ["gekauft", "kauft"] }, { lat: "poeta", de: "der Dichter", st: ["dichter", "poet"] }, { lat: "verba", de: "die Worte", st: ["wort"] }, { lat: "legit", de: "las", st: ["las", "lese", "gelesen", "sammelt"] }] },
+    { lat: "Imperavit, ut monumentum in via poneretur.",
+      de: "Er befahl, dass das Denkmal an der Straße aufgestellt werde.",
+      form: "poneretur", erkl: "Konj. Imperfekt Passiv — Infinitiv ponere + tur." ,
+      woerter: [{ lat: "imperavit", de: "er befahl", st: ["befahl", "befiehl", "anordn", "gebot"] }, { lat: "monumentum", de: "das Denkmal", st: ["denkmal", "monument"] }, { lat: "in via", de: "an der Straße", st: ["strasse", "straße", "weg"] }, { lat: "poneretur", de: "aufgestellt werde", st: ["aufgestellt", "aufstell", "gesetzt", "gestellt", "gelegt"] }] },
+    { lat: "Cum periculum homines terreret, omnes ad templum ibant.",
+      de: "Während die Gefahr die Menschen erschreckte, gingen alle zum Tempel.",
+      form: "terreret", erkl: "Konj. Imperfekt Aktiv, 3. Sg. — Infinitiv terrere + t." ,
+      woerter: [{ lat: "periculum", de: "die Gefahr", st: ["gefahr"] }, { lat: "homines", de: "die Menschen", st: ["mensch", "leute"] }, { lat: "terreret", de: "erschreckte", st: ["erschreck", "schreckt", "angstig", "ängstig", "furcht"] }, { lat: "omnes", de: "alle", st: ["alle"] }, { lat: "templum", de: "zum Tempel", st: ["tempel"] }, { lat: "ibant", de: "gingen", st: ["ging", "gehen", "liefen"] }] },
+    { lat: "Scire volui, quid frater mihi mandavisset.",
+      de: "Ich wollte wissen, was mein Bruder mir aufgetragen hatte.",
+      form: "mandavisset", erkl: "Konj. Plusquamperfekt Aktiv — Perfektstamm mandav- + isset." ,
+      woerter: [{ lat: "scire volui", de: "ich wollte wissen", st: ["wissen", "wusst", "wüsst"] }, { lat: "quid", de: "was", st: ["was"] }, { lat: "frater", de: "der Bruder", st: ["bruder"] }, { lat: "mihi", de: "mir", st: ["mir"] }, { lat: "mandavisset", de: "aufgetragen hatte", st: ["aufgetragen", "auftrag", "anvertraut", "ubergeben", "übergeben"] }] },
+    { lat: "Cum iter longum confectum esset, comites sedebant.",
+      de: "Als der lange Weg zurückgelegt worden war, saßen die Begleiter.",
+      form: "confectum esset", erkl: "Konj. Plusquamperfekt Passiv — PPP confectum (Neutrum zu iter) + esset." ,
+      woerter: [{ lat: "iter", de: "der Weg", st: ["weg", "reise", "marsch"] }, { lat: "longum", de: "lang", st: ["lang"] }, { lat: "confectum esset", de: "zurückgelegt worden war", st: ["zuruckgelegt", "zurückgelegt", "beendet", "erledigt", "vollendet", "fertig"] }, { lat: "comites", de: "die Begleiter", st: ["begleiter", "gefahrt", "gefährt"] }, { lat: "sedebant", de: "saßen", st: ["sass", "saß", "sitz"] }] },
+    { lat: "Scire volui, ubi telum positum esset.",
+      de: "Ich wollte wissen, wo die Waffe hingelegt worden war.",
+      form: "positum esset", erkl: "Konj. Plusquamperfekt Passiv — PPP positum (Neutrum zu telum) + esset." ,
+      woerter: [{ lat: "scire volui", de: "ich wollte wissen", st: ["wissen", "wusst", "wüsst"] }, { lat: "ubi", de: "wo", st: ["wo"] }, { lat: "telum", de: "die Waffe", st: ["waffe", "geschoss", "speer", "pfeil"] }, { lat: "positum esset", de: "hingelegt worden war", st: ["gelegt", "gestellt", "gesetzt", "abgelegt"] }] },
+    { lat: "Cum multitudo in monte sederet, poeta orationem habebat.",
+      de: "Während die Menge auf dem Berg saß, hielt der Dichter eine Rede.",
+      form: "sederet", erkl: "Konj. Imperfekt Aktiv, 3. Sg. — Infinitiv sedere + t. orationem habere = eine Rede halten." ,
+      woerter: [{ lat: "multitudo", de: "die Menge", st: ["menge", "masse", "vielzahl"] }, { lat: "in monte", de: "auf dem Berg", st: ["berg"] }, { lat: "sederet", de: "saß", st: ["sass", "saß", "sitz"] }, { lat: "poeta", de: "der Dichter", st: ["dichter", "poet"] }, { lat: "orationem habebat", de: "hielt eine Rede", st: ["rede"] }] },
+    { lat: "Imperavit, ut cives auxilium peterent.",
+      de: "Er befahl, dass die Bürger Hilfe holen.",
+      form: "peterent", erkl: "Konj. Imperfekt Aktiv, 3. Pl. — ut mit Konjunktiv nach imperare." ,
+      woerter: [{ lat: "imperavit", de: "er befahl", st: ["befahl", "befiehl", "anordn", "gebot"] }, { lat: "cives", de: "die Bürger", st: ["burger", "bürger"] }, { lat: "auxilium", de: "Hilfe", st: ["hilfe", "unterstutzung", "unterstützung", "beistand"] }, { lat: "peterent", de: "holen sollen", st: ["hol", "erbitt", "bitte", "such"] }] },
+    { lat: "Cum ara ornata esset, sacra facta sunt.",
+      de: "Als der Altar geschmückt worden war, wurden die Opfer vollzogen.",
+      form: "ornata esset", erkl: "Konj. Plusquamperfekt Passiv — PPP ornata (Femininum zu ara) + esset." ,
+      woerter: [{ lat: "ara", de: "der Altar", st: ["altar"] }, { lat: "ornata esset", de: "geschmückt worden war", st: ["geschmuckt", "geschmückt", "schmuck", "schmück", "verziert"] }, { lat: "sacra", de: "die Opfer", st: ["opfer", "heiligtum", "heilig"] }, { lat: "facta sunt", de: "wurden vollzogen", st: ["vollzogen", "gemacht", "durchgefuhrt", "durchgeführt", "stattgefunden"] }] },
+    { lat: "Scire volui, cur poeta taceret.",
+      de: "Ich wollte wissen, warum der Dichter schwieg.",
+      form: "taceret", erkl: "Konj. Imperfekt Aktiv — Infinitiv tacere + t, gleichzeitig." ,
+      woerter: [{ lat: "scire volui", de: "ich wollte wissen", st: ["wissen", "wusst", "wüsst"] }, { lat: "cur", de: "warum", st: ["warum", "weshalb", "wieso"] }, { lat: "poeta", de: "der Dichter", st: ["dichter", "poet"] }, { lat: "taceret", de: "schwieg", st: ["schwieg", "schweig", "still"] }] },
+    { lat: "Cum hostes telis terrerentur, agmen se movebat.",
+      de: "Während die Feinde durch Waffen erschreckt wurden, setzte sich der Heereszug in Bewegung.",
+      form: "terrerentur", erkl: "Konj. Imperfekt Passiv, 3. Pl. — Infinitiv terrere + ntur. telis ist Ablativ des Mittels." ,
+      woerter: [{ lat: "hostes", de: "die Feinde", st: ["feind"] }, { lat: "telis", de: "durch Waffen", st: ["waffe", "geschoss", "speer"] }, { lat: "terrerentur", de: "erschreckt wurden", st: ["erschreck", "schreckt", "angstig", "ängstig"] }, { lat: "agmen", de: "der Heereszug", st: ["heereszug", "heer", "zug", "kolonne"] }, { lat: "se movebat", de: "setzte sich in Bewegung", st: ["beweg", "zog", "marschiert"] }] },
+    { lat: "Nuntiavit, ubi Romani provinciam cepissent.",
+      de: "Er meldete, wo die Römer die Provinz eingenommen hatten.",
+      form: "cepissent", erkl: "Konj. Plusquamperfekt Aktiv — Perfektstamm cep- + issent." ,
+      woerter: [{ lat: "nuntiavit", de: "er meldete", st: ["meldet", "gemeldet", "berichtet", "verkundet", "verkündet"] }, { lat: "ubi", de: "wo", st: ["wo"] }, { lat: "Romani", de: "die Römer", st: ["romer", "römer"] }, { lat: "provinciam", de: "die Provinz", st: ["provinz"] }, { lat: "cepissent", de: "eingenommen hatten", st: ["eingenommen", "genommen", "erobert", "ergriff", "besetzt"] }] },
+    { lat: "Cum labor conficeretur, comites gratiam habebant.",
+      de: "Während die Arbeit erledigt wurde, waren die Begleiter dankbar.",
+      form: "conficeretur", erkl: "Konj. Imperfekt Passiv — Infinitiv conficere + tur. gratiam habere = dankbar sein." ,
+      woerter: [{ lat: "labor", de: "die Arbeit", st: ["arbeit", "muhe", "mühe", "anstrengung"] }, { lat: "conficeretur", de: "erledigt wurde", st: ["erledigt", "beendet", "vollendet", "fertig", "zuruckgelegt", "zurückgelegt"] }, { lat: "comites", de: "die Begleiter", st: ["begleiter", "gefahrt", "gefährt"] }, { lat: "gratiam habebant", de: "waren dankbar", st: ["dankbar", "dank"] }] },
+    { lat: "Imperavit, ut naves ad flumen ducerentur.",
+      de: "Er befahl, dass die Schiffe zum Fluss geführt werden.",
+      form: "ducerentur", erkl: "Konj. Imperfekt Passiv, 3. Pl. — Infinitiv ducere + ntur." ,
+      woerter: [{ lat: "imperavit", de: "er befahl", st: ["befahl", "befiehl", "anordn", "gebot"] }, { lat: "naves", de: "die Schiffe", st: ["schiff"] }, { lat: "ad flumen", de: "zum Fluss", st: ["fluss", "fluß", "strom"] }, { lat: "ducerentur", de: "geführt werden", st: ["gefuhrt", "geführt", "fuhr", "führ", "gebracht", "zog"] }] },
+  ];
+
+  const MODI = [
+    { id: "bestimmen",  label: "Form bestimmen" },
+    { id: "bilden",     label: "Form bilden" },
+    { id: "umformen",   label: "Umformen" },
+    { id: "uebersetzen", label: "Übersetzen" },
+    { id: "gemischt",   label: "Gemischt" },
+  ];
+
+  let modus = "gemischt";
+  let stand = { richtig: 0, falsch: 0, serie: 0 };
+  let aktuell = null;
+
+  const zufall = (liste) => liste[Math.floor(Math.random() * liste.length)];
+  const norm = (s) => (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "")
+    .replace(/[.,!?;]/g, "").replace(/\s+/g, " ").trim();
+
+  function zufallsform(nurMitPassiv) {
+    const verb = zufall(nurMitPassiv ? VERBEN.filter((v) => v.passiv) : VERBEN);
+    const tempus = Math.random() < 0.5 ? "impf" : "plqpf";
+    let genus = Math.random() < 0.5 ? "akt" : "pass";
+    if (!verb.passiv) genus = "akt";
+    if (tempus === "plqpf" && genus === "pass" && !verb.ppp) genus = "akt";
+    return { verb, tempus, genus, i: Math.floor(Math.random() * 6) };
+  }
+
+  function baueAufgabe() {
+    const gewaehlt = modus === "gemischt"
+      ? zufall(["bestimmen", "bilden", "umformen", "uebersetzen"])
+      : modus;
+
+    if (gewaehlt === "uebersetzen") {
+      return { art: "uebersetzen", satz: zufall(SAETZE) };
+    }
+    if (gewaehlt === "bestimmen") {
+      const f = zufallsform(false);
+      const ziel = { tempus: f.tempus, genus: f.genus, i: f.i };
+      const gesehen = new Map([[bezeichnung(f.tempus, f.genus, f.i), ziel]]);
+      let schutz = 0;
+      while (gesehen.size < 4 && schutz++ < 60) {
+        const alt = { ...ziel };
+        const wuerfel = Math.random();
+        if (wuerfel < 0.4) alt.i = Math.floor(Math.random() * 6);
+        else if (wuerfel < 0.7) alt.tempus = alt.tempus === "impf" ? "plqpf" : "impf";
+        else alt.genus = alt.genus === "akt" ? "pass" : "akt";
+        gesehen.set(bezeichnung(alt.tempus, alt.genus, alt.i), alt);
+      }
+      const optionen = [...gesehen.entries()].map(([label, wert]) => ({ label, ...wert }))
+        .sort(() => Math.random() - 0.5);
+      return { art: "bestimmen", form: bilde(f.verb, f.tempus, f.genus, f.i), verb: f.verb,
+               ziel, richtig: bezeichnung(f.tempus, f.genus, f.i), optionen };
+    }
+    if (gewaehlt === "bilden") {
+      const f = zufallsform(false);
+      return { art: "bilden", verb: f.verb, auftrag: bezeichnung(f.tempus, f.genus, f.i),
+               ziel: { tempus: f.tempus, genus: f.genus, i: f.i },
+               loesungen: alleLoesungen(f.verb, f.tempus, f.genus, f.i) };
+    }
+    // Umformen: gleiche Person, anderes Tempus oder anderes Genus verbi
+    const f = zufallsform(true);
+    const richtungTempus = Math.random() < 0.5;
+    const ziel = { ...f };
+    if (richtungTempus) ziel.tempus = f.tempus === "impf" ? "plqpf" : "impf";
+    else ziel.genus = f.genus === "akt" ? "pass" : "akt";
+    return {
+      art: "umformen",
+      form: bilde(f.verb, f.tempus, f.genus, f.i),
+      verb: f.verb,
+      auftrag: richtungTempus
+        ? `ins ${ziel.tempus === "impf" ? "Konj. Imperfekt" : "Konj. Plusquamperfekt"} setzen`
+        : `ins ${ziel.genus === "akt" ? "Aktiv" : "Passiv"} setzen`,
+      zusatz: `${PERSONEN[f.i]} bleibt gleich`,
+      ziel: { tempus: ziel.tempus, genus: ziel.genus, i: ziel.i },
+      loesungen: alleLoesungen(ziel.verb, ziel.tempus, ziel.genus, ziel.i),
+    };
+  }
+
+  function el(tag, klasse, text) {
+    const e = document.createElement(tag);
+    if (klasse) e.className = klasse;
+    if (text !== undefined) e.textContent = text;
+    return e;
+  }
+
+  function zeichne() {
+    aktuell = baueAufgabe();
+    const box = document.getElementById("aufgabe");
+    box.innerHTML = "";
+
+    const titel = { bestimmen: "Form bestimmen", bilden: "Form bilden",
+                    umformen: "Umformen", uebersetzen: "Übersetzen" }[aktuell.art];
+    const kopf = el("div", "typzeile");
+    kopf.append(el("span", null, titel));
+    box.append(kopf);
+
+    if (aktuell.art === "bestimmen") {
+      kopf.append(el("span", null, aktuell.verb.bed));
+      box.append(el("div", "zeigeform", aktuell.form));
+      box.append(el("p", "frage", "Welche Form ist das?"));
+      const wahl = el("div", "wahl");
+      aktuell.optionen.forEach((o) => {
+        const b = el("button", null, o.label);
+        b.type = "button";
+        b.addEventListener("click", () => pruefeWahl(o, wahl));
+        wahl.append(b);
+      });
+      box.append(wahl);
+      return;
+    }
+
+    if (aktuell.art === "uebersetzen") {
+      const satzEl = el("div", "satz");
+      const teile = aktuell.satz.lat.split(aktuell.satz.form);
+      satzEl.append(document.createTextNode(teile[0]));
+      satzEl.append(el("span", "konj", aktuell.satz.form));
+      satzEl.append(document.createTextNode(teile.slice(1).join(aktuell.satz.form)));
+      box.append(satzEl);
+      box.append(el("p", "hinweis", "Rot markiert ist die Konjunktiv-Form. Übersetze den Satz; danach prüfe ich deine Vokabeln."));
+      const feld = el("textarea");
+      feld.id = "eingabe";
+      feld.placeholder = "Deine Übersetzung …";
+      box.append(feld);
+      const reihe = el("div", "knopfreihe");
+      const zeigen = el("button", "haupt", "Lösung zeigen");
+      zeigen.type = "button";
+      zeigen.addEventListener("click", () => zeigeUebersetzung(box, reihe));
+      reihe.append(zeigen);
+      box.append(reihe);
+      feld.focus();
+      return;
+    }
+
+    // bilden / umformen
+    kopf.append(el("span", null, aktuell.verb.bed));
+    if (aktuell.art === "umformen") {
+      box.append(el("div", "zeigeform", aktuell.form));
+      box.append(el("p", "frage", `Diese Form ${aktuell.auftrag}.`));
+      box.append(el("p", "hinweis", aktuell.zusatz));
+    } else {
+      box.append(el("div", "zeigeform", aktuell.verb.inf));
+      box.append(el("p", "frage", `Bilde die Form: ${aktuell.auftrag}`));
+    }
+    const feld = el("input");
+    feld.type = "text";
+    feld.id = "eingabe";
+    feld.autocapitalize = "off";
+    feld.autocomplete = "off";
+    feld.spellcheck = false;
+    feld.placeholder = "Form eingeben …";
+    feld.addEventListener("keydown", (ev) => { if (ev.key === "Enter") pruefeEingabe(box); });
+    box.append(feld);
+    const reihe = el("div", "knopfreihe");
+    const pruefen = el("button", "haupt", "Prüfen");
+    pruefen.type = "button";
+    pruefen.addEventListener("click", () => pruefeEingabe(box));
+    const weiss = el("button", "neben", "Weiß ich nicht");
+    weiss.type = "button";
+    weiss.addEventListener("click", () => aufloesen(box));
+    reihe.append(pruefen, weiss);
+    box.append(reihe);
+    feld.focus({ preventScroll: true });
+  }
+
+  function weiterKnopf(box, text) {
+    const reihe = el("div", "knopfreihe");
+    const b = el("button", "haupt", text || "Weiter");
+    b.type = "button";
+    b.addEventListener("click", zeichne);
+    reihe.append(b);
+    box.append(reihe);
+    b.focus({ preventScroll: true });
+    const meldung = box.querySelector(".rueck");
+    if (meldung) meldung.scrollIntoView({ block: "center", behavior: "smooth" });
+  }
+
+  function pruefeWahl(gewaehlt, wahlBox) {
+    const box = document.getElementById("aufgabe");
+    [...wahlBox.querySelectorAll("button")].forEach((b) => {
+      b.disabled = true;
+      if (b.textContent === aktuell.richtig) b.classList.add("richtig");
+      else if (b.textContent === gewaehlt.label) b.classList.add("falsch");
+    });
+    const ok = gewaehlt.label === aktuell.richtig;
+    zaehle(ok);
+    const rueck = el("div", "rueck " + (ok ? "ok" : "nein"));
+    rueck.append(el("div", null, ok ? "Richtig." : "Dein Fehler:"));
+    if (!ok) {
+      rueck.append(el("div", "fehlergrund", unterschied(gewaehlt, aktuell.ziel)));
+      rueck.append(el("div", "loesung", "Richtig wäre: " + aktuell.richtig));
+      const block = el("div", "vergleich");
+      const z1 = el("div", "zeile");
+      z1.append(el("span", "etikett", "Deins"));
+      const deine = formEl(aktuell.verb, gewaehlt.tempus, gewaehlt.genus, gewaehlt.i);
+      z1.append(deine);
+      block.append(z1);
+      const z2 = el("div", "zeile");
+      z2.append(el("span", "etikett", "Gezeigt"));
+      z2.append(formEl(aktuell.verb, aktuell.ziel.tempus, aktuell.ziel.genus, aktuell.ziel.i));
+      block.append(z2);
+      rueck.append(block);
+      const e = el("div", "erklaerung");
+      e.textContent = `Deine Antwort „${gewaehlt.label}" wäre die Form `
+        + `${bilde(aktuell.verb, gewaehlt.tempus, gewaehlt.genus, gewaehlt.i)} gewesen.`;
+      rueck.append(e);
+    } else {
+      const e = el("div", "erklaerung");
+      e.textContent = bauplan(aktuell.verb, aktuell.ziel.tempus, aktuell.ziel.genus, aktuell.ziel.i);
+      rueck.append(e);
+    }
+    box.append(rueck);
+    weiterKnopf(box);
+  }
+
+  function pruefeEingabe(box) {
+    const feld = document.getElementById("eingabe");
+    if (!feld || feld.disabled) return;
+    const ok = aktuell.loesungen.some((l) => norm(l) === norm(feld.value));
+    feld.disabled = true;
+    zaehle(ok);
+    const rueck = el("div", "rueck " + (ok ? "ok" : "nein"));
+    rueck.append(el("div", null, ok ? "Richtig." : "Dein Fehler:"));
+    if (!ok) rueck.append(el("div", "fehlergrund", diagnose(aktuell.verb, aktuell.ziel, feld.value)));
+    if (ok) {
+      const z = el("div", "vergleich");
+      const zeile = el("div", "zeile");
+      zeile.append(el("span", "etikett", "Aufbau"));
+      zeile.append(formEl(aktuell.verb, aktuell.ziel.tempus, aktuell.ziel.genus, aktuell.ziel.i));
+      z.append(zeile);
+      rueck.append(z);
+    } else {
+      rueck.append(vergleichsblock(aktuell.verb, aktuell.ziel, feld.value));
+    }
+    const erkl = el("div", "erklaerung");
+    erkl.textContent = "So wird sie gebaut: "
+      + bauplan(aktuell.verb, aktuell.ziel.tempus, aktuell.ziel.genus, aktuell.ziel.i) + ".";
+    rueck.append(erkl);
+    box.querySelectorAll(".knopfreihe").forEach((r) => r.remove());
+    box.append(rueck);
+    weiterKnopf(box);
+  }
+
+  function aufloesen(box) {
+    const feld = document.getElementById("eingabe");
+    if (feld) feld.disabled = true;
+    zaehle(false);
+    const rueck = el("div", "rueck nein");
+    rueck.append(el("div", null, "Lösung:"));
+    rueck.append(vergleichsblock(aktuell.verb, aktuell.ziel, ""));
+    const erkl = el("div", "erklaerung");
+    erkl.textContent = bauplan(aktuell.verb, aktuell.ziel.tempus, aktuell.ziel.genus, aktuell.ziel.i) + ".";
+    rueck.append(erkl);
+    box.querySelectorAll(".knopfreihe").forEach((r) => r.remove());
+    box.append(rueck);
+    weiterKnopf(box);
+  }
+
+  function zeigeUebersetzung(box, reihe) {
+    reihe.remove();
+    const eigene = norm(document.getElementById("eingabe").value);
+    const woerter = aktuell.satz.woerter || [];
+    const gefunden = woerter.map((w) => ({ ...w, hat: w.st.some((s) => eigene.includes(norm(s))) }));
+    const fehlend = gefunden.filter((w) => !w.hat);
+
+    const rueck = el("div", "rueck " + (fehlend.length === 0 ? "ok" : "nein"));
+    rueck.append(el("div", "uebersetzung", aktuell.satz.de));
+    const erkl = el("div", "erklaerung");
+    erkl.textContent = `${aktuell.satz.form} — ${aktuell.satz.erkl}`;
+    rueck.append(erkl);
+
+    if (woerter.length) {
+      const liste = el("ul", "vokliste");
+      gefunden.forEach((w) => {
+        const li = el("li", w.hat ? "hat" : "fehlt");
+        li.append(el("span", "zeichen", w.hat ? "✓" : "✗"));
+        const text = el("span");
+        text.append(el("span", "lat", w.lat));
+        text.append(document.createTextNode(` — ${w.de}`));
+        li.append(text);
+        liste.append(li);
+      });
+      rueck.append(liste);
+      const fazit = el("div", "erklaerung");
+      fazit.textContent = eigene
+        ? (fehlend.length === 0
+            ? "Alle Vokabeln sind in deiner Übersetzung vorgekommen."
+            : `${fehlend.length === 1 ? "Diese Vokabel fehlt oder ist anders übersetzt" : `Diese ${fehlend.length} Vokabeln fehlen oder sind anders übersetzt`}: `
+              + fehlend.map((w) => `${w.lat} = ${w.de}`).join(", ") + ".")
+        : "Ohne eigene Übersetzung kann ich die Vokabeln nicht abgleichen.";
+      rueck.append(fazit);
+    }
+    box.append(rueck);
+
+    const reihe2 = el("div", "knopfreihe");
+    const richtig = el("button", "haupt", "Hatte ich richtig");
+    richtig.type = "button";
+    richtig.addEventListener("click", () => { zaehle(true); zeichne(); });
+    const falsch = el("button", "neben", "Hatte ich falsch");
+    falsch.type = "button";
+    falsch.addEventListener("click", () => { zaehle(false); zeichne(); });
+    reihe2.append(richtig, falsch);
+    box.append(reihe2);
+  }
+
+  function zaehle(ok) {
+    if (ok) { stand.richtig++; stand.serie++; }
+    else { stand.falsch++; stand.serie = 0; }
+    document.getElementById("zRichtig").textContent = stand.richtig;
+    document.getElementById("zFalsch").textContent = stand.falsch;
+    document.getElementById("zSerie").textContent = stand.serie;
+    try { localStorage.setItem("konjunktiv_stand", JSON.stringify(stand)); } catch (e) { /* egal */ }
+  }
+
+  function baueModi() {
+    const leiste = document.getElementById("modi");
+    MODI.forEach((m) => {
+      const b = el("button", null, m.label);
+      b.type = "button";
+      b.id = "modus_" + m.id;
+      b.setAttribute("aria-pressed", String(m.id === modus));
+      b.addEventListener("click", () => {
+        modus = m.id;
+        [...leiste.querySelectorAll("button")].forEach((x) =>
+          x.setAttribute("aria-pressed", String(x.id === "modus_" + m.id)));
+        zeichne();
+      });
+      leiste.append(b);
+    });
+  }
+
+  try {
+    const gespeichert = JSON.parse(localStorage.getItem("konjunktiv_stand") || "null");
+    if (gespeichert && typeof gespeichert.richtig === "number") stand = gespeichert;
+  } catch (e) { /* egal */ }
+
+  document.getElementById("resetBtn").addEventListener("click", () => {
+    stand = { richtig: 0, falsch: 0, serie: 0 };
+    ["zRichtig", "zFalsch", "zSerie"].forEach((id) => { document.getElementById(id).textContent = "0"; });
+    try { localStorage.setItem("konjunktiv_stand", JSON.stringify(stand)); } catch (e) { /* egal */ }
+  });
+
+  baueModi();
+  document.getElementById("zRichtig").textContent = stand.richtig;
+  document.getElementById("zFalsch").textContent = stand.falsch;
+  document.getElementById("zSerie").textContent = stand.serie;
+  zeichne();
+</script>
+
+</body>
+</html>
