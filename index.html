@@ -20,7 +20,7 @@
   @media (prefers-color-scheme: dark) {
     body { background: #17181a; color: #f0f0f0; }
     .card { background: #232527 !important; border-color: #34363a !important; }
-    input[type="password"] { background: #17181a !important; color: #f0f0f0 !important; border-color: #34363a !important; }
+    #tokenInput { background: #17181a !important; color: #f0f0f0 !important; border-color: #34363a !important; }
   }
   h1 { font-size: 1.3rem; margin: 0 0 4px; text-align: center; }
   p.sub { color: #8a8a8a; text-align: center; margin: 0 0 24px; font-size: 0.9rem; }
@@ -30,7 +30,7 @@
     padding: 20px; margin-bottom: 16px;
   }
   .card h2 { font-size: 0.95rem; margin: 0 0 12px; }
-  input[type="password"] {
+  #tokenInput {
     width: 100%; padding: 12px 14px; border-radius: 10px;
     border: 1px solid #d8d6d0; font-size: 1rem; margin-bottom: 10px;
   }
@@ -76,13 +76,14 @@
 </style>
 </head>
 <body>
+  <div id="fehler" style="display:none; max-width:420px; width:100%; background:#c0392b; color:#fff; padding:12px 14px; border-radius:10px; margin-bottom:14px; font-size:.85rem; white-space:pre-wrap;"></div>
   <h1>Vokabel-Scanner</h1>
   <p class="sub">Beliebig viele Bilder sammeln → Abschicken → eine Lektion in Navigium</p>
 
   <div class="card" id="tokenSection">
     <h2>Einmalig: GitHub-Zugriff einrichten</h2>
-    <input type="password" id="tokenInput" placeholder="GitHub Token (ghp_... / github_pat_...)" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
-    <button class="btn-primary" onclick="saveToken()">Speichern (nur auf diesem iPad)</button>
+    <input type="text" id="tokenInput" placeholder="GitHub Token (github_pat_... )" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" name="nicht-passwort">
+    <button class="btn-primary" id="saveTokenBtn">Speichern (nur auf diesem Gerät)</button>
     <div id="tokenStatus" style="text-align:center; font-size:0.85rem; margin-top:8px; color:#8a8a8a;">
       Der Token wird nur lokal in Safari gespeichert, nie irgendwo anders hin gesendet.
     </div>
@@ -92,24 +93,34 @@
     <h2>Neue Lektion</h2>
 
     <label id="captureLabel" for="cameraInput">📷 Foto aufnehmen</label>
-    <input type="file" id="cameraInput" accept="image/*" capture="environment" multiple style="display:none" onchange="addFiles(event)">
+    <input type="file" id="cameraInput" accept="image/*" capture="environment" multiple style="display:none" >
 
     <label id="libraryLabel" for="libraryInput">🖼️ Aus Fotos / Screenshots wählen</label>
-    <input type="file" id="libraryInput" accept="image/*" multiple style="display:none" onchange="addFiles(event)">
+    <input type="file" id="libraryInput" accept="image/*" multiple style="display:none" >
 
     <div id="thumbs"></div>
 
     <label class="feldlabel" for="notiz">Hinweise (optional)</label>
     <textarea id="notiz" rows="3" placeholder="z.B. „Die Lektion beginnt bei amiga und geht bis agua“ oder „Seite 2 gehört zur selben Lektion“"></textarea>
 
-    <button class="btn-primary" id="submitBtn" onclick="submitBatch()" disabled>Abschicken</button>
+    <button class="btn-primary" id="submitBtn" disabled>Abschicken</button>
     <div id="status"></div>
-    <button class="btn-secondary" style="margin-top:14px" onclick="resetToken()">Token zurücksetzen</button>
+    <button class="btn-secondary" style="margin-top:14px" id="resetBtn">Token zurücksetzen</button>
   </div>
 
 <script>
+  const VERSION = "v4 (16.09. 19:50)";
   const REPO = "Nahol2021/vokabel-scanner";
   const TOKEN_KEY = "vokabel_scanner_gh_token";
+
+  // Fehler sichtbar machen: sonst wirkt ein kaputtes Skript wie ein toter Knopf.
+  window.onerror = function (msg, quelle, zeile) {
+    const box = document.getElementById("fehler");
+    if (box) {
+      box.style.display = "block";
+      box.textContent = `Fehler (${VERSION}), Zeile ${zeile}:\n${msg}`;
+    }
+  };
 
   function $(id) { return document.getElementById(id); }
 
@@ -120,10 +131,23 @@
   }
 
   function saveToken() {
-    const val = $("tokenInput").value.trim();
-    if (!val) return;
-    localStorage.setItem(TOKEN_KEY, val);
-    $("tokenInput").value = "";
+    const feld = $("tokenInput");
+    const val = (feld.value || "").trim();
+    if (!val) {
+      $("tokenStatus").textContent = "Bitte zuerst den Token in das Feld einfügen.";
+      $("tokenStatus").style.color = "#c0392b";
+      feld.focus();
+      return;
+    }
+    try {
+      localStorage.setItem(TOKEN_KEY, val);
+    } catch (e) {
+      $("tokenStatus").textContent = "Speichern nicht möglich: " + e.message
+        + " (privates Surfen? Dann bitte ein normales Fenster nutzen.)";
+      $("tokenStatus").style.color = "#c0392b";
+      return;
+    }
+    feld.value = "";
     refreshSections();
   }
 
@@ -249,8 +273,30 @@
     }
   }
 
+  // Verdrahtung per Listener statt onclick-Attribut - so faellt sofort auf,
+  // wenn ein Element fehlt, statt dass ein Knopf stumm bleibt.
+  const verdrahtung = [
+    ["saveTokenBtn", "click", saveToken],
+    ["resetBtn", "click", resetToken],
+    ["submitBtn", "click", submitBatch],
+    ["cameraInput", "change", addFiles],
+    ["libraryInput", "change", addFiles],
+  ];
+  const fehlend = [];
+  for (const [id, evt, fn] of verdrahtung) {
+    const el = $(id);
+    if (el) el.addEventListener(evt, fn);
+    else fehlend.push(id);
+  }
+  if (fehlend.length) {
+    $("fehler").style.display = "block";
+    $("fehler").textContent = "Fehlende Elemente: " + fehlend.join(", ");
+  }
+
+  $("version").textContent = VERSION;
   refreshSections();
   renderThumbs();
 </script>
+  <p class="sub" style="margin:0"><span id="version"></span></p>
 </body>
 </html>
