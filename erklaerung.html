@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wochendosis & Vokabelscanner</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+  :root {
+    --papier: #f7f6f3;
+    --karte: #ffffff;
+    --tinte: #1b1d21;
+    --tinte-2: #545a63;
+    --tinte-3: #868d96;
+    --linie: #e3e1db;
+    --musik: #b4621f;
+    --musik-hell: #fbf1e7;
+    --latein: #2b6663;
+    --latein-hell: #e9f2f1;
+    --warn: #9a3b2f;
+    --warn-hell: #fbecea;
+    --code-bg: #f0eeea;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --papier: #15171a;
+      --karte: #1d2024;
+      --tinte: #e9eaec;
+      --tinte-2: #a9b0b8;
+      --tinte-3: #7d848c;
+      --linie: #2d3137;
+      --musik: #e2954f;
+      --musik-hell: #2a2119;
+      --latein: #6fc0ba;
+      --latein-hell: #172726;
+      --warn: #e89086;
+      --warn-hell: #2c1d1b;
+      --code-bg: #24282d;
+    }
+  }
+  :root[data-theme="dark"] {
+    --papier: #15171a;
+    --karte: #1d2024;
+    --tinte: #e9eaec;
+    --tinte-2: #a9b0b8;
+    --tinte-3: #7d848c;
+    --linie: #2d3137;
+    --musik: #e2954f;
+    --musik-hell: #2a2119;
+    --latein: #6fc0ba;
+    --latein-hell: #172726;
+    --warn: #e89086;
+    --warn-hell: #2c1d1b;
+    --code-bg: #24282d;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--papier);
+    color: var(--tinte);
+    font-family: "Source Sans 3", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 17px;
+    line-height: 1.62;
+  }
+  .blatt {
+    max-width: 730px;
+    margin: 0 auto;
+    padding-inline: 20px;
+    padding-block: 40px 90px;
+  }
+
+  h1 {
+    font-family: "Fraunces", Georgia, serif;
+    font-size: clamp(2rem, 7vw, 2.9rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin: 0 0 14px;
+    text-wrap: balance;
+  }
+  .unterzeile { font-size: 1.1rem; color: var(--tinte-2); margin: 0 0 6px; }
+  .stand { font-size: .82rem; color: var(--tinte-3); margin: 0; }
+
+  h2 {
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 1.62rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 56px 0 6px;
+    text-wrap: balance;
+    scroll-margin-top: 20px;
+  }
+  h2 .nr {
+    display: block;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .72rem;
+    letter-spacing: .12em;
+    color: var(--tinte-3);
+    margin-bottom: 5px;
+    font-weight: 600;
+  }
+  h3 {
+    font-size: 1.08rem;
+    font-weight: 700;
+    margin: 30px 0 4px;
+  }
+  p { margin: 0 0 14px; }
+  ul, ol { margin: 0 0 16px; padding-left: 22px; }
+  li { margin-bottom: 7px; }
+  a { color: var(--latein); }
+
+  code {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .88em;
+    background: var(--code-bg);
+    padding: 1px 5px;
+    border-radius: 4px;
+    word-break: break-word;
+  }
+  pre {
+    background: var(--code-bg);
+    border-radius: 9px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .82rem;
+    line-height: 1.55;
+    margin: 0 0 16px;
+  }
+  pre code { background: none; padding: 0; }
+
+  /* Inhaltsverzeichnis */
+  nav.inhalt {
+    background: var(--karte);
+    border: 1px solid var(--linie);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin: 32px 0 8px;
+  }
+  nav.inhalt h2 { margin: 0 0 10px; font-size: 1rem; font-family: inherit; font-weight: 700; }
+  nav.inhalt ol { margin: 0; padding-left: 20px; }
+  nav.inhalt li { margin-bottom: 4px; }
+  nav.inhalt a { text-decoration: none; color: var(--tinte); }
+  nav.inhalt a:hover { text-decoration: underline; }
+
+  /* Ablaufkette */
+  .kette { display: flex; flex-direction: column; gap: 0; margin: 4px 0 22px; }
+  .schritt {
+    display: flex;
+    gap: 14px;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--linie);
+  }
+  .schritt:last-child { border-bottom: none; }
+  .schritt .zahl {
+    flex: 0 0 26px; height: 26px;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .76rem; font-weight: 600;
+    background: var(--code-bg); color: var(--tinte-2);
+  }
+  .musik .schritt .zahl { background: var(--musik-hell); color: var(--musik); }
+  .latein .schritt .zahl { background: var(--latein-hell); color: var(--latein); }
+  .schritt .txt { flex: 1; }
+  .schritt .txt b { display: block; }
+  .schritt .txt span { color: var(--tinte-2); font-size: .95rem; }
+
+  /* Infokästen */
+  .kasten {
+    border-radius: 11px;
+    padding: 15px 17px;
+    margin: 0 0 18px;
+    font-size: .95rem;
+  }
+  .kasten b.titel {
+    display: block;
+    font-size: .72rem;
+    text-transform: uppercase;
+    letter-spacing: .09em;
+    margin-bottom: 5px;
+  }
+  .kasten p:last-child { margin-bottom: 0; }
+  .begriff { background: var(--code-bg); }
+  .begriff b.titel { color: var(--tinte-3); }
+  .achtung { background: var(--warn-hell); }
+  .achtung b.titel { color: var(--warn); }
+  .merke { background: var(--latein-hell); }
+  .merke b.titel { color: var(--latein); }
+
+  /* Tabellen */
+  .tabelle { overflow-x: auto; margin: 0 0 20px; }
+  table { border-collapse: collapse; width: 100%; font-size: .9rem; }
+  th, td { text-align: left; padding: 8px 12px 8px 0; border-bottom: 1px solid var(--linie); vertical-align: top; }
+  th { font-size: .72rem; text-transform: uppercase; letter-spacing: .07em; color: var(--tinte-3); }
+  td code { white-space: nowrap; }
+
+  /* Kapitelmarke */
+  .marke {
+    display: inline-block;
+    font-size: .72rem;
+    text-transform: uppercase;
+    letter-spacing: .09em;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 999px;
+    margin-bottom: 8px;
+  }
+  .marke.m1 { background: var(--musik-hell); color: var(--musik); }
+  .marke.m2 { background: var(--latein-hell); color: var(--latein); }
+
+  hr { border: none; border-top: 1px solid var(--linie); margin: 48px 0 0; }
+  .fuss { color: var(--tinte-3); font-size: .86rem; margin-top: 18px; }
+</style>
+</head>
+<body>
+
+<div class="blatt">
+
+<h1>Wochendosis &amp; Vokabelscanner</h1>
+<p class="unterzeile">Zwei Automaten, die ohne deinen Rechner laufen — und wie sie das anstellen.</p>
+<p class="stand">Stand: 16. September 2026</p>
+
+<nav class="inhalt">
+  <h2>Inhalt</h2>
+  <ol>
+    <li><a href="#grundidee">Die Grundidee hinter beidem</a></li>
+    <li><a href="#bausteine">Die Bausteine, die beide benutzen</a></li>
+    <li><a href="#wochendosis">Wochendosis: der Musik-Automat</a></li>
+    <li><a href="#vokabeln">Vokabelscanner: vom Foto zur Lektion</a></li>
+    <li><a href="#navigium">Wie wir Navigium überhaupt geknackt haben</a></li>
+    <li><a href="#grenzen">Wo die Systeme an Grenzen stoßen</a></li>
+    <li><a href="#bedienung">Bedienung: was du wo anfasst</a></li>
+  </ol>
+</nav>
+
+<h2 id="grundidee"><span class="nr">Kapitel 1</span>Die Grundidee hinter beidem</h2>
+
+<p>Beide Systeme lösen dasselbe Grundproblem: Etwas soll regelmäßig und von allein passieren, <b>ohne dass ein Computer bei dir zu Hause laufen muss</b>. Dein PC ist nachts aus, das iPad liegt in der Schultasche — trotzdem soll montags früh die Playlist neu gefüllt sein.</p>
+
+<p>Die Lösung ist in beiden Fällen dieselbe: Der eigentliche Rechner steht bei GitHub. Dort liegt dein Programmcode, und GitHub startet ihn nach Zeitplan oder auf ein Signal hin auf einem geliehenen Computer, der für ein paar Sekunden hochfährt, seine Arbeit macht und wieder verschwindet. Das kostet nichts und läuft, egal ob dein Gerät an ist.</p>
+
+<p>Der zweite gemeinsame Gedanke: Die Programme reden nicht über Bildschirme mit den Diensten, sondern über deren <b>Schnittstellen</b>. Kein simuliertes Klicken, kein Vorlesen von Webseiten — sondern direkte Anfragen an Spotify und an Navigium, so wie deren eigene Apps es auch tun.</p>
+
+<div class="kasten begriff">
+  <b class="titel">Fachbegriff: API</b>
+  <p>Eine API (Programmierschnittstelle) ist ein Eingang zu einem Dienst, der nicht für Menschen, sondern für Programme gemacht ist. Statt einer bunten Seite bekommst du dort nüchterne Daten zurück — etwa: <code>{"name": "Lektion 19", "vokabeln": [...]}</code>. Man schickt eine Anfrage an eine Adresse und bekommt eine Antwort. Genau das tun unsere Skripte, nur eben tausendmal schneller, als du klicken könntest.</p>
+</div>
+
+<h2 id="bausteine"><span class="nr">Kapitel 2</span>Die Bausteine, die beide benutzen</h2>
+
+<h3>Das Repository</h3>
+<p>Ein Repository („Repo") ist ein Projektordner bei GitHub, der jede Änderung mitschreibt. Du hast drei davon:</p>
+<div class="tabelle">
+<table>
+  <tr><th>Repository</th><th>Inhalt</th></tr>
+  <tr><td><code>wochendosis-automation</code></td><td>der komplette Spotify-Automat</td></tr>
+  <tr><td><code>vokabel-scanner</code></td><td>die Verarbeitung der Vokabelfotos (privat)</td></tr>
+  <tr><td><code>vokabel-upload</code></td><td>die Webseiten: Foto-Upload und Konjunktiv-Übung</td></tr>
+</table>
+</div>
+
+<h3>GitHub Actions — der Automat</h3>
+<p>In jedem Repo liegt ein Ordner <code>.github/workflows/</code> mit Textdateien, die beschreiben: <i>Wann</i> soll <i>was</i> laufen. GitHub liest diese Dateien und hält sich daran. Eine solche Datei heißt Workflow.</p>
+
+<p>Der Zeitplan wird als <b>Cron-Ausdruck</b> geschrieben — fünf Zahlen für Minute, Stunde, Tag, Monat, Wochentag:</p>
+
+<pre><code>cron: "12 6 * * 1"     → montags um 6:12 Uhr
+cron: "47 6 * * *"     → jeden Tag um 6:47 Uhr
+cron: "27 7 1 * *"     → am 1. jedes Monats um 7:27 Uhr</code></pre>
+
+<p>Die krummen Minuten sind Absicht: Zu jeder vollen Stunde starten weltweit Millionen solcher Aufträge gleichzeitig, und GitHub schiebt sie dann in eine Warteschlange. Um 6:12 ist mehr Luft.</p>
+
+<p>Zusätzlich steht in jedem Workflow <code>workflow_dispatch</code>. Das bedeutet: Man kann ihn auch von Hand starten, ohne auf den Termin zu warten. Genau das haben wir beim Testen ständig gemacht.</p>
+
+<h3>Secrets — Passwörter, die niemand sieht</h3>
+<p>Die Programme müssen sich bei Spotify und Navigium anmelden. Diese Zugangsdaten dürfen aber auf keinen Fall im Code stehen, denn den kann man lesen. Deshalb liegen sie in GitHubs <b>Secrets</b>: ein verschlossener Tresor pro Repo. Der Workflow reicht sie beim Start als Umgebungsvariablen an das Programm weiter.</p>
+
+<pre><code>env:
+  SPOTIFY_REFRESH_TOKEN: ${{ secrets.SPOTIFY_REFRESH_TOKEN }}
+  NAVIGIUM_PASS: ${{ secrets.NAVIGIUM_PASS }}</code></pre>
+
+<p>Im Code steht dann nur noch <code>os.environ["NAVIGIUM_PASS"]</code> — „hol den Wert, der von außen reingereicht wurde". Secrets sind eine Einbahnstraße: Man kann sie setzen und überschreiben, aber nicht wieder auslesen. Deshalb musste der Gemini-Schlüssel neu erzeugt werden, als wir ihn für das zweite Projekt brauchten.</p>
+
+<div class="kasten achtung">
+  <b class="titel">Warum das wichtig ist</b>
+  <p>GitHub schwärzt Secrets sogar in den Protokollen: Selbst wenn ein Programm versehentlich das Passwort ausgibt, steht im Log nur <code>***</code>. Das ist uns tatsächlich zugutegekommen — in einer Fehlermeldung tauchte die Benutzer-URL auf, aber der Name war automatisch unkenntlich gemacht.</p>
+</div>
+
+<h3>Gemini — die KI als Bauteil</h3>
+<p>An zwei Stellen steckt ein Sprachmodell im System, beide Male über Googles kostenlose Schnittstelle. Wichtig zum Verständnis: Die KI ist hier kein Chatpartner, sondern ein <b>Bauteil mit festem Auftrag</b>. Das Programm schickt eine genaue Anweisung und verlangt die Antwort in einem festen Format (JSON), damit der Rest des Programms damit rechnen kann.</p>
+
+<h2 id="wochendosis"><span class="nr">Kapitel 3</span><span class="marke m1">Spotify</span><br>Wochendosis: der Musik-Automat</h2>
+
+<h3>Die Idee: künstliche Verknappung</h3>
+<p>Das System erzeugt absichtlich Mangel. Statt unendlich viel Musik auf einmal bekommst du pro Woche zehn Songs, und die auch nicht auf einen Schlag, sondern portionsweise über die Woche verteilt. Dadurch hört man einzelne Songs wirklich, statt endlos zu skippen.</p>
+
+<h3>Die beteiligten Playlists</h3>
+<div class="tabelle">
+<table>
+  <tr><th>Playlist</th><th>Rolle</th></tr>
+  <tr><td><b>Weekly Pool</b></td><td>Vorratskammer: die 10 Songs der Woche, werden montags neu gefüllt</td></tr>
+  <tr><td><b>Daily Drop</b></td><td>das, was du tatsächlich hörst — wächst täglich um zwei Songs</td></tr>
+  <tr><td><b>Pool-History</b></td><td>Gedächtnis: jeder je ausgespielte Song, damit sich nichts wiederholt</td></tr>
+  <tr><td><b>G00fγ</b></td><td>deine große Sammlung, dient als Quelle für Wiederentdeckungen</td></tr>
+  <tr><td><b>Monthly Sports / Chills</b></td><td>zwei Stimmungs-Playlists, die monatlich teilrotiert werden</td></tr>
+</table>
+</div>
+
+<h3>Montag 6:12 Uhr — die Wochenmischung</h3>
+<p>Das Skript <code>teil_a_weekly.py</code> leert Weekly Pool und Daily Drop und stellt zehn Songs aus <b>fünf verschiedenen Quellen</b> zusammen. Der Sinn dahinter: Die Mischung soll weder langweilig noch beliebig sein.</p>
+
+<div class="kette musik">
+  <div class="schritt"><div class="zahl">1</div><div class="txt"><b>Wiederentdeckung (2 Songs)</b><span>Zufällig gezogen aus G00fγ. Früher war es „die ältesten zuerst", aber dadurch kamen immer wieder dieselben — seit unserer Änderung wird gewürfelt.</span></div></div>
+  <div class="schritt"><div class="zahl">2</div><div class="txt"><b>Neue Releases (2 Songs)</b><span>Das Skript schaut bei deinen Top-Artists und den Artists, denen du folgst, nach frisch erschienenen Alben und Singles.</span></div></div>
+  <div class="schritt"><div class="zahl">3</div><div class="txt"><b>Artist-Wünsche</b><span>Steht in <code>artist_requests.json</code> ein Wunsch, wird er bevorzugt bedient und die Restanzahl heruntergezählt.</span></div></div>
+  <div class="schritt"><div class="zahl">4</div><div class="txt"><b>Taste-Match (bis 3 Songs)</b><span>Gemini schlägt Songs vor, die zum Geschmack passen — aber ausdrücklich von Artists, die noch nicht vorkamen.</span></div></div>
+  <div class="schritt"><div class="zahl">5</div><div class="txt"><b>Wildcard (3 Songs)</b><span>Gemini schlägt bewusst Musik <i>außerhalb</i> des Geschmacks vor, zur Horizonterweiterung.</span></div></div>
+</div>
+
+<p>Damit Gemini sinnvoll vorschlägt, steht im Skript ein kurzes Geschmacksprofil, und es bekommt eine Liste der bereits bekannten Artists mit dem Hinweis, diese <i>nicht</i> erneut vorzuschlagen.</p>
+
+<p>Gemini nennt aber nur Titel und Artist als Text — Spotify braucht eine Song-ID. Deshalb sucht das Skript jeden Vorschlag anschließend über die Spotify-Suche und prüft, ob der gefundene Treffer wirklich der gemeinte ist. Findet es einen Song namens „Birthday Behavior", bei dem der gewünschte Artist gar nicht beteiligt ist, wird der Treffer verworfen.</p>
+
+<p>Zuletzt wird die fertige Zehnerliste <b>gemischt</b>. Sonst kämen am Montag zwei Wiederentdeckungen hintereinander und am Freitag nur Wildcards.</p>
+
+<div class="kasten begriff">
+  <b class="titel">Das Duplikat-Problem</b>
+  <p>Ein Song kann bei Spotify unter mehreren IDs existieren — als Single, auf dem Album, in der Deluxe-Edition. Der Vergleich über IDs allein reichte deshalb nicht: „Breathe" von Yeat tauchte doppelt auf. Seitdem gibt es zusätzlich <code>norm_key()</code>, das Titel und ersten Artist kleinschreibt und vergleicht. Zwei Pressungen desselben Songs haben zwar verschiedene IDs, aber denselben Schlüssel.</p>
+</div>
+
+<h3>Täglich 6:47 Uhr — die Portion</h3>
+<p><code>teil_b_daily.py</code> ist das kürzeste Skript im ganzen Projekt, knapp 30 Zeilen. Es vergleicht: Welche Songs liegen im Weekly Pool, aber noch nicht im Daily Drop? Die ersten beiden davon wandern hinüber. Sind alle zehn schon ausgeliefert, passiert nichts und es schreibt das ins Protokoll.</p>
+
+<p>Der Ablauf ist absichtlich stumpf: Das Skript merkt sich nichts, sondern liest jeden Morgen den tatsächlichen Zustand beider Playlists und leitet daraus ab, was zu tun ist. Solche Programme sind robust — fällt ein Tag aus, holt der nächste Lauf es von selbst auf.</p>
+
+<h3>Am Monatsersten 7:27 Uhr — die Stimmungs-Playlists</h3>
+<p><code>teil_c_monthly.py</code> pflegt zwei Playlists mit fester Obergrenze:</p>
+<div class="tabelle">
+<table>
+  <tr><th>Playlist</th><th>Maximum</th><th>Wird ausgetauscht</th><th>Stimmung</th></tr>
+  <tr><td>Monthly Sports</td><td>10 Songs</td><td>3 pro Monat</td><td>energiegeladen, treibend, zum Trainieren</td></tr>
+  <tr><td>Monthly Chills</td><td>6 Songs</td><td>2 pro Monat</td><td>ruhig, R&amp;B/Downtempo, zum Runterkommen</td></tr>
+</table>
+</div>
+
+<p>Ist die Playlist noch nicht voll, wird nur aufgefüllt. Ist sie voll, fliegen die <b>ältesten</b> Einträge raus — dafür merkt sich Spotify pro Playlist-Eintrag ein Hinzufüge-Datum. Von den Neuzugängen kommen etwa drei Fünftel aus G00fγ (von Gemini nach Stimmung ausgewählt) und der Rest sind komplett neue Vorschläge. So bleibt die Playlist vertraut und trotzdem in Bewegung.</p>
+
+<h3>Der Wunsch-Kanal</h3>
+<p>In <code>artist_requests.json</code> kannst du Wünsche hinterlegen — Artist, wie oft, welche Titel du schon kennst und welche du dir wünschst:</p>
+<pre><code>{
+  "artist": "Young Miko",
+  "remaining": 1,
+  "exclude_titles": ["curita", "princess peach", "offline"],
+  "candidate_titles": ["Birthday Behavior", "Safada"]
+}</code></pre>
+<p>Das Besondere: Nach dem Lauf <b>schreibt der Workflow die Datei zurück ins Repository</b> — mit heruntergezähltem Zähler. Der Automat verändert also seinen eigenen Quellcode, damit er sich beim nächsten Mal erinnert. Das ist der Trick, mit dem man ohne Datenbank ein Gedächtnis bekommt.</p>
+
+<h3>Wie die Anmeldung bei Spotify funktioniert</h3>
+<p>Spotify lässt niemanden mit Benutzername und Passwort auf fremde Konten zugreifen. Stattdessen gibt es ein dreiteiliges System:</p>
+<ul>
+  <li><b>Client ID und Client Secret</b> weisen die <i>Anwendung</i> aus — sozusagen der Ausweis des Programms.</li>
+  <li><b>Der Refresh-Token</b> ist deine einmalig erteilte Erlaubnis. Den bekommt man nur, indem man sich einmal im Browser einloggt und zustimmt.</li>
+  <li>Bei jedem Lauf tauscht das Programm den Refresh-Token gegen einen <b>Access-Token</b>, der nur eine Stunde gilt. Damit arbeitet es dann.</li>
+</ul>
+<p>Beim Zustimmen legt man auch fest, <i>was</i> das Programm darf — die sogenannten <b>Scopes</b>. Genau daran sind wir später aufgelaufen, siehe Kapitel 6.</p>
+
+<h2 id="vokabeln"><span class="nr">Kapitel 4</span><span class="marke m2">Latein</span><br>Vokabelscanner: vom Foto zur Lektion</h2>
+
+<h3>Warum überhaupt</h3>
+<p>Navigium hat eine eingebaute Fotofunktion, aber die erkennt zu ungenau. Der Scanner nimmt deshalb einen anderen Weg: Das Foto wird von einem Sprachmodell gelesen, das nicht nur Buchstaben erkennt, sondern <i>versteht</i>, was eine Vokabelliste ist — welche Zeile ein Wort ist, welche eine Überschrift, welcher Kasten nur Hintergrundinfo enthält.</p>
+
+<h3>Der Weg eines Fotos</h3>
+
+<div class="kette latein">
+  <div class="schritt"><div class="zahl">1</div><div class="txt"><b>Du sammelst Bilder</b><span>Auf der Upload-Seite fotografierst du oder wählst Screenshots aus. Noch passiert nichts — die Bilder liegen erst nur im Browser.</span></div></div>
+  <div class="schritt"><div class="zahl">2</div><div class="txt"><b>Du schreibst optional einen Hinweis</b><span>Zum Beispiel „nur die Vokabeln von <i>amiga</i> bis <i>agua</i>". Dieser Satz geht später wörtlich an die KI.</span></div></div>
+  <div class="schritt"><div class="zahl">3</div><div class="txt"><b>Abschicken lädt alles hoch</b><span>Jedes Bild wandert einzeln über GitHubs Contents-API in den Ordner <code>inbox/&lt;Stapelnummer&gt;/</code>.</span></div></div>
+  <div class="schritt"><div class="zahl">4</div><div class="txt"><b>Die Marker-Datei gibt den Startschuss</b><span>Zum Schluss wird <code>batch.json</code> hochgeladen — mit Bilderliste und Hinweistext. Erst diese Datei löst die Verarbeitung aus.</span></div></div>
+  <div class="schritt"><div class="zahl">5</div><div class="txt"><b>Gemini liest alle Bilder gemeinsam</b><span>Es erkennt die Sprache, zieht die Vokabelpaare heraus, ergänzt Genitive und Stammformen und schlägt einen Lektionsnamen vor.</span></div></div>
+  <div class="schritt"><div class="zahl">6</div><div class="txt"><b>Abgleich mit Navigiums Wörterbuch</b><span>Bei Latein wird jedes Wort im offiziellen Großwörterbuch nachgeschlagen und durch den echten Eintrag ersetzt.</span></div></div>
+  <div class="schritt"><div class="zahl">7</div><div class="txt"><b>Die Lektion wird angelegt</b><span>Fertig in deinem Navigium-Konto — plus ein automatisch geschlossenes Protokoll-Issue mit der Tabelle, falls du nachschauen willst.</span></div></div>
+</div>
+
+<h3>Der Trick mit der Marker-Datei</h3>
+<p>Das Problem: Jedes Hochladen einer Datei ist bei GitHub eine eigene Änderung. Bei drei Fotos wäre der Workflow dreimal gestartet — und hätte drei getrennte Lektionen angelegt. Genau das ist dir bei den zwei Spanisch-Seiten passiert.</p>
+
+<p>Die Lösung steht in einer einzigen Zeile des Workflows:</p>
+<pre><code>paths:
+  - "inbox/*/batch.json"</code></pre>
+<p>Der Workflow reagiert also <b>nur</b> auf die Marker-Datei, nicht auf die Bilder. Die Fotos rieseln still herein; erst das <code>batch.json</code> am Ende sagt „jetzt sind alle da, leg los". So ergibt ein Stapel genau eine Lektion.</p>
+
+<h3>Warum der Wörterbuch-Abgleich so wichtig ist</h3>
+<p>Ein Sprachmodell kann sich irren, und bei Grammatik zählt jeder Buchstabe. Deshalb ist Gemini nur für das <i>Lesen</i> zuständig. Was danach passiert, ist eine Absicherung:</p>
+
+<p>Für jedes Wort fragt das Programm Navigiums eigenes Wörterbuch. Kommt ein Treffer zurück, wird die offizielle Schreibweise übernommen — mit Längenzeichen und in Navigiums Notation, also <code>templum -ī</code> statt <code>templum, templi</code>. Auch Genus, Merkhilfe und Wortart kommen aus dem Wörterbuch.</p>
+
+<p>Dabei gibt es zwei Fallen, gegen die wir absichern mussten:</p>
+
+<div class="kasten achtung">
+  <b class="titel">Falle 1: mehrere Treffer</b>
+  <p>Das Wörterbuch liefert oft mehrere Kandidaten. Bei <code>os</code> zum Beispiel <b>ōs ōris</b> (Mund) und <b>os ossis</b> (Knochen). Anfangs nahm das Programm stumpf den ersten. Heute bewertet es alle Kandidaten: Passt die Wortart? Überschneiden sich die Bedeutungen mit dem, was im Buch steht? Der beste Treffer gewinnt.</p>
+</div>
+
+<div class="kasten achtung">
+  <b class="titel">Falle 2: der Lemma-Sprung</b>
+  <p>Suchst du <code>minor</code> („kleiner"), antwortet das Wörterbuch mit <b>parvus a um</b> („klein") — sprachwissenschaftlich korrekt, denn <i>minor</i> ist dessen Steigerungsform. Für deine Lektion ist es aber ein anderes Wort. Deshalb prüft das Programm jetzt, ob der Wortanfang des Treffers überhaupt zum gesuchten Wort passt. <code>minor</code> gegen <code>parvus</code> — Ablehnung.</p>
+</div>
+
+<h2 id="navigium"><span class="nr">Kapitel 5</span><span class="marke m2">Latein</span><br>Wie wir Navigium überhaupt geknackt haben</h2>
+
+<p>Spotify dokumentiert seine Schnittstelle öffentlich. Navigium nicht — dort gibt es nur die Webseite. Also mussten wir herausfinden, welche Anfragen die Seite selbst verschickt. Das war der aufwendigste Teil des ganzen Projekts, und der Weg dahin ist lehrreich.</p>
+
+<h3>Versuch 1: im Programmcode der Webseite suchen</h3>
+<p>Jede moderne Webseite lädt eine große JavaScript-Datei, in der ihr ganzes Verhalten steckt. Wir haben diese Dateien heruntergeladen und nach Adressmustern durchsucht. Das brachte viele Endpunkte zum <i>Lesen</i> ans Licht — aber nicht den zum Speichern. Sackgasse.</p>
+
+<h3>Versuch 2: dem Browser bei der Arbeit zusehen</h3>
+<p>Der erfolgreiche Weg war ein ferngesteuerter Browser (das Werkzeug heißt <b>Playwright</b>). Er meldet sich an, klickt sich wie ein Mensch durch die Oberfläche — und <b>protokolliert dabei jede Anfrage mit</b>, die die Seite im Hintergrund verschickt. So fanden wir alles Nötige:</p>
+
+<div class="tabelle">
+<table>
+  <tr><th>Zweck</th><th>Anfrage</th></tr>
+  <tr><td>Anmelden</td><td><code>POST /schule/login2</code></td></tr>
+  <tr><td>Lektionen auflisten</td><td><code>GET /schule/vokabellektionen/alle</code></td></tr>
+  <tr><td>Wörterbuch befragen</td><td><code>GET /suchfunktion/_vokabel</code></td></tr>
+  <tr><td>Lektion speichern</td><td><code>POST /schule/rest/vokabellektion/&lt;Schule&gt;/&lt;Benutzer&gt;</code></td></tr>
+  <tr><td>Lektion löschen</td><td><code>DELETE /schule/rest/vokabellektion/&lt;ID&gt;</code></td></tr>
+</table>
+</div>
+
+<h3>Das eigentliche Rätsel: die Grammatik-Abfrage</h3>
+<p>Speichern funktionierte, aber im Vokabeltrainer fehlte bei deinen Lektionen das Dropdown für die Konjugationsklasse. Bei den Lektionen deiner Lehrer war es da. Die Frage war also: Was haben deren Einträge, was unsere nicht haben?</p>
+
+<p>Die Antwort kam durch einen direkten Vergleich. Das Wort <code>liber</code> kommt in beiden Lektionen vor — einmal von der Lehrkraft angelegt, einmal von uns. Feld für Feld nebeneinandergelegt:</p>
+
+<div class="tabelle">
+<table>
+  <tr><th>Feld</th><th>Lehrer-Lektion</th><th>unsere</th></tr>
+  <tr><td><code>vokid</code></td><td><code>RRLX-VWH</code></td><td><code>NAVIX-…</code></td></tr>
+  <tr><td><code>quelle</code></td><td><code>gross</code></td><td><code>RRLX-VWH</code></td></tr>
+  <tr><td>alle übrigen</td><td colspan="2">identisch</td></tr>
+</table>
+</div>
+
+<p>Wir hatten die beiden Felder <b>vertauscht</b>. Das <code>vokid</code> muss die Nummer des echten Wörterbucheintrags sein, und <code>quelle</code> der Name des Wörterbuchs. Bei uns stand in <code>vokid</code> eine frisch erfundene Nummer — für Navigium also ein unbekanntes Eigengewächs, über dessen Grammatik es nichts weiß. Ein Feld getauscht, und die Dropdowns waren da.</p>
+
+<div class="kasten merke">
+  <b class="titel">Die Lehre daraus</b>
+  <p>Wenn etwas bei anderen funktioniert und bei dir nicht, ist der schnellste Weg nicht Nachdenken, sondern <b>Vergleichen</b>: einen funktionierenden Datensatz neben den eigenen legen und Feld für Feld durchgehen. Der Unterschied ist die Antwort. Vorher hatte ich fälschlich behauptet, die Funktion sei für eigene Lektionen technisch unmöglich.</p>
+</div>
+
+<h3>Wie Navigium entscheidet, was es abfragt</h3>
+<p>Im gespeicherten Eintrag steht ein Feld <code>optionen</code> mit einem Wert wie <code>@trwa=1</code>. Diesen Code vergibt Navigium selbst, abgeleitet aus der Wortart. Er bestimmt, was der Trainer später fragt:</p>
+
+<div class="tabelle">
+<table>
+  <tr><th>Code</th><th>Wortart</th><th>Was abgefragt wird</th></tr>
+  <tr><td><code>@trwa=0</code></td><td>Substantiv</td><td>Genitiv, Genus, Deklinationsklasse</td></tr>
+  <tr><td><code>@trwa=1</code></td><td>Verb</td><td>Stammformen und Konjugationsklasse</td></tr>
+  <tr><td><code>@trwa=2</code></td><td>Adjektiv</td><td>weibliche und sächliche Form, Klasse</td></tr>
+  <tr><td><code>@trwa=3 / 4 / 5</code></td><td>Adverb / Pronomen / Subjunktion</td><td>nur die Bedeutung</td></tr>
+  <tr><td><code>@trwa=8</code></td><td>Phrase</td><td>nur die Bedeutung</td></tr>
+</table>
+</div>
+
+<p>Deshalb ist die Wortart mehr als eine Beschriftung — sie entscheidet über die Grammatikabfrage. Aus demselben Grund wurde der KI-Auftrag nachgeschärft: Sie soll nicht grob „Sonstiges" vergeben, sondern genau zwischen Präposition, Subjunktion, Phrase und so weiter unterscheiden.</p>
+
+<p>Bei Verben kommt eine zweite Bedingung dazu: Das Feld <code>stammformen</code> muss gefüllt sein, im Format <code>agere,ago,egi,actum</code> — ohne Leerzeichen. Fehlt es, fragt der Trainer keine Stammformen ab.</p>
+
+<h2 id="grenzen"><span class="nr">Kapitel 6</span>Wo die Systeme an Grenzen stoßen</h2>
+
+<p>Nicht alles ließ sich lösen. Die drei Grenzen sind echt und liegen bei den Anbietern, nicht im Code.</p>
+
+<h3>Spotify: Liked Songs lassen sich nicht löschen</h3>
+<p>Als du Songs aus „Liked Songs" nach G00fγ verschieben wolltest, klappte das Hinzufügen — das Entfernen aber nicht. Der Server antwortete hartnäckig mit <code>403 Forbidden</code>.</p>
+<p>Wir haben die naheliegende Ursache ausgeschlossen: Eine neue Anmeldung mit erweiterter Berechtigung brachte nichts. Ein Blick auf die Berechtigungen des Tokens zeigte, dass <code>user-library-modify</code> sehr wohl enthalten war. Entscheidend war dann ein Vergleichstest: Auch die reine <i>Nachfrage</i>, ob ein Song gespeichert ist, wurde abgelehnt — obwohl dieselbe Berechtigung überall sonst funktioniert.</p>
+<p>Damit war klar: Spotify sperrt diese ganze Endpunkt-Familie für Apps, die im <b>Development Mode</b> laufen, also ohne offizielle Freigabe. Das Auflisten bleibt erlaubt, das Bearbeiten nicht. Deshalb musst du dieses eine Aufräumen von Hand machen.</p>
+
+<h3>Navigium: das Wörterbuch kennt nur Latein</h3>
+<p>Der Abgleich läuft ausschließlich bei Latein — und das aus gutem Grund. Die Suche nach dem spanischen <code>casa</code> liefert nämlich das lateinische <b>casa -ae</b> („Hütte"). Ohne Sperre würde die Pipeline spanische Vokabeln fröhlich mit zufällig gleich geschriebenen lateinischen Wörtern überschreiben. Für Spanisch, Englisch und Französisch trägt das System deshalb nur Wort, Bedeutung und Genus ein — mehr kann Navigium dort ohnehin nicht abfragen.</p>
+
+<h3>Unregelmäßige Verben</h3>
+<p>Bei <code>facere</code> erscheint kein Konjugationsklassen-Dropdown. Das ist kein Fehler: Die Lektion deiner Lehrkraft verhält sich genauso. Navigium fragt die Klasse bei unregelmäßigen Verben schlicht nicht ab.</p>
+
+<h2 id="bedienung"><span class="nr">Kapitel 7</span>Bedienung: was du wo anfasst</h2>
+
+<h3>Vokabeln einscannen</h3>
+<p><b>Seite:</b> <code>nahol2021.github.io/vokabel-upload/</code></p>
+<p>Bilder sammeln, optional Hinweis eintippen, abschicken. Nach etwa einer Minute steht die Lektion in Navigium. Der Zugangs-Token wird einmal pro Gerät eingetragen und bleibt dort im Browser gespeichert — er verlässt dein Gerät nie, außer direkt zu GitHub.</p>
+
+<h3>Konjunktiv üben</h3>
+<p><b>Seite:</b> <code>nahol2021.github.io/vokabel-upload/konjunktiv.html</code></p>
+<p>Ohne Anmeldung. Die Formen werden nicht aus einer Liste geholt, sondern aus den Regeln <i>berechnet</i> — Infinitiv plus Endung, Perfektstamm plus <code>isse</code> plus Endung. Deshalb gehen sie nie aus.</p>
+
+<h3>Musikwunsch äußern</h3>
+<p>Eintrag in <code>artist_requests.json</code> im Repo <code>wochendosis-automation</code> ergänzen. Beim nächsten Montagslauf wird er berücksichtigt.</p>
+
+<h3>Wenn etwas nicht läuft</h3>
+<p>Jeder Lauf hinterlässt ein Protokoll unter dem Reiter <b>Actions</b> im jeweiligen Repository. Dort steht Zeile für Zeile, was das Programm getan hat und woran es gescheitert ist. Ein roter Haken heißt: Der Lauf ist abgebrochen — die Meldung darunter sagt, warum.</p>
+
+<hr>
+<p class="fuss">Beide Systeme laufen vollständig auf fremden Rechnern: GitHub führt den Code aus, Spotify und Navigium halten die Daten, Google stellt das Sprachmodell. Dein Gerät ist nur noch Fernbedienung — weshalb alles auch dann weiterläuft, wenn dein PC seit Tagen aus ist.</p>
+
+</div>
+
+</body>
+</html>
