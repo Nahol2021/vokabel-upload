@@ -8,7 +8,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>Vokabel-Scanner Upload</title>
 <style>
-  :root { color-scheme: light dark; }
+  :root { color-scheme: light dark; --akzent: #c0392b; }
+  body.grammatik { --akzent: #2d5fa6; }
   * { box-sizing: border-box; }
   body {
     margin: 0; padding: 24px 16px 48px;
@@ -39,13 +40,14 @@
     font-size: 1rem; font-weight: 600; cursor: pointer;
     -webkit-tap-highlight-color: transparent;
   }
-  .btn-primary { background: #c0392b; color: #fff; }
+  .btn-primary { background: var(--akzent); color: #fff; }
   .btn-secondary { background: #eceae5; color: #1a1a1a; }
   @media (prefers-color-scheme: dark) { .btn-secondary { background: #34363a; color: #f0f0f0; } }
   .btn-primary:disabled { opacity: 0.5; }
   #captureLabel, #libraryLabel {
     display: block; text-align: center; padding: 24px 20px; border-radius: 16px;
-    border: 2px dashed #c0392b33; background: #c0392b0d; color: #c0392b;
+    border: 2px dashed color-mix(in srgb, var(--akzent) 20%, transparent);
+    background: color-mix(in srgb, var(--akzent) 5%, transparent); color: var(--akzent);
     font-weight: 600; margin-bottom: 10px;
   }
   #libraryLabel { padding: 16px 20px; }
@@ -69,16 +71,31 @@
   .status-ok { color: #1a7d3a; }
   .status-err { color: #c0392b; }
   a.issues-link {
-    display: block; text-align: center; margin-top: 14px; color: #c0392b;
+    display: block; text-align: center; margin-top: 14px; color: var(--akzent);
     font-weight: 600; text-decoration: none; font-size: 0.95rem;
   }
+  .modus {
+    display: flex; gap: 4px; width: 100%; max-width: 420px; margin-bottom: 16px;
+    background: #e8e6e1; border-radius: 14px; padding: 4px;
+  }
+  @media (prefers-color-scheme: dark) { .modus { background: #232527; } }
+  .modus button {
+    padding: 11px 8px; border-radius: 11px; background: transparent;
+    color: #8a8a8a; font-size: .95rem;
+  }
+  .modus button[aria-pressed="true"] { background: var(--akzent); color: #fff; }
   #tokenSection.hidden, #uploadSection.hidden { display: none; }
 </style>
 </head>
 <body>
   <div id="fehler" style="display:none; max-width:420px; width:100%; background:#c0392b; color:#fff; padding:12px 14px; border-radius:10px; margin-bottom:14px; font-size:.85rem; white-space:pre-wrap;"></div>
-  <h1>Vokabel-Scanner</h1>
-  <p class="sub">Beliebig viele Bilder sammeln → Abschicken → eine Lektion in Navigium</p>
+  <h1 id="titel">Vokabel-Scanner</h1>
+  <p class="sub" id="untertitel">Beliebig viele Bilder sammeln → Abschicken → eine Lektion in Navigium</p>
+
+  <div class="modus" id="modus">
+    <button type="button" data-modus="vokabeln" aria-pressed="true">Vokabeln</button>
+    <button type="button" data-modus="grammatik" aria-pressed="false">Grammatik</button>
+  </div>
 
   <div class="card" id="tokenSection">
     <h2>Einmalig: GitHub-Zugriff einrichten</h2>
@@ -90,7 +107,7 @@
   </div>
 
   <div class="card" id="uploadSection">
-    <h2>Neue Lektion</h2>
+    <h2 id="kartentitel">Neue Lektion</h2>
 
     <label id="captureLabel" for="cameraInput">📷 Foto aufnehmen</label>
     <input type="file" id="cameraInput" accept="image/*" capture="environment" multiple style="display:none" >
@@ -105,15 +122,54 @@
 
     <button class="btn-primary" id="submitBtn" disabled>Abschicken</button>
     <div id="status"></div>
+    <a class="issues-link" id="grammatikLink" href="grammatik.html" style="display:none">Zur Grammatik-Sammlung →</a>
     <button class="btn-secondary" style="margin-top:14px" id="resetBtn">Token zurücksetzen</button>
   </div>
 
   <p class="sub" style="margin:0"><span id="version"></span></p>
 
 <script>
-  const VERSION = "v6 (16.09. 20:25)";
+  const VERSION = "v7 (22.09.)";
   const REPO = "Nahol2021/vokabel-scanner";
   const TOKEN_KEY = "vokabel_scanner_gh_token";
+
+  // Zwei Ziele im selben Repo. Die Marker-Datei liegt jeweils im eigenen
+  // Eingang, damit der passende Workflow anspringt.
+  const MODI = {
+    vokabeln: {
+      ordner: "inbox",
+      titel: "Vokabel-Scanner",
+      untertitel: "Beliebig viele Bilder sammeln → Abschicken → eine Lektion in Navigium",
+      karte: "Neue Lektion",
+      platzhalter: "z.B. „Die Lektion beginnt bei amiga und geht bis agua“ oder „Seite 2 gehört zur selben Lektion“",
+      fertig: (n) => `Abgeschickt! ${n} ${n === 1 ? "Bild wird" : "Bilder werden"} zu einer Lektion verarbeitet und in Navigium angelegt (~1 Min.).`,
+    },
+    grammatik: {
+      ordner: "grammatik-inbox",
+      titel: "Grammatik-Scanner",
+      untertitel: "Regelblätter und Tabellen fotografieren → landen auf deiner Grammatik-Seite",
+      karte: "Neues Regelblatt",
+      platzhalter: "z.B. „das ist Konjunktiv Aktiv“ oder „gehört zur a-Deklination“ – hilft beim Einsortieren",
+      fertig: (n) => `Abgeschickt! ${n} ${n === 1 ? "Bild wird" : "Bilder werden"} ausgelesen, gegengeprüft und in die Grammatik-Seite eingefügt (~2 Min.).`,
+    },
+  };
+  let modus = "vokabeln";
+
+  function setzeModus(neu) {
+    if (!MODI[neu]) return;
+    modus = neu;
+    const m = MODI[neu];
+    document.body.classList.toggle("grammatik", neu === "grammatik");
+    $("titel").textContent = m.titel;
+    $("untertitel").textContent = m.untertitel;
+    $("kartentitel").textContent = m.karte;
+    $("notiz").placeholder = m.platzhalter;
+    $("grammatikLink").style.display = neu === "grammatik" ? "block" : "none";
+    for (const b of $("modus").querySelectorAll("button")) {
+      b.setAttribute("aria-pressed", String(b.dataset.modus === neu));
+    }
+    setStatus("");
+  }
 
   // Fehler sichtbar machen: sonst wirkt ein kaputtes Skript wie ein toter Knopf.
   window.onerror = function (msg, quelle, zeile) {
@@ -243,8 +299,9 @@
         setStatus(`Lade Bild ${i + 1} von ${gesammelt.length} hoch ...`);
         const { file } = gesammelt[i];
         const name = `${i + 1}.${extFromMime(file.type)}`;
-        const res = await ghPut(token, `inbox/${stapel}/${name}`, await fileToBase64(file),
-                                `Vokabelbild ${i + 1} (Stapel ${stapel})`);
+        const res = await ghPut(token, `${MODI[modus].ordner}/${stapel}/${name}`,
+                                await fileToBase64(file),
+                                `${modus} Bild ${i + 1} (Stapel ${stapel})`);
         if (res.status === 401) {
           setStatus("Token ungültig oder abgelaufen. Bitte zurücksetzen und neu eintragen.", "status-err");
           $("submitBtn").disabled = false;
@@ -261,8 +318,10 @@
       // Die Marker-Datei loest erst jetzt die Verarbeitung aus - so wird aus
       // allen Bildern zusammen genau eine Lektion.
       setStatus("Starte Verarbeitung ...");
-      const marker = { bilder, notiz: $("notiz").value.trim(), erstellt: new Date().toISOString() };
-      const res = await ghPut(token, `inbox/${stapel}/batch.json`,
+      const marker = { bilder, notiz: $("notiz").value.trim(), modus,
+                       erstellt: new Date().toISOString(),
+                       datum: new Date().toISOString().slice(0, 10) };
+      const res = await ghPut(token, `${MODI[modus].ordner}/${stapel}/batch.json`,
                               btoa(unescape(encodeURIComponent(JSON.stringify(marker, null, 2)))),
                               `Stapel ${stapel} abschicken (${bilder.length} Bilder)`);
       if (res.status !== 201) {
@@ -275,7 +334,7 @@
       gesammelt = [];
       $("notiz").value = "";
       renderThumbs();
-      setStatus(`Abgeschickt! ${bilder.length} ${bilder.length === 1 ? "Bild wird" : "Bilder werden"} zu einer Lektion verarbeitet und in Navigium angelegt (~1 Min.).`, "status-ok");
+      setStatus(MODI[modus].fertig(bilder.length), "status-ok");
     } catch (e) {
       setStatus("Netzwerkfehler: " + e.message, "status-err");
       $("submitBtn").disabled = false;
@@ -290,6 +349,10 @@
     ["submitBtn", "click", submitBatch],
     ["cameraInput", "change", addFiles],
     ["libraryInput", "change", addFiles],
+    ["modus", "click", (ev) => {
+      const b = ev.target.closest("button");
+      if (b) setzeModus(b.dataset.modus);
+    }],
   ];
   const fehlend = [];
   for (const [id, evt, fn] of verdrahtung) {
@@ -304,6 +367,7 @@
 
   const versionsAnzeige = $("version");
   if (versionsAnzeige) versionsAnzeige.textContent = VERSION;
+  setzeModus("vokabeln");
   refreshSections();
   renderThumbs();
 </script>
