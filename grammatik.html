@@ -131,6 +131,13 @@
     font-family: "IBM Plex Sans", sans-serif; font-size: .76rem; font-weight: 500;
     color: var(--tinte-3);
   }
+  .bereichzahl {
+    margin-left: auto; font-family: "IBM Plex Sans", sans-serif;
+    font-size: .72rem; font-weight: 600; color: var(--tinte-3);
+    font-variant-numeric: tabular-nums;
+  }
+  .verzeichnisbereich a { color: inherit; text-decoration: none; }
+  .verzeichnisbereich a:hover { color: var(--akzent); }
   .bereich[hidden] { display: none; }
 
   /* Ein Thema */
@@ -141,9 +148,13 @@
   .themakopf { display: flex; flex-wrap: wrap; align-items: baseline; gap: 9px; margin-bottom: 10px; }
   .thema h3 { font-size: 1.05rem; font-weight: 600; margin: 0; }
   .vorlaeufig {
-    font-size: .66rem; text-transform: uppercase; letter-spacing: .06em; font-weight: 700;
-    color: var(--warn); background: var(--warn-bg); padding: 2px 7px; border-radius: 5px;
-    cursor: help;
+    font-size: .7rem; font-style: italic; color: var(--tinte-3);
+    cursor: help; font-weight: 500;
+  }
+  .vorlaeufig::before {
+    content: ""; display: inline-block; width: 6px; height: 6px;
+    border-radius: 50%; background: var(--warn); margin-right: 5px;
+    vertical-align: .08em;
   }
   .gemeinsam {
     font-size: .73rem; text-transform: uppercase; letter-spacing: .07em;
@@ -165,8 +176,9 @@
     /* 1% zwingt die Spalte auf ihre Inhaltsbreite - sonst teilt der Browser
        die Tabelle gleichmaessig auf und zwischen Beschriftung und Form
        klafft eine Luecke. */
-    width: 1%; min-width: 4.4em; max-width: 11em; white-space: normal;
-    hyphens: auto;
+    /* Nicht umbrechen: sonst zerfaellt "Nom. pl maennlich" in Silben, sobald
+       die Wertespalte den Platz nimmt. Zu breite Tabellen scrollen seitlich. */
+    width: 1%; white-space: nowrap;
     position: sticky; left: 0; background: var(--flaeche); z-index: 1;
     padding-right: 18px;
   }
@@ -178,7 +190,7 @@
        dass "Nom. pl maennlich" auf drei Zeilen zerfaellt. Dort darf die
        Tabelle lieber nach ihrem Inhalt wachsen und seitlich scrollen. */
     tbody td:last-child, thead th:last-child { width: auto; }
-    .zeilenkopf { max-width: none; white-space: nowrap; }
+    .zeilenkopf { max-width: none; }
     th, td { padding-right: 16px; }
   }
   .form { font-family: "IBM Plex Serif", Georgia, serif; font-weight: 600; }
@@ -279,23 +291,23 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 
 <div class="sprachwahl" id="sprachwahl">
 <button type="button" data-sprache="latein" aria-pressed="true">Latein<span class="anzahl">1</span></button>
-<button type="button" data-sprache="spanisch" aria-pressed="false">Spanisch<span class="anzahl">3</span></button>
+<button type="button" data-sprache="spanisch" aria-pressed="false">Spanisch<span class="anzahl">12</span></button>
 </div>
 <div class="suchfeld"><input type="search" id="suche" placeholder="Thema suchen …" autocomplete="off" spellcheck="false"><p class="keintreffer" id="keintreffer" hidden>Nichts gefunden.</p></div>
 <div class="spalten">
 <div class="sprachblock" data-sprache="latein">
 <details class="verzeichnisklappe" open><summary>Inhalt</summary>
 <nav class="verzeichnis" data-sprache="latein">
-<p class="verzeichniskopf">1 Thema</p>
-<p class="verzeichnisbereich">Verben</p><ul>
+<p class="verzeichniskopf">1 Eintrag</p>
+<p class="verzeichnisbereich"><a href="#latein-bereich-verb">Verben</a></p><ul>
 <li data-suche="konjunktiv"><a href="#latein-konjunktiv">Konjunktiv<span class="anzahl">2</span></a></li>
 </ul>
 </nav>
 </details>
 <main class="inhalt">
 <section class="bereich" id="latein-bereich-verb">
-<h2>Verben<span class="bereichunter">Formen, Zeiten und Modi</span></h2>
-<article class="thema" id="latein-konjunktiv" data-suche="konjunktiv verb konjunktiv präsens aktiv — laudare konjunktiv imperfekt aktiv — laudare">
+<h2>Verben<span class="bereichunter">Formen, Zeiten und Modi</span><span class="bereichzahl">1</span></h2>
+<article class="thema" id="latein-konjunktiv" data-suche="konjunktiv konjunktiv präsens aktiv — laudare konjunktiv imperfekt aktiv — laudare">
 <header class="themakopf">
 <h3>Konjunktiv</h3>
 </header>
@@ -337,8 +349,8 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <details class="begriffe">
 <summary>Fachbegriffe erklärt <span>(5)</span></summary>
 <dl>
-<dt>Konjunktiv<span class="art">Modus</span></dt><dd>Die Möglichkeitsform: etwas ist gewünscht, vorgestellt oder nur möglich. Im Deutschen oft mit „würde“ oder „möge“ wiedergegeben. „Utinam laudet!“ – Hoffentlich lobt er!</dd>
 <dt>Präsens<span class="art">Tempus</span></dt><dd>Gegenwart: was jetzt geschieht.</dd>
+<dt>Konjunktiv<span class="art">Modus</span></dt><dd>Die Möglichkeitsform: etwas ist gewünscht, vorgestellt oder nur möglich. Im Deutschen oft mit „würde“ oder „möge“ wiedergegeben. „Utinam laudet!“ – Hoffentlich lobt er!</dd>
 <dt>Aktiv<span class="art">Genus verbi</span></dt><dd>Das Subjekt handelt selbst: „Er lobt.“</dd>
 <dt>Imperfekt<span class="art">Tempus</span></dt><dd>Vergangenheit für Vorgänge, die andauerten oder sich wiederholten – der Hintergrund einer Erzählung.</dd>
 <dt>Perfekt<span class="art">Tempus</span></dt><dd>Vergangenheit für abgeschlossene Ereignisse – das, was die Handlung vorantreibt.</dd>
@@ -351,27 +363,35 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <div class="sprachblock" data-sprache="spanisch" hidden>
 <details class="verzeichnisklappe" open><summary>Inhalt</summary>
 <nav class="verzeichnis" data-sprache="spanisch">
-<p class="verzeichniskopf">3 Themen</p>
-<p class="verzeichnisbereich">Verben</p><ul>
-<li data-suche="verben"><a href="#spanisch-verben">Verben<span class="anzahl">2</span></a></li>
+<p class="verzeichniskopf">12 Einträge</p>
+<p class="verzeichnisbereich"><a href="#spanisch-bereich-verb">Verben</a></p><ul>
+<li data-suche="indikativ · präsens · aktiv: ser, hablar"><a href="#spanisch-verben-1">Indikativ · Präsens · Aktiv: ser, hablar<span class="anzahl">2</span></a></li>
+<li data-suche="verwendung von hay"><a href="#spanisch-verben-2">Verwendung von hay</a></li>
+<li data-suche="regeln von deinem blatt"><a href="#spanisch-verben-regeln">Regeln von deinem Blatt</a></li>
 </ul>
-<p class="verzeichnisbereich">Substantive</p><ul>
-<li data-suche="substantive und artikel"><a href="#spanisch-substantive-und-artikel">Substantive und Artikel<span class="anzahl">4</span></a></li>
+<p class="verzeichnisbereich"><a href="#spanisch-bereich-substantiv">Substantive</a></p><ul>
+<li data-suche="artículos y sustantivos"><a href="#spanisch-substantive-und-artikel-1">Artículos y sustantivos</a></li>
+<li data-suche="unbestimmter artikel und pluralbildung"><a href="#spanisch-substantive-und-artikel-2">Unbestimmter Artikel und Pluralbildung</a></li>
+<li data-suche="regeln von deinem blatt"><a href="#spanisch-substantive-und-artikel-regeln">Regeln von deinem Blatt</a></li>
 </ul>
-<p class="verzeichnisbereich">Aussprache</p><ul>
-<li data-suche="aussprache"><a href="#spanisch-aussprache">Aussprache<span class="anzahl">8</span></a></li>
+<p class="verzeichnisbereich"><a href="#spanisch-bereich-aussprache">Aussprache</a></p><ul>
+<li data-suche="aussprache von c"><a href="#spanisch-aussprache-1">Aussprache von c</a></li>
+<li data-suche="aussprache von z"><a href="#spanisch-aussprache-2">Aussprache von z</a></li>
+<li data-suche="aussprache von j und g"><a href="#spanisch-aussprache-3">Aussprache von j und g</a></li>
+<li data-suche="aussprache von g"><a href="#spanisch-aussprache-4">Aussprache von g</a></li>
+<li data-suche="aussprache von h"><a href="#spanisch-aussprache-5">Aussprache von h</a></li>
+<li data-suche="aussprache von r und rr"><a href="#spanisch-aussprache-6">Aussprache von r und rr</a></li>
 </ul>
 </nav>
 </details>
 <main class="inhalt">
 <section class="bereich" id="spanisch-bereich-verb">
-<h2>Verben<span class="bereichunter">Formen, Zeiten und Modi</span></h2>
-<article class="thema" id="spanisch-verben" data-suche="verben verb ser präsente präsens von hablar (-ar verben)">
+<h2>Verben<span class="bereichunter">Formen, Zeiten und Modi</span><span class="bereichzahl">3</span></h2>
+<article class="thema" id="spanisch-verben-1" data-suche="indikativ · präsens · aktiv: ser, hablar verben ser präsente präsens von hablar (-ar verben)">
 <header class="themakopf">
-<h3>Verben</h3>
+<h3>Indikativ · Präsens · Aktiv: ser, hablar</h3>
 <span class="vorlaeufig" title="Gelesen, während das beste Modell überlastet war. Wird automatisch noch einmal gelesen.">vorläufig</span>
 </header>
-<p class="gemeinsam">Indikativ · Präsens · Aktiv</p>
 <div class="tabellenrahmen"><table>
 <thead><tr><th class="zeilenkopf"></th>
 <th>ser</th>
@@ -402,18 +422,6 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <td><span class="form">hablan</span></td>
 </tr>
 </tbody></table></div>
-<dl class="regeln">
-<dt>hablar</dt><dd>Stamm + -o, -as, -a, -amos, -áis, -an</dd>
-</dl>
-<aside class="regelblock">
-<h4>Regeln von deinem Blatt</h4><ul>
-<li>Personalpronomen: yo, tú, él/ella/usted, nosotros/nosotras, vosotros/vosotras, ellos/ellas/ustedes</li>
-<li>unos / unas bedeutet &quot;einige&quot;</li>
-<li>hay bedeutet &quot;es gibt&quot; und bleibt unverändert (kombiniert mit un, una oder Nomen im Plural ohne Artikel)</li>
-<li>Personalpronomen: yo, tú, él / ella (usted), nosotros / nosotras, vosotros / vosotras, ellos / ellas (ustedes)</li>
-<li>hay bedeutet &quot;es gibt&quot; und steht vor un/una oder direkt vor Substantiven im Plural ohne Artikel</li>
-<li>Personalpronomen: yo, tú, él/ella (usted), nosotros/nosotras, vosotros/vosotras, ellos/ellas (ustedes)</li>
-</ul></aside>
 <details class="begriffe">
 <summary>Fachbegriffe erklärt <span>(3)</span></summary>
 <dl>
@@ -421,82 +429,117 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <dt>Präsens<span class="art">Tempus</span></dt><dd>Gegenwart: was jetzt geschieht.</dd>
 <dt>Aktiv<span class="art">Genus verbi</span></dt><dd>Das Subjekt handelt selbst: „Er lobt.“</dd>
 </dl></details>
+</article>
+<article class="thema" id="spanisch-verben-2" data-suche="verwendung von hay verben verwendung von hay">
+<header class="themakopf">
+<h3>Verwendung von hay</h3>
+<span class="vorlaeufig" title="Gelesen, während das beste Modell überlastet war. Wird automatisch noch einmal gelesen.">vorläufig</span>
+</header>
+<div class="tabellenrahmen"><table>
+<tr><th class="zeilenkopf">Bedeutung</th><td><span class="form">hay</span> <span class="erklaerung">es gibt</span></td></tr>
+<tr><th class="zeilenkopf">mit unbestimmtem Artikel</th><td><span class="form">hay un parque</span></td></tr>
+<tr><th class="zeilenkopf">mit unbestimmtem Artikel</th><td><span class="form">hay una tiendas</span></td></tr>
+<tr><th class="zeilenkopf">ohne Artikel im Plural</th><td><span class="form">hay cafeterías</span></td></tr>
+</table></div>
+<details class="begriffe">
+<summary>Fachbegriffe erklärt <span>(1)</span></summary>
+<dl>
+<dt>Plural<span class="art">Numerus</span></dt><dd>Mehrzahl.</dd>
+</dl></details>
+</article>
+<article class="thema" id="spanisch-verben-regeln" data-suche="regeln verben">
+<header class="themakopf">
+<h3>Regeln von deinem Blatt</h3>
+<span class="vorlaeufig" title="Gelesen, während das beste Modell überlastet war. Wird automatisch noch einmal gelesen.">vorläufig</span>
+</header>
+<aside class="regelblock">
+<ul>
+<li>Personalpronomen: yo, tú, él/ella/usted, nosotros/nosotras, vosotros/vosotras, ellos/ellas/ustedes</li>
+<li>unos / unas bedeutet &quot;einige&quot;</li>
+<li>hay bedeutet &quot;es gibt&quot; und bleibt unverändert (kombiniert mit un, una oder Nomen im Plural ohne Artikel)</li>
+<li>Personalpronomen: yo, tú, él / ella (usted), nosotros / nosotras, vosotros / vosotras, ellos / ellas (ustedes)</li>
+<li>hay bedeutet &quot;es gibt&quot; und steht vor un/una oder direkt vor Substantiven im Plural ohne Artikel</li>
+<li>Personalpronomen: yo, tú, él/ella (usted), nosotros/nosotras, vosotros/vosotras, ellos/ellas (ustedes)</li>
+<li>hay bedeutet &quot;es gibt&quot; und wird mit unbestimmter Artikel oder im Plural ohne Artikel verwendet</li>
+</ul></aside>
 <p class="quelle">Zuletzt ergänzt am 23.09.2026 · 3 Blätter</p>
 </article>
 </section>
 <section class="bereich" id="spanisch-bereich-substantiv">
-<h2>Substantive<span class="bereichunter">Fälle, Zahl und Geschlecht</span></h2>
-<article class="thema" id="spanisch-substantive-und-artikel" data-suche="substantive und artikel substantiv maskuline substantive und artikel (♂) feminine substantive und artikel (♀) unbestimmter artikel und pluralbildung verwendung von hay">
+<h2>Substantive<span class="bereichunter">Fälle, Zahl und Geschlecht</span><span class="bereichzahl">3</span></h2>
+<article class="thema" id="spanisch-substantive-und-artikel-1" data-suche="artículos y sustantivos substantive und artikel artículos y sustantivos">
 <header class="themakopf">
-<h3>Substantive und Artikel</h3>
+<h3>Artículos y sustantivos</h3>
 <span class="vorlaeufig" title="Gelesen, während das beste Modell überlastet war. Wird automatisch noch einmal gelesen.">vorläufig</span>
 </header>
-<h4 class="untertabelle">Maskuline Substantive und Artikel (♂)</h4>
+<p class="gemeinsam">alle: Nom.</p>
 <div class="tabellenrahmen"><table>
-<tr><th class="zeilenkopf">Sg.</th><td><span class="form">el amigo</span></td></tr>
-<tr><th class="zeilenkopf">Sg.</th><td><span class="form">el profesor</span></td></tr>
-<tr><th class="zeilenkopf">Pl.</th><td><span class="form">los amigos</span></td></tr>
-<tr><th class="zeilenkopf">Pl.</th><td><span class="form">los profesores</span></td></tr>
+<tr><th class="zeilenkopf">sg männlich</th><td><span class="form">el amigo</span></td></tr>
+<tr><th class="zeilenkopf">sg männlich</th><td><span class="form">el profesor</span></td></tr>
+<tr><th class="zeilenkopf">pl männlich</th><td><span class="form">los amigos</span></td></tr>
+<tr><th class="zeilenkopf">pl männlich</th><td><span class="form">los profesores</span></td></tr>
+<tr><th class="zeilenkopf">sg weiblich</th><td><span class="form">la amiga</span></td></tr>
+<tr><th class="zeilenkopf">sg weiblich</th><td><span class="form">la ciudad</span></td></tr>
+<tr><th class="zeilenkopf">pl weiblich</th><td><span class="form">las amigas</span></td></tr>
+<tr><th class="zeilenkopf">pl weiblich</th><td><span class="form">las ciudades</span></td></tr>
+<tr><th class="zeilenkopf">pl weiblich</th><td><span class="form">las universidades</span></td></tr>
 </table></div>
-<h4 class="untertabelle">Feminine Substantive und Artikel (♀)</h4>
+<details class="begriffe">
+<summary>Fachbegriffe erklärt <span>(1)</span></summary>
+<dl>
+<dt>Nominativ<span class="art">Kasus</span></dt><dd>Wer oder was? – der Fall des Subjekts.</dd>
+</dl></details>
+</article>
+<article class="thema" id="spanisch-substantive-und-artikel-2" data-suche="unbestimmter artikel und pluralbildung substantive und artikel unbestimmter artikel und pluralbildung">
+<header class="themakopf">
+<h3>Unbestimmter Artikel und Pluralbildung</h3>
+<span class="vorlaeufig" title="Gelesen, während das beste Modell überlastet war. Wird automatisch noch einmal gelesen.">vorläufig</span>
+</header>
 <div class="tabellenrahmen"><table>
-<tr><th class="zeilenkopf">Sg.</th><td><span class="form">la amiga</span></td></tr>
-<tr><th class="zeilenkopf">Sg.</th><td><span class="form">la ciudad</span></td></tr>
-<tr><th class="zeilenkopf">Pl.</th><td><span class="form">las amigas</span></td></tr>
-<tr><th class="zeilenkopf">Pl.</th><td><span class="form">las ciudades</span></td></tr>
-<tr><th class="zeilenkopf">Pl.</th><td><span class="form">las universidades</span> <span class="erklaerung">Handschriftliche Ergänzung</span></td></tr>
+<tr><th class="zeilenkopf">männlich sg.</th><td><span class="form">un amigo</span></td></tr>
+<tr><th class="zeilenkopf">männlich sg.</th><td><span class="form">un profesor</span></td></tr>
+<tr><th class="zeilenkopf">weiblich sg.</th><td><span class="form">una amiga</span></td></tr>
+<tr><th class="zeilenkopf">weiblich sg.</th><td><span class="form">una ciudad</span></td></tr>
+<tr><th class="zeilenkopf">männlich pl.</th><td><span class="form">amigos</span></td></tr>
+<tr><th class="zeilenkopf">männlich pl.</th><td><span class="form">profesores</span></td></tr>
+<tr><th class="zeilenkopf">weiblich pl.</th><td><span class="form">amigas</span></td></tr>
+<tr><th class="zeilenkopf">weiblich pl.</th><td><span class="form">ciudades</span></td></tr>
+<tr><th class="zeilenkopf">männlich pl. unbestimmter Artikel</th><td><span class="form">unos</span> <span class="erklaerung">einige</span></td></tr>
+<tr><th class="zeilenkopf">weiblich pl. unbestimmter Artikel</th><td><span class="form">unas</span> <span class="erklaerung">einige</span></td></tr>
 </table></div>
-<h4 class="untertabelle">Unbestimmter Artikel und Pluralbildung<span class="alle">alle: Nom.</span></h4>
-<div class="tabellenrahmen"><table>
-<tr><th class="zeilenkopf">Sg. männlich</th><td><span class="form">un amigo</span></td></tr>
-<tr><th class="zeilenkopf">Sg. männlich</th><td><span class="form">un profesor</span></td></tr>
-<tr><th class="zeilenkopf">Sg. weiblich</th><td><span class="form">una amiga</span></td></tr>
-<tr><th class="zeilenkopf">Sg. weiblich</th><td><span class="form">una ciudad</span></td></tr>
-<tr><th class="zeilenkopf">Pl. männlich</th><td><span class="form">amigos</span></td></tr>
-<tr><th class="zeilenkopf">Pl. männlich</th><td><span class="form">profesores</span></td></tr>
-<tr><th class="zeilenkopf">Pl. weiblich</th><td><span class="form">amigas</span></td></tr>
-<tr><th class="zeilenkopf">Pl. weiblich</th><td><span class="form">ciudades</span></td></tr>
-<tr><th class="zeilenkopf">Pl. unbestimmter artikel plural</th><td><span class="form">unos</span> <span class="erklaerung">einige</span></td></tr>
-<tr><th class="zeilenkopf">Pl. unbestimmter artikel plural</th><td><span class="form">unas</span> <span class="erklaerung">einige</span></td></tr>
-</table></div>
-<h4 class="untertabelle">Verwendung von hay</h4>
-<div class="tabellenrahmen"><table>
-<tr><th class="zeilenkopf">hay</th><td><span class="form">es gibt</span></td></tr>
-<tr><th class="zeilenkopf">hay</th><td><span class="form">un parque</span></td></tr>
-<tr><th class="zeilenkopf">hay</th><td><span class="form">unas tiendas</span></td></tr>
-<tr><th class="zeilenkopf">hay</th><td><span class="form">cafeterías</span></td></tr>
-</table></div>
+<details class="begriffe">
+<summary>Fachbegriffe erklärt <span>(3)</span></summary>
+<dl>
+<dt>Plural<span class="art">Numerus</span></dt><dd>Mehrzahl.</dd>
+<dt>Bestimmter Artikel<span class="art">Wortart</span></dt><dd>Der Artikel für etwas Bekanntes: el, la, los, las – „der, die, das“.</dd>
+<dt>Unbestimmter Artikel<span class="art">Wortart</span></dt><dd>Der Artikel für etwas Unbekanntes: un, una – „ein, eine“.</dd>
+</dl></details>
+</article>
+<article class="thema" id="spanisch-substantive-und-artikel-regeln" data-suche="regeln substantive und artikel">
+<header class="themakopf">
+<h3>Regeln von deinem Blatt</h3>
+<span class="vorlaeufig" title="Gelesen, während das beste Modell überlastet war. Wird automatisch noch einmal gelesen.">vorläufig</span>
+</header>
 <aside class="regelblock">
-<h4>Regeln von deinem Blatt</h4><ul>
+<ul>
 <li>Bestimmte Artikel und Substantive im Singular und Plural mit männlichen und weiblichen Beispielen.</li>
 <li>unos / unas bedeutet &quot;einige&quot;</li>
 <li>hay bedeutet &quot;es gibt&quot; und bleibt unverändert (kombiniert mit un, una oder Nomen im Plural ohne Artikel)</li>
 <li>hay bedeutet &quot;es gibt&quot; und steht vor un/una oder direkt vor Substantiven im Plural ohne Artikel</li>
 <li>Bestimmte Artikel im Spanischen: el (m. sg.), los (m. pl.), la (f. sg.), las (f. pl.)</li>
 <li>hay bedeutet &quot;es gibt&quot;</li>
+<li>hay bedeutet &quot;es gibt&quot; und wird mit unbestimmter Artikel oder im Plural ohne Artikel verwendet</li>
 </ul></aside>
-<details class="begriffe">
-<summary>Fachbegriffe erklärt <span>(7)</span></summary>
-<dl>
-<dt>Maskulin<span class="art">Genus</span></dt><dd>Männliches grammatisches Geschlecht.</dd>
-<dt>Feminin<span class="art">Genus</span></dt><dd>Weibliches grammatisches Geschlecht.</dd>
-<dt>Plural<span class="art">Numerus</span></dt><dd>Mehrzahl.</dd>
-<dt>Bestimmter Artikel<span class="art">Wortart</span></dt><dd>Der Artikel für etwas Bekanntes: el, la, los, las – „der, die, das“.</dd>
-<dt>Unbestimmter Artikel<span class="art">Wortart</span></dt><dd>Der Artikel für etwas Unbekanntes: un, una – „ein, eine“.</dd>
-<dt>Singular<span class="art">Numerus</span></dt><dd>Einzahl.</dd>
-<dt>Nominativ<span class="art">Kasus</span></dt><dd>Wer oder was? – der Fall des Subjekts.</dd>
-</dl></details>
 <p class="quelle">Zuletzt ergänzt am 23.09.2026 · 2 Blätter</p>
 </article>
 </section>
 <section class="bereich" id="spanisch-bereich-aussprache">
-<h2>Aussprache<span class="bereichunter">Wie die Buchstaben klingen</span></h2>
-<article class="thema" id="spanisch-aussprache" data-suche="aussprache aussprache aussprache von /k/ aussprache von /θ/ aussprache von /x/ aussprache von /g/ aussprache von h aussprache von /rr/ handschriftliche notiz: aussprache von c handschriftliche notiz: vokalverbindungen e/i">
+<h2>Aussprache<span class="bereichunter">Wie die Buchstaben klingen</span><span class="bereichzahl">6</span></h2>
+<article class="thema" id="spanisch-aussprache-1" data-suche="aussprache von c aussprache aussprache von c">
 <header class="themakopf">
-<h3>Aussprache</h3>
+<h3>Aussprache von c</h3>
 <span class="vorlaeufig" title="Gelesen, während das beste Modell überlastet war. Wird automatisch noch einmal gelesen.">vorläufig</span>
 </header>
-<h4 class="untertabelle">Aussprache von /k/</h4>
 <div class="tabellenrahmen"><table>
 <tr><th class="zeilenkopf">ca</th><td><span class="form">casa</span></td></tr>
 <tr><th class="zeilenkopf">que</th><td><span class="form">queso</span></td></tr>
@@ -504,7 +547,17 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <tr><th class="zeilenkopf">co</th><td><span class="form">comer</span></td></tr>
 <tr><th class="zeilenkopf">cu</th><td><span class="form">cuatro</span></td></tr>
 </table></div>
-<h4 class="untertabelle">Aussprache von /θ/</h4>
+<details class="begriffe">
+<summary>Fachbegriffe erklärt <span>(1)</span></summary>
+<dl>
+<dt>Aussprache<span class="art">Lautlehre</span></dt><dd>Wie die Buchstaben klingen. Die Zeichen zwischen Schrägstrichen wie /k/ sind Lautschrift, nicht Schreibweise.</dd>
+</dl></details>
+</article>
+<article class="thema" id="spanisch-aussprache-2" data-suche="aussprache von z aussprache aussprache von z">
+<header class="themakopf">
+<h3>Aussprache von z</h3>
+<span class="vorlaeufig" title="Gelesen, während das beste Modell überlastet war. Wird automatisch noch einmal gelesen.">vorläufig</span>
+</header>
 <div class="tabellenrahmen"><table>
 <tr><th class="zeilenkopf">za</th><td><span class="form">zapato</span></td></tr>
 <tr><th class="zeilenkopf">ce</th><td><span class="form">centro</span></td></tr>
@@ -512,7 +565,17 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <tr><th class="zeilenkopf">zo</th><td><span class="form">zoo</span></td></tr>
 <tr><th class="zeilenkopf">zu</th><td><span class="form">zumo</span></td></tr>
 </table></div>
-<h4 class="untertabelle">Aussprache von /x/</h4>
+<details class="begriffe">
+<summary>Fachbegriffe erklärt <span>(1)</span></summary>
+<dl>
+<dt>Aussprache<span class="art">Lautlehre</span></dt><dd>Wie die Buchstaben klingen. Die Zeichen zwischen Schrägstrichen wie /k/ sind Lautschrift, nicht Schreibweise.</dd>
+</dl></details>
+</article>
+<article class="thema" id="spanisch-aussprache-3" data-suche="aussprache von j und g aussprache aussprache von j und g">
+<header class="themakopf">
+<h3>Aussprache von j und g</h3>
+<span class="vorlaeufig" title="Gelesen, während das beste Modell überlastet war. Wird automatisch noch einmal gelesen.">vorläufig</span>
+</header>
 <div class="tabellenrahmen"><table>
 <tr><th class="zeilenkopf">ja</th><td><span class="form">jamón</span></td></tr>
 <tr><th class="zeilenkopf">je / ge</th><td><span class="form">jefe / gente</span></td></tr>
@@ -520,50 +583,57 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <tr><th class="zeilenkopf">jo</th><td><span class="form">joven</span></td></tr>
 <tr><th class="zeilenkopf">ju</th><td><span class="form">jugar</span></td></tr>
 </table></div>
-<h4 class="untertabelle">Aussprache von /g/</h4>
+<details class="begriffe">
+<summary>Fachbegriffe erklärt <span>(1)</span></summary>
+<dl>
+<dt>Aussprache<span class="art">Lautlehre</span></dt><dd>Wie die Buchstaben klingen. Die Zeichen zwischen Schrägstrichen wie /k/ sind Lautschrift, nicht Schreibweise.</dd>
+</dl></details>
+</article>
+<article class="thema" id="spanisch-aussprache-4" data-suche="aussprache von g aussprache aussprache von g">
+<header class="themakopf">
+<h3>Aussprache von g</h3>
+<span class="vorlaeufig" title="Gelesen, während das beste Modell überlastet war. Wird automatisch noch einmal gelesen.">vorläufig</span>
+</header>
 <div class="tabellenrahmen"><table>
 <tr><th class="zeilenkopf">ga</th><td><span class="form">gato</span></td></tr>
 <tr><th class="zeilenkopf">gue</th><td><span class="form">juguete</span></td></tr>
 <tr><th class="zeilenkopf">gui</th><td><span class="form">guitarra</span></td></tr>
 <tr><th class="zeilenkopf">go</th><td><span class="form">gol</span></td></tr>
 <tr><th class="zeilenkopf">gu</th><td><span class="form">guapo</span></td></tr>
-<tr><th class="zeilenkopf">g + e, i</th><td><span class="form">g + e, i</span></td></tr>
-<tr><th class="zeilenkopf">g + a, o, u</th><td><span class="form">g + a, o, u</span></td></tr>
 </table></div>
-<h4 class="untertabelle">Aussprache von h</h4>
-<div class="tabellenrahmen"><table>
-<tr><th class="zeilenkopf">h</th><td><span class="form">hola</span> <span class="erklaerung">no se pronuncia</span></td></tr>
-</table></div>
-<h4 class="untertabelle">Aussprache von /rr/</h4>
-<div class="tabellenrahmen"><table>
-<tr><th class="zeilenkopf">rr</th><td><span class="form">perro</span></td></tr>
-</table></div>
-<h4 class="untertabelle">Handschriftliche Notiz: Aussprache von c</h4>
-<div class="tabellenrahmen"><table>
-<tr><th class="zeilenkopf">c + e, i</th><td><span class="form">c + e, i</span></td></tr>
-<tr><th class="zeilenkopf">c + a, o, u</th><td><span class="form">c + a, o, u</span></td></tr>
-</table></div>
-<h4 class="untertabelle">Handschriftliche Notiz: Vokalverbindungen e/i</h4>
-<div class="tabellenrahmen"><table>
-<tr><th class="zeilenkopf">ge</th><td><span class="form">ge</span></td></tr>
-<tr><th class="zeilenkopf">que</th><td><span class="form">que</span></td></tr>
-<tr><th class="zeilenkopf">güe</th><td><span class="form">güe</span></td></tr>
-<tr><th class="zeilenkopf">gi</th><td><span class="form">gi</span></td></tr>
-<tr><th class="zeilenkopf">gui</th><td><span class="form">gui</span></td></tr>
-<tr><th class="zeilenkopf">güi</th><td><span class="form">güi</span></td></tr>
-</table></div>
-<aside class="regelblock">
-<h4>Regeln von deinem Blatt</h4><ul>
-<li>Se pronuncia &quot;r&quot; fuerte: - Cuando hay dos: &quot;rr&quot;. Ej: perro</li>
-<li>Se pronuncia &quot;r&quot; fuerte: - A principio de palabra: Ej: Roma</li>
-<li>Se pronuncia &quot;r&quot; fuerte: - Después de L, N, S: Ej: alrededor</li>
-</ul></aside>
 <details class="begriffe">
 <summary>Fachbegriffe erklärt <span>(1)</span></summary>
 <dl>
 <dt>Aussprache<span class="art">Lautlehre</span></dt><dd>Wie die Buchstaben klingen. Die Zeichen zwischen Schrägstrichen wie /k/ sind Lautschrift, nicht Schreibweise.</dd>
 </dl></details>
-<p class="quelle">Zuletzt ergänzt am 23.09.2026 · 1 Blatt</p>
+</article>
+<article class="thema" id="spanisch-aussprache-5" data-suche="aussprache von h aussprache aussprache von h">
+<header class="themakopf">
+<h3>Aussprache von h</h3>
+<span class="vorlaeufig" title="Gelesen, während das beste Modell überlastet war. Wird automatisch noch einmal gelesen.">vorläufig</span>
+</header>
+<div class="tabellenrahmen"><table>
+<tr><th class="zeilenkopf">h</th><td><span class="form">hola</span> <span class="erklaerung">no se pronuncia</span></td></tr>
+</table></div>
+<details class="begriffe">
+<summary>Fachbegriffe erklärt <span>(1)</span></summary>
+<dl>
+<dt>Aussprache<span class="art">Lautlehre</span></dt><dd>Wie die Buchstaben klingen. Die Zeichen zwischen Schrägstrichen wie /k/ sind Lautschrift, nicht Schreibweise.</dd>
+</dl></details>
+</article>
+<article class="thema" id="spanisch-aussprache-6" data-suche="aussprache von r und rr aussprache aussprache von r und rr">
+<header class="themakopf">
+<h3>Aussprache von r und rr</h3>
+<span class="vorlaeufig" title="Gelesen, während das beste Modell überlastet war. Wird automatisch noch einmal gelesen.">vorläufig</span>
+</header>
+<div class="tabellenrahmen"><table>
+<tr><th class="zeilenkopf">rr</th><td><span class="form">perro</span> <span class="erklaerung">Se pronuncia &quot;r&quot; fuerte: - Cuando hay dos: &quot;rr&quot;. Ej: perro - A principio de palabra: Ej: Roma - Después de L, N, S: Ej: alrededor</span></td></tr>
+</table></div>
+<details class="begriffe">
+<summary>Fachbegriffe erklärt <span>(1)</span></summary>
+<dl>
+<dt>Aussprache<span class="art">Lautlehre</span></dt><dd>Wie die Buchstaben klingen. Die Zeichen zwischen Schrägstrichen wie /k/ sind Lautschrift, nicht Schreibweise.</dd>
+</dl></details>
 </article>
 </section>
 </main>
