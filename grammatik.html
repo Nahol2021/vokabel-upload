@@ -5,110 +5,300 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Grammatik">
+<meta name="description" content="Fotografierte Regelblätter, nach Sprache und Thema zusammengeführt.">
 <title>Grammatik-Sammlung</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:wght@400;600&display=swap">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:wght@400;600;700&display=swap">
 <style>
   :root {
-    --grund: #f5f6f7; --flaeche: #ffffff; --tinte: #17212b; --tinte-2: #4c5a66;
-    --tinte-3: #7c8892; --linie: #dde1e5; --akzent: #2d5fa6; --endung: #b8622a;
-    --warn: #b8342a; --warn-bg: #fbeae8;
+    --grund: #f4f5f7; --flaeche: #ffffff; --flaeche-2: #f8f9fa;
+    --tinte: #16202a; --tinte-2: #4a5966; --tinte-3: #7b8894;
+    --linie: #e0e4e8; --linie-2: #eef0f3;
+    --akzent: #2d5fa6; --endung: #b0602a; --warn: #b33428; --warn-bg: #fceceb;
+    --schatten: 0 1px 2px rgba(20,32,44,.05), 0 8px 24px rgba(20,32,44,.05);
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --grund: #13191f; --flaeche: #1b232b; --tinte: #e8edf1; --tinte-2: #a8b6c1;
-      --tinte-3: #7b8894; --linie: #2e3941; --akzent: #7fa9e8; --endung: #e0965c;
-      --warn: #f0867c; --warn-bg: #35201e;
+      --grund: #11171d; --flaeche: #1a222a; --flaeche-2: #202932;
+      --tinte: #e9eef2; --tinte-2: #a9b7c2; --tinte-3: #7a8793;
+      --linie: #2c363f; --linie-2: #232d36;
+      --akzent: #7fa9e8; --endung: #dc9a62; --warn: #f0877d; --warn-bg: #351f1d;
+      --schatten: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
     }
   }
   :root[data-theme="dark"] {
-    --grund: #13191f; --flaeche: #1b232b; --tinte: #e8edf1; --tinte-2: #a8b6c1;
-    --tinte-3: #7b8894; --linie: #2e3941; --akzent: #7fa9e8; --endung: #e0965c;
-    --warn: #f0867c; --warn-bg: #35201e;
+    --grund: #11171d; --flaeche: #1a222a; --flaeche-2: #202932;
+    --tinte: #e9eef2; --tinte-2: #a9b7c2; --tinte-3: #7a8793;
+    --linie: #2c363f; --linie-2: #232d36;
+    --akzent: #7fa9e8; --endung: #dc9a62; --warn: #f0877d; --warn-bg: #351f1d;
   }
   * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 14px; }
   body {
     margin: 0; background: var(--grund); color: var(--tinte);
-    font-family: "IBM Plex Sans", -apple-system, sans-serif; font-size: 16px; line-height: 1.55;
+    font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 16px; line-height: 1.55; -webkit-text-size-adjust: 100%;
   }
-  .blatt { max-width: 900px; margin: 0 auto; padding-inline: 18px; padding-block: 24px 70px; }
-  h1 { font-family: "IBM Plex Serif", Georgia, serif; font-size: 1.6rem; font-weight: 600; margin: 0 0 4px; }
-  .unter { color: var(--tinte-2); font-size: .93rem; margin: 0 0 22px; }
-  .sprachwahl { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 14px; }
+  .blatt { max-width: 1100px; margin: 0 auto; padding: 26px 18px 72px; }
+
+  /* Kopf */
+  h1 {
+    font-family: "IBM Plex Serif", Georgia, serif; font-size: 1.75rem;
+    font-weight: 700; margin: 0 0 5px; letter-spacing: -.01em;
+  }
+  .unter { color: var(--tinte-2); font-size: .95rem; margin: 0 0 20px; max-width: 46ch; }
+
+  .sprachwahl { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 12px; }
   .sprachwahl button {
-    font: inherit; font-size: .86rem; font-weight: 500; padding: 7px 14px;
+    font: inherit; font-size: .88rem; font-weight: 500; padding: 8px 14px;
     border-radius: 999px; border: 1px solid var(--linie); background: var(--flaeche);
-    color: var(--tinte-2); cursor: pointer;
+    color: var(--tinte-2); cursor: pointer; display: inline-flex; align-items: center;
+    gap: 7px; transition: background .12s, color .12s, border-color .12s;
   }
-  .sprachwahl button[aria-pressed="true"] { background: var(--tinte); color: var(--grund); border-color: var(--tinte); }
+  .sprachwahl button:hover { border-color: var(--tinte-3); }
+  .sprachwahl button[aria-pressed="true"] {
+    background: var(--tinte); color: var(--grund); border-color: var(--tinte);
+  }
+  .anzahl {
+    font-size: .72rem; font-weight: 600; opacity: .65;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .suchfeld { margin-bottom: 22px; }
   #suche {
-    width: 100%; padding: 10px 14px; border-radius: 10px; border: 1px solid var(--linie);
-    background: var(--flaeche); color: var(--tinte); font: inherit; margin-bottom: 20px;
+    width: 100%; padding: 11px 15px; border-radius: 11px;
+    border: 1px solid var(--linie); background: var(--flaeche);
+    color: var(--tinte); font: inherit;
   }
-  .thema {
+  #suche:focus { outline: 2px solid var(--akzent); outline-offset: 1px; border-color: transparent; }
+  .keintreffer { color: var(--tinte-3); font-size: .88rem; margin: 10px 2px 0; }
+
+  /* Zwei Spalten am Rechner, gestapelt am Handy */
+  .spalten { position: relative; }
+  .sprachblock { display: block; }
+  /* Muss nach der display-Regel stehen: sonst gewinnt display:block gegen
+     das hidden-Attribut und alle Sprachen stehen gleichzeitig da. */
+  .sprachblock[hidden] { display: none; }
+  @media (min-width: 900px) {
+    .sprachblock { display: grid; grid-template-columns: 218px minmax(0, 1fr); gap: 32px; align-items: start; }
+    .sprachblock[hidden] { display: none; }
+    .verzeichnisklappe { position: sticky; top: 18px; }
+    .verzeichnisklappe > summary { display: none; }
+  }
+
+  /* Inhaltsverzeichnis */
+  .verzeichnisklappe { margin-bottom: 18px; }
+  .verzeichnisklappe > summary {
+    cursor: pointer; font-size: .85rem; font-weight: 600; color: var(--tinte-2);
+    padding: 10px 14px; background: var(--flaeche); border: 1px solid var(--linie);
+    border-radius: 11px; list-style: none;
+  }
+  .verzeichnisklappe > summary::-webkit-details-marker { display: none; }
+  .verzeichnisklappe > summary::after { content: " ▾"; color: var(--tinte-3); }
+  .verzeichnisklappe[open] > summary::after { content: " ▴"; }
+  .verzeichnis {
     background: var(--flaeche); border: 1px solid var(--linie); border-radius: 13px;
-    padding: 18px 18px 14px; margin-bottom: 16px;
+    padding: 14px 8px 12px; margin-top: 8px; max-height: calc(100vh - 60px);
+    overflow-y: auto;
   }
-  .thema h3 { font-size: 1.12rem; margin: 0 0 12px; display: flex; align-items: baseline; gap: 9px; }
-  .bereich {
-    font-size: .68rem; text-transform: uppercase; letter-spacing: .08em;
-    color: var(--tinte-3); font-weight: 600;
+  .verzeichniskopf {
+    font-size: .7rem; text-transform: uppercase; letter-spacing: .08em;
+    color: var(--tinte-3); font-weight: 600; margin: 0 0 10px; padding-inline: 10px;
+  }
+  .verzeichnisbereich {
+    font-size: .78rem; font-weight: 700; color: var(--tinte); margin: 14px 0 3px;
+    padding-inline: 10px;
+  }
+  .verzeichnisbereich:first-of-type { margin-top: 0; }
+  .verzeichnis ul { list-style: none; margin: 0; padding: 0; }
+  .verzeichnis a {
+    display: flex; justify-content: space-between; gap: 8px; align-items: baseline;
+    padding: 6px 10px; border-radius: 8px; text-decoration: none;
+    color: var(--tinte-2); font-size: .88rem;
+  }
+  .verzeichnis a:hover { background: var(--flaeche-2); color: var(--tinte); }
+  .verzeichnis li[hidden] { display: none; }
+
+  /* Bereiche */
+  .bereich { margin-bottom: 34px; }
+  .bereich h2 {
+    font-family: "IBM Plex Serif", Georgia, serif; font-size: 1.22rem; font-weight: 600;
+    margin: 0 0 12px; padding-bottom: 8px; border-bottom: 2px solid var(--linie);
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px;
+  }
+  .bereichunter {
+    font-family: "IBM Plex Sans", sans-serif; font-size: .76rem; font-weight: 500;
+    color: var(--tinte-3);
+  }
+  .bereich[hidden] { display: none; }
+
+  /* Ein Thema */
+  .thema {
+    background: var(--flaeche); border: 1px solid var(--linie); border-radius: 14px;
+    padding: 18px 18px 14px; margin-bottom: 14px; box-shadow: var(--schatten);
+  }
+  .themakopf { display: flex; flex-wrap: wrap; align-items: baseline; gap: 9px; margin-bottom: 10px; }
+  .thema h3 { font-size: 1.05rem; font-weight: 600; margin: 0; }
+  .vorlaeufig {
+    font-size: .66rem; text-transform: uppercase; letter-spacing: .06em; font-weight: 700;
+    color: var(--warn); background: var(--warn-bg); padding: 2px 7px; border-radius: 5px;
+    cursor: help;
   }
   .gemeinsam {
-    font-size: .74rem; text-transform: uppercase; letter-spacing: .07em;
-    color: var(--tinte-3); font-weight: 600; margin: -6px 0 10px;
+    font-size: .73rem; text-transform: uppercase; letter-spacing: .07em;
+    color: var(--tinte-3); font-weight: 600; margin: 2px 0 8px;
   }
+
+  /* Tabellen */
   .tabellenrahmen { overflow-x: auto; margin-inline: -18px; padding-inline: 18px; }
   table { border-collapse: collapse; width: 100%; font-size: .93rem; }
-  th, td { text-align: left; padding: 7px 12px 7px 0; border-bottom: 1px solid var(--linie); white-space: nowrap; }
+  th, td { text-align: left; padding: 7px 14px 7px 0; border-bottom: 1px solid var(--linie-2); white-space: nowrap; }
+  tbody tr:last-child th, tbody tr:last-child td { border-bottom: none; }
   thead th {
     font-size: .7rem; text-transform: uppercase; letter-spacing: .06em;
     color: var(--tinte-3); font-weight: 600; vertical-align: bottom;
+    border-bottom-color: var(--linie);
   }
   .zeilenkopf {
-    color: var(--tinte-3); font-weight: 600; font-size: .82rem; max-width: 11em;
-    white-space: normal;
+    color: var(--tinte-3); font-weight: 600; font-size: .82rem;
+    /* 1% zwingt die Spalte auf ihre Inhaltsbreite - sonst teilt der Browser
+       die Tabelle gleichmaessig auf und zwischen Beschriftung und Form
+       klafft eine Luecke. */
+    width: 1%; min-width: 4.4em; max-width: 11em; white-space: normal;
+    hyphens: auto;
     position: sticky; left: 0; background: var(--flaeche); z-index: 1;
-    padding-right: 14px;
+    padding-right: 18px;
+  }
+  /* Die letzte Spalte nimmt den Rest, damit die Formen links zusammenstehen. */
+  tbody td:last-child, thead th:last-child { width: 100%; }
+  table { table-layout: auto; }
+  @media (max-width: 560px) {
+    /* Auf dem Handy wuerde das die Beschriftungsspalte so zusammendruecken,
+       dass "Nom. pl maennlich" auf drei Zeilen zerfaellt. Dort darf die
+       Tabelle lieber nach ihrem Inhalt wachsen und seitlich scrollen. */
+    tbody td:last-child, thead th:last-child { width: auto; }
+    .zeilenkopf { max-width: none; white-space: nowrap; }
+    th, td { padding-right: 16px; }
   }
   .form { font-family: "IBM Plex Serif", Georgia, serif; font-weight: 600; }
   .endung { font-family: "IBM Plex Serif", Georgia, serif; color: var(--endung); font-weight: 600; }
-  td.leer { color: var(--tinte-3); }
   .erklaerung { color: var(--tinte-2); font-size: .85em; }
+  td.leer { color: var(--tinte-3); }
   .konflikt { color: var(--warn); background: var(--warn-bg); border-radius: 4px; padding: 0 4px; cursor: help; }
-  .regeln { margin: 14px 0 0; display: grid; grid-template-columns: auto 1fr; gap: 3px 12px; font-size: .86rem; }
+  .untertabelle {
+    font-size: .78rem; letter-spacing: .02em; color: var(--tinte-3);
+    font-weight: 600; margin: 18px 0 4px;
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 9px;
+  }
+  .untertabelle .alle, .gemeinsam .alle {
+    font-size: .68rem; text-transform: uppercase; letter-spacing: .06em;
+    color: var(--tinte-3); font-weight: 600; opacity: .85;
+  }
+  .thema .untertabelle:first-of-type { margin-top: 2px; }
+  .bildungsregel { font-size: .84rem; color: var(--tinte-2); margin: 6px 0 0; }
+  .regeln {
+    margin: 12px 0 0; display: grid; grid-template-columns: auto 1fr;
+    gap: 3px 14px; font-size: .86rem;
+  }
   .regeln dt { color: var(--tinte-3); font-weight: 600; }
   .regeln dd { margin: 0; color: var(--tinte-2); }
-  .merksaetze { margin: 12px 0 0; padding-left: 20px; font-size: .88rem; color: var(--tinte-2); }
-  .untertabelle {
-    /* Keine Grossschreibung: aus dem Lautzeichen /k/ wuerde sonst /K/. */
-    font-size: .78rem; letter-spacing: .02em;
-    color: var(--tinte-3); font-weight: 600; margin: 16px 0 4px;
+
+  /* Regeln vom Blatt */
+  .regelblock {
+    margin: 16px 0 0; padding: 12px 15px; background: var(--flaeche-2);
+    border-left: 3px solid var(--akzent); border-radius: 0 9px 9px 0;
   }
-  .thema .untertabelle:first-of-type { margin-top: 4px; }
-  .bildungsregel { font-size: .84rem; color: var(--tinte-2); margin: 6px 0 0; }
-  .quelle { font-size: .76rem; color: var(--tinte-3); margin: 12px 0 0; }
-  .hinweis, .leerzustand { color: var(--tinte-2); font-size: .93rem; }
+  .regelblock h4 {
+    font-size: .72rem; text-transform: uppercase; letter-spacing: .07em;
+    color: var(--tinte-3); font-weight: 700; margin: 0 0 6px;
+  }
+  .regelblock ul { margin: 0; padding-left: 18px; font-size: .89rem; color: var(--tinte-2); }
+  .regelblock li + li { margin-top: 4px; }
+
+  /* Fachbegriffe */
+  .begriffe { margin-top: 14px; }
+  .begriffe summary {
+    cursor: pointer; font-size: .82rem; font-weight: 600; color: var(--akzent);
+    list-style: none;
+  }
+  .begriffe summary::-webkit-details-marker { display: none; }
+  .begriffe summary::before { content: "? "; font-weight: 700; }
+  .begriffe summary span { color: var(--tinte-3); font-weight: 500; }
+  .begriffe dl { margin: 10px 0 0; font-size: .88rem; }
+  .begriffe dt {
+    font-weight: 600; margin-top: 9px; display: flex; align-items: baseline; gap: 8px;
+  }
+  .begriffe dt:first-child { margin-top: 0; }
+  .begriffe .art {
+    font-size: .64rem; text-transform: uppercase; letter-spacing: .06em;
+    color: var(--tinte-3); font-weight: 600;
+  }
+  .begriffe dd { margin: 1px 0 0; color: var(--tinte-2); }
+
+  .quelle { font-size: .74rem; color: var(--tinte-3); margin: 14px 0 0; }
+  .hinweis { color: var(--tinte-2); font-size: .92rem; margin: 0; }
+
   .leerzustand {
-    background: var(--flaeche); border: 1px dashed var(--linie);
-    border-radius: 13px; padding: 22px; text-align: center;
+    background: var(--flaeche); border: 1px dashed var(--linie); border-radius: 14px;
+    padding: 34px 24px; text-align: center; color: var(--tinte-2);
   }
-  footer { margin-top: 30px; color: var(--tinte-3); font-size: .8rem; line-height: 1.8; }
+  .leerzustand h2 { font-size: 1.05rem; margin: 0 0 8px; color: var(--tinte); }
+  .leerzustand p { margin: 0 auto 14px; max-width: 42ch; font-size: .93rem; }
+  .knopf {
+    display: inline-block; padding: 9px 18px; border-radius: 10px;
+    background: var(--akzent); color: #fff; text-decoration: none;
+    font-weight: 600; font-size: .9rem;
+  }
+  .fussnote {
+    font-size: .82rem; color: var(--tinte-2); background: var(--flaeche-2);
+    border: 1px solid var(--linie); border-radius: 11px; padding: 12px 15px;
+    margin: 6px 0 0;
+  }
+  footer {
+    margin-top: 26px; padding-top: 16px; border-top: 1px solid var(--linie);
+    color: var(--tinte-3); font-size: .8rem; line-height: 1.7;
+  }
   footer a { color: var(--akzent); font-weight: 600; text-decoration: none; }
+
+  @media print {
+    body { background: #fff; }
+    .sprachwahl, .suchfeld, .verzeichnisklappe, footer { display: none; }
+    .thema { box-shadow: none; break-inside: avoid; }
+    .sprachblock[hidden] { display: block !important; }
+    .begriffe { display: block; }
+    .begriffe[open] summary { display: none; }
+  }
 </style>
 </head>
 <body>
 <div class="blatt">
 <h1>Grammatik-Sammlung</h1>
-<p class="unter">Alles, was du fotografiert hast — nach Sprache und Thema zusammengeführt.</p>
+<p class="unter">Alles, was du fotografiert hast — nach Sprache, Bereich und Thema
+zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 
 <div class="sprachwahl" id="sprachwahl">
-<button type="button" data-sprache="latein" aria-pressed="true">Latein</button>
-<button type="button" data-sprache="spanisch" aria-pressed="false">Spanisch</button>
+<button type="button" data-sprache="latein" aria-pressed="true">Latein<span class="anzahl">1</span></button>
+<button type="button" data-sprache="spanisch" aria-pressed="false">Spanisch<span class="anzahl">3</span></button>
 </div>
-<input type="search" id="suche" placeholder="Thema suchen …" autocomplete="off">
+<div class="suchfeld"><input type="search" id="suche" placeholder="Thema suchen …" autocomplete="off" spellcheck="false"><p class="keintreffer" id="keintreffer" hidden>Nichts gefunden.</p></div>
+<div class="spalten">
 <div class="sprachblock" data-sprache="latein">
-<section class="thema" id="konjunktiv" data-suche="konjunktiv verb">
-<h3>Konjunktiv <span class="bereich">verb</span></h3>
+<details class="verzeichnisklappe" open><summary>Inhalt</summary>
+<nav class="verzeichnis" data-sprache="latein">
+<p class="verzeichniskopf">1 Thema</p>
+<p class="verzeichnisbereich">Verben</p><ul>
+<li data-suche="konjunktiv"><a href="#latein-konjunktiv">Konjunktiv<span class="anzahl">2</span></a></li>
+</ul>
+</nav>
+</details>
+<main class="inhalt">
+<section class="bereich" id="latein-bereich-verb">
+<h2>Verben<span class="bereichunter">Formen, Zeiten und Modi</span></h2>
+<article class="thema" id="latein-konjunktiv" data-suche="konjunktiv verb konjunktiv präsens aktiv — laudare konjunktiv imperfekt aktiv — laudare">
+<header class="themakopf">
+<h3>Konjunktiv</h3>
+</header>
 <p class="gemeinsam">Konjunktiv · Aktiv</p>
 <div class="tabellenrahmen"><table>
 <thead><tr><th class="zeilenkopf"></th>
@@ -141,115 +331,46 @@
 </tr>
 </tbody></table></div>
 <dl class="regeln">
-<dt>Konjunktiv Präsens Aktiv — laudare</dt><dd>Präsensstamm + -e- + Personalendung (bei der a-Konjugation entfällt das Stamm-a)</dd>
-<dt>Konjunktiv Imperfekt Aktiv — laudare</dt><dd>Infinitiv Präsens + Personalendung</dd>
+<dt>laudare · Präsens</dt><dd>Präsensstamm + -e- + Personalendung (bei der a-Konjugation entfällt das Stamm-a)</dd>
+<dt>laudare · Imperfekt</dt><dd>Infinitiv Präsens + Personalendung</dd>
 </dl>
-<p class="quelle">Zuletzt ergänzt am 2026-09-22 (1 Lieferung)</p>
+<details class="begriffe">
+<summary>Fachbegriffe erklärt <span>(5)</span></summary>
+<dl>
+<dt>Konjunktiv<span class="art">Modus</span></dt><dd>Die Möglichkeitsform: etwas ist gewünscht, vorgestellt oder nur möglich. Im Deutschen oft mit „würde“ oder „möge“ wiedergegeben. „Utinam laudet!“ – Hoffentlich lobt er!</dd>
+<dt>Präsens<span class="art">Tempus</span></dt><dd>Gegenwart: was jetzt geschieht.</dd>
+<dt>Aktiv<span class="art">Genus verbi</span></dt><dd>Das Subjekt handelt selbst: „Er lobt.“</dd>
+<dt>Imperfekt<span class="art">Tempus</span></dt><dd>Vergangenheit für Vorgänge, die andauerten oder sich wiederholten – der Hintergrund einer Erzählung.</dd>
+<dt>Perfekt<span class="art">Tempus</span></dt><dd>Vergangenheit für abgeschlossene Ereignisse – das, was die Handlung vorantreibt.</dd>
+</dl></details>
+<p class="quelle">Zuletzt ergänzt am 22.09.2026 · 1 Blatt</p>
+</article>
 </section>
+</main>
 </div>
 <div class="sprachblock" data-sprache="spanisch" hidden>
-<section class="thema" id="aussprache" data-suche="aussprache aussprache">
-<h3>Aussprache <span class="bereich">aussprache</span></h3>
-<h4 class="untertabelle">/k/</h4>
-<div class="tabellenrahmen"><table>
-<tr><th class="zeilenkopf">ca</th><td><span class="form">casa</span></td></tr>
-<tr><th class="zeilenkopf">que</th><td><span class="form">queso</span></td></tr>
-<tr><th class="zeilenkopf">qui</th><td><span class="form">quince</span></td></tr>
-<tr><th class="zeilenkopf">co</th><td><span class="form">comer</span></td></tr>
-<tr><th class="zeilenkopf">cu</th><td><span class="form">cuatro</span></td></tr>
-</table></div>
-<h4 class="untertabelle">/θ/</h4>
-<div class="tabellenrahmen"><table>
-<tr><th class="zeilenkopf">za</th><td><span class="form">zapato</span></td></tr>
-<tr><th class="zeilenkopf">ce</th><td><span class="form">centro</span></td></tr>
-<tr><th class="zeilenkopf">ci</th><td><span class="form">cien</span></td></tr>
-<tr><th class="zeilenkopf">zo</th><td><span class="form">zoo</span></td></tr>
-<tr><th class="zeilenkopf">zu</th><td><span class="form">zumo</span></td></tr>
-</table></div>
-<h4 class="untertabelle">/x/</h4>
-<div class="tabellenrahmen"><table>
-<tr><th class="zeilenkopf">ja</th><td><span class="form">jamón</span></td></tr>
-<tr><th class="zeilenkopf">je / ge</th><td><span class="form">jefe / gente</span></td></tr>
-<tr><th class="zeilenkopf">ji / gi</th><td><span class="form">jirafa / girasol</span></td></tr>
-<tr><th class="zeilenkopf">jo</th><td><span class="form">joven</span></td></tr>
-<tr><th class="zeilenkopf">ju</th><td><span class="form">jugar</span></td></tr>
-</table></div>
-<h4 class="untertabelle">/g/</h4>
-<div class="tabellenrahmen"><table>
-<tr><th class="zeilenkopf">ga</th><td><span class="form">gato</span></td></tr>
-<tr><th class="zeilenkopf">gue</th><td><span class="form">juguete</span></td></tr>
-<tr><th class="zeilenkopf">gui</th><td><span class="form">guitarra</span></td></tr>
-<tr><th class="zeilenkopf">go</th><td><span class="form">gol</span></td></tr>
-<tr><th class="zeilenkopf">gu</th><td><span class="form">guapo</span></td></tr>
-</table></div>
-<h4 class="untertabelle">/(-)/</h4>
-<div class="tabellenrahmen"><table>
-<tr><th class="zeilenkopf">h</th><td><span class="form">hola</span> <span class="erklaerung">no se pronuncia</span></td></tr>
-</table></div>
-<h4 class="untertabelle">/rr/</h4>
-<div class="tabellenrahmen"><table>
-<tr><th class="zeilenkopf">rr</th><td><span class="form">perro</span></td></tr>
-</table></div>
-<h4 class="untertabelle">Handnotiz: c vor Vokalen</h4>
-<div class="tabellenrahmen"><table>
-<tr><th class="zeilenkopf">c</th><td><span class="form">e, i</span></td></tr>
-<tr><th class="zeilenkopf">c</th><td><span class="form">a, o, u</span></td></tr>
-</table></div>
-<h4 class="untertabelle">Handnotiz: g vor Vokalen</h4>
-<div class="tabellenrahmen"><table>
-<tr><th class="zeilenkopf">g</th><td><span class="form">e, i</span></td></tr>
-<tr><th class="zeilenkopf">g</th><td><span class="form">a, o, u</span></td></tr>
-</table></div>
-<h4 class="untertabelle">Handnotiz: Vokalverbindungen</h4>
-<div class="tabellenrahmen"><table>
-<tr><th class="zeilenkopf">ge</th><td><span class="form">gi</span></td></tr>
-<tr><th class="zeilenkopf">que</th><td><span class="form">gui</span></td></tr>
-<tr><th class="zeilenkopf">güe</th><td><span class="form">güi</span></td></tr>
-</table></div>
-<ul class="merksaetze">
-<li>Se pronuncia &quot;r&quot; fuerte:</li>
-<li>- Cuando hay dos: &quot;rr&quot;. Ej: perro</li>
-<li>- A principio de palabra: Ej: Roma</li>
-<li>- Después de L, N, S: Ej: alrededor</li>
+<details class="verzeichnisklappe" open><summary>Inhalt</summary>
+<nav class="verzeichnis" data-sprache="spanisch">
+<p class="verzeichniskopf">3 Themen</p>
+<p class="verzeichnisbereich">Verben</p><ul>
+<li data-suche="verben"><a href="#spanisch-verben">Verben<span class="anzahl">2</span></a></li>
 </ul>
-<p class="quelle">Zuletzt ergänzt am 2026-09-23 (1 Lieferung)</p>
-</section>
-<section class="thema" id="substantive-und-artikel" data-suche="substantive und artikel substantiv">
-<h3>Substantive und Artikel <span class="bereich">substantiv</span></h3>
-<h4 class="untertabelle">Artículos y sustantivos</h4>
-<div class="tabellenrahmen"><table>
-<tr><th class="zeilenkopf">Nom. sg männlich</th><td><span class="form">el amigo</span></td></tr>
-<tr><th class="zeilenkopf">Nom. sg männlich</th><td><span class="form">el profesor</span></td></tr>
-<tr><th class="zeilenkopf">Nom. pl männlich</th><td><span class="form">los amigos</span></td></tr>
-<tr><th class="zeilenkopf">Nom. pl männlich</th><td><span class="form">los profesores</span></td></tr>
-<tr><th class="zeilenkopf">Nom. pl weiblich</th><td><span class="form">las universidades</span></td></tr>
-<tr><th class="zeilenkopf">Nom. sg weiblich</th><td><span class="form">la amiga</span></td></tr>
-<tr><th class="zeilenkopf">Nom. sg weiblich</th><td><span class="form">la ciudad</span></td></tr>
-<tr><th class="zeilenkopf">Nom. pl weiblich</th><td><span class="form">las amigas</span></td></tr>
-<tr><th class="zeilenkopf">Nom. pl weiblich</th><td><span class="form">las ciudades</span></td></tr>
-</table></div>
-<h4 class="untertabelle">Unbestimmter Artikel und Pluralbildung</h4>
-<div class="tabellenrahmen"><table>
-<tr><th class="zeilenkopf">Nom. Sg. männlich</th><td><span class="form">un amigo</span></td></tr>
-<tr><th class="zeilenkopf">Nom. Sg. männlich</th><td><span class="form">un profesor</span></td></tr>
-<tr><th class="zeilenkopf">Nom. Sg. weiblich</th><td><span class="form">una amiga</span></td></tr>
-<tr><th class="zeilenkopf">Nom. Sg. weiblich</th><td><span class="form">una ciudad</span></td></tr>
-<tr><th class="zeilenkopf">Nom. Pl. männlich</th><td><span class="form">amigos</span></td></tr>
-<tr><th class="zeilenkopf">Nom. Pl. männlich</th><td><span class="form">profesores</span></td></tr>
-<tr><th class="zeilenkopf">Nom. Pl. weiblich</th><td><span class="form">amigas</span></td></tr>
-<tr><th class="zeilenkopf">Nom. Pl. weiblich</th><td><span class="form">ciudades</span></td></tr>
-</table></div>
-<ul class="merksaetze">
-<li>Bestimmte Artikel und Substantive im Singular und Plural mit männlichen und weiblichen Beispielen.</li>
-<li>unos / unas bedeutet &quot;einige&quot;</li>
-<li>hay bedeutet &quot;es gibt&quot; und bleibt unverändert (kombiniert mit un, una oder Nomen im Plural ohne Artikel)</li>
-<li>hay bedeutet &quot;es gibt&quot; und steht vor un/una oder direkt vor Substantiven im Plural ohne Artikel</li>
-<li>Bestimmte Artikel im Spanischen: el (m. sg.), los (m. pl.), la (f. sg.), las (f. pl.)</li>
+<p class="verzeichnisbereich">Substantive</p><ul>
+<li data-suche="substantive und artikel"><a href="#spanisch-substantive-und-artikel">Substantive und Artikel<span class="anzahl">4</span></a></li>
 </ul>
-<p class="quelle">Zuletzt ergänzt am 2026-09-23 (2 Lieferungen)</p>
-</section>
-<section class="thema" id="verben" data-suche="verben verb">
-<h3>Verben <span class="bereich">verb</span></h3>
+<p class="verzeichnisbereich">Aussprache</p><ul>
+<li data-suche="aussprache"><a href="#spanisch-aussprache">Aussprache<span class="anzahl">8</span></a></li>
+</ul>
+</nav>
+</details>
+<main class="inhalt">
+<section class="bereich" id="spanisch-bereich-verb">
+<h2>Verben<span class="bereichunter">Formen, Zeiten und Modi</span></h2>
+<article class="thema" id="spanisch-verben" data-suche="verben verb ser präsente präsens von hablar (-ar verben)">
+<header class="themakopf">
+<h3>Verben</h3>
+<span class="vorlaeufig" title="Gelesen, während das beste Modell überlastet war. Wird automatisch noch einmal gelesen.">vorläufig</span>
+</header>
 <p class="gemeinsam">Indikativ · Präsens · Aktiv</p>
 <div class="tabellenrahmen"><table>
 <thead><tr><th class="zeilenkopf"></th>
@@ -281,51 +402,242 @@
 <td><span class="form">hablan</span></td>
 </tr>
 </tbody></table></div>
-<h4 class="untertabelle">Verwendung von hay</h4>
-<div class="tabellenrahmen"><table>
-<tr><th class="zeilenkopf">Bedeutung</th><td><span class="form">es gibt</span></td></tr>
-<tr><th class="zeilenkopf">Beispiel mit un</th><td><span class="form">hay un parque</span></td></tr>
-<tr><th class="zeilenkopf">Beispiel mit una</th><td><span class="form">hay una tiendas</span></td></tr>
-<tr><th class="zeilenkopf">Beispiel ohne Artikel</th><td><span class="form">hay cafeterías</span></td></tr>
-</table></div>
-<ul class="merksaetze">
+<dl class="regeln">
+<dt>hablar</dt><dd>Stamm + -o, -as, -a, -amos, -áis, -an</dd>
+</dl>
+<aside class="regelblock">
+<h4>Regeln von deinem Blatt</h4><ul>
 <li>Personalpronomen: yo, tú, él/ella/usted, nosotros/nosotras, vosotros/vosotras, ellos/ellas/ustedes</li>
 <li>unos / unas bedeutet &quot;einige&quot;</li>
 <li>hay bedeutet &quot;es gibt&quot; und bleibt unverändert (kombiniert mit un, una oder Nomen im Plural ohne Artikel)</li>
 <li>Personalpronomen: yo, tú, él / ella (usted), nosotros / nosotras, vosotros / vosotras, ellos / ellas (ustedes)</li>
 <li>hay bedeutet &quot;es gibt&quot; und steht vor un/una oder direkt vor Substantiven im Plural ohne Artikel</li>
-</ul>
-<p class="quelle">Zuletzt ergänzt am 2026-09-23 (3 Lieferungen)</p>
+<li>Personalpronomen: yo, tú, él/ella (usted), nosotros/nosotras, vosotros/vosotras, ellos/ellas (ustedes)</li>
+</ul></aside>
+<details class="begriffe">
+<summary>Fachbegriffe erklärt <span>(3)</span></summary>
+<dl>
+<dt>Indikativ<span class="art">Modus</span></dt><dd>Die normale Wirklichkeitsform: etwas ist so. „Er lobt.“</dd>
+<dt>Präsens<span class="art">Tempus</span></dt><dd>Gegenwart: was jetzt geschieht.</dd>
+<dt>Aktiv<span class="art">Genus verbi</span></dt><dd>Das Subjekt handelt selbst: „Er lobt.“</dd>
+</dl></details>
+<p class="quelle">Zuletzt ergänzt am 23.09.2026 · 3 Blätter</p>
+</article>
 </section>
+<section class="bereich" id="spanisch-bereich-substantiv">
+<h2>Substantive<span class="bereichunter">Fälle, Zahl und Geschlecht</span></h2>
+<article class="thema" id="spanisch-substantive-und-artikel" data-suche="substantive und artikel substantiv maskuline substantive und artikel (♂) feminine substantive und artikel (♀) unbestimmter artikel und pluralbildung verwendung von hay">
+<header class="themakopf">
+<h3>Substantive und Artikel</h3>
+<span class="vorlaeufig" title="Gelesen, während das beste Modell überlastet war. Wird automatisch noch einmal gelesen.">vorläufig</span>
+</header>
+<h4 class="untertabelle">Maskuline Substantive und Artikel (♂)</h4>
+<div class="tabellenrahmen"><table>
+<tr><th class="zeilenkopf">Sg.</th><td><span class="form">el amigo</span></td></tr>
+<tr><th class="zeilenkopf">Sg.</th><td><span class="form">el profesor</span></td></tr>
+<tr><th class="zeilenkopf">Pl.</th><td><span class="form">los amigos</span></td></tr>
+<tr><th class="zeilenkopf">Pl.</th><td><span class="form">los profesores</span></td></tr>
+</table></div>
+<h4 class="untertabelle">Feminine Substantive und Artikel (♀)</h4>
+<div class="tabellenrahmen"><table>
+<tr><th class="zeilenkopf">Sg.</th><td><span class="form">la amiga</span></td></tr>
+<tr><th class="zeilenkopf">Sg.</th><td><span class="form">la ciudad</span></td></tr>
+<tr><th class="zeilenkopf">Pl.</th><td><span class="form">las amigas</span></td></tr>
+<tr><th class="zeilenkopf">Pl.</th><td><span class="form">las ciudades</span></td></tr>
+<tr><th class="zeilenkopf">Pl.</th><td><span class="form">las universidades</span> <span class="erklaerung">Handschriftliche Ergänzung</span></td></tr>
+</table></div>
+<h4 class="untertabelle">Unbestimmter Artikel und Pluralbildung<span class="alle">alle: Nom.</span></h4>
+<div class="tabellenrahmen"><table>
+<tr><th class="zeilenkopf">Sg. männlich</th><td><span class="form">un amigo</span></td></tr>
+<tr><th class="zeilenkopf">Sg. männlich</th><td><span class="form">un profesor</span></td></tr>
+<tr><th class="zeilenkopf">Sg. weiblich</th><td><span class="form">una amiga</span></td></tr>
+<tr><th class="zeilenkopf">Sg. weiblich</th><td><span class="form">una ciudad</span></td></tr>
+<tr><th class="zeilenkopf">Pl. männlich</th><td><span class="form">amigos</span></td></tr>
+<tr><th class="zeilenkopf">Pl. männlich</th><td><span class="form">profesores</span></td></tr>
+<tr><th class="zeilenkopf">Pl. weiblich</th><td><span class="form">amigas</span></td></tr>
+<tr><th class="zeilenkopf">Pl. weiblich</th><td><span class="form">ciudades</span></td></tr>
+<tr><th class="zeilenkopf">Pl. unbestimmter artikel plural</th><td><span class="form">unos</span> <span class="erklaerung">einige</span></td></tr>
+<tr><th class="zeilenkopf">Pl. unbestimmter artikel plural</th><td><span class="form">unas</span> <span class="erklaerung">einige</span></td></tr>
+</table></div>
+<h4 class="untertabelle">Verwendung von hay</h4>
+<div class="tabellenrahmen"><table>
+<tr><th class="zeilenkopf">hay</th><td><span class="form">es gibt</span></td></tr>
+<tr><th class="zeilenkopf">hay</th><td><span class="form">un parque</span></td></tr>
+<tr><th class="zeilenkopf">hay</th><td><span class="form">unas tiendas</span></td></tr>
+<tr><th class="zeilenkopf">hay</th><td><span class="form">cafeterías</span></td></tr>
+</table></div>
+<aside class="regelblock">
+<h4>Regeln von deinem Blatt</h4><ul>
+<li>Bestimmte Artikel und Substantive im Singular und Plural mit männlichen und weiblichen Beispielen.</li>
+<li>unos / unas bedeutet &quot;einige&quot;</li>
+<li>hay bedeutet &quot;es gibt&quot; und bleibt unverändert (kombiniert mit un, una oder Nomen im Plural ohne Artikel)</li>
+<li>hay bedeutet &quot;es gibt&quot; und steht vor un/una oder direkt vor Substantiven im Plural ohne Artikel</li>
+<li>Bestimmte Artikel im Spanischen: el (m. sg.), los (m. pl.), la (f. sg.), las (f. pl.)</li>
+<li>hay bedeutet &quot;es gibt&quot;</li>
+</ul></aside>
+<details class="begriffe">
+<summary>Fachbegriffe erklärt <span>(7)</span></summary>
+<dl>
+<dt>Maskulin<span class="art">Genus</span></dt><dd>Männliches grammatisches Geschlecht.</dd>
+<dt>Feminin<span class="art">Genus</span></dt><dd>Weibliches grammatisches Geschlecht.</dd>
+<dt>Plural<span class="art">Numerus</span></dt><dd>Mehrzahl.</dd>
+<dt>Bestimmter Artikel<span class="art">Wortart</span></dt><dd>Der Artikel für etwas Bekanntes: el, la, los, las – „der, die, das“.</dd>
+<dt>Unbestimmter Artikel<span class="art">Wortart</span></dt><dd>Der Artikel für etwas Unbekanntes: un, una – „ein, eine“.</dd>
+<dt>Singular<span class="art">Numerus</span></dt><dd>Einzahl.</dd>
+<dt>Nominativ<span class="art">Kasus</span></dt><dd>Wer oder was? – der Fall des Subjekts.</dd>
+</dl></details>
+<p class="quelle">Zuletzt ergänzt am 23.09.2026 · 2 Blätter</p>
+</article>
+</section>
+<section class="bereich" id="spanisch-bereich-aussprache">
+<h2>Aussprache<span class="bereichunter">Wie die Buchstaben klingen</span></h2>
+<article class="thema" id="spanisch-aussprache" data-suche="aussprache aussprache aussprache von /k/ aussprache von /θ/ aussprache von /x/ aussprache von /g/ aussprache von h aussprache von /rr/ handschriftliche notiz: aussprache von c handschriftliche notiz: vokalverbindungen e/i">
+<header class="themakopf">
+<h3>Aussprache</h3>
+<span class="vorlaeufig" title="Gelesen, während das beste Modell überlastet war. Wird automatisch noch einmal gelesen.">vorläufig</span>
+</header>
+<h4 class="untertabelle">Aussprache von /k/</h4>
+<div class="tabellenrahmen"><table>
+<tr><th class="zeilenkopf">ca</th><td><span class="form">casa</span></td></tr>
+<tr><th class="zeilenkopf">que</th><td><span class="form">queso</span></td></tr>
+<tr><th class="zeilenkopf">qui</th><td><span class="form">quince</span></td></tr>
+<tr><th class="zeilenkopf">co</th><td><span class="form">comer</span></td></tr>
+<tr><th class="zeilenkopf">cu</th><td><span class="form">cuatro</span></td></tr>
+</table></div>
+<h4 class="untertabelle">Aussprache von /θ/</h4>
+<div class="tabellenrahmen"><table>
+<tr><th class="zeilenkopf">za</th><td><span class="form">zapato</span></td></tr>
+<tr><th class="zeilenkopf">ce</th><td><span class="form">centro</span></td></tr>
+<tr><th class="zeilenkopf">ci</th><td><span class="form">cien</span></td></tr>
+<tr><th class="zeilenkopf">zo</th><td><span class="form">zoo</span></td></tr>
+<tr><th class="zeilenkopf">zu</th><td><span class="form">zumo</span></td></tr>
+</table></div>
+<h4 class="untertabelle">Aussprache von /x/</h4>
+<div class="tabellenrahmen"><table>
+<tr><th class="zeilenkopf">ja</th><td><span class="form">jamón</span></td></tr>
+<tr><th class="zeilenkopf">je / ge</th><td><span class="form">jefe / gente</span></td></tr>
+<tr><th class="zeilenkopf">ji / gi</th><td><span class="form">jirafa / girasol</span></td></tr>
+<tr><th class="zeilenkopf">jo</th><td><span class="form">joven</span></td></tr>
+<tr><th class="zeilenkopf">ju</th><td><span class="form">jugar</span></td></tr>
+</table></div>
+<h4 class="untertabelle">Aussprache von /g/</h4>
+<div class="tabellenrahmen"><table>
+<tr><th class="zeilenkopf">ga</th><td><span class="form">gato</span></td></tr>
+<tr><th class="zeilenkopf">gue</th><td><span class="form">juguete</span></td></tr>
+<tr><th class="zeilenkopf">gui</th><td><span class="form">guitarra</span></td></tr>
+<tr><th class="zeilenkopf">go</th><td><span class="form">gol</span></td></tr>
+<tr><th class="zeilenkopf">gu</th><td><span class="form">guapo</span></td></tr>
+<tr><th class="zeilenkopf">g + e, i</th><td><span class="form">g + e, i</span></td></tr>
+<tr><th class="zeilenkopf">g + a, o, u</th><td><span class="form">g + a, o, u</span></td></tr>
+</table></div>
+<h4 class="untertabelle">Aussprache von h</h4>
+<div class="tabellenrahmen"><table>
+<tr><th class="zeilenkopf">h</th><td><span class="form">hola</span> <span class="erklaerung">no se pronuncia</span></td></tr>
+</table></div>
+<h4 class="untertabelle">Aussprache von /rr/</h4>
+<div class="tabellenrahmen"><table>
+<tr><th class="zeilenkopf">rr</th><td><span class="form">perro</span></td></tr>
+</table></div>
+<h4 class="untertabelle">Handschriftliche Notiz: Aussprache von c</h4>
+<div class="tabellenrahmen"><table>
+<tr><th class="zeilenkopf">c + e, i</th><td><span class="form">c + e, i</span></td></tr>
+<tr><th class="zeilenkopf">c + a, o, u</th><td><span class="form">c + a, o, u</span></td></tr>
+</table></div>
+<h4 class="untertabelle">Handschriftliche Notiz: Vokalverbindungen e/i</h4>
+<div class="tabellenrahmen"><table>
+<tr><th class="zeilenkopf">ge</th><td><span class="form">ge</span></td></tr>
+<tr><th class="zeilenkopf">que</th><td><span class="form">que</span></td></tr>
+<tr><th class="zeilenkopf">güe</th><td><span class="form">güe</span></td></tr>
+<tr><th class="zeilenkopf">gi</th><td><span class="form">gi</span></td></tr>
+<tr><th class="zeilenkopf">gui</th><td><span class="form">gui</span></td></tr>
+<tr><th class="zeilenkopf">güi</th><td><span class="form">güi</span></td></tr>
+</table></div>
+<aside class="regelblock">
+<h4>Regeln von deinem Blatt</h4><ul>
+<li>Se pronuncia &quot;r&quot; fuerte: - Cuando hay dos: &quot;rr&quot;. Ej: perro</li>
+<li>Se pronuncia &quot;r&quot; fuerte: - A principio de palabra: Ej: Roma</li>
+<li>Se pronuncia &quot;r&quot; fuerte: - Después de L, N, S: Ej: alrededor</li>
+</ul></aside>
+<details class="begriffe">
+<summary>Fachbegriffe erklärt <span>(1)</span></summary>
+<dl>
+<dt>Aussprache<span class="art">Lautlehre</span></dt><dd>Wie die Buchstaben klingen. Die Zeichen zwischen Schrägstrichen wie /k/ sind Lautschrift, nicht Schreibweise.</dd>
+</dl></details>
+<p class="quelle">Zuletzt ergänzt am 23.09.2026 · 1 Blatt</p>
+</article>
+</section>
+</main>
 </div>
+</div>
+<p class="fussnote">5 Blätter wurden gelesen, während das beste Modell überlastet war. Sie sind als <em>vorläufig</em> markiert und werden automatisch noch einmal gelesen, sobald es wieder erreichbar ist.</p>
 
-<footer>Automatisch erzeugt am 23.09.2026. Neue Tabellen kommen über die
-Upload-Seite im Modus „Grammatik“ dazu und werden in bestehende Themen eingefügt.<br>
-<a href="index.html">← Zum Scanner</a></footer>
+<footer>
+Automatisch erzeugt am 23.09.2026. Neue Tabellen kommen über die Upload-Seite im
+Modus „Grammatik“ dazu und werden in bestehende Themen eingefügt.<br>
+<a href="index.html">← Zum Scanner</a>
+</footer>
 </div>
 <script>
   const wahl = document.getElementById("sprachwahl");
+  const suche = document.getElementById("suche");
+  const keintreffer = document.getElementById("keintreffer");
+
+  function sichtbarerBlock() {
+    return document.querySelector(".sprachblock:not([hidden])");
+  }
+
   if (wahl) {
     wahl.addEventListener("click", (ev) => {
       const knopf = ev.target.closest("button");
       if (!knopf) return;
       const sprache = knopf.dataset.sprache;
-      [...wahl.querySelectorAll("button")].forEach((b) =>
+      wahl.querySelectorAll("button").forEach((b) =>
         b.setAttribute("aria-pressed", String(b === knopf)));
       document.querySelectorAll(".sprachblock").forEach((b) => {
         b.hidden = b.dataset.sprache !== sprache;
       });
+      if (suche && suche.value) filtern();
     });
   }
-  const suche = document.getElementById("suche");
-  if (suche) {
-    suche.addEventListener("input", () => {
-      const begriff = suche.value.trim().toLowerCase();
-      document.querySelectorAll(".thema").forEach((t) => {
-        t.hidden = begriff && !(t.dataset.suche || "").includes(begriff);
-      });
+
+  function filtern() {
+    const begriff = suche.value.trim().toLowerCase();
+    const block = sichtbarerBlock();
+    if (!block) return;
+    let treffer = 0;
+
+    block.querySelectorAll(".thema").forEach((t) => {
+      const passt = !begriff || (t.dataset.suche || "").includes(begriff);
+      t.hidden = !passt;
+      if (passt) treffer++;
     });
+    // Ein Bereich ohne sichtbares Thema verschwindet mit.
+    block.querySelectorAll(".bereich").forEach((b) => {
+      b.hidden = !b.querySelector(".thema:not([hidden])");
+    });
+    // Das Verzeichnis folgt der Suche.
+    block.querySelectorAll(".verzeichnis li").forEach((li) => {
+      li.hidden = begriff && !(li.dataset.suche || "").includes(begriff);
+    });
+    block.querySelectorAll(".verzeichnisbereich").forEach((p) => {
+      const liste = p.nextElementSibling;
+      const leer = liste && !liste.querySelector("li:not([hidden])");
+      p.hidden = Boolean(begriff && leer);
+      if (liste) liste.hidden = Boolean(begriff && leer);
+    });
+    if (keintreffer) keintreffer.hidden = !(begriff && treffer === 0);
   }
+
+  if (suche) suche.addEventListener("input", filtern);
+
+  // Am Handy nach dem Sprung das Verzeichnis zuklappen, damit der Inhalt
+  // nicht hinter der Liste steht.
+  document.addEventListener("click", (ev) => {
+    const link = ev.target.closest(".verzeichnis a");
+    if (!link || window.innerWidth >= 900) return;
+    const klappe = link.closest(".verzeichnisklappe");
+    if (klappe) klappe.open = false;
+  });
 </script>
 </body>
 </html>
