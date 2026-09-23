@@ -96,6 +96,7 @@
 
 <div class="sprachwahl" id="sprachwahl">
 <button type="button" data-sprache="latein" aria-pressed="true">Latein</button>
+<button type="button" data-sprache="nachlesen" aria-pressed="false">Nachlesen</button>
 <button type="button" data-sprache="spanisch" aria-pressed="false">Spanisch</button>
 </div>
 <input type="search" id="suche" placeholder="Thema suchen …" autocomplete="off">
@@ -140,22 +141,23 @@
 <p class="quelle">Zuletzt ergänzt am 2026-09-22 (1 Lieferung)</p>
 </section>
 </div>
+<div class="sprachblock" data-sprache="nachlesen" hidden>
+<p class="leerzustand">Für diese Sprache ist noch nichts da.</p>
+</div>
 <div class="sprachblock" data-sprache="spanisch" hidden>
 <section class="thema" id="aussprache" data-suche="aussprache aussprache">
 <h3>Aussprache <span class="bereich">aussprache</span></h3>
 <div class="tabellenrahmen"><table>
 <thead><tr><th class="zeilenkopf"></th>
 <th>c</th>
-<th>j, g</th>
-<th>h, r</th>
 <th>z, c</th>
+<th>j, g</th>
 <th>g</th>
 <th>h</th>
-<th>r, rr</th>
+<th>r</th>
 </tr></thead><tbody>
 <tr><th class="zeilenkopf">ca</th>
-<td><span class="form">casa</span> <span class="erklaerung">/k/</span></td>
-<td class="leer">·</td>
+<td><span class="form">casa</span></td>
 <td class="leer">·</td>
 <td class="leer">·</td>
 <td class="leer">·</td>
@@ -163,8 +165,7 @@
 <td class="leer">·</td>
 </tr>
 <tr><th class="zeilenkopf">que</th>
-<td><span class="form">queso</span> <span class="erklaerung">/k/</span></td>
-<td class="leer">·</td>
+<td><span class="form">queso</span></td>
 <td class="leer">·</td>
 <td class="leer">·</td>
 <td class="leer">·</td>
@@ -172,8 +173,7 @@
 <td class="leer">·</td>
 </tr>
 <tr><th class="zeilenkopf">qui</th>
-<td><span class="form">quince</span> <span class="erklaerung">/k/</span></td>
-<td class="leer">·</td>
+<td><span class="form">quince</span></td>
 <td class="leer">·</td>
 <td class="leer">·</td>
 <td class="leer">·</td>
@@ -181,8 +181,7 @@
 <td class="leer">·</td>
 </tr>
 <tr><th class="zeilenkopf">co</th>
-<td><span class="form">comer</span> <span class="erklaerung">/k/</span></td>
-<td class="leer">·</td>
+<td><span class="form">comer</span></td>
 <td class="leer">·</td>
 <td class="leer">·</td>
 <td class="leer">·</td>
@@ -190,8 +189,7 @@
 <td class="leer">·</td>
 </tr>
 <tr><th class="zeilenkopf">cu</th>
-<td><span class="form">cuatro</span> <span class="erklaerung">/k/</span></td>
-<td class="leer">·</td>
+<td><span class="form">cuatro</span></td>
 <td class="leer">·</td>
 <td class="leer">·</td>
 <td class="leer">·</td>
@@ -199,98 +197,87 @@
 <td class="leer">·</td>
 </tr>
 <tr><th class="zeilenkopf">za</th>
-<td><span class="form">zapato</span> <span class="erklaerung">/θ/</span></td>
-<td class="leer">·</td>
 <td class="leer">·</td>
 <td><span class="form">zapato</span></td>
 <td class="leer">·</td>
 <td class="leer">·</td>
 <td class="leer">·</td>
+<td class="leer">·</td>
 </tr>
 <tr><th class="zeilenkopf">ce</th>
-<td><span class="form">centro</span> <span class="erklaerung">/θ/</span></td>
-<td class="leer">·</td>
 <td class="leer">·</td>
 <td><span class="form">centro</span></td>
 <td class="leer">·</td>
 <td class="leer">·</td>
 <td class="leer">·</td>
+<td class="leer">·</td>
 </tr>
 <tr><th class="zeilenkopf">ci</th>
-<td><span class="form">cien</span> <span class="erklaerung">/θ/</span></td>
-<td class="leer">·</td>
 <td class="leer">·</td>
 <td><span class="form">cien</span></td>
 <td class="leer">·</td>
 <td class="leer">·</td>
 <td class="leer">·</td>
+<td class="leer">·</td>
 </tr>
 <tr><th class="zeilenkopf">zo</th>
-<td><span class="form">zoo</span> <span class="erklaerung">/θ/</span></td>
-<td class="leer">·</td>
 <td class="leer">·</td>
 <td><span class="form">zoo</span></td>
 <td class="leer">·</td>
 <td class="leer">·</td>
 <td class="leer">·</td>
+<td class="leer">·</td>
 </tr>
 <tr><th class="zeilenkopf">zu</th>
-<td><span class="form">zumo</span> <span class="erklaerung">/θ/</span></td>
-<td class="leer">·</td>
 <td class="leer">·</td>
 <td><span class="form">zumo</span></td>
+<td class="leer">·</td>
 <td class="leer">·</td>
 <td class="leer">·</td>
 <td class="leer">·</td>
 </tr>
 <tr><th class="zeilenkopf">ja</th>
 <td class="leer">·</td>
-<td><span class="form">jamón</span> <span class="erklaerung">/x/</span></td>
 <td class="leer">·</td>
-<td class="leer">·</td>
+<td><span class="form">jamón</span></td>
 <td class="leer">·</td>
 <td class="leer">·</td>
 <td class="leer">·</td>
 </tr>
 <tr><th class="zeilenkopf">je / ge</th>
 <td class="leer">·</td>
-<td><span class="form">jefe / gente</span> <span class="erklaerung">/x/</span></td>
 <td class="leer">·</td>
-<td class="leer">·</td>
+<td><span class="form">jefe / gente</span></td>
 <td class="leer">·</td>
 <td class="leer">·</td>
 <td class="leer">·</td>
 </tr>
 <tr><th class="zeilenkopf">ji / gi</th>
 <td class="leer">·</td>
-<td><span class="form">jirafa / girasol</span> <span class="erklaerung">/x/</span></td>
 <td class="leer">·</td>
-<td class="leer">·</td>
+<td><span class="form">jirafa / girasol</span></td>
 <td class="leer">·</td>
 <td class="leer">·</td>
 <td class="leer">·</td>
 </tr>
 <tr><th class="zeilenkopf">jo</th>
 <td class="leer">·</td>
-<td><span class="form">joven</span> <span class="erklaerung">/x/</span></td>
 <td class="leer">·</td>
-<td class="leer">·</td>
+<td><span class="form">joven</span></td>
 <td class="leer">·</td>
 <td class="leer">·</td>
 <td class="leer">·</td>
 </tr>
 <tr><th class="zeilenkopf">ju</th>
 <td class="leer">·</td>
-<td><span class="form">jugar</span> <span class="erklaerung">/x/</span></td>
 <td class="leer">·</td>
-<td class="leer">·</td>
+<td><span class="form">jugar</span></td>
 <td class="leer">·</td>
 <td class="leer">·</td>
 <td class="leer">·</td>
 </tr>
 <tr><th class="zeilenkopf">ga</th>
 <td class="leer">·</td>
-<td><span class="form">gato</span> <span class="erklaerung">/g/</span></td>
 <td class="leer">·</td>
 <td class="leer">·</td>
 <td><span class="form">gato</span></td>
@@ -299,7 +286,6 @@
 </tr>
 <tr><th class="zeilenkopf">gue</th>
 <td class="leer">·</td>
-<td><span class="form">juguete</span> <span class="erklaerung">/g/</span></td>
 <td class="leer">·</td>
 <td class="leer">·</td>
 <td><span class="form">juguete</span></td>
@@ -308,7 +294,6 @@
 </tr>
 <tr><th class="zeilenkopf">gui</th>
 <td class="leer">·</td>
-<td><span class="form">guitarra</span> <span class="erklaerung">/g/</span></td>
 <td class="leer">·</td>
 <td class="leer">·</td>
 <td><span class="form">guitarra</span></td>
@@ -317,7 +302,6 @@
 </tr>
 <tr><th class="zeilenkopf">go</th>
 <td class="leer">·</td>
-<td><span class="form">gol</span> <span class="erklaerung">/g/</span></td>
 <td class="leer">·</td>
 <td class="leer">·</td>
 <td><span class="form">gol</span></td>
@@ -326,7 +310,6 @@
 </tr>
 <tr><th class="zeilenkopf">gu</th>
 <td class="leer">·</td>
-<td><span class="form">guapo</span> <span class="erklaerung">/g/</span></td>
 <td class="leer">·</td>
 <td class="leer">·</td>
 <td><span class="form">guapo</span></td>
@@ -336,7 +319,6 @@
 <tr><th class="zeilenkopf">h</th>
 <td class="leer">·</td>
 <td class="leer">·</td>
-<td><span class="form">hola</span> <span class="erklaerung">no se pronuncia</span></td>
 <td class="leer">·</td>
 <td class="leer">·</td>
 <td><span class="form">hola</span> <span class="erklaerung">no se pronuncia</span></td>
@@ -345,23 +327,18 @@
 <tr><th class="zeilenkopf">rr</th>
 <td class="leer">·</td>
 <td class="leer">·</td>
-<td><span class="form">perro</span> <span class="erklaerung">Se pronuncia &quot;r&quot; fuerte: Cuando hay dos &quot;rr&quot;</span></td>
 <td class="leer">·</td>
 <td class="leer">·</td>
 <td class="leer">·</td>
-<td><span class="form">perro</span> <span class="erklaerung">Se pronuncia &quot;r&quot; fuerte: Cuando hay dos: &quot;rr&quot;.</span></td>
+<td><span class="form">perro</span> <span class="erklaerung">Se pronuncia &quot;r&quot; fuerte: Cuando hay dos: &quot;rr&quot;</span></td>
 </tr>
 </tbody></table></div>
 <ul class="merksaetze">
-<li>Se pronuncia &quot;r&quot; fuerte:</li>
-<li>- Cuando hay dos: &quot;rr&quot;. Ej: perro</li>
-<li>- A principio de palabra: Ej: Roma</li>
-<li>- Después de L, N, S: Ej: alrededor</li>
-<li>Se pronuncia &quot;r&quot; fuerte: Cuando hay dos: &quot;rr&quot;. Ej: perro</li>
-<li>A principio de palabra: Ej: Roma</li>
-<li>Después de L, N, S: Ej: alrededor</li>
+<li>Se pronuncia &quot;r&quot; fuerte: - Cuando hay dos: &quot;rr&quot;. Ej: perro</li>
+<li>Se pronuncia &quot;r&quot; fuerte: - A principio de palabra: Ej: Roma</li>
+<li>Se pronuncia &quot;r&quot; fuerte: - Después de L, N, S: Ej: alrededor</li>
 </ul>
-<p class="quelle">Zuletzt ergänzt am 2026-09-23 (2 Lieferungen)</p>
+<p class="quelle">Zuletzt ergänzt am 2026-09-23 (1 Lieferung)</p>
 </section>
 <section class="thema" id="substantive-und-artikel" data-suche="substantive und artikel substantiv">
 <h3>Substantive und Artikel <span class="bereich">substantiv</span></h3>
@@ -369,93 +346,108 @@
 <thead><tr><th class="zeilenkopf"></th>
 <th>articulos y sustantivos</th>
 <th>unbestimmter artikel pluralbildung</th>
+<th>unbestimmter artikel unos unas</th>
 </tr></thead><tbody>
 <tr><th class="zeilenkopf">Nom. sg männlich</th>
 <td><span class="form">el amigo</span></td>
+<td class="leer">·</td>
 <td class="leer">·</td>
 </tr>
 <tr><th class="zeilenkopf">Nom. sg männlich</th>
 <td><span class="form">el profesor</span></td>
 <td class="leer">·</td>
+<td class="leer">·</td>
 </tr>
 <tr><th class="zeilenkopf">Nom. pl männlich</th>
 <td><span class="form">los amigos</span></td>
+<td class="leer">·</td>
 <td class="leer">·</td>
 </tr>
 <tr><th class="zeilenkopf">Nom. pl männlich</th>
 <td><span class="form">los profesores</span></td>
 <td class="leer">·</td>
+<td class="leer">·</td>
 </tr>
 <tr><th class="zeilenkopf">Nom. sg weiblich</th>
 <td><span class="form">la amiga</span></td>
+<td class="leer">·</td>
 <td class="leer">·</td>
 </tr>
 <tr><th class="zeilenkopf">Nom. sg weiblich</th>
 <td><span class="form">la ciudad</span></td>
 <td class="leer">·</td>
+<td class="leer">·</td>
 </tr>
 <tr><th class="zeilenkopf">Nom. pl weiblich</th>
 <td><span class="form">las amigas</span></td>
+<td class="leer">·</td>
 <td class="leer">·</td>
 </tr>
 <tr><th class="zeilenkopf">Nom. pl weiblich</th>
 <td><span class="form">las ciudades</span></td>
 <td class="leer">·</td>
-</tr>
-<tr><th class="zeilenkopf">Nom. sg weiblich</th>
-<td><span class="form">la universidad</span></td>
 <td class="leer">·</td>
 </tr>
 <tr><th class="zeilenkopf">Nom. pl weiblich</th>
 <td><span class="form">las universidades</span></td>
 <td class="leer">·</td>
+<td class="leer">·</td>
 </tr>
-<tr><th class="zeilenkopf">maskulin sg.</th>
+<tr><th class="zeilenkopf">männlich sg.</th>
 <td class="leer">·</td>
 <td><span class="form">un amigo</span></td>
+<td class="leer">·</td>
 </tr>
-<tr><th class="zeilenkopf">maskulin sg.</th>
+<tr><th class="zeilenkopf">männlich sg.</th>
 <td class="leer">·</td>
 <td><span class="form">un profesor</span></td>
+<td class="leer">·</td>
 </tr>
-<tr><th class="zeilenkopf">feminin sg.</th>
+<tr><th class="zeilenkopf">weiblich sg.</th>
 <td class="leer">·</td>
 <td><span class="form">una amiga</span></td>
+<td class="leer">·</td>
 </tr>
-<tr><th class="zeilenkopf">feminin sg.</th>
+<tr><th class="zeilenkopf">weiblich sg.</th>
 <td class="leer">·</td>
 <td><span class="form">una ciudad</span></td>
-</tr>
-<tr><th class="zeilenkopf">maskulin pl.</th>
 <td class="leer">·</td>
-<td><span class="form">amigos</span> <span class="erklaerung">unbestimmter Artikel fehlt im Plural (Nullartikel)</span></td>
 </tr>
-<tr><th class="zeilenkopf">maskulin pl.</th>
+<tr><th class="zeilenkopf">männlich pl.</th>
 <td class="leer">·</td>
-<td><span class="form">profesores</span> <span class="erklaerung">unbestimmter Artikel fehlt im Plural (Nullartikel)</span></td>
+<td><span class="form">amigos</span></td>
+<td class="leer">·</td>
 </tr>
-<tr><th class="zeilenkopf">feminin pl.</th>
+<tr><th class="zeilenkopf">männlich pl.</th>
 <td class="leer">·</td>
-<td><span class="form">amigas</span> <span class="erklaerung">unbestimmter Artikel fehlt im Plural (Nullartikel)</span></td>
+<td><span class="form">profesores</span></td>
+<td class="leer">·</td>
 </tr>
-<tr><th class="zeilenkopf">feminin pl.</th>
+<tr><th class="zeilenkopf">weiblich pl.</th>
 <td class="leer">·</td>
-<td><span class="form">ciudades</span> <span class="erklaerung">unbestimmter Artikel fehlt im Plural (Nullartikel)</span></td>
+<td><span class="form">amigas</span></td>
+<td class="leer">·</td>
+</tr>
+<tr><th class="zeilenkopf">weiblich pl.</th>
+<td class="leer">·</td>
+<td><span class="form">ciudades</span></td>
+<td class="leer">·</td>
 </tr>
 <tr><th class="zeilenkopf">unos</th>
 <td class="leer">·</td>
-<td><span class="form">unos</span> <span class="erklaerung">&quot;einige&quot; (maskulin plural)</span></td>
+<td class="leer">·</td>
+<td><span class="form">unos</span> <span class="erklaerung">einige (männlich)</span></td>
 </tr>
 <tr><th class="zeilenkopf">unas</th>
 <td class="leer">·</td>
-<td><span class="form">unas</span> <span class="erklaerung">&quot;einige&quot; (feminin plural)</span></td>
+<td class="leer">·</td>
+<td><span class="form">unas</span> <span class="erklaerung">einige (weiblich)</span></td>
 </tr>
 </tbody></table></div>
 <ul class="merksaetze">
-<li>Bestimmte Artikel und Substantive im Singular und Plural mit Genusunterscheidung.</li>
-<li>Unbestimmter Artikel: un (m.sg.), una (f.sg.)</li>
-<li>Im Plural gibt es keinen unbestimmten Artikel (Nullartikel), stattdessen &quot;unos&quot; / &quot;unas&quot; für &quot;einige&quot;.</li>
-<li>hay bedeutet &quot;es gibt&quot; und bleibt unverändert (kein Plural von hay).</li>
+<li>Bestimmte Artikel und Substantive im Singular und Plural mit männlichen und weiblichen Beispielen.</li>
+<li>unos / unas bedeutet &quot;einige&quot;</li>
+<li>hay bedeutet &quot;es gibt&quot; und bleibt unverändert (kombiniert mit un, una oder Nomen im Plural ohne Artikel)</li>
 </ul>
 <p class="quelle">Zuletzt ergänzt am 2026-09-23 (2 Lieferungen)</p>
 </section>
@@ -500,7 +492,7 @@
 <tr><th class="zeilenkopf">Bedeutung</th>
 <td class="leer">·</td>
 <td class="leer">·</td>
-<td><span class="form">hay</span> <span class="erklaerung">&quot;es gibt&quot;</span></td>
+<td><span class="form">hay</span> <span class="erklaerung">es gibt</span></td>
 </tr>
 <tr><th class="zeilenkopf">Beispiel mit un</th>
 <td class="leer">·</td>
@@ -512,20 +504,16 @@
 <td class="leer">·</td>
 <td><span class="form">hay una tiendas</span></td>
 </tr>
-<tr><th class="zeilenkopf">Beispiel mit Nullartikel</th>
+<tr><th class="zeilenkopf">Beispiel ohne Artikel (Plural)</th>
 <td class="leer">·</td>
 <td class="leer">·</td>
 <td><span class="form">hay cafeterías</span></td>
 </tr>
 </tbody></table></div>
-<dl class="regeln">
-<dt>hablar · Indikativ · Präsens · Aktiv</dt><dd>Wortstamm + Endung</dd>
-</dl>
 <ul class="merksaetze">
-<li>Personalpronomen: yo, tú, él/ella (usted), nosotros/nosotras, vosotros/vosotras, ellos/ellas (ustedes)</li>
-<li>Unbestimmter Artikel: un (m.sg.), una (f.sg.)</li>
-<li>Im Plural gibt es keinen unbestimmten Artikel (Nullartikel), stattdessen &quot;unos&quot; / &quot;unas&quot; für &quot;einige&quot;.</li>
-<li>hay bedeutet &quot;es gibt&quot; und bleibt unverändert (kein Plural von hay).</li>
+<li>Personalpronomen: yo, tú, él/ella/usted, nosotros/nosotras, vosotros/vosotras, ellos/ellas/ustedes</li>
+<li>unos / unas bedeutet &quot;einige&quot;</li>
+<li>hay bedeutet &quot;es gibt&quot; und bleibt unverändert (kombiniert mit un, una oder Nomen im Plural ohne Artikel)</li>
 </ul>
 <p class="quelle">Zuletzt ergänzt am 2026-09-23 (3 Lieferungen)</p>
 </section>
