@@ -163,6 +163,9 @@
 
   /* Tabellen */
   .tabellenrahmen { overflow-x: auto; margin-inline: -18px; padding-inline: 18px; }
+  .lernen + .tabellenrahmen, .lernen + .gemeinsam, .lernen + .untertabelle {
+    border-top: 1px solid var(--linie); padding-top: 14px; margin-top: 2px;
+  }
   table { border-collapse: collapse; width: 100%; font-size: .93rem; }
   th, td { text-align: left; padding: 7px 14px 7px 0; border-bottom: 1px solid var(--linie-2); white-space: nowrap; }
   tbody tr:last-child th, tbody tr:last-child td { border-bottom: none; }
@@ -215,6 +218,40 @@
   }
   .regeln dt { color: var(--tinte-3); font-weight: 600; }
   .regeln dd { margin: 0; color: var(--tinte-2); }
+
+  /* Lernblock: erst verstehen, dann die Formen */
+  .lernen { margin: 0 0 16px; }
+  .worum {
+    font-family: "IBM Plex Serif", Georgia, serif; font-size: 1rem;
+    color: var(--tinte); margin: 0 0 11px; line-height: 1.5;
+  }
+  .regelkasten {
+    background: var(--flaeche-2); border: 1px solid var(--linie);
+    border-radius: 11px; padding: 13px 16px 12px; margin-bottom: 11px;
+  }
+  .regelkasten h4 {
+    font-size: .7rem; text-transform: uppercase; letter-spacing: .08em;
+    color: var(--akzent); font-weight: 700; margin: 0 0 7px;
+  }
+  .regelkasten ul { margin: 0; padding-left: 18px; }
+  .regelkasten li { font-size: .92rem; color: var(--tinte); margin-bottom: 5px; }
+  .regelkasten li:last-child { margin-bottom: 0; }
+  .regelkasten strong { font-weight: 700; }
+  .regelkasten em, .worum em, .anwenden em, .achtung em {
+    font-family: "IBM Plex Serif", Georgia, serif; font-style: italic;
+  }
+  .anwenden, .achtung {
+    font-size: .89rem; color: var(--tinte-2); margin: 0 0 9px; line-height: 1.55;
+  }
+  .etikett {
+    display: block; font-size: .66rem; text-transform: uppercase;
+    letter-spacing: .08em; font-weight: 700; margin-bottom: 2px;
+    color: var(--tinte-3);
+  }
+  .achtung .etikett { color: var(--warn); }
+  .achtung {
+    border-left: 3px solid var(--warn); padding-left: 12px;
+  }
 
   /* Regeln vom Blatt */
   .regelblock {
@@ -311,6 +348,16 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <header class="themakopf">
 <h3>Konjunktiv</h3>
 </header>
+<section class="lernen">
+<p class="worum">Der Konjunktiv — die Form für alles, was nicht einfach Tatsache ist.</p>
+<div class="regelkasten"><h4>Die Regel</h4><ul>
+<li><strong>Konjunktiv Präsens</strong> der a-Konjugation: Präsensstamm, das Stamm-<strong>a</strong> fällt weg, dafür kommt ein <strong>-e-</strong>, dann die Personalendung: <em>laud-e-m, laud-e-s, laud-e-t …</em></li>
+<li>Bei den übrigen Konjugationen steht stattdessen ein <strong>-a-</strong>: <em>mone-a-m, reg-a-m, audi-a-m</em>.</li>
+<li><strong>Konjunktiv Imperfekt</strong> ist bequem: <strong>Infinitiv Präsens + Endung</strong> — <em>laudare</em> → <em>laudare-m, laudare-s, laudare-t …</em> Das gilt für alle Konjugationen, auch für <em>esse</em> → <em>esse-m</em>.</li>
+</ul></div>
+<p class="anwenden"><span class="etikett">So wendest du es an</span>Du brauchst ihn für Wünsche (<em>Utinam laudet!</em> – Hoffentlich lobt er!), für Aufforderungen an „wir“ (<em>Eamus!</em> – Gehen wir!) und vor allem in Nebensätzen nach <strong>ut, ne, cum</strong> und in indirekten Fragen.</p>
+<p class="achtung"><span class="etikett">Achtung</span>Übersetze den Konjunktiv im Nebensatz meistens <strong>nicht</strong> mit einem deutschen Konjunktiv — nach <em>ut</em> wird daraus ein „dass“- oder „damit“-Satz im Indikativ. Der lateinische Konjunktiv ist dort nur ein Signal, kein Bedeutungsträger.</p>
+</section>
 <p class="gemeinsam">Konjunktiv · Aktiv</p>
 <div class="tabellenrahmen"><table>
 <thead><tr><th class="zeilenkopf"></th>
@@ -395,6 +442,25 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <h3>Verben</h3>
 <span class="vorlaeufig" title="Gelesen, während das beste Modell überlastet war. Wird automatisch noch einmal gelesen.">vorläufig</span>
 </header>
+<section class="lernen">
+<p class="worum">Das regelmäßige Muster der Verben auf <strong>-ar</strong>.</p>
+<div class="regelkasten"><h4>Die Regel</h4><ul>
+<li>Du nimmst den Stamm (<em>hablar</em> → <strong>habl-</strong>) und hängst an:</li>
+<li><strong>-o, -as, -a, -amos, -áis, -an</strong></li>
+<li>Das gilt für alle regelmäßigen -ar-Verben: <em>trabajar, estudiar, cantar, escuchar</em> …</li>
+</ul></div>
+<p class="anwenden"><span class="etikett">So wendest du es an</span>Ein einziges Muster öffnet dir hunderte Verben. Wenn du <em>hablo</em> kannst, kannst du auch <em>trabajo</em>, <em>estudio</em>, <em>canto</em>.</p>
+<p class="achtung"><span class="etikett">Achtung</span>Die Endung allein sagt schon, wer handelt — darum lässt man <em>yo, tú, él</em> meistens weg. <em>Hablo español</em> reicht.</p>
+</section>
+<section class="lernen">
+<p class="worum"><strong>ser</strong> – „sein“, das wichtigste unregelmäßige Verb.</p>
+<div class="regelkasten"><h4>Die Regel</h4><ul>
+<li>Die Formen folgen keinem Muster, sie müssen sitzen: <strong>soy, eres, es, somos, sois, son</strong>.</li>
+<li><strong>ser</strong> benutzt du für das, was jemand <em>ist</em>: Name, Herkunft, Beruf, Aussehen, Charakter — für Dauerhaftes.</li>
+</ul></div>
+<p class="anwenden"><span class="etikett">So wendest du es an</span><em>Soy Johan. Soy de Alemania. Somos estudiantes.</em> — Immer dann, wenn du jemanden oder etwas <strong>einordnest</strong>.</p>
+<p class="achtung"><span class="etikett">Achtung</span>Für Ort und Zustand nimmt man <strong>estar</strong>, nicht ser: <em>estoy en casa</em> („ich bin zu Hause“), <em>estoy cansado</em> („ich bin müde“). Dieselbe deutsche Übersetzung, zwei Verben.</p>
+</section>
 <p class="gemeinsam">Indikativ · Präsens · Aktiv</p>
 <div class="tabellenrahmen"><table>
 <thead><tr><th class="zeilenkopf"></th>
@@ -467,6 +533,26 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <header class="themakopf">
 <h3>4 artículos y ,hay&#x27;</h3>
 </header>
+<section class="lernen">
+<p class="worum">Der unbestimmte Artikel — „ein, eine“ und „einige“.</p>
+<div class="regelkasten"><h4>Die Regel</h4><ul>
+<li>männlich: <strong>un</strong> (Einzahl) → <strong>unos</strong> (Mehrzahl)</li>
+<li>weiblich: <strong>una</strong> (Einzahl) → <strong>unas</strong> (Mehrzahl)</li>
+<li><strong>unos / unas</strong> heißt „einige“ und wird oft ganz weggelassen: <em>Hay cafeterías</em> – „Es gibt Cafés“.</li>
+</ul></div>
+<p class="anwenden"><span class="etikett">So wendest du es an</span>Im Deutschen gibt es keinen Plural von „ein“ — darum fühlt sich <em>unos</em> fremd an. Nimm es, wenn du „ein paar“ meinst, und lass es weg, wenn du nur „Cafés“ sagen willst.</p>
+<p class="achtung"><span class="etikett">Achtung</span>Der unbestimmte Artikel hat dieselbe Endung wie das Substantiv dahinter: <em>un<strong>a</strong> amig<strong>a</strong></em>. Das ist eine gute Kontrolle beim Schreiben.</p>
+</section>
+<section class="lernen">
+<p class="worum"><strong>hay</strong> – „es gibt“.</p>
+<div class="regelkasten"><h4>Die Regel</h4><ul>
+<li><strong>hay</strong> ändert sich nie: nicht nach Person, nicht nach Zahl.</li>
+<li><em>Hay un parque</em> – es gibt einen Park. <em>Hay cafeterías</em> – es gibt Cafés.</li>
+<li>Es steht mit <strong>un/una</strong>, mit Zahlen oder ganz ohne Artikel.</li>
+</ul></div>
+<p class="anwenden"><span class="etikett">So wendest du es an</span>Immer wenn du sagen willst, dass etwas <strong>existiert</strong> oder <strong>vorhanden ist</strong> — egal ob eins oder viele.</p>
+<p class="achtung"><span class="etikett">Achtung</span>Nach <em>hay</em> steht <strong>nie</strong> el/la/los/las. „Der Park ist dort“ ist <em>el parque está allí</em> — dafür brauchst du <strong>estar</strong>, nicht hay.</p>
+</section>
 <h4 class="untertabelle">Unbestimmter Artikel und Pluralbildung bei Substantiven</h4>
 <div class="tabellenrahmen"><table>
 <tr><th class="zeilenkopf">Nom. Sg.</th><td><span class="form">un amigo</span> <span class="erklaerung">männlich Singular auf Vokal</span></td></tr>
@@ -543,8 +629,8 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <details class="begriffe">
 <summary>Fachbegriffe erklärt <span>(2)</span></summary>
 <dl>
-<dt>Plural<span class="art">Numerus</span></dt><dd>Mehrzahl.</dd>
 <dt>Singular<span class="art">Numerus</span></dt><dd>Einzahl.</dd>
+<dt>Plural<span class="art">Numerus</span></dt><dd>Mehrzahl.</dd>
 </dl></details>
 <p class="quelle">Zuletzt ergänzt am 23.09.2026 · 1 Blatt</p>
 </article>
@@ -555,6 +641,15 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <header class="themakopf">
 <h3>Aussprache von /k/</h3>
 </header>
+<section class="lernen">
+<p class="worum">Wann klingt geschriebenes c wie ein k?</p>
+<div class="regelkasten"><h4>Die Regel</h4><ul>
+<li><strong>c + a, o, u</strong> → k-Laut: <em>casa, comer, cuatro</em>.</li>
+<li>Vor <strong>e</strong> und <strong>i</strong> geht das nicht — dort schreibt man <strong>qu</strong>: <em>queso, quince</em>. Das <strong>u</strong> ist dabei stumm, man hört nur /k/.</li>
+</ul></div>
+<p class="anwenden"><span class="etikett">So wendest du es an</span>Willst du einen k-Laut schreiben, entscheidet der folgende Vokal die Schreibweise: vor a/o/u nimmst du c, vor e/i nimmst du qu.</p>
+<p class="achtung"><span class="etikett">Achtung</span><em>queso</em> spricht man „keso“, nicht „kweso“. Ein hörbares w gibt es nur bei <strong>cu</strong>: <em>cuatro</em> = „kwatro“.</p>
+</section>
 <div class="tabellenrahmen"><table>
 <tr><th class="zeilenkopf">ca</th><td><span class="form">casa</span></td></tr>
 <tr><th class="zeilenkopf">que</th><td><span class="form">queso</span></td></tr>
@@ -572,6 +667,16 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <header class="themakopf">
 <h3>Aussprache von /θ/</h3>
 </header>
+<section class="lernen">
+<p class="worum">Der Lispel-Laut — geschrieben mal z, mal c.</p>
+<div class="regelkasten"><h4>Die Regel</h4><ul>
+<li><strong>z + a, o, u</strong> → /θ/: <em>zapato, zoo, zumo</em>.</li>
+<li><strong>c + e, i</strong> → derselbe Laut /θ/: <em>centro, cien</em>.</li>
+<li>Zusammen decken z und c alle fünf Vokale ab: za – ce – ci – zo – zu.</li>
+</ul></div>
+<p class="anwenden"><span class="etikett">So wendest du es an</span>Merke dir die Reihe <strong>za, ce, ci, zo, zu</strong>. Wo ein e oder i folgt, steht c; sonst z. <em>ze</em> und <em>zi</em> kommen fast nie vor.</p>
+<p class="achtung"><span class="etikett">Achtung</span>/θ/ ist der englische th-Laut in <em>think</em>. In Lateinamerika spricht man an dieser Stelle einfach ein s — beides ist richtig, aber bleib bei einer Variante.</p>
+</section>
 <div class="tabellenrahmen"><table>
 <tr><th class="zeilenkopf">za</th><td><span class="form">zapato</span></td></tr>
 <tr><th class="zeilenkopf">ce</th><td><span class="form">centro</span></td></tr>
@@ -589,6 +694,16 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <header class="themakopf">
 <h3>Aussprache von /x/</h3>
 </header>
+<section class="lernen">
+<p class="worum">Der Rachenlaut wie in „Bach“ — geschrieben j oder g.</p>
+<div class="regelkasten"><h4>Die Regel</h4><ul>
+<li><strong>j</strong> klingt immer so, vor jedem Vokal: <em>jamón, joven, jugar</em>.</li>
+<li><strong>g + e, i</strong> klingt genauso: <em>gente, girasol</em>.</li>
+<li>Deshalb gibt es Paare, die gleich klingen: <em>je / ge</em>, <em>ji / gi</em>.</li>
+</ul></div>
+<p class="anwenden"><span class="etikett">So wendest du es an</span>Hörst du den Laut, musst du wissen, ob j oder g geschrieben wird — das lässt sich nicht ableiten, das lernt man pro Wort.</p>
+<p class="achtung"><span class="etikett">Achtung</span>Vor <strong>a, o, u</strong> klingt g <strong>nicht</strong> so, sondern wie unser g: <em>gato, gol, guapo</em>. Der Rachenlaut kommt bei g nur vor e und i.</p>
+</section>
 <div class="tabellenrahmen"><table>
 <tr><th class="zeilenkopf">ja</th><td><span class="form">jamón</span></td></tr>
 <tr><th class="zeilenkopf">je / ge</th><td><span class="form">jefe / gente</span></td></tr>
@@ -606,6 +721,16 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <header class="themakopf">
 <h3>Aussprache von /g/</h3>
 </header>
+<section class="lernen">
+<p class="worum">Wann klingt g wie unser g?</p>
+<div class="regelkasten"><h4>Die Regel</h4><ul>
+<li><strong>g + a, o, u</strong> → g-Laut: <em>gato, gol, guapo</em>.</li>
+<li>Vor <strong>e, i</strong> brauchst du ein stummes <strong>u</strong> dazwischen: <strong>gue, gui</strong> → <em>juguete, guitarra</em>.</li>
+<li>Soll das u doch gesprochen werden, bekommt es zwei Punkte: <strong>güe, güi</strong> → <em>vergüenza, pingüino</em>.</li>
+</ul></div>
+<p class="anwenden"><span class="etikett">So wendest du es an</span>Dieselbe Logik wie bei c/qu: vor e und i schiebt man einen stummen Buchstaben ein, damit der harte Laut erhalten bleibt.</p>
+<p class="achtung"><span class="etikett">Achtung</span>Ohne u wird aus <em>gue</em> ein <em>ge</em> — und das klingt wie „che“. Das u ist also kein Schmuck, es verändert den Laut.</p>
+</section>
 <div class="tabellenrahmen"><table>
 <tr><th class="zeilenkopf">ga</th><td><span class="form">gato</span></td></tr>
 <tr><th class="zeilenkopf">gue</th><td><span class="form">juguete</span></td></tr>
@@ -623,6 +748,14 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <header class="themakopf">
 <h3>Aussprache von h</h3>
 </header>
+<section class="lernen">
+<p class="worum">Das h wird nie gesprochen.</p>
+<div class="regelkasten"><h4>Die Regel</h4><ul>
+<li><strong>h</strong> ist immer stumm: <em>hola</em> klingt wie „ola“, <em>hay</em> wie „ai“, <em>hermano</em> wie „ermano“.</li>
+</ul></div>
+<p class="anwenden"><span class="etikett">So wendest du es an</span>Beim Hören verrät dir nichts, ob ein Wort mit h beginnt — das musst du dir beim Schreiben merken.</p>
+<p class="achtung"><span class="etikett">Achtung</span>Ausnahme ist die Verbindung <strong>ch</strong>: die klingt wie tsch, <em>chico</em> = „tschiko“.</p>
+</section>
 <div class="tabellenrahmen"><table>
 <tr><th class="zeilenkopf">h</th><td><span class="form">hola</span> <span class="erklaerung">no se pronuncia</span></td></tr>
 </table></div>
@@ -636,6 +769,15 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <header class="themakopf">
 <h3>Aussprache von /rr/</h3>
 </header>
+<section class="lernen">
+<p class="worum">Wann wird das r gerollt?</p>
+<div class="regelkasten"><h4>Die Regel</h4><ul>
+<li>Gerollt wird es in drei Fällen: bei <strong>rr</strong> (<em>perro</em>), am <strong>Wortanfang</strong> (<em>Roma</em>) und nach <strong>l, n, s</strong> (<em>alrededor</em>).</li>
+<li>Sonst ist es ein kurzer Schlag mit der Zungenspitze: <em>pero, caro</em>.</li>
+</ul></div>
+<p class="anwenden"><span class="etikett">So wendest du es an</span>Der Unterschied trägt Bedeutung: <em>pero</em> heißt „aber“, <em>perro</em> heißt „Hund“. Einmal zu wenig gerollt, und der Satz kippt.</p>
+<p class="achtung"><span class="etikett">Achtung</span>Am Wortanfang schreibt man nur <strong>ein</strong> r, rollt es aber trotzdem — <em>Roma</em>, nicht <em>Rroma</em>.</p>
+</section>
 <div class="tabellenrahmen"><table>
 <tr><th class="zeilenkopf">rr</th><td><span class="form">perro</span></td></tr>
 </table></div>
