@@ -74,6 +74,13 @@
   #suche:focus { outline: 2px solid var(--akzent); outline-offset: 1px; border-color: transparent; }
   .keintreffer { color: var(--tinte-3); font-size: .88rem; margin: 10px 2px 0; }
   .andere { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .titelwahl { display: flex; align-items: center; gap: 4px; margin: 10px 2px 0; font-size: .8rem; color: var(--tinte-3); }
+  .titelwahl span { margin-right: 4px; }
+  .titelwahl button {
+    font: inherit; font-weight: 600; cursor: pointer; padding: 3px 10px;
+    border: 1px solid var(--linie); background: var(--flaeche); color: var(--tinte-2); border-radius: 999px;
+  }
+  .titelwahl button[aria-pressed="true"] { background: var(--tinte); border-color: var(--tinte); color: var(--grund); }
   .anderesprache {
     font: inherit; font-size: .82rem; font-weight: 600; cursor: pointer;
     border: 1px solid var(--sprache); color: var(--sprache); background: var(--flaeche);
@@ -399,7 +406,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <button type="button" data-sprache="latein" aria-pressed="false">Latein<span class="anzahl">1</span></button>
 <button type="button" data-sprache="spanisch" aria-pressed="false">Spanisch<span class="anzahl">14</span></button>
 </div>
-<div class="suchfeld"><input type="search" id="suche" placeholder="Thema suchen …" autocomplete="off" spellcheck="false"><p class="keintreffer" id="keintreffer" hidden>Nichts gefunden.</p><p class="keintreffer andere" id="andere" hidden></p></div>
+<div class="suchfeld"><input type="search" id="suche" placeholder="Thema suchen …" autocomplete="off" spellcheck="false"><p class="keintreffer" id="keintreffer" hidden>Nichts gefunden.</p><p class="keintreffer andere" id="andere" hidden></p><div class="titelwahl" role="group" aria-label="Titel"><span>Titel:</span><button type="button" data-titel="einheitlich" aria-pressed="true">einheitlich</button><button type="button" data-titel="blatt" aria-pressed="false">wie auf dem Blatt</button></div></div>
 <div class="spalten">
 <div class="sprachblock" data-sprache="griechisch">
 <nav class="ueberblick" aria-label="Bereiche">
@@ -412,30 +419,30 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <nav class="verzeichnis" data-sprache="griechisch">
 <p class="verzeichniskopf">11 Einträge</p>
 <p class="verzeichnisbereich"><a href="#griechisch-bereich-substantiv">Substantive</a></p><ul>
-<li data-suche="bestimmter artikel / unbestimmter artikel / artikel mit praeposition"><a href="#griechisch-artikel-und-substantive-1">bestimmter artikel / unbestimmter artikel / artikel mit praeposition<span class="anzahl">3</span></a></li>
-<li data-suche="deklination maskulinum auf -ος"><a href="#griechisch-artikel-und-substantive-2">Deklination Maskulinum auf -ος</a></li>
-<li data-suche="regeln von deinem blatt"><a href="#griechisch-artikel-und-substantive-regeln">Regeln von deinem Blatt</a></li>
+<li data-suche="bestimmter artikel / unbestimmter artikel / artikel mit praeposition bestimmter artikel · unbestimmter artikel · artikel mit der präposition σε (singular)"><a href="#griechisch-artikel-und-substantive-1"><span class="titel" data-blatt="bestimmter artikel / unbestimmter artikel / artikel mit praeposition" data-einheitlich="Bestimmter Artikel · Unbestimmter Artikel · Artikel mit der Präposition σε (Singular)">Bestimmter Artikel · Unbestimmter Artikel · Artikel mit der Präposition σε (Singular)</span><span class="anzahl">3</span></a></li>
+<li data-suche="deklination maskulinum auf -ος deklination maskulinum auf -ος"><a href="#griechisch-artikel-und-substantive-2"><span class="titel" data-blatt="Deklination Maskulinum auf -ος" data-einheitlich="Deklination Maskulinum auf -ος">Deklination Maskulinum auf -ος</span></a></li>
+<li data-suche="regeln von deinem blatt regeln von deinem blatt"><a href="#griechisch-artikel-und-substantive-regeln"><span class="titel" data-blatt="Regeln von deinem Blatt" data-einheitlich="Regeln von deinem Blatt">Regeln von deinem Blatt</span></a></li>
 </ul>
 <p class="verzeichnisbereich"><a href="#griechisch-bereich-pronomen">Pronomen</a></p><ul>
-<li data-suche="fragewörter"><a href="#griechisch-fragewoerter">Fragewörter</a></li>
-<li data-suche="personalpronomen"><a href="#griechisch-personalpronomen">Personalpronomen</a></li>
+<li data-suche="fragewörter fragewörter"><a href="#griechisch-fragewoerter"><span class="titel" data-blatt="Fragewörter" data-einheitlich="Fragewörter">Fragewörter</span></a></li>
+<li data-suche="personalpronomen personalpronomen"><a href="#griechisch-personalpronomen"><span class="titel" data-blatt="Personalpronomen" data-einheitlich="Personalpronomen">Personalpronomen</span></a></li>
 </ul>
 <p class="verzeichnisbereich"><a href="#griechisch-bereich-zahlen">Zahlen</a></p><ul>
-<li data-suche="zahlen"><a href="#griechisch-zahlen">Zahlen</a></li>
+<li data-suche="zahlen zahlen"><a href="#griechisch-zahlen"><span class="titel" data-blatt="Zahlen" data-einheitlich="Zahlen">Zahlen</span></a></li>
 </ul>
 <p class="verzeichnisbereich"><a href="#griechisch-bereich-aussprache">Aussprache</a></p><ul>
-<li data-suche="das alphabet"><a href="#griechisch-aussprache-1">Das Alphabet</a></li>
-<li data-suche="vokalkombinationen"><a href="#griechisch-aussprache-2">Vokalkombinationen</a></li>
-<li data-suche="konsonantenkombinationen"><a href="#griechisch-aussprache-3">Konsonantenkombinationen</a></li>
-<li data-suche="schreibweisen für vokallaute"><a href="#griechisch-aussprache-4">Schreibweisen für Vokallaute</a></li>
-<li data-suche="regeln von deinem blatt"><a href="#griechisch-aussprache-regeln">Regeln von deinem Blatt</a></li>
+<li data-suche="das alphabet das alphabet"><a href="#griechisch-aussprache-1"><span class="titel" data-blatt="Das Alphabet" data-einheitlich="Das Alphabet">Das Alphabet</span></a></li>
+<li data-suche="vokalkombinationen vokalkombinationen"><a href="#griechisch-aussprache-2"><span class="titel" data-blatt="Vokalkombinationen" data-einheitlich="Vokalkombinationen">Vokalkombinationen</span></a></li>
+<li data-suche="konsonantenkombinationen konsonantenkombinationen"><a href="#griechisch-aussprache-3"><span class="titel" data-blatt="Konsonantenkombinationen" data-einheitlich="Konsonantenkombinationen">Konsonantenkombinationen</span></a></li>
+<li data-suche="schreibweisen für vokallaute schreibweisen für vokallaute"><a href="#griechisch-aussprache-4"><span class="titel" data-blatt="Schreibweisen für Vokallaute" data-einheitlich="Schreibweisen für Vokallaute">Schreibweisen für Vokallaute</span></a></li>
+<li data-suche="regeln von deinem blatt regeln von deinem blatt"><a href="#griechisch-aussprache-regeln"><span class="titel" data-blatt="Regeln von deinem Blatt" data-einheitlich="Regeln von deinem Blatt">Regeln von deinem Blatt</span></a></li>
 </ul>
 </nav>
 </details>
 <main class="inhalt">
 <section class="bereich" id="griechisch-bereich-substantiv">
 <h2>Substantive<span class="bereichunter">Fälle, Zahl und Geschlecht</span><span class="bereichzahl">3</span></h2>
-<article class="thema" id="griechisch-artikel-und-substantive-1" data-suche="bestimmter artikel / unbestimmter artikel / artikel mit praeposition artikel und substantive bestimmter artikel unbestimmter artikel artikel mit der präposition σε (singular)  
+<article class="thema" id="griechisch-artikel-und-substantive-1" data-suche="bestimmter artikel · unbestimmter artikel · artikel mit der präposition σε (singular) bestimmter artikel / unbestimmter artikel / artikel mit praeposition artikel und substantive bestimmter artikel unbestimmter artikel artikel mit der präposition σε (singular)  
  der artikel verrät das geschlecht — und beugt sich mit. 
   die regel  
  drei geschlechter, je eigener artikel:  ο  (männlich),  η  (weiblich),  το  (sächlich). 
@@ -595,9 +602,9 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
  · 
  · 
  
-       fachbegriffe erklärt  (11)      bestimmter artikel wortart   der artikel für etwas bekanntes: el, la, los, las – „der, die, das“.   unbestimmter artikel wortart   der artikel für etwas unbekanntes: un, una – „ein, eine“.   singular numerus   einzahl.   nominativ kasus   wer oder was? – der fall des subjekts.   neutrum genus   sächliches grammatisches geschlecht.   akkusativ kasus   wen oder was? – der fall des direkten objekts.   feminin genus   weibliches grammatisches geschlecht.   maskulin genus   männliches grammatisches geschlecht.   plural numerus   mehrzahl.   vokativ kasus   der anredefall: „marce!“ – marcus!   genitiv kasus   wessen? – zeigt zugehörigkeit. in latein verrät er außerdem die deklinationsklasse.     nominativ genitiv akkusativ vokativ singular plural maskulin feminin neutrum">
+       fachbegriffe erklärt  (11)      bestimmter artikel wortart   der artikel für etwas bekanntes: el, la, los, las – „der, die, das“.   unbestimmter artikel wortart   der artikel für etwas unbekanntes: un, una – „ein, eine“.   singular numerus   einzahl.   vokativ kasus   der anredefall: „marce!“ – marcus!   maskulin genus   männliches grammatisches geschlecht.   nominativ kasus   wer oder was? – der fall des subjekts.   plural numerus   mehrzahl.   feminin genus   weibliches grammatisches geschlecht.   genitiv kasus   wessen? – zeigt zugehörigkeit. in latein verrät er außerdem die deklinationsklasse.   neutrum genus   sächliches grammatisches geschlecht.   akkusativ kasus   wen oder was? – der fall des direkten objekts.     nominativ genitiv akkusativ vokativ singular plural maskulin feminin neutrum">
 <header class="themakopf">
-<h3>bestimmter artikel / unbestimmter artikel / artikel mit praeposition</h3>
+<h3><span class="titel" data-blatt="bestimmter artikel / unbestimmter artikel / artikel mit praeposition" data-einheitlich="Bestimmter Artikel · Unbestimmter Artikel · Artikel mit der Präposition σε (Singular)">Bestimmter Artikel · Unbestimmter Artikel · Artikel mit der Präposition σε (Singular)</span></h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
@@ -769,18 +776,18 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <dt>Bestimmter Artikel<span class="art">Wortart</span></dt><dd>Der Artikel für etwas Bekanntes: el, la, los, las – „der, die, das“.</dd>
 <dt>Unbestimmter Artikel<span class="art">Wortart</span></dt><dd>Der Artikel für etwas Unbekanntes: un, una – „ein, eine“.</dd>
 <dt>Singular<span class="art">Numerus</span></dt><dd>Einzahl.</dd>
+<dt>Vokativ<span class="art">Kasus</span></dt><dd>Der Anredefall: „Marce!“ – Marcus!</dd>
+<dt>Maskulin<span class="art">Genus</span></dt><dd>Männliches grammatisches Geschlecht.</dd>
 <dt>Nominativ<span class="art">Kasus</span></dt><dd>Wer oder was? – der Fall des Subjekts.</dd>
+<dt>Plural<span class="art">Numerus</span></dt><dd>Mehrzahl.</dd>
+<dt>Feminin<span class="art">Genus</span></dt><dd>Weibliches grammatisches Geschlecht.</dd>
+<dt>Genitiv<span class="art">Kasus</span></dt><dd>Wessen? – zeigt Zugehörigkeit. In Latein verrät er außerdem die Deklinationsklasse.</dd>
 <dt>Neutrum<span class="art">Genus</span></dt><dd>Sächliches grammatisches Geschlecht.</dd>
 <dt>Akkusativ<span class="art">Kasus</span></dt><dd>Wen oder was? – der Fall des direkten Objekts.</dd>
-<dt>Feminin<span class="art">Genus</span></dt><dd>Weibliches grammatisches Geschlecht.</dd>
-<dt>Maskulin<span class="art">Genus</span></dt><dd>Männliches grammatisches Geschlecht.</dd>
-<dt>Plural<span class="art">Numerus</span></dt><dd>Mehrzahl.</dd>
-<dt>Vokativ<span class="art">Kasus</span></dt><dd>Der Anredefall: „Marce!“ – Marcus!</dd>
-<dt>Genitiv<span class="art">Kasus</span></dt><dd>Wessen? – zeigt Zugehörigkeit. In Latein verrät er außerdem die Deklinationsklasse.</dd>
 </dl></details>
 <p class="quelle">≠ Zwei Fotos zeigen hier Verschiedenes. Vorn steht die neuere Lesung, hinter ≠ die ältere. Im Zweifel gilt dein Blatt.</p>
 </article>
-<article class="thema" id="griechisch-artikel-und-substantive-2" data-suche="deklination maskulinum auf -ος artikel und substantive deklination maskulinum auf -ος  
+<article class="thema" id="griechisch-artikel-und-substantive-2" data-suche="deklination maskulinum auf -ος deklination maskulinum auf -ος artikel und substantive deklination maskulinum auf -ος  
  der artikel verrät das geschlecht — und beugt sich mit. 
   die regel  
  drei geschlechter, je eigener artikel:  ο  (männlich),  η  (weiblich),  το  (sächlich). 
@@ -823,9 +830,9 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
   nom. pl. -ους   παππούδες   -oudes   
   gen. pl. -ους   παππούδων   -oudon   
   akk. pl. -ους   παππούδες   -oudes   
-      fachbegriffe erklärt  (8)      maskulin genus   männliches grammatisches geschlecht.   deklination formenlehre   das beugen von substantiven, adjektiven und pronomen nach fall, zahl und geschlecht.   nominativ kasus   wer oder was? – der fall des subjekts.   singular numerus   einzahl.   genitiv kasus   wessen? – zeigt zugehörigkeit. in latein verrät er außerdem die deklinationsklasse.   plural numerus   mehrzahl.   akkusativ kasus   wen oder was? – der fall des direkten objekts.   vokativ kasus   der anredefall: „marce!“ – marcus!     nominativ genitiv akkusativ vokativ singular plural">
+      fachbegriffe erklärt  (8)      maskulin genus   männliches grammatisches geschlecht.   deklination formenlehre   das beugen von substantiven, adjektiven und pronomen nach fall, zahl und geschlecht.   genitiv kasus   wessen? – zeigt zugehörigkeit. in latein verrät er außerdem die deklinationsklasse.   singular numerus   einzahl.   akkusativ kasus   wen oder was? – der fall des direkten objekts.   plural numerus   mehrzahl.   nominativ kasus   wer oder was? – der fall des subjekts.   vokativ kasus   der anredefall: „marce!“ – marcus!     nominativ genitiv akkusativ vokativ singular plural">
 <header class="themakopf">
-<h3>Deklination Maskulinum auf -ος</h3>
+<h3><span class="titel" data-blatt="Deklination Maskulinum auf -ος" data-einheitlich="Deklination Maskulinum auf -ος">Deklination Maskulinum auf -ος</span></h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
@@ -878,17 +885,17 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <dl>
 <dt>Maskulin<span class="art">Genus</span></dt><dd>Männliches grammatisches Geschlecht.</dd>
 <dt>Deklination<span class="art">Formenlehre</span></dt><dd>Das Beugen von Substantiven, Adjektiven und Pronomen nach Fall, Zahl und Geschlecht.</dd>
-<dt>Nominativ<span class="art">Kasus</span></dt><dd>Wer oder was? – der Fall des Subjekts.</dd>
-<dt>Singular<span class="art">Numerus</span></dt><dd>Einzahl.</dd>
 <dt>Genitiv<span class="art">Kasus</span></dt><dd>Wessen? – zeigt Zugehörigkeit. In Latein verrät er außerdem die Deklinationsklasse.</dd>
-<dt>Plural<span class="art">Numerus</span></dt><dd>Mehrzahl.</dd>
+<dt>Singular<span class="art">Numerus</span></dt><dd>Einzahl.</dd>
 <dt>Akkusativ<span class="art">Kasus</span></dt><dd>Wen oder was? – der Fall des direkten Objekts.</dd>
+<dt>Plural<span class="art">Numerus</span></dt><dd>Mehrzahl.</dd>
+<dt>Nominativ<span class="art">Kasus</span></dt><dd>Wer oder was? – der Fall des Subjekts.</dd>
 <dt>Vokativ<span class="art">Kasus</span></dt><dd>Der Anredefall: „Marce!“ – Marcus!</dd>
 </dl></details>
 </article>
-<article class="thema" id="griechisch-artikel-und-substantive-regeln" data-suche="regeln artikel und substantive      als artikel bezeichnet man ein wort, das ein anderes begleitet.   der genitiv ist im griechischen häufiger als im deutschen.   das ζ wird wie ein stimmhaftes s ausgesprochen, wie zum beispiel bei den wörtern: siegfried, silke, seele, siegel.   endet ein wort auf -s, so wird dieses immer als schluss-ς geschrieben; das σ steht nie am ende eines wortes.   personennamen, städte- und ländernamen werden vom bestimmten artikel begleitet.   der artikel ο steht für das männliche geschlecht, η für das weibliche und το für das neutrale geschlecht.   folgt dem αυ und ευ θ, κ, ξ, π, σ, τ, φ, χ, oder ψ, werden sie als af bzw. ef ausgesprochen.   will man auf einen bestimmten tag, monat oder eine bestimmte jahreszeit hinweisen, verwendet man den artikel im akkusativ.   in verbindung mit dem unbestimmten artikel bleiben präposition und artikel getrennt.   der vokativ wird nur bei wörtern auf -ος extra aufgeführt, da er dort unterschiede aufweist. bei allen anderen substantiven ist der vokativ gleich wie der akkusativ.   im griechischen werden fast alle wörter kleingeschrieben; ausnahmen sind satzanfänge, eigennamen, länder/städte, feiertage und kunstwerke.   der genitiv plural endet bei allen substantiven und adjektiven auf -ων.   das ζ wird wie ein stimmhaftes s ausgesprochen, wie zum beispiel bei den wörtern: siegfried, silke, seele, siegel. griechische beispiele: ζωή, ζώο, ζευγάρι.   endet ein wort auf -s, so wird dieses immer als schluss-ς geschrieben; das σ steht nie am ende eines wortes. beispiele: κόσμος, ελέφαντας.   in verbindung mit dem unbestimmten artikel bleiben präposition und artikel getrennt (σε ένα, σε μια).   in verbindung mit dem unbestimmten artikel bleiben präposition σε und artikel getrennt.   der vokativ wird nur bei wörtern auf -ος extra aufgeführt (-ε). bei allen anderen substantiven ist der vokativ gleich wie der akkusativ.   im nominativ singular enden alle maskulina auf -ς.   alle diese substantive [der maskulin-deklination] enden im genitiv plural auf -ων.   das schluss-ν beim artikel (τον, την, έναν) bleibt vor vokalen und den konsonanten κ, π, τ, γκ, μπ, ντ, τσ, τζ, ξ, ψ erhalten.   in verbindung mit dem unbestimmten artikel bleiben präposition σε und artikel getrennt (σε έναν, σε μια, σε ένα).   alle substantive und adjektive haben im genitiv plural für alle genera die endung -ων.   das schluss-ν beim bestimmten artikel (τον, την) entfällt häufig vor bestimmten konsonanten.   bestimmte artikel begleiten auch personennamen, städte- und ländernamen (z.b. ο γιώργος, η αθήνα).   in verbindung mit dem unbestimmten artikel bleiben präposition und artikel getrennt (z.b. σε ένα).   unbestimmte artikel: ένας, μια, ένα (ein, eine, ein).   in verbindung mit dem unbestimmten artikel bleiben präposition und artikel getrennt: σε ένα(ν), σε μια, σε ένα.      zuletzt ergänzt am 01.10.2026 · 4 blätter ">
+<article class="thema" id="griechisch-artikel-und-substantive-regeln" data-suche="regeln von deinem blatt regeln artikel und substantive      als artikel bezeichnet man ein wort, das ein anderes begleitet.   der genitiv ist im griechischen häufiger als im deutschen.   das ζ wird wie ein stimmhaftes s ausgesprochen, wie zum beispiel bei den wörtern: siegfried, silke, seele, siegel.   endet ein wort auf -s, so wird dieses immer als schluss-ς geschrieben; das σ steht nie am ende eines wortes.   personennamen, städte- und ländernamen werden vom bestimmten artikel begleitet.   der artikel ο steht für das männliche geschlecht, η für das weibliche und το für das neutrale geschlecht.   folgt dem αυ und ευ θ, κ, ξ, π, σ, τ, φ, χ, oder ψ, werden sie als af bzw. ef ausgesprochen.   will man auf einen bestimmten tag, monat oder eine bestimmte jahreszeit hinweisen, verwendet man den artikel im akkusativ.   in verbindung mit dem unbestimmten artikel bleiben präposition und artikel getrennt.   der vokativ wird nur bei wörtern auf -ος extra aufgeführt, da er dort unterschiede aufweist. bei allen anderen substantiven ist der vokativ gleich wie der akkusativ.   im griechischen werden fast alle wörter kleingeschrieben; ausnahmen sind satzanfänge, eigennamen, länder/städte, feiertage und kunstwerke.   der genitiv plural endet bei allen substantiven und adjektiven auf -ων.   das ζ wird wie ein stimmhaftes s ausgesprochen, wie zum beispiel bei den wörtern: siegfried, silke, seele, siegel. griechische beispiele: ζωή, ζώο, ζευγάρι.   endet ein wort auf -s, so wird dieses immer als schluss-ς geschrieben; das σ steht nie am ende eines wortes. beispiele: κόσμος, ελέφαντας.   in verbindung mit dem unbestimmten artikel bleiben präposition und artikel getrennt (σε ένα, σε μια).   in verbindung mit dem unbestimmten artikel bleiben präposition σε und artikel getrennt.   der vokativ wird nur bei wörtern auf -ος extra aufgeführt (-ε). bei allen anderen substantiven ist der vokativ gleich wie der akkusativ.   im nominativ singular enden alle maskulina auf -ς.   alle diese substantive [der maskulin-deklination] enden im genitiv plural auf -ων.   das schluss-ν beim artikel (τον, την, έναν) bleibt vor vokalen und den konsonanten κ, π, τ, γκ, μπ, ντ, τσ, τζ, ξ, ψ erhalten.   in verbindung mit dem unbestimmten artikel bleiben präposition σε und artikel getrennt (σε έναν, σε μια, σε ένα).   alle substantive und adjektive haben im genitiv plural für alle genera die endung -ων.   das schluss-ν beim bestimmten artikel (τον, την) entfällt häufig vor bestimmten konsonanten.   bestimmte artikel begleiten auch personennamen, städte- und ländernamen (z.b. ο γιώργος, η αθήνα).   in verbindung mit dem unbestimmten artikel bleiben präposition und artikel getrennt (z.b. σε ένα).   unbestimmte artikel: ένας, μια, ένα (ein, eine, ein).   in verbindung mit dem unbestimmten artikel bleiben präposition und artikel getrennt: σε ένα(ν), σε μια, σε ένα.      zuletzt ergänzt am 01.10.2026 · 4 blätter ">
 <header class="themakopf">
-<h3>Regeln von deinem Blatt</h3>
+<h3><span class="titel" data-blatt="Regeln von deinem Blatt" data-einheitlich="Regeln von deinem Blatt">Regeln von deinem Blatt</span></h3>
 </header>
 <aside class="regelblock">
 <ul>
@@ -925,7 +932,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 </section>
 <section class="bereich" id="griechisch-bereich-pronomen">
 <h2>Pronomen<span class="bereichunter">Fürwörter</span><span class="bereichzahl">2</span></h2>
-<article class="thema" id="griechisch-fragewoerter" data-suche="fragewörter übersicht der wichtigsten fragewörter  
+<article class="thema" id="griechisch-fragewoerter" data-suche="fragewörter fragewörter übersicht der wichtigsten fragewörter  
  die fragewörter — ein teil davon beugt sich. 
   die regel  
  unveränderlich:  τι  (was),  πού  (wo),  πότε  (wann),  γιατί  (warum),  πώς  (wie). 
@@ -946,7 +953,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
   γιατί   warum   γιατί έχουν όλοι το ίδιο όνομα; (warum haben alle denselben namen?)   
       regeln von deinem blatt     das wort γιατί bedeutet &#x27;warum&#x27; in fragen und &#x27;weil&#x27; in aussagesätzen.      zuletzt ergänzt am 01.10.2026 · 1 blatt ">
 <header class="themakopf">
-<h3>Fragewörter</h3>
+<h3><span class="titel" data-blatt="Fragewörter" data-einheitlich="Fragewörter">Fragewörter</span></h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
@@ -977,7 +984,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 </ul></aside>
 <p class="quelle">Zuletzt ergänzt am 01.10.2026 · 1 Blatt</p>
 </article>
-<article class="thema" id="griechisch-personalpronomen" data-suche="personalpronomen personalpronomen (starke und schwache formen)  
+<article class="thema" id="griechisch-personalpronomen" data-suche="personalpronomen personalpronomen personalpronomen (starke und schwache formen)  
  personalpronomen gibt es in einer starken und einer schwachen form. 
   die regel  
   εγώ, εσύ, αυτός/αυτή/αυτό  sind die subjektformen — sie stehen nur zur betonung. 
@@ -1020,7 +1027,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
   3pl n (sie)   αυτά / τα   akkusativ (stark / schwach)   
       regeln von deinem blatt     die schwachen formen der personalpronomen sind gebräuchlicher; starke formen dienen der hervorhebung.   die starken formen der personalpronomen werden verwendet, wenn man die person, über die man spricht, hervorheben will.   starke formen der personalpronomen werden verwendet, um die person hervorzuheben (z.b. εσένα θέλω - dich will ich).      zuletzt ergänzt am 01.10.2026 · 1 blatt ">
 <header class="themakopf">
-<h3>Personalpronomen</h3>
+<h3><span class="titel" data-blatt="Personalpronomen" data-einheitlich="Personalpronomen">Personalpronomen</span></h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
@@ -1078,7 +1085,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 </section>
 <section class="bereich" id="griechisch-bereich-zahlen">
 <h2>Zahlen<span class="bereichunter">Zählen, Mengen und Reihenfolge</span><span class="bereichzahl">1</span></h2>
-<article class="thema" id="griechisch-zahlen" data-suche="zahlen kardinal- und ordinalzahlen  
+<article class="thema" id="griechisch-zahlen" data-suche="zahlen zahlen kardinal- und ordinalzahlen  
  die zahlen — drei davon beugen sich. 
   die regel  
   1, 3, 4  richten sich nach dem geschlecht:  ένας / μία / ένα ,  τρεις / τρία ,  τέσσερις / τέσσερα . 
@@ -1097,7 +1104,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
   100   εκατό(ν)   hundert   
       regeln von deinem blatt     die grundzahlen werden im griechischen nicht dekliniert, mit ausnahme der zahlen: ένας, μια/μία, ένα; τρεις, εις, τρία; τέσσερις, ις, τέσσερα sowie einiger weiterer.   grundzahlen werden im griechischen nicht dekliniert, mit ausnahme der zahlen ένας/μία/ένα (1), τρεις/τρία (3), τέσσερις/τέσσερα (4) sowie einiger weiterer wie διακόσιοι (200).   die grundzahlen werden im griechischen nicht dekliniert, mit ausnahme der zahlen ένας/μία/ένα, τρεις/τρία, τέσσερις/τέσσερα sowie einiger weiterer hunderter zahlen.      zuletzt ergänzt am 01.10.2026 · 1 blatt ">
 <header class="themakopf">
-<h3>Zahlen</h3>
+<h3><span class="titel" data-blatt="Zahlen" data-einheitlich="Zahlen">Zahlen</span></h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
@@ -1131,7 +1138,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 </section>
 <section class="bereich" id="griechisch-bereich-aussprache">
 <h2>Aussprache<span class="bereichunter">Wie die Buchstaben klingen</span><span class="bereichzahl">5</span></h2>
-<article class="thema" id="griechisch-aussprache-1" data-suche="das alphabet aussprache das alphabet  
+<article class="thema" id="griechisch-aussprache-1" data-suche="das alphabet das alphabet aussprache das alphabet  
  das griechische alphabet — 24 buchstaben, von denen du die meisten schon kennst. 
   die regel  
  acht buchstaben sehen aus wie lateinische und klingen auch so:  α ε ζ ι κ μ ο τ . 
@@ -1168,7 +1175,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
   ω ω (omega)   o   wie opfer   
       fachbegriffe erklärt  (1)      aussprache lautlehre   wie die buchstaben klingen. die zeichen zwischen schrägstrichen wie /k/ sind lautschrift, nicht schreibweise.    ">
 <header class="themakopf">
-<h3>Das Alphabet</h3>
+<h3><span class="titel" data-blatt="Das Alphabet" data-einheitlich="Das Alphabet">Das Alphabet</span></h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
@@ -1214,7 +1221,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <dt>Aussprache<span class="art">Lautlehre</span></dt><dd>Wie die Buchstaben klingen. Die Zeichen zwischen Schrägstrichen wie /k/ sind Lautschrift, nicht Schreibweise.</dd>
 </dl></details>
 </article>
-<article class="thema" id="griechisch-aussprache-2" data-suche="vokalkombinationen aussprache vokalkombinationen  
+<article class="thema" id="griechisch-aussprache-2" data-suche="vokalkombinationen vokalkombinationen aussprache vokalkombinationen  
  zwei vokale, ein laut — und bei αυ/ευ hängt er vom nächsten buchstaben ab. 
   die regel  
   οι  und  ει  →  i ,  αι  →  e ,  ου  →  u . 
@@ -1231,7 +1238,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
   ει   i   
       fachbegriffe erklärt  (1)      aussprache lautlehre   wie die buchstaben klingen. die zeichen zwischen schrägstrichen wie /k/ sind lautschrift, nicht schreibweise.    ">
 <header class="themakopf">
-<h3>Vokalkombinationen</h3>
+<h3><span class="titel" data-blatt="Vokalkombinationen" data-einheitlich="Vokalkombinationen">Vokalkombinationen</span></h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
@@ -1257,7 +1264,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <dt>Aussprache<span class="art">Lautlehre</span></dt><dd>Wie die Buchstaben klingen. Die Zeichen zwischen Schrägstrichen wie /k/ sind Lautschrift, nicht Schreibweise.</dd>
 </dl></details>
 </article>
-<article class="thema" id="griechisch-aussprache-3" data-suche="konsonantenkombinationen aussprache konsonantenkombinationen  
+<article class="thema" id="griechisch-aussprache-3" data-suche="konsonantenkombinationen konsonantenkombinationen aussprache konsonantenkombinationen  
  laute, die es als einzelnen buchstaben nicht gibt. 
   die regel  
   μπ  → b ( μπαμπάς  = babás) ·  ντ  → d ·  γγ / γκ  → g ·  τζ  → dz ·  τς  → ts 
@@ -1273,7 +1280,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
   τζ   dz   beispiel: τζάκι (kamin)   
       fachbegriffe erklärt  (1)      aussprache lautlehre   wie die buchstaben klingen. die zeichen zwischen schrägstrichen wie /k/ sind lautschrift, nicht schreibweise.    ">
 <header class="themakopf">
-<h3>Konsonantenkombinationen</h3>
+<h3><span class="titel" data-blatt="Konsonantenkombinationen" data-einheitlich="Konsonantenkombinationen">Konsonantenkombinationen</span></h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
@@ -1298,7 +1305,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <dt>Aussprache<span class="art">Lautlehre</span></dt><dd>Wie die Buchstaben klingen. Die Zeichen zwischen Schrägstrichen wie /k/ sind Lautschrift, nicht Schreibweise.</dd>
 </dl></details>
 </article>
-<article class="thema" id="griechisch-aussprache-4" data-suche="schreibweisen für vokallaute aussprache schreibweisen für vokallaute   
+<article class="thema" id="griechisch-aussprache-4" data-suche="schreibweisen für vokallaute schreibweisen für vokallaute aussprache schreibweisen für vokallaute   
   laut i   η   
   laut i   ι   
   laut i   υ   
@@ -1310,7 +1317,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
   laut o   ω   
       fachbegriffe erklärt  (1)      aussprache lautlehre   wie die buchstaben klingen. die zeichen zwischen schrägstrichen wie /k/ sind lautschrift, nicht schreibweise.    ">
 <header class="themakopf">
-<h3>Schreibweisen für Vokallaute</h3>
+<h3><span class="titel" data-blatt="Schreibweisen für Vokallaute" data-einheitlich="Schreibweisen für Vokallaute">Schreibweisen für Vokallaute</span></h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <div class="tabellenrahmen"><table>
@@ -1330,9 +1337,9 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <dt>Aussprache<span class="art">Lautlehre</span></dt><dd>Wie die Buchstaben klingen. Die Zeichen zwischen Schrägstrichen wie /k/ sind Lautschrift, nicht Schreibweise.</dd>
 </dl></details>
 </article>
-<article class="thema" id="griechisch-aussprache-regeln" data-suche="regeln aussprache      im griechischen werden alle wörter kleingeschrieben, außer eigennamen, länder, städte, flüsse, berge, nationalitäten, wochentage, monate, feiertage, religiöse ursprünge und kunstwerke/literarische werke.   ποῦ und πῶς sind zwei der drei einsilbigen wörter, die im griechischen einen akzent tragen.   wenn auf das γ ein i-laut oder e-laut folgt, wird das γ wie ein j ausgesprochen. folgt jedoch ein a-, o-laut oder ein konsonant, so wird das γ wie ein stimmhaftes ch ausgesprochen (mischung aus r und g).   das ζ wird wie ein stimmhaftes s ausgesprochen, wie zum beispiel bei den wörtern: siegfried, silke, seele, siegel.   wenn auf ein χ ein i- oder e-laut folgt, wird das χ wie ein ich, milch ausgesprochen. folgt jedoch ein a-, o-, ou- laut oder ein konsonant, wird das χ wie in achtung, machen ausgesprochen.   endet ein wort auf -s, so wird dieses immer als schluss-ς geschrieben; das σ steht nie am ende eines wortes.   folgt dem αυ und ευ ein vokal oder einer der konsonanten β, γ, δ, ζ, λ, μ, ν, ρ, ist die aussprache aw bzw. ew. folgt jedoch θ, κ, ξ, π, σ, τ, φ, χ, ψ, werden αυ und ευ als af bzw. ef ausgesprochen.   folgt dem αυ und ευ ein vokal oder einer der stimmhaften konsonanten (β, γ, δ, ζ, λ, μ, ν, ρ), ist die aussprache aw bzw. ew.   folgt jedoch ein stimmloser konsonant (θ, κ, ξ, π, σ, τ, φ, χ, ψ), werden αυ und ευ als af bzw. ef ausgesprochen.   wenn auf das γ ein i-laut oder e-laut folgt, wird das γ wie ein j ausgesprochen. (beispiele: γιώργος, γεια σου, γερμανία)   der artikel ο steht für das männliche geschlecht, η steht für das weibliche geschlecht und το steht für das neutrale geschlecht.   folgt jedoch ein a-, o-laut oder ein konsonant, so wird das γ wie ein stimmhaftes ch ausgesprochen. es ist wie eine mischung aus einem nicht gerollten r und einem g, ein reibelaut, wie er etwa beim gurgeln entsteht. beispiele: γάτα, παγωτό, γόνατο.   wenn auf ein χ ein i- oder e-laut folgt, wird das χ wie ein ich-laut (wie in milch) ausgesprochen. beispiele: χειρούργος, χέρι.   folgt jedoch ein a-, o-, ou-laut oder ein konsonant, wird das χ wie in achtung oder machen ausgesprochen. beispiele: ευχαριστώ, χορεύω.   das griechische kennt fünf unterschiedliche schreibweisen für den laut i (η, ι, υ, ει, οι), zwei unterschiedliche schreibweisen für den laut e (ε, αι) und zwei unterschiedliche schreibweisen für den laut o (ο, ω).      zuletzt ergänzt am 01.10.2026 · 4 blätter ">
+<article class="thema" id="griechisch-aussprache-regeln" data-suche="regeln von deinem blatt regeln aussprache      im griechischen werden alle wörter kleingeschrieben, außer eigennamen, länder, städte, flüsse, berge, nationalitäten, wochentage, monate, feiertage, religiöse ursprünge und kunstwerke/literarische werke.   ποῦ und πῶς sind zwei der drei einsilbigen wörter, die im griechischen einen akzent tragen.   wenn auf das γ ein i-laut oder e-laut folgt, wird das γ wie ein j ausgesprochen. folgt jedoch ein a-, o-laut oder ein konsonant, so wird das γ wie ein stimmhaftes ch ausgesprochen (mischung aus r und g).   das ζ wird wie ein stimmhaftes s ausgesprochen, wie zum beispiel bei den wörtern: siegfried, silke, seele, siegel.   wenn auf ein χ ein i- oder e-laut folgt, wird das χ wie ein ich, milch ausgesprochen. folgt jedoch ein a-, o-, ou- laut oder ein konsonant, wird das χ wie in achtung, machen ausgesprochen.   endet ein wort auf -s, so wird dieses immer als schluss-ς geschrieben; das σ steht nie am ende eines wortes.   folgt dem αυ und ευ ein vokal oder einer der konsonanten β, γ, δ, ζ, λ, μ, ν, ρ, ist die aussprache aw bzw. ew. folgt jedoch θ, κ, ξ, π, σ, τ, φ, χ, ψ, werden αυ und ευ als af bzw. ef ausgesprochen.   folgt dem αυ und ευ ein vokal oder einer der stimmhaften konsonanten (β, γ, δ, ζ, λ, μ, ν, ρ), ist die aussprache aw bzw. ew.   folgt jedoch ein stimmloser konsonant (θ, κ, ξ, π, σ, τ, φ, χ, ψ), werden αυ und ευ als af bzw. ef ausgesprochen.   wenn auf das γ ein i-laut oder e-laut folgt, wird das γ wie ein j ausgesprochen. (beispiele: γιώργος, γεια σου, γερμανία)   der artikel ο steht für das männliche geschlecht, η steht für das weibliche geschlecht und το steht für das neutrale geschlecht.   folgt jedoch ein a-, o-laut oder ein konsonant, so wird das γ wie ein stimmhaftes ch ausgesprochen. es ist wie eine mischung aus einem nicht gerollten r und einem g, ein reibelaut, wie er etwa beim gurgeln entsteht. beispiele: γάτα, παγωτό, γόνατο.   wenn auf ein χ ein i- oder e-laut folgt, wird das χ wie ein ich-laut (wie in milch) ausgesprochen. beispiele: χειρούργος, χέρι.   folgt jedoch ein a-, o-, ou-laut oder ein konsonant, wird das χ wie in achtung oder machen ausgesprochen. beispiele: ευχαριστώ, χορεύω.   das griechische kennt fünf unterschiedliche schreibweisen für den laut i (η, ι, υ, ει, οι), zwei unterschiedliche schreibweisen für den laut e (ε, αι) und zwei unterschiedliche schreibweisen für den laut o (ο, ω).      zuletzt ergänzt am 01.10.2026 · 4 blätter ">
 <header class="themakopf">
-<h3>Regeln von deinem Blatt</h3>
+<h3><span class="titel" data-blatt="Regeln von deinem Blatt" data-einheitlich="Regeln von deinem Blatt">Regeln von deinem Blatt</span></h3>
 </header>
 <aside class="regelblock">
 <ul>
@@ -1365,14 +1372,14 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <nav class="verzeichnis" data-sprache="latein">
 <p class="verzeichniskopf">1 Eintrag</p>
 <p class="verzeichnisbereich"><a href="#latein-bereich-verb">Verben</a></p><ul>
-<li data-suche="konjunktiv"><a href="#latein-konjunktiv">Konjunktiv<span class="anzahl">2</span></a></li>
+<li data-suche="konjunktiv konjunktiv"><a href="#latein-konjunktiv"><span class="titel" data-blatt="Konjunktiv" data-einheitlich="Konjunktiv">Konjunktiv</span><span class="anzahl">2</span></a></li>
 </ul>
 </nav>
 </details>
 <main class="inhalt">
 <section class="bereich" id="latein-bereich-verb">
 <h2>Verben<span class="bereichunter">Formen, Zeiten und Modi</span><span class="bereichzahl">1</span></h2>
-<article class="thema" id="latein-konjunktiv" data-suche="konjunktiv konjunktiv präsens aktiv — laudare konjunktiv imperfekt aktiv — laudare  
+<article class="thema" id="latein-konjunktiv" data-suche="konjunktiv konjunktiv konjunktiv präsens aktiv — laudare konjunktiv imperfekt aktiv — laudare  
  der konjunktiv — die form für alles, was nicht einfach tatsache ist. 
   die regel  
   konjunktiv präsens  der a-konjugation: präsensstamm, das stamm- a  fällt weg, dafür kommt ein  -e- , dann die personalendung:  laud-e-m, laud-e-s, laud-e-t …  
@@ -1416,7 +1423,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
  laudare · imperfekt  infinitiv präsens + personalendung 
      fachbegriffe erklärt  (5)      präsens tempus   gegenwart: was jetzt geschieht.   konjunktiv modus   die möglichkeitsform: etwas ist gewünscht, vorgestellt oder nur möglich. im deutschen oft mit „würde“ oder „möge“ wiedergegeben. „utinam laudet!“ – hoffentlich lobt er!   aktiv genus verbi   das subjekt handelt selbst: „er lobt.“   imperfekt tempus   vergangenheit für vorgänge, die andauerten oder sich wiederholten – der hintergrund einer erzählung.   perfekt tempus   vergangenheit für abgeschlossene ereignisse – das, was die handlung vorantreibt.      zuletzt ergänzt am 22.09.2026 · 1 blatt  praesens imperfekt perfekt aktiv indikativ konjunktiv singular plural">
 <header class="themakopf">
-<h3>Konjunktiv</h3>
+<h3><span class="titel" data-blatt="Konjunktiv" data-einheitlich="Konjunktiv">Konjunktiv</span></h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
@@ -1490,35 +1497,35 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <nav class="verzeichnis" data-sprache="spanisch">
 <p class="verzeichniskopf">14 Einträge</p>
 <p class="verzeichnisbereich"><a href="#spanisch-bereich-verb">Verben</a></p><ul>
-<li data-suche="präsens"><a href="#spanisch-praesens">Präsens<span class="anzahl">4</span></a></li>
+<li data-suche="präsens präsens"><a href="#spanisch-praesens"><span class="titel" data-blatt="Präsens" data-einheitlich="Präsens">Präsens</span><span class="anzahl">4</span></a></li>
 </ul>
 <p class="verzeichnisbereich"><a href="#spanisch-bereich-substantiv">Substantive</a></p><ul>
-<li data-suche="artículos y sustantivos"><a href="#spanisch-articulos-y-sustantivos">artículos y sustantivos<span class="anzahl">4</span></a></li>
+<li data-suche="artículos y sustantivos artikel und substantive"><a href="#spanisch-articulos-y-sustantivos"><span class="titel" data-blatt="artículos y sustantivos" data-einheitlich="Artikel und Substantive">Artikel und Substantive</span><span class="anzahl">4</span></a></li>
 </ul>
 <p class="verzeichnisbereich"><a href="#spanisch-bereich-pronomen">Pronomen</a></p><ul>
-<li data-suche="fragewörter"><a href="#spanisch-fragewoerter">Fragewörter<span class="anzahl">2</span></a></li>
-<li data-suche="personalpronomen"><a href="#spanisch-personalpronomen">Personalpronomen</a></li>
+<li data-suche="fragewörter fragewörter"><a href="#spanisch-fragewoerter"><span class="titel" data-blatt="Fragewörter" data-einheitlich="Fragewörter">Fragewörter</span><span class="anzahl">2</span></a></li>
+<li data-suche="personalpronomen personalpronomen"><a href="#spanisch-personalpronomen"><span class="titel" data-blatt="Personalpronomen" data-einheitlich="Personalpronomen">Personalpronomen</span></a></li>
 </ul>
 <p class="verzeichnisbereich"><a href="#spanisch-bereich-zahlen">Zahlen</a></p><ul>
-<li data-suche="los números"><a href="#spanisch-los-numeros">Los números<span class="anzahl">8</span></a></li>
+<li data-suche="los números zahlen"><a href="#spanisch-los-numeros"><span class="titel" data-blatt="Los números" data-einheitlich="Zahlen">Zahlen</span><span class="anzahl">8</span></a></li>
 </ul>
 <p class="verzeichnisbereich"><a href="#spanisch-bereich-aussprache">Aussprache</a></p><ul>
-<li data-suche="aussprache von /k/"><a href="#spanisch-aussprache-1">Aussprache von /k/</a></li>
-<li data-suche="aussprache von /θ/"><a href="#spanisch-aussprache-2">Aussprache von /θ/</a></li>
-<li data-suche="aussprache von /x/"><a href="#spanisch-aussprache-3">Aussprache von /x/</a></li>
-<li data-suche="aussprache von /g/"><a href="#spanisch-aussprache-4">Aussprache von /g/</a></li>
-<li data-suche="aussprache von h"><a href="#spanisch-aussprache-5">Aussprache von h</a></li>
-<li data-suche="aussprache von /rr/"><a href="#spanisch-aussprache-6">Aussprache von /rr/</a></li>
-<li data-suche="regeln für c und g (handschriftlich)"><a href="#spanisch-aussprache-7">Regeln für c und g (handschriftlich)</a></li>
-<li data-suche="schreibung von lauten vor e und i (handschriftlich)"><a href="#spanisch-aussprache-8">Schreibung von Lauten vor e und i (handschriftlich)</a></li>
-<li data-suche="regeln von deinem blatt"><a href="#spanisch-aussprache-regeln">Regeln von deinem Blatt</a></li>
+<li data-suche="aussprache von /k/ aussprache von /k/"><a href="#spanisch-aussprache-1"><span class="titel" data-blatt="Aussprache von /k/" data-einheitlich="Aussprache von /k/">Aussprache von /k/</span></a></li>
+<li data-suche="aussprache von /θ/ aussprache von /θ/"><a href="#spanisch-aussprache-2"><span class="titel" data-blatt="Aussprache von /θ/" data-einheitlich="Aussprache von /θ/">Aussprache von /θ/</span></a></li>
+<li data-suche="aussprache von /x/ aussprache von /x/"><a href="#spanisch-aussprache-3"><span class="titel" data-blatt="Aussprache von /x/" data-einheitlich="Aussprache von /x/">Aussprache von /x/</span></a></li>
+<li data-suche="aussprache von /g/ aussprache von /g/"><a href="#spanisch-aussprache-4"><span class="titel" data-blatt="Aussprache von /g/" data-einheitlich="Aussprache von /g/">Aussprache von /g/</span></a></li>
+<li data-suche="aussprache von h aussprache von h"><a href="#spanisch-aussprache-5"><span class="titel" data-blatt="Aussprache von h" data-einheitlich="Aussprache von h">Aussprache von h</span></a></li>
+<li data-suche="aussprache von /rr/ aussprache von /rr/"><a href="#spanisch-aussprache-6"><span class="titel" data-blatt="Aussprache von /rr/" data-einheitlich="Aussprache von /rr/">Aussprache von /rr/</span></a></li>
+<li data-suche="regeln für c und g (handschriftlich) regeln für c und g (handschriftlich)"><a href="#spanisch-aussprache-7"><span class="titel" data-blatt="Regeln für c und g (handschriftlich)" data-einheitlich="Regeln für c und g (handschriftlich)">Regeln für c und g (handschriftlich)</span></a></li>
+<li data-suche="schreibung von lauten vor e und i (handschriftlich) schreibung von lauten vor e und i (handschriftlich)"><a href="#spanisch-aussprache-8"><span class="titel" data-blatt="Schreibung von Lauten vor e und i (handschriftlich)" data-einheitlich="Schreibung von Lauten vor e und i (handschriftlich)">Schreibung von Lauten vor e und i (handschriftlich)</span></a></li>
+<li data-suche="regeln von deinem blatt regeln von deinem blatt"><a href="#spanisch-aussprache-regeln"><span class="titel" data-blatt="Regeln von deinem Blatt" data-einheitlich="Regeln von deinem Blatt">Regeln von deinem Blatt</span></a></li>
 </ul>
 </nav>
 </details>
 <main class="inhalt">
 <section class="bereich" id="spanisch-bereich-verb">
 <h2>Verben<span class="bereichunter">Formen, Zeiten und Modi</span><span class="bereichzahl">1</span></h2>
-<article class="thema" id="spanisch-praesens" data-suche="präsens präsens von ser (sein) verben auf -er (comer) verben auf -ir (vivir) regelmäßige verben auf -ar  
+<article class="thema" id="spanisch-praesens" data-suche="präsens präsens präsens von ser (sein) verben auf -er (comer) verben auf -ir (vivir) regelmäßige verben auf -ar  
  das regelmäßige muster der verben auf  -ar . 
   die regel  
  du nimmst den stamm ( hablar  →  habl- ) und hängst an: 
@@ -1592,7 +1599,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
  hablar  verbstamm + personalendung 
      regeln von deinem blatt     2 verbos   die endungen der -ar-verben werden an den stamm (hier: habl-) angehängt.   hay bedeutet &#x27;es gibt&#x27;   ser bedeutet übersetzt &#x27;sein&#x27;.        fachbegriffe erklärt  (3)      präsens tempus   gegenwart: was jetzt geschieht.   indikativ modus   die normale wirklichkeitsform: etwas ist so. „er lobt.“   aktiv genus verbi   das subjekt handelt selbst: „er lobt.“      zuletzt ergänzt am 23.09.2026 · 10 blätter  praesens aktiv indikativ singular plural">
 <header class="themakopf">
-<h3>Präsens</h3>
+<h3><span class="titel" data-blatt="Präsens" data-einheitlich="Präsens">Präsens</span></h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
@@ -1692,7 +1699,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 </section>
 <section class="bereich" id="spanisch-bereich-substantiv">
 <h2>Substantive<span class="bereichunter">Fälle, Zahl und Geschlecht</span><span class="bereichzahl">1</span></h2>
-<article class="thema" id="spanisch-articulos-y-sustantivos" data-suche="artículos y sustantivos maskuline artikel und substantive feminine artikel und substantive unbestimmter artikel und pluralbildung bei substantiven verwendung von hay  
+<article class="thema" id="spanisch-articulos-y-sustantivos" data-suche="artikel und substantive artículos y sustantivos maskuline artikel und substantive feminine artikel und substantive unbestimmter artikel und pluralbildung bei substantiven verwendung von hay  
  der bestimmte artikel — „der, die, das“ auf spanisch. 
   die regel  
  jedes substantiv hat ein geschlecht, und der artikel richtet sich danach: 
@@ -1750,9 +1757,9 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
   hay + un   hay un parque   es gibt einen park   
   hay + una   hay una tiendas   es gibt ein geschäft   
   hay + plural   hay cafeterías   es gibt cafés   
-      regeln von deinem blatt     unos / unas bedeutet &quot;einige&quot;   hay bedeutet &quot;es gibt&quot; und bleibt unverändert (kombiniert mit un, una oder nomen im plural ohne artikel)   hay bedeutet &quot;es gibt&quot; und steht vor un/una oder direkt vor substantiven im plural ohne artikel   hay bedeutet &quot;es gibt&quot; und wird mit unbestimmter artikel oder im plural ohne artikel verwendet   hay bedeutet &quot;es gibt&quot; und wird mit un/una oder direkt mit substantiven im plural verwendet   die farbliche kennzeichnung (blau/pink) unterscheidet zwischen maskulinen und femininen formen.        fachbegriffe erklärt  (7)      maskulin genus   männliches grammatisches geschlecht.   feminin genus   weibliches grammatisches geschlecht.   plural numerus   mehrzahl.   bestimmter artikel wortart   der artikel für etwas bekanntes: el, la, los, las – „der, die, das“.   unbestimmter artikel wortart   der artikel für etwas unbekanntes: un, una – „ein, eine“.   nominativ kasus   wer oder was? – der fall des subjekts.   singular numerus   einzahl.      zuletzt ergänzt am 23.09.2026 · 2 blätter  nominativ singular plural">
+      regeln von deinem blatt     unos / unas bedeutet &quot;einige&quot;   hay bedeutet &quot;es gibt&quot; und bleibt unverändert (kombiniert mit un, una oder nomen im plural ohne artikel)   hay bedeutet &quot;es gibt&quot; und steht vor un/una oder direkt vor substantiven im plural ohne artikel   hay bedeutet &quot;es gibt&quot; und wird mit unbestimmter artikel oder im plural ohne artikel verwendet   hay bedeutet &quot;es gibt&quot; und wird mit un/una oder direkt mit substantiven im plural verwendet   die farbliche kennzeichnung (blau/pink) unterscheidet zwischen maskulinen und femininen formen.        fachbegriffe erklärt  (7)      maskulin genus   männliches grammatisches geschlecht.   feminin genus   weibliches grammatisches geschlecht.   plural numerus   mehrzahl.   bestimmter artikel wortart   der artikel für etwas bekanntes: el, la, los, las – „der, die, das“.   unbestimmter artikel wortart   der artikel für etwas unbekanntes: un, una – „ein, eine“.   singular numerus   einzahl.   nominativ kasus   wer oder was? – der fall des subjekts.      zuletzt ergänzt am 23.09.2026 · 2 blätter  nominativ singular plural">
 <header class="themakopf">
-<h3>artículos y sustantivos</h3>
+<h3><span class="titel" data-blatt="artículos y sustantivos" data-einheitlich="Artikel und Substantive">Artikel und Substantive</span></h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
@@ -1838,15 +1845,15 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <dt>Plural<span class="art">Numerus</span></dt><dd>Mehrzahl.</dd>
 <dt>Bestimmter Artikel<span class="art">Wortart</span></dt><dd>Der Artikel für etwas Bekanntes: el, la, los, las – „der, die, das“.</dd>
 <dt>Unbestimmter Artikel<span class="art">Wortart</span></dt><dd>Der Artikel für etwas Unbekanntes: un, una – „ein, eine“.</dd>
-<dt>Nominativ<span class="art">Kasus</span></dt><dd>Wer oder was? – der Fall des Subjekts.</dd>
 <dt>Singular<span class="art">Numerus</span></dt><dd>Einzahl.</dd>
+<dt>Nominativ<span class="art">Kasus</span></dt><dd>Wer oder was? – der Fall des Subjekts.</dd>
 </dl></details>
 <p class="quelle">Zuletzt ergänzt am 23.09.2026 · 2 Blätter</p>
 </article>
 </section>
 <section class="bereich" id="spanisch-bereich-pronomen">
 <h2>Pronomen<span class="bereichunter">Fürwörter</span><span class="bereichzahl">2</span></h2>
-<article class="thema" id="spanisch-fragewoerter" data-suche="fragewörter die fragewörter | las palabras interrogativas wendung ¿qué tal?  
+<article class="thema" id="spanisch-fragewoerter" data-suche="fragewörter fragewörter die fragewörter | las palabras interrogativas wendung ¿qué tal?  
  die fragewörter — und warum sie einen akzent tragen. 
   die regel  
   ¿qué?  was ·  ¿quién?  wer ·  ¿cómo?  wie ·  ¿dónde?  wo ·  ¿de dónde?  woher ·  ¿cuándo?  wann ·  ¿por qué?  warum 
@@ -1872,7 +1879,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
   qué tal   ¿qué tal el instituto?   wie läuft&#x27;s in der schule?   
       regeln von deinem blatt     alle spanischen fragewörter tragen einen akzent.   das fragewort ¿quién? hat im spanischen eine pluralform: ¿quiénes?   ¿qué tal? ist eine feste wendung. wenn sie alleine steht, bedeutet sie „wie geht&#x27;s?“. wenn ein substantiv folgt, bedeutet sie „wie ist/war ...?“ oder auch „wie läuft&#x27;s in/mit ...?“.      zuletzt ergänzt am 01.10.2026 · 1 blatt ">
 <header class="themakopf">
-<h3>Fragewörter</h3>
+<h3><span class="titel" data-blatt="Fragewörter" data-einheitlich="Fragewörter">Fragewörter</span></h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
@@ -1911,7 +1918,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 </ul></aside>
 <p class="quelle">Zuletzt ergänzt am 01.10.2026 · 1 Blatt</p>
 </article>
-<article class="thema" id="spanisch-personalpronomen" data-suche="personalpronomen subjektpronomen  
+<article class="thema" id="spanisch-personalpronomen" data-suche="personalpronomen personalpronomen subjektpronomen  
  die personalpronomen — und warum du sie meistens weglässt. 
   die regel  
   yo  – ich ·  tú  – du ·  él / ella / usted  – er / sie / sie 
@@ -1930,7 +1937,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
   3. pl.   ellos, ellas (ustedes)   
       regeln von deinem blatt     personalpronomen: yo, tú, él / ella (usted), nosotros / nosotras, vosotros / vosotras, ellos / ellas (ustedes)   die pronomen in klammern (usted, ustedes) werden mit der 3. person konjugiert (höflichkeitsform).      zuletzt ergänzt am 23.09.2026 · 1 blatt  singular plural">
 <header class="themakopf">
-<h3>Personalpronomen</h3>
+<h3><span class="titel" data-blatt="Personalpronomen" data-einheitlich="Personalpronomen">Personalpronomen</span></h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
@@ -1963,7 +1970,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 </section>
 <section class="bereich" id="spanisch-bereich-zahlen">
 <h2>Zahlen<span class="bereichunter">Zählen, Mengen und Reihenfolge</span><span class="bereichzahl">1</span></h2>
-<article class="thema" id="spanisch-los-numeros" data-suche="los números grundzahlen 0-9 zahlen 10-19 zahlen 20-29 zahlen 30-41 zehnerzahlen 50-90 hunderterzahlen große zahlen schreibweise der zahlen  
+<article class="thema" id="spanisch-los-numeros" data-suche="zahlen los números grundzahlen 0-9 zahlen 10-19 zahlen 20-29 zahlen 30-41 zehnerzahlen 50-90 hunderterzahlen große zahlen schreibweise der zahlen  
  die zahlen — bis 29 zusammen, ab 31 getrennt. 
   die regel  
  0–15 sind eigene wörter:  cero, uno … quince . 
@@ -2058,7 +2065,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
   31 - 99   ... y ...   zahlen ab 31 werden mit &#x27;y&#x27; getrennt (drei wörter).   
       regeln von deinem blatt     die zehnerzahlen von 21 bis 29 werden zusammengeschrieben (veinti...).   die zahlen von 31 bis 99 werden getrennt mit &#x27;y&#x27; geschrieben.   die hunderter 500 (quinientos), 700 (setecientos) und 900 (novecientos) sind unregelmäßig.      zuletzt ergänzt am 01.10.2026 · 1 blatt ">
 <header class="themakopf">
-<h3>Los números</h3>
+<h3><span class="titel" data-blatt="Los números" data-einheitlich="Zahlen">Zahlen</span></h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
@@ -2175,7 +2182,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 </section>
 <section class="bereich" id="spanisch-bereich-aussprache">
 <h2>Aussprache<span class="bereichunter">Wie die Buchstaben klingen</span><span class="bereichzahl">9</span></h2>
-<article class="thema" id="spanisch-aussprache-1" data-suche="aussprache von /k/ aussprache aussprache von /k/  
+<article class="thema" id="spanisch-aussprache-1" data-suche="aussprache von /k/ aussprache von /k/ aussprache aussprache von /k/  
  wann klingt geschriebenes c wie ein k? 
   die regel  
   c + a, o, u  → k-laut:  casa, comer, cuatro . 
@@ -2191,7 +2198,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
   cu   cuatro   
       fachbegriffe erklärt  (1)      aussprache lautlehre   wie die buchstaben klingen. die zeichen zwischen schrägstrichen wie /k/ sind lautschrift, nicht schreibweise.    ">
 <header class="themakopf">
-<h3>Aussprache von /k/</h3>
+<h3><span class="titel" data-blatt="Aussprache von /k/" data-einheitlich="Aussprache von /k/">Aussprache von /k/</span></h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
@@ -2216,7 +2223,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <dt>Aussprache<span class="art">Lautlehre</span></dt><dd>Wie die Buchstaben klingen. Die Zeichen zwischen Schrägstrichen wie /k/ sind Lautschrift, nicht Schreibweise.</dd>
 </dl></details>
 </article>
-<article class="thema" id="spanisch-aussprache-2" data-suche="aussprache von /θ/ aussprache aussprache von /θ/  
+<article class="thema" id="spanisch-aussprache-2" data-suche="aussprache von /θ/ aussprache von /θ/ aussprache aussprache von /θ/  
  der lispel-laut — geschrieben mal z, mal c. 
   die regel  
   z + a, o, u  → /θ/:  zapato, zoo, zumo . 
@@ -2233,7 +2240,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
   zu   zumo   
       fachbegriffe erklärt  (1)      aussprache lautlehre   wie die buchstaben klingen. die zeichen zwischen schrägstrichen wie /k/ sind lautschrift, nicht schreibweise.    ">
 <header class="themakopf">
-<h3>Aussprache von /θ/</h3>
+<h3><span class="titel" data-blatt="Aussprache von /θ/" data-einheitlich="Aussprache von /θ/">Aussprache von /θ/</span></h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
@@ -2259,7 +2266,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <dt>Aussprache<span class="art">Lautlehre</span></dt><dd>Wie die Buchstaben klingen. Die Zeichen zwischen Schrägstrichen wie /k/ sind Lautschrift, nicht Schreibweise.</dd>
 </dl></details>
 </article>
-<article class="thema" id="spanisch-aussprache-3" data-suche="aussprache von /x/ aussprache aussprache von /x/  
+<article class="thema" id="spanisch-aussprache-3" data-suche="aussprache von /x/ aussprache von /x/ aussprache aussprache von /x/  
  der rachenlaut wie in „bach“ — geschrieben j oder g. 
   die regel  
   j  klingt immer so, vor jedem vokal:  jamón, joven, jugar . 
@@ -2276,7 +2283,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
   ju   jugar   
       fachbegriffe erklärt  (1)      aussprache lautlehre   wie die buchstaben klingen. die zeichen zwischen schrägstrichen wie /k/ sind lautschrift, nicht schreibweise.    ">
 <header class="themakopf">
-<h3>Aussprache von /x/</h3>
+<h3><span class="titel" data-blatt="Aussprache von /x/" data-einheitlich="Aussprache von /x/">Aussprache von /x/</span></h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
@@ -2302,7 +2309,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <dt>Aussprache<span class="art">Lautlehre</span></dt><dd>Wie die Buchstaben klingen. Die Zeichen zwischen Schrägstrichen wie /k/ sind Lautschrift, nicht Schreibweise.</dd>
 </dl></details>
 </article>
-<article class="thema" id="spanisch-aussprache-4" data-suche="aussprache von /g/ aussprache aussprache von /g/  
+<article class="thema" id="spanisch-aussprache-4" data-suche="aussprache von /g/ aussprache von /g/ aussprache aussprache von /g/  
  wann klingt g wie unser g? 
   die regel  
   g + a, o, u  → g-laut:  gato, gol, guapo . 
@@ -2319,7 +2326,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
   gu   guapo   
       fachbegriffe erklärt  (1)      aussprache lautlehre   wie die buchstaben klingen. die zeichen zwischen schrägstrichen wie /k/ sind lautschrift, nicht schreibweise.    ">
 <header class="themakopf">
-<h3>Aussprache von /g/</h3>
+<h3><span class="titel" data-blatt="Aussprache von /g/" data-einheitlich="Aussprache von /g/">Aussprache von /g/</span></h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
@@ -2345,7 +2352,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <dt>Aussprache<span class="art">Lautlehre</span></dt><dd>Wie die Buchstaben klingen. Die Zeichen zwischen Schrägstrichen wie /k/ sind Lautschrift, nicht Schreibweise.</dd>
 </dl></details>
 </article>
-<article class="thema" id="spanisch-aussprache-5" data-suche="aussprache von h aussprache aussprache von h  
+<article class="thema" id="spanisch-aussprache-5" data-suche="aussprache von h aussprache von h aussprache aussprache von h  
  das h wird nie gesprochen. 
   die regel  
   h  ist immer stumm:  hola  klingt wie „ola“,  hay  wie „ai“,  hermano  wie „ermano“. 
@@ -2356,7 +2363,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
   h   hola   no se pronuncia   
       fachbegriffe erklärt  (1)      aussprache lautlehre   wie die buchstaben klingen. die zeichen zwischen schrägstrichen wie /k/ sind lautschrift, nicht schreibweise.    ">
 <header class="themakopf">
-<h3>Aussprache von h</h3>
+<h3><span class="titel" data-blatt="Aussprache von h" data-einheitlich="Aussprache von h">Aussprache von h</span></h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
@@ -2376,7 +2383,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <dt>Aussprache<span class="art">Lautlehre</span></dt><dd>Wie die Buchstaben klingen. Die Zeichen zwischen Schrägstrichen wie /k/ sind Lautschrift, nicht Schreibweise.</dd>
 </dl></details>
 </article>
-<article class="thema" id="spanisch-aussprache-6" data-suche="aussprache von /rr/ aussprache aussprache von /rr/  
+<article class="thema" id="spanisch-aussprache-6" data-suche="aussprache von /rr/ aussprache von /rr/ aussprache aussprache von /rr/  
  wann wird das r gerollt? 
   die regel  
  gerollt wird es in drei fällen: bei  rr  ( perro ), am  wortanfang  ( roma ) und nach  l, n, s  ( alrededor ). 
@@ -2388,7 +2395,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
   rr   perro   
       fachbegriffe erklärt  (1)      aussprache lautlehre   wie die buchstaben klingen. die zeichen zwischen schrägstrichen wie /k/ sind lautschrift, nicht schreibweise.    ">
 <header class="themakopf">
-<h3>Aussprache von /rr/</h3>
+<h3><span class="titel" data-blatt="Aussprache von /rr/" data-einheitlich="Aussprache von /rr/">Aussprache von /rr/</span></h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
@@ -2409,7 +2416,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <dt>Aussprache<span class="art">Lautlehre</span></dt><dd>Wie die Buchstaben klingen. Die Zeichen zwischen Schrägstrichen wie /k/ sind Lautschrift, nicht Schreibweise.</dd>
 </dl></details>
 </article>
-<article class="thema" id="spanisch-aussprache-7" data-suche="regeln für c und g (handschriftlich) aussprache regeln für c und g (handschriftlich)  
+<article class="thema" id="spanisch-aussprache-7" data-suche="regeln für c und g (handschriftlich) regeln für c und g (handschriftlich) aussprache regeln für c und g (handschriftlich)  
  deine merknotiz: c verzweigt je nach folgendem vokal. 
   die regel  
   c + e, i  → /θ/, der lispel-laut:  centro, cien . 
@@ -2417,13 +2424,13 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
   
   so wendest du es an ein buchstabe, zwei laute — welcher es ist, entscheidet allein der vokal dahinter. dieselbe verzweigung gibt es bei g. 
     
-  c   e, i   
-  c   a, o, u   
-  g   e, i   
-  g   a, o, u   
+  c   e, i   → /θ/ wie in centro (ergänzt, nicht vom blatt)   
+  c   a, o, u   → /k/ wie in casa (ergänzt, nicht vom blatt)   
+  g   e, i   → /x/ wie in gente (ergänzt, nicht vom blatt)   
+  g   a, o, u   → /g/ wie in gato (ergänzt, nicht vom blatt)   
       fachbegriffe erklärt  (1)      aussprache lautlehre   wie die buchstaben klingen. die zeichen zwischen schrägstrichen wie /k/ sind lautschrift, nicht schreibweise.    ">
 <header class="themakopf">
-<h3>Regeln für c und g (handschriftlich)</h3>
+<h3><span class="titel" data-blatt="Regeln für c und g (handschriftlich)" data-einheitlich="Regeln für c und g (handschriftlich)">Regeln für c und g (handschriftlich)</span></h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
@@ -2435,10 +2442,10 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <p class="anwenden"><span class="etikett">So wendest du es an</span>Ein Buchstabe, zwei Laute — welcher es ist, entscheidet allein der Vokal dahinter. Dieselbe Verzweigung gibt es bei g.</p>
 </section>
 <div class="tabellenrahmen"><table>
-<tr><th class="zeilenkopf">c</th><td><span class="form">e, i</span></td></tr>
-<tr><th class="zeilenkopf">c</th><td><span class="form">a, o, u</span></td></tr>
-<tr><th class="zeilenkopf">g</th><td><span class="form">e, i</span></td></tr>
-<tr><th class="zeilenkopf">g</th><td><span class="form">a, o, u</span></td></tr>
+<tr><th class="zeilenkopf">c</th><td><span class="form">e, i</span> <span class="erklaerung">→ /θ/ wie in centro (ergänzt, nicht vom Blatt)</span></td></tr>
+<tr><th class="zeilenkopf">c</th><td><span class="form">a, o, u</span> <span class="erklaerung">→ /k/ wie in casa (ergänzt, nicht vom Blatt)</span></td></tr>
+<tr><th class="zeilenkopf">g</th><td><span class="form">e, i</span> <span class="erklaerung">→ /x/ wie in gente (ergänzt, nicht vom Blatt)</span></td></tr>
+<tr><th class="zeilenkopf">g</th><td><span class="form">a, o, u</span> <span class="erklaerung">→ /g/ wie in gato (ergänzt, nicht vom Blatt)</span></td></tr>
 </table></div>
 <details class="begriffe">
 <summary>Fachbegriffe erklärt <span>(1)</span></summary>
@@ -2446,7 +2453,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <dt>Aussprache<span class="art">Lautlehre</span></dt><dd>Wie die Buchstaben klingen. Die Zeichen zwischen Schrägstrichen wie /k/ sind Lautschrift, nicht Schreibweise.</dd>
 </dl></details>
 </article>
-<article class="thema" id="spanisch-aussprache-8" data-suche="schreibung von lauten vor e und i (handschriftlich) aussprache schreibung von lauten vor e und i (handschriftlich)  
+<article class="thema" id="spanisch-aussprache-8" data-suche="schreibung von lauten vor e und i (handschriftlich) schreibung von lauten vor e und i (handschriftlich) aussprache schreibung von lauten vor e und i (handschriftlich)  
  deine merknotiz: die schreibtricks vor e und i. 
   die regel  
   ge, gi  → weicher rachenlaut. 
@@ -2461,7 +2468,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
   güe   güi   
       fachbegriffe erklärt  (1)      aussprache lautlehre   wie die buchstaben klingen. die zeichen zwischen schrägstrichen wie /k/ sind lautschrift, nicht schreibweise.    ">
 <header class="themakopf">
-<h3>Schreibung von Lauten vor e und i (handschriftlich)</h3>
+<h3><span class="titel" data-blatt="Schreibung von Lauten vor e und i (handschriftlich)" data-einheitlich="Schreibung von Lauten vor e und i (handschriftlich)">Schreibung von Lauten vor e und i (handschriftlich)</span></h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
@@ -2485,9 +2492,9 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <dt>Aussprache<span class="art">Lautlehre</span></dt><dd>Wie die Buchstaben klingen. Die Zeichen zwischen Schrägstrichen wie /k/ sind Lautschrift, nicht Schreibweise.</dd>
 </dl></details>
 </article>
-<article class="thema" id="spanisch-aussprache-regeln" data-suche="regeln aussprache      se pronuncia &#x27;r&#x27; fuerte: cuando hay dos: &#x27;rr&#x27;. ej: perro   se pronuncia &#x27;r&#x27; fuerte: a principio de palabra: ej: roma   se pronuncia &#x27;r&#x27; fuerte: después de l, n, s: ej: alrededor      zuletzt ergänzt am 23.09.2026 · 1 blatt ">
+<article class="thema" id="spanisch-aussprache-regeln" data-suche="regeln von deinem blatt regeln aussprache      se pronuncia &#x27;r&#x27; fuerte: cuando hay dos: &#x27;rr&#x27;. ej: perro   se pronuncia &#x27;r&#x27; fuerte: a principio de palabra: ej: roma   se pronuncia &#x27;r&#x27; fuerte: después de l, n, s: ej: alrededor      zuletzt ergänzt am 23.09.2026 · 1 blatt ">
 <header class="themakopf">
-<h3>Regeln von deinem Blatt</h3>
+<h3><span class="titel" data-blatt="Regeln von deinem Blatt" data-einheitlich="Regeln von deinem Blatt">Regeln von deinem Blatt</span></h3>
 </header>
 <aside class="regelblock">
 <ul>
@@ -2598,6 +2605,22 @@ Modus „Grammatik“ dazu und werden in bestehende Themen eingefügt.<br>
   }
 
   if (suche) suche.addEventListener("input", filtern);
+
+  // Titel umschalten: einheitlich (deutsch) oder wie auf dem Blatt.
+  function titelZeigen(art) {
+    document.querySelectorAll(".titel").forEach((t) => {
+      t.textContent = t.dataset[art === "blatt" ? "blatt" : "einheitlich"];
+    });
+    document.querySelectorAll(".titelwahl button").forEach((b) =>
+      b.setAttribute("aria-pressed", String(b.dataset.titel === art)));
+    try { localStorage.setItem("grammatik-titel", art); } catch (e) {}
+  }
+  document.querySelectorAll(".titelwahl button").forEach((b) =>
+    b.addEventListener("click", () => titelZeigen(b.dataset.titel)));
+  try {
+    const gemerkt = localStorage.getItem("grammatik-titel");
+    if (gemerkt) titelZeigen(gemerkt);
+  } catch (e) {}
 
   // Abdecken: Formen einer Karte verstecken, Antippen deckt eine auf.
   function abdeckstand(karte) {
