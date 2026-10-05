@@ -15,7 +15,7 @@
     --grund: #f4f5f7; --flaeche: #ffffff; --flaeche-2: #f8f9fa;
     --tinte: #16202a; --tinte-2: #4a5966; --tinte-3: #7b8894;
     --linie: #e0e4e8; --linie-2: #eef0f3;
-    --akzent: #2d5fa6; --endung: #b0602a; --warn: #b33428; --warn-bg: #fceceb;
+    --akzent: #2d5fa6; --endung: #b0602a; --warn: #b33428; --warn-bg: #fceceb; --achtung: #946000;
     --schatten: 0 1px 2px rgba(20,32,44,.05), 0 8px 24px rgba(20,32,44,.05);
   }
   @media (prefers-color-scheme: dark) {
@@ -23,7 +23,7 @@
       --grund: #11171d; --flaeche: #1a222a; --flaeche-2: #202932;
       --tinte: #e9eef2; --tinte-2: #a9b7c2; --tinte-3: #7a8793;
       --linie: #2c363f; --linie-2: #232d36;
-      --akzent: #7fa9e8; --endung: #dc9a62; --warn: #f0877d; --warn-bg: #351f1d;
+      --akzent: #7fa9e8; --endung: #dc9a62; --warn: #f0877d; --warn-bg: #351f1d; --achtung: #f0b54a;
       --schatten: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
     }
   }
@@ -31,7 +31,7 @@
     --grund: #11171d; --flaeche: #1a222a; --flaeche-2: #202932;
     --tinte: #e9eef2; --tinte-2: #a9b7c2; --tinte-3: #7a8793;
     --linie: #2c363f; --linie-2: #232d36;
-    --akzent: #7fa9e8; --endung: #dc9a62; --warn: #f0877d; --warn-bg: #351f1d;
+    --akzent: #7fa9e8; --endung: #dc9a62; --warn: #f0877d; --warn-bg: #351f1d; --achtung: #f0b54a;
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; scroll-padding-top: 14px; }
@@ -285,9 +285,9 @@
     letter-spacing: .08em; font-weight: 700; margin-bottom: 2px;
     color: var(--tinte-3);
   }
-  .achtung .etikett { color: var(--warn); }
+  .achtung .etikett { color: var(--achtung); }
   .achtung {
-    border-left: 3px solid var(--warn); padding-left: 12px;
+    border-left: 3px solid var(--achtung); padding-left: 12px;
   }
 
   /* Regeln vom Blatt */
@@ -348,29 +348,29 @@
   footer a { color: var(--akzent); font-weight: 600; text-decoration: none; }
 
   :root { --sprache: var(--akzent); }
-  [data-sprache="latein"] { --sprache: #a8322b; --akzent: #a8322b; }
-  [data-sprache="spanisch"] { --sprache: #a65800; --akzent: #a65800; }
+  [data-sprache="latein"] { --sprache: #6b3fa8; --akzent: #6b3fa8; }
+  [data-sprache="spanisch"] { --sprache: #c0262d; --akzent: #c0262d; }
   [data-sprache="griechisch"] { --sprache: #1f5ea8; --akzent: #1f5ea8; }
   [data-sprache="neugriechisch"] { --sprache: #1f5ea8; --akzent: #1f5ea8; }
   [data-sprache="altgriechisch"] { --sprache: #1f5ea8; --akzent: #1f5ea8; }
-  [data-sprache="englisch"] { --sprache: #0f6e66; --akzent: #0f6e66; }
-  [data-sprache="franzoesisch"] { --sprache: #6a3fa0; --akzent: #6a3fa0; }
+  [data-sprache="englisch"] { --sprache: #1d7a3a; --akzent: #1d7a3a; }
+  [data-sprache="franzoesisch"] { --sprache: #0f6e74; --akzent: #0f6e74; }
   @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) [data-sprache="latein"] { --sprache: #f0897d; --akzent: #f0897d; }
-  :root:not([data-theme="light"]) [data-sprache="spanisch"] { --sprache: #f2a744; --akzent: #f2a744; }
+  :root:not([data-theme="light"]) [data-sprache="latein"] { --sprache: #b99bea; --akzent: #b99bea; }
+  :root:not([data-theme="light"]) [data-sprache="spanisch"] { --sprache: #ff7b78; --akzent: #ff7b78; }
   :root:not([data-theme="light"]) [data-sprache="griechisch"] { --sprache: #7fb1f0; --akzent: #7fb1f0; }
   :root:not([data-theme="light"]) [data-sprache="neugriechisch"] { --sprache: #7fb1f0; --akzent: #7fb1f0; }
   :root:not([data-theme="light"]) [data-sprache="altgriechisch"] { --sprache: #7fb1f0; --akzent: #7fb1f0; }
-  :root:not([data-theme="light"]) [data-sprache="englisch"] { --sprache: #5ccfc2; --akzent: #5ccfc2; }
-  :root:not([data-theme="light"]) [data-sprache="franzoesisch"] { --sprache: #b99bea; --akzent: #b99bea; }
+  :root:not([data-theme="light"]) [data-sprache="englisch"] { --sprache: #5fd08a; --akzent: #5fd08a; }
+  :root:not([data-theme="light"]) [data-sprache="franzoesisch"] { --sprache: #5cc6cf; --akzent: #5cc6cf; }
   }
-  :root[data-theme="dark"] [data-sprache="latein"] { --sprache: #f0897d; --akzent: #f0897d; }
-  :root[data-theme="dark"] [data-sprache="spanisch"] { --sprache: #f2a744; --akzent: #f2a744; }
+  :root[data-theme="dark"] [data-sprache="latein"] { --sprache: #b99bea; --akzent: #b99bea; }
+  :root[data-theme="dark"] [data-sprache="spanisch"] { --sprache: #ff7b78; --akzent: #ff7b78; }
   :root[data-theme="dark"] [data-sprache="griechisch"] { --sprache: #7fb1f0; --akzent: #7fb1f0; }
   :root[data-theme="dark"] [data-sprache="neugriechisch"] { --sprache: #7fb1f0; --akzent: #7fb1f0; }
   :root[data-theme="dark"] [data-sprache="altgriechisch"] { --sprache: #7fb1f0; --akzent: #7fb1f0; }
-  :root[data-theme="dark"] [data-sprache="englisch"] { --sprache: #5ccfc2; --akzent: #5ccfc2; }
-  :root[data-theme="dark"] [data-sprache="franzoesisch"] { --sprache: #b99bea; --akzent: #b99bea; }
+  :root[data-theme="dark"] [data-sprache="englisch"] { --sprache: #5fd08a; --akzent: #5fd08a; }
+  :root[data-theme="dark"] [data-sprache="franzoesisch"] { --sprache: #5cc6cf; --akzent: #5cc6cf; }
 
   @media print {
     body { background: #fff; }
@@ -770,15 +770,15 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <dl>
 <dt>Bestimmter Artikel<span class="art">Wortart</span></dt><dd>Der Artikel für etwas Bekanntes: el, la, los, las – „der, die, das“.</dd>
 <dt>Unbestimmter Artikel<span class="art">Wortart</span></dt><dd>Der Artikel für etwas Unbekanntes: un, una – „ein, eine“.</dd>
-<dt>Akkusativ<span class="art">Kasus</span></dt><dd>Wen oder was? – der Fall des direkten Objekts.</dd>
+<dt>Nominativ<span class="art">Kasus</span></dt><dd>Wer oder was? – der Fall des Subjekts.</dd>
 <dt>Singular<span class="art">Numerus</span></dt><dd>Einzahl.</dd>
+<dt>Akkusativ<span class="art">Kasus</span></dt><dd>Wen oder was? – der Fall des direkten Objekts.</dd>
+<dt>Plural<span class="art">Numerus</span></dt><dd>Mehrzahl.</dd>
+<dt>Neutrum<span class="art">Genus</span></dt><dd>Sächliches grammatisches Geschlecht.</dd>
+<dt>Feminin<span class="art">Genus</span></dt><dd>Weibliches grammatisches Geschlecht.</dd>
+<dt>Vokativ<span class="art">Kasus</span></dt><dd>Der Anredefall: „Marce!“ – Marcus!</dd>
 <dt>Maskulin<span class="art">Genus</span></dt><dd>Männliches grammatisches Geschlecht.</dd>
 <dt>Genitiv<span class="art">Kasus</span></dt><dd>Wessen? – zeigt Zugehörigkeit. In Latein verrät er außerdem die Deklinationsklasse.</dd>
-<dt>Neutrum<span class="art">Genus</span></dt><dd>Sächliches grammatisches Geschlecht.</dd>
-<dt>Nominativ<span class="art">Kasus</span></dt><dd>Wer oder was? – der Fall des Subjekts.</dd>
-<dt>Plural<span class="art">Numerus</span></dt><dd>Mehrzahl.</dd>
-<dt>Vokativ<span class="art">Kasus</span></dt><dd>Der Anredefall: „Marce!“ – Marcus!</dd>
-<dt>Feminin<span class="art">Genus</span></dt><dd>Weibliches grammatisches Geschlecht.</dd>
 </dl></details>
 </article>
 <article class="thema" id="griechisch-artikel-und-substantive-2" data-suche="artikel mit praeposition / zusammengesetzter artikel mit im ins am artikel und substantive artikel mit der präposition σε (singular) zusammengesetzter artikel mit σε (im/ins/am...)">
@@ -867,11 +867,11 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <dl>
 <dt>Singular<span class="art">Numerus</span></dt><dd>Einzahl.</dd>
 <dt>Genitiv<span class="art">Kasus</span></dt><dd>Wessen? – zeigt Zugehörigkeit. In Latein verrät er außerdem die Deklinationsklasse.</dd>
+<dt>Feminin<span class="art">Genus</span></dt><dd>Weibliches grammatisches Geschlecht.</dd>
+<dt>Akkusativ<span class="art">Kasus</span></dt><dd>Wen oder was? – der Fall des direkten Objekts.</dd>
 <dt>Plural<span class="art">Numerus</span></dt><dd>Mehrzahl.</dd>
 <dt>Neutrum<span class="art">Genus</span></dt><dd>Sächliches grammatisches Geschlecht.</dd>
 <dt>Maskulin<span class="art">Genus</span></dt><dd>Männliches grammatisches Geschlecht.</dd>
-<dt>Akkusativ<span class="art">Kasus</span></dt><dd>Wen oder was? – der Fall des direkten Objekts.</dd>
-<dt>Feminin<span class="art">Genus</span></dt><dd>Weibliches grammatisches Geschlecht.</dd>
 </dl></details>
 </article>
 <article class="thema" id="griechisch-artikel-und-substantive-3" data-suche="verschmelzung von präposition σε und bestimmtem artikel (singular) artikel und substantive verschmelzung von präposition σε und bestimmtem artikel (singular)">
@@ -976,12 +976,12 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <dl>
 <dt>Maskulin<span class="art">Genus</span></dt><dd>Männliches grammatisches Geschlecht.</dd>
 <dt>Deklination<span class="art">Formenlehre</span></dt><dd>Das Beugen von Substantiven, Adjektiven und Pronomen nach Fall, Zahl und Geschlecht.</dd>
-<dt>Genitiv<span class="art">Kasus</span></dt><dd>Wessen? – zeigt Zugehörigkeit. In Latein verrät er außerdem die Deklinationsklasse.</dd>
-<dt>Plural<span class="art">Numerus</span></dt><dd>Mehrzahl.</dd>
-<dt>Akkusativ<span class="art">Kasus</span></dt><dd>Wen oder was? – der Fall des direkten Objekts.</dd>
-<dt>Singular<span class="art">Numerus</span></dt><dd>Einzahl.</dd>
 <dt>Nominativ<span class="art">Kasus</span></dt><dd>Wer oder was? – der Fall des Subjekts.</dd>
+<dt>Singular<span class="art">Numerus</span></dt><dd>Einzahl.</dd>
+<dt>Akkusativ<span class="art">Kasus</span></dt><dd>Wen oder was? – der Fall des direkten Objekts.</dd>
 <dt>Vokativ<span class="art">Kasus</span></dt><dd>Der Anredefall: „Marce!“ – Marcus!</dd>
+<dt>Plural<span class="art">Numerus</span></dt><dd>Mehrzahl.</dd>
+<dt>Genitiv<span class="art">Kasus</span></dt><dd>Wessen? – zeigt Zugehörigkeit. In Latein verrät er außerdem die Deklinationsklasse.</dd>
 </dl></details>
 </article>
 <article class="thema" id="griechisch-artikel-und-substantive-regeln" data-suche="regeln artikel und substantive">
@@ -1743,8 +1743,8 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <dt>Plural<span class="art">Numerus</span></dt><dd>Mehrzahl.</dd>
 <dt>Bestimmter Artikel<span class="art">Wortart</span></dt><dd>Der Artikel für etwas Bekanntes: el, la, los, las – „der, die, das“.</dd>
 <dt>Unbestimmter Artikel<span class="art">Wortart</span></dt><dd>Der Artikel für etwas Unbekanntes: un, una – „ein, eine“.</dd>
-<dt>Singular<span class="art">Numerus</span></dt><dd>Einzahl.</dd>
 <dt>Nominativ<span class="art">Kasus</span></dt><dd>Wer oder was? – der Fall des Subjekts.</dd>
+<dt>Singular<span class="art">Numerus</span></dt><dd>Einzahl.</dd>
 </dl></details>
 <p class="quelle">Zuletzt ergänzt am 23.09.2026 · 2 Blätter</p>
 </article>
