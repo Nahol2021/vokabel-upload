@@ -73,6 +73,12 @@
   }
   #suche:focus { outline: 2px solid var(--akzent); outline-offset: 1px; border-color: transparent; }
   .keintreffer { color: var(--tinte-3); font-size: .88rem; margin: 10px 2px 0; }
+  .andere { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .anderesprache {
+    font: inherit; font-size: .82rem; font-weight: 600; cursor: pointer;
+    border: 1px solid var(--sprache); color: var(--sprache); background: var(--flaeche);
+    border-radius: 999px; padding: 2px 10px;
+  }
 
   /* Zwei Spalten am Rechner, gestapelt am Handy */
   .spalten { position: relative; }
@@ -389,27 +395,25 @@
 zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 
 <div class="sprachwahl" id="sprachwahl">
-<button type="button" data-sprache="griechisch" aria-pressed="true">Griechisch<span class="anzahl">13</span></button>
+<button type="button" data-sprache="griechisch" aria-pressed="true">Griechisch<span class="anzahl">11</span></button>
 <button type="button" data-sprache="latein" aria-pressed="false">Latein<span class="anzahl">1</span></button>
 <button type="button" data-sprache="spanisch" aria-pressed="false">Spanisch<span class="anzahl">14</span></button>
 </div>
-<div class="suchfeld"><input type="search" id="suche" placeholder="Thema suchen …" autocomplete="off" spellcheck="false"><p class="keintreffer" id="keintreffer" hidden>Nichts gefunden.</p></div>
+<div class="suchfeld"><input type="search" id="suche" placeholder="Thema suchen …" autocomplete="off" spellcheck="false"><p class="keintreffer" id="keintreffer" hidden>Nichts gefunden.</p><p class="keintreffer andere" id="andere" hidden></p></div>
 <div class="spalten">
 <div class="sprachblock" data-sprache="griechisch">
 <nav class="ueberblick" aria-label="Bereiche">
-<a href="#griechisch-bereich-substantiv">Substantive<span class="anzahl">4</span></a>
+<a href="#griechisch-bereich-substantiv">Substantive<span class="anzahl">3</span></a>
 <a href="#griechisch-bereich-pronomen">Pronomen<span class="anzahl">2</span></a>
 <a href="#griechisch-bereich-zahlen">Zahlen<span class="anzahl">1</span></a>
-<a href="#griechisch-bereich-aussprache">Aussprache<span class="anzahl">4</span></a>
+<a href="#griechisch-bereich-aussprache">Aussprache<span class="anzahl">5</span></a>
 </nav>
 <details class="verzeichnisklappe"><summary>Inhalt</summary>
 <nav class="verzeichnis" data-sprache="griechisch">
-<p class="verzeichniskopf">13 Einträge</p>
+<p class="verzeichniskopf">11 Einträge</p>
 <p class="verzeichnisbereich"><a href="#griechisch-bereich-substantiv">Substantive</a></p><ul>
-<li data-suche="bestimmter artikel"><a href="#griechisch-artikel-und-substantive-1">Bestimmter Artikel<span class="anzahl">2</span></a></li>
-<li data-suche="artikel mit praeposition / zusammengesetzter artikel mit im ins am"><a href="#griechisch-artikel-und-substantive-2">artikel mit praeposition / zusammengesetzter artikel mit im ins am<span class="anzahl">2</span></a></li>
-<li data-suche="verschmelzung von präposition σε und bestimmtem artikel (singular)"><a href="#griechisch-artikel-und-substantive-3">Verschmelzung von Präposition σε und bestimmtem Artikel (Singular)</a></li>
-<li data-suche="deklination maskulinum auf -ος"><a href="#griechisch-artikel-und-substantive-4">Deklination Maskulinum auf -ος</a></li>
+<li data-suche="bestimmter artikel / unbestimmter artikel / artikel mit praeposition"><a href="#griechisch-artikel-und-substantive-1">bestimmter artikel / unbestimmter artikel / artikel mit praeposition<span class="anzahl">3</span></a></li>
+<li data-suche="deklination maskulinum auf -ος"><a href="#griechisch-artikel-und-substantive-2">Deklination Maskulinum auf -ος</a></li>
 <li data-suche="regeln von deinem blatt"><a href="#griechisch-artikel-und-substantive-regeln">Regeln von deinem Blatt</a></li>
 </ul>
 <p class="verzeichnisbereich"><a href="#griechisch-bereich-pronomen">Pronomen</a></p><ul>
@@ -421,8 +425,8 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 </ul>
 <p class="verzeichnisbereich"><a href="#griechisch-bereich-aussprache">Aussprache</a></p><ul>
 <li data-suche="das alphabet"><a href="#griechisch-aussprache-1">Das Alphabet</a></li>
-<li data-suche="vokalkombinationen / vokalkombinationen diphthonge"><a href="#griechisch-aussprache-2">vokalkombinationen / vokalkombinationen diphthonge<span class="anzahl">2</span></a></li>
-<li data-suche="konsonantenkombinationen / konsonantendehnungen kombinationen"><a href="#griechisch-aussprache-3">konsonantenkombinationen / konsonantendehnungen kombinationen<span class="anzahl">2</span></a></li>
+<li data-suche="vokalkombinationen"><a href="#griechisch-aussprache-2">Vokalkombinationen</a></li>
+<li data-suche="konsonantenkombinationen"><a href="#griechisch-aussprache-3">Konsonantenkombinationen</a></li>
 <li data-suche="schreibweisen für vokallaute"><a href="#griechisch-aussprache-4">Schreibweisen für Vokallaute</a></li>
 <li data-suche="regeln von deinem blatt"><a href="#griechisch-aussprache-regeln">Regeln von deinem Blatt</a></li>
 </ul>
@@ -430,10 +434,170 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 </details>
 <main class="inhalt">
 <section class="bereich" id="griechisch-bereich-substantiv">
-<h2>Substantive<span class="bereichunter">Fälle, Zahl und Geschlecht</span><span class="bereichzahl">5</span></h2>
-<article class="thema" id="griechisch-artikel-und-substantive-1" data-suche="bestimmter artikel artikel und substantive bestimmter artikel unbestimmter artikel">
+<h2>Substantive<span class="bereichunter">Fälle, Zahl und Geschlecht</span><span class="bereichzahl">3</span></h2>
+<article class="thema" id="griechisch-artikel-und-substantive-1" data-suche="bestimmter artikel / unbestimmter artikel / artikel mit praeposition artikel und substantive bestimmter artikel unbestimmter artikel artikel mit der präposition σε (singular)  
+ der artikel verrät das geschlecht — und beugt sich mit. 
+  die regel  
+ drei geschlechter, je eigener artikel:  ο  (männlich),  η  (weiblich),  το  (sächlich). 
+ artikel und substantiv ändern sich gemeinsam nach dem fall:  ο φίλος  →  του φίλου  →  το(ν) φίλο . 
+ im nominativ singular enden maskulina auf  -ς  — daran erkennst du sie fast immer. 
+ der  vokativ  ist die anredeform und steht ohne artikel:  φίλε!  
+  
+  so wendest du es an lerne jedes substantiv  mit artikel : nicht  φίλος , sondern  ο φίλος . ohne artikel kennst du das geschlecht nicht, und ohne geschlecht die formen nicht. 
+  achtung das  ν  in  το(ν)  und  τη(ν)  steht nur vor bestimmten lauten — die klammer heißt: mal ja, mal nein. 
+   
+ σε verschmilzt mit dem artikel. 
+  die regel  
+  σε + τον → στον ,  σε + την → στη(ν) ,  σε + το → στο . 
+ im plural:  στους, στις, στα . im genitiv:  στου, στης, στων . 
+ σε heißt je nach zusammenhang  in, auf, an, zu, nach . 
+  
+  so wendest du es an die getrennte form  σε τον  schreibt man nicht — verschmolzen ist die normale schreibweise. 
+  achtung  στο  kann „in dem“  und  „in das“ heißen. welches gemeint ist, sagt das verb, nicht die form. 
+    
+    
+ bestimmter artikel 
+ unbestimmter artikel 
+ artikel mit praeposition 
+   
+  nom. sg. mask. 
+  ο φίλος   der freund  
+  ένας   ein  
+ · 
+ 
+  nom. sg. fem. 
+  η φίλη   die freundin  
+  μια   eine  
+ · 
+ 
+  nom. sg. neutr. 
+  το παιδί   das kind  
+  ένα   ein  
+ · 
+ 
+  nom. pl. mask. 
+  οι φίλοι   die freunde  
+ · 
+ · 
+ 
+  nom. pl. fem. 
+  οι φίλες   die freundinnen  
+ · 
+ · 
+ 
+  nom. pl. neutr. 
+  τα παιδιά   die kinder  
+ · 
+ · 
+ 
+  gen. sg. mask. 
+  του φίλου   des freundes  
+  ενός   eines  
+  στου  
+ 
+  gen. sg. fem. 
+  της φίλης   der freundin  
+  μιας   einer  
+  στης  
+ 
+  gen. sg. neutr. 
+  του παιδιού   des kindes  
+  ενός   eines  
+  στου  
+ 
+  gen. pl. mask. 
+  των φίλων   der freunde  
+ · 
+  στων  
+ 
+  gen. pl. fem. 
+  των φίλων   der freundinnen  
+ · 
+  στων  
+ 
+  gen. pl. neutr. 
+  των παιδιών   der kinder  
+ · 
+  στων  
+ 
+  akk. sg. mask. 
+  το(ν)* φίλο   den freund  
+  ένα(ν)   einen  
+  στο(ν)   in einen / zu einem   ≠ σε ένα(ν)  
+ 
+  akk. sg. fem. 
+  τη(ν) φίλη   die freundin  
+  μια   eine  
+  στη(ν)   in eine / zu einer   ≠ σε μια  
+ 
+  akk. sg. neutr. 
+  το παιδί   das kind  
+  ένα   ein  
+  στο   in ein / zu einem   ≠ σε ένα  
+ 
+  akk. sg. unbestimmt maskulinum 
+ · 
+ · 
+  σε ένα(ν)  
+ 
+  akk. sg. unbestimmt femininum 
+ · 
+ · 
+  σε μια  
+ 
+  akk. sg. unbestimmt neutrum 
+ · 
+ · 
+  σε ένα  
+ 
+  akk. pl. mask. 
+  τους φίλους   die freunde  
+ · 
+  στους  
+ 
+  akk. pl. fem. 
+  τις φίλες   die freundinnen  
+ · 
+  στις  
+ 
+  akk. pl. neutr. 
+  τα παιδιά   die kinder  
+ · 
+  στα  
+ 
+  vok. sg. mask. 
+  φίλε   freund  
+ · 
+ · 
+ 
+  vok. sg. fem. 
+  φίλη   freundin  
+ · 
+ · 
+ 
+  vok. sg. neutr. 
+  παιδί   kind  
+ · 
+ · 
+ 
+  vok. pl. mask. 
+  φίλοι   freunde  
+ · 
+ · 
+ 
+  vok. pl. fem. 
+  φίλες   freundinnen  
+ · 
+ · 
+ 
+  vok. pl. neutr. 
+  παιδιά   kinder  
+ · 
+ · 
+ 
+       fachbegriffe erklärt  (11)      bestimmter artikel wortart   der artikel für etwas bekanntes: el, la, los, las – „der, die, das“.   unbestimmter artikel wortart   der artikel für etwas unbekanntes: un, una – „ein, eine“.   singular numerus   einzahl.   nominativ kasus   wer oder was? – der fall des subjekts.   neutrum genus   sächliches grammatisches geschlecht.   akkusativ kasus   wen oder was? – der fall des direkten objekts.   feminin genus   weibliches grammatisches geschlecht.   maskulin genus   männliches grammatisches geschlecht.   plural numerus   mehrzahl.   vokativ kasus   der anredefall: „marce!“ – marcus!   genitiv kasus   wessen? – zeigt zugehörigkeit. in latein verrät er außerdem die deklinationsklasse.     nominativ genitiv akkusativ vokativ singular plural maskulin feminin neutrum">
 <header class="themakopf">
-<h3>Bestimmter Artikel</h3>
+<h3>bestimmter artikel / unbestimmter artikel / artikel mit praeposition</h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
@@ -447,321 +611,155 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <p class="anwenden"><span class="etikett">So wendest du es an</span>Lerne jedes Substantiv <strong>mit Artikel</strong>: nicht <em>φίλος</em>, sondern <em>ο φίλος</em>. Ohne Artikel kennst du das Geschlecht nicht, und ohne Geschlecht die Formen nicht.</p>
 <p class="achtung"><span class="etikett">Achtung</span>Das <strong>ν</strong> in <em>το(ν)</em> und <em>τη(ν)</em> steht nur vor bestimmten Lauten — die Klammer heißt: mal ja, mal nein.</p>
 </section>
+<section class="lernen">
+<p class="worum">σε verschmilzt mit dem Artikel.</p>
+<div class="regelkasten"><h4>Die Regel</h4><ul>
+<li><strong>σε + τον → στον</strong>, <strong>σε + την → στη(ν)</strong>, <strong>σε + το → στο</strong>.</li>
+<li>Im Plural: <strong>στους, στις, στα</strong>. Im Genitiv: <strong>στου, στης, στων</strong>.</li>
+<li>σε heißt je nach Zusammenhang <em>in, auf, an, zu, nach</em>.</li>
+</ul></div>
+<p class="anwenden"><span class="etikett">So wendest du es an</span>Die getrennte Form <em>σε τον</em> schreibt man nicht — verschmolzen ist die normale Schreibweise.</p>
+<p class="achtung"><span class="etikett">Achtung</span><em>στο</em> kann „in dem“ <strong>und</strong> „in das“ heißen. Welches gemeint ist, sagt das Verb, nicht die Form.</p>
+</section>
 <div class="tabellenrahmen"><table>
 <thead><tr><th class="zeilenkopf"></th>
 <th>bestimmter artikel</th>
 <th>unbestimmter artikel</th>
+<th>artikel mit praeposition</th>
 </tr></thead><tbody>
+<tr><th class="zeilenkopf">Nom. Sg. mask.</th>
+<td><span class="form">ο φίλος</span> <span class="erklaerung">der Freund</span></td>
+<td><span class="form">ένας</span> <span class="erklaerung">ein</span></td>
+<td class="leer">·</td>
+</tr>
+<tr><th class="zeilenkopf">Nom. Sg. fem.</th>
+<td><span class="form">η φίλη</span> <span class="erklaerung">die Freundin</span></td>
+<td><span class="form">μια</span> <span class="erklaerung">eine</span></td>
+<td class="leer">·</td>
+</tr>
 <tr><th class="zeilenkopf">Nom. Sg. neutr.</th>
 <td><span class="form">το παιδί</span> <span class="erklaerung">das Kind</span></td>
 <td><span class="form">ένα</span> <span class="erklaerung">ein</span></td>
-</tr>
-<tr><th class="zeilenkopf">Nom. Sg. maskulinum</th>
-<td><span class="form">ο φίλος</span> <span class="erklaerung">der Freund</span></td>
-<td><span class="form">ένας</span> <span class="erklaerung">ein</span></td>
-</tr>
-<tr><th class="zeilenkopf">Nom. Sg. femininum</th>
-<td><span class="form">η φίλη</span> <span class="erklaerung">die Freundin</span></td>
-<td><span class="form">μια</span> <span class="erklaerung">eine</span></td>
-</tr>
-<tr><th class="zeilenkopf">Nom. Sg. maskulinum</th>
-<td><span class="form">ο</span> <span class="erklaerung">ο φίλος (der Freund)</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: ο φίλος">≠</span></td>
-<td><span class="form">ένας</span> <span class="erklaerung">ein</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: ένας ein">≠</span></td>
-</tr>
-<tr><th class="zeilenkopf">Nom. Sg. femininum</th>
-<td><span class="form">η</span> <span class="erklaerung">η φίλη (die Freundin)</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: η φίλη">≠</span></td>
-<td><span class="form">μια</span> <span class="erklaerung">eine</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: μια / μια">≠</span></td>
-</tr>
-<tr><th class="zeilenkopf">Nom. Sg. neutrum</th>
-<td><span class="form">το</span> <span class="erklaerung">το παιδί (das Kind)</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: το παιδί">≠</span></td>
-<td><span class="form">ένα</span> <span class="erklaerung">ein</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: ένα ein">≠</span></td>
-</tr>
-<tr><th class="zeilenkopf">Nom. Sg.</th>
-<td><span class="form">ο φίλος / η φίλη / το παιδί</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: ο φίλος">≠</span></td>
-<td><span class="form">ένας / μια / ένα</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: ένας">≠</span></td>
-</tr>
-<tr><th class="zeilenkopf">Nom. Sg.</th>
-<td><span class="form">η φίλη</span></td>
 <td class="leer">·</td>
 </tr>
-<tr><th class="zeilenkopf">Nom. Sg.</th>
-<td><span class="form">το παιδί</span></td>
+<tr><th class="zeilenkopf">Nom. Pl. mask.</th>
+<td><span class="form">οι φίλοι</span> <span class="erklaerung">die Freunde</span></td>
+<td class="leer">·</td>
 <td class="leer">·</td>
 </tr>
-<tr><th class="zeilenkopf">Nom. Sg.</th>
+<tr><th class="zeilenkopf">Nom. Pl. fem.</th>
+<td><span class="form">οι φίλες</span> <span class="erklaerung">die Freundinnen</span></td>
 <td class="leer">·</td>
-<td><span class="form">μια</span></td>
-</tr>
-<tr><th class="zeilenkopf">Nom. Sg.</th>
 <td class="leer">·</td>
-<td><span class="form">ένα</span></td>
 </tr>
 <tr><th class="zeilenkopf">Nom. Pl. neutr.</th>
 <td><span class="form">τα παιδιά</span> <span class="erklaerung">die Kinder</span></td>
 <td class="leer">·</td>
-</tr>
-<tr><th class="zeilenkopf">Nom. Pl. maskulinum</th>
-<td><span class="form">οι φίλοι</span> <span class="erklaerung">die Freunde</span></td>
 <td class="leer">·</td>
 </tr>
-<tr><th class="zeilenkopf">Nom. Pl. femininum</th>
-<td><span class="form">οι φίλες</span> <span class="erklaerung">die Freundinnen</span></td>
-<td class="leer">·</td>
+<tr><th class="zeilenkopf">Gen. Sg. mask.</th>
+<td><span class="form">του φίλου</span> <span class="erklaerung">des Freundes</span></td>
+<td><span class="form">ενός</span> <span class="erklaerung">eines</span></td>
+<td><span class="form">στου</span></td>
 </tr>
-<tr><th class="zeilenkopf">Nom. Pl. maskulinum</th>
-<td><span class="form">οι</span> <span class="erklaerung">οι φίλοι (die Freunde)</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: οι φίλοι">≠</span></td>
-<td class="leer">·</td>
-</tr>
-<tr><th class="zeilenkopf">Nom. Pl. femininum</th>
-<td><span class="form">οι</span> <span class="erklaerung">οι φίλες (die Freundinnen)</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: οι φίλες">≠</span></td>
-<td class="leer">·</td>
-</tr>
-<tr><th class="zeilenkopf">Nom. Pl. neutrum</th>
-<td><span class="form">τα</span> <span class="erklaerung">τα παιδιά (die Kinder)</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: τα παιδιά">≠</span></td>
-<td class="leer">·</td>
-</tr>
-<tr><th class="zeilenkopf">Nom. Pl.</th>
-<td><span class="form">οι φίλοι / οι φίλες / τα παιδιά</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: οι φίλοι">≠</span></td>
-<td class="leer">·</td>
-</tr>
-<tr><th class="zeilenkopf">Nom. Pl.</th>
-<td><span class="form">οι φίλες</span></td>
-<td class="leer">·</td>
-</tr>
-<tr><th class="zeilenkopf">Nom. Pl.</th>
-<td><span class="form">τα παιδιά</span></td>
-<td class="leer">·</td>
+<tr><th class="zeilenkopf">Gen. Sg. fem.</th>
+<td><span class="form">της φίλης</span> <span class="erklaerung">der Freundin</span></td>
+<td><span class="form">μιας</span> <span class="erklaerung">einer</span></td>
+<td><span class="form">στης</span></td>
 </tr>
 <tr><th class="zeilenkopf">Gen. Sg. neutr.</th>
 <td><span class="form">του παιδιού</span> <span class="erklaerung">des Kindes</span></td>
 <td><span class="form">ενός</span> <span class="erklaerung">eines</span></td>
+<td><span class="form">στου</span></td>
 </tr>
-<tr><th class="zeilenkopf">Gen. Sg. maskulinum</th>
-<td><span class="form">του φίλου</span> <span class="erklaerung">des Freundes</span></td>
-<td><span class="form">ενός</span> <span class="erklaerung">eines</span></td>
-</tr>
-<tr><th class="zeilenkopf">Gen. Sg. femininum</th>
-<td><span class="form">της φίλης</span> <span class="erklaerung">der Freundin</span></td>
-<td><span class="form">μιας</span> <span class="erklaerung">einer</span></td>
-</tr>
-<tr><th class="zeilenkopf">Gen. Sg. maskulinum</th>
-<td><span class="form">του</span> <span class="erklaerung">του φίλου (des Freundes)</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: του φίλου">≠</span></td>
-<td><span class="form">ενός</span> <span class="erklaerung">eines</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: ενός eines">≠</span></td>
-</tr>
-<tr><th class="zeilenkopf">Gen. Sg. femininum</th>
-<td><span class="form">της</span> <span class="erklaerung">της φίλης (der Freundin)</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: της φίλης">≠</span></td>
-<td><span class="form">μιας</span> <span class="erklaerung">einer</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: μιας einer">≠</span></td>
-</tr>
-<tr><th class="zeilenkopf">Gen. Sg. neutrum</th>
-<td><span class="form">του</span> <span class="erklaerung">του παιδιού (des Kindes)</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: του παιδιού">≠</span></td>
-<td><span class="form">ενός</span> <span class="erklaerung">eines</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: ενός eines">≠</span></td>
-</tr>
-<tr><th class="zeilenkopf">Gen. Sg.</th>
-<td><span class="form">του φίλου / της φίλης / του παιδιού</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: του φίλου">≠</span></td>
-<td><span class="form">ενός / μιας / ενός</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: ενός">≠</span></td>
-</tr>
-<tr><th class="zeilenkopf">Gen. Sg.</th>
-<td><span class="form">της φίλης</span></td>
+<tr><th class="zeilenkopf">Gen. Pl. mask.</th>
+<td><span class="form">των φίλων</span> <span class="erklaerung">der Freunde</span></td>
 <td class="leer">·</td>
+<td><span class="form">στων</span></td>
 </tr>
-<tr><th class="zeilenkopf">Gen. Sg.</th>
-<td><span class="form">του παιδιού</span></td>
+<tr><th class="zeilenkopf">Gen. Pl. fem.</th>
+<td><span class="form">των φίλων</span> <span class="erklaerung">der Freundinnen</span></td>
 <td class="leer">·</td>
-</tr>
-<tr><th class="zeilenkopf">Gen. Sg.</th>
-<td class="leer">·</td>
-<td><span class="form">μιας</span></td>
-</tr>
-<tr><th class="zeilenkopf">Gen. Sg.</th>
-<td class="leer">·</td>
-<td><span class="form">ενός</span></td>
+<td><span class="form">στων</span></td>
 </tr>
 <tr><th class="zeilenkopf">Gen. Pl. neutr.</th>
 <td><span class="form">των παιδιών</span> <span class="erklaerung">der Kinder</span></td>
 <td class="leer">·</td>
+<td><span class="form">στων</span></td>
 </tr>
-<tr><th class="zeilenkopf">Gen. Pl. maskulinum</th>
-<td><span class="form">των φίλων</span> <span class="erklaerung">der Freunde</span></td>
-<td class="leer">·</td>
+<tr><th class="zeilenkopf">Akk. Sg. mask.</th>
+<td><span class="form">το(ν)* φίλο</span> <span class="erklaerung">den Freund</span></td>
+<td><span class="form">ένα(ν)</span> <span class="erklaerung">einen</span></td>
+<td><span class="form">στο(ν)</span> <span class="erklaerung">in einen / zu einem</span> <span class="konflikt" title="Ein anderes Foto zeigt hier: σε ένα(ν)">≠ σε ένα(ν)</span></td>
 </tr>
-<tr><th class="zeilenkopf">Gen. Pl. femininum</th>
-<td><span class="form">των φίλων</span> <span class="erklaerung">der Freundinnen</span></td>
-<td class="leer">·</td>
-</tr>
-<tr><th class="zeilenkopf">Gen. Pl. maskulinum</th>
-<td><span class="form">των</span> <span class="erklaerung">των φίλων (der Freunde)</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: των φίλων">≠</span></td>
-<td class="leer">·</td>
-</tr>
-<tr><th class="zeilenkopf">Gen. Pl. femininum</th>
-<td><span class="form">των</span> <span class="erklaerung">των φίλων (der Freundinnen)</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: των φίλων">≠</span></td>
-<td class="leer">·</td>
-</tr>
-<tr><th class="zeilenkopf">Gen. Pl. neutrum</th>
-<td><span class="form">των</span> <span class="erklaerung">των παιδιών (der Kinder)</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: των παιδιών">≠</span></td>
-<td class="leer">·</td>
-</tr>
-<tr><th class="zeilenkopf">Gen. Pl.</th>
-<td><span class="form">των φίλων / των φίλων / των παιδιών</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: των φίλων">≠</span></td>
-<td class="leer">·</td>
-</tr>
-<tr><th class="zeilenkopf">Gen. Pl.</th>
-<td><span class="form">των φίλων</span></td>
-<td class="leer">·</td>
-</tr>
-<tr><th class="zeilenkopf">Gen. Pl.</th>
-<td><span class="form">των παιδιών</span></td>
-<td class="leer">·</td>
+<tr><th class="zeilenkopf">Akk. Sg. fem.</th>
+<td><span class="form">τη(ν) φίλη</span> <span class="erklaerung">die Freundin</span></td>
+<td><span class="form">μια</span> <span class="erklaerung">eine</span></td>
+<td><span class="form">στη(ν)</span> <span class="erklaerung">in eine / zu einer</span> <span class="konflikt" title="Ein anderes Foto zeigt hier: σε μια">≠ σε μια</span></td>
 </tr>
 <tr><th class="zeilenkopf">Akk. Sg. neutr.</th>
 <td><span class="form">το παιδί</span> <span class="erklaerung">das Kind</span></td>
 <td><span class="form">ένα</span> <span class="erklaerung">ein</span></td>
+<td><span class="form">στο</span> <span class="erklaerung">in ein / zu einem</span> <span class="konflikt" title="Ein anderes Foto zeigt hier: σε ένα">≠ σε ένα</span></td>
 </tr>
-<tr><th class="zeilenkopf">Akk. Sg. maskulinum</th>
-<td><span class="form">το(ν)* φίλο</span> <span class="erklaerung">den Freund</span></td>
-<td><span class="form">ένα(ν)</span> <span class="erklaerung">einen</span></td>
-</tr>
-<tr><th class="zeilenkopf">Akk. Sg. femininum</th>
-<td><span class="form">τη(ν) φίλη</span> <span class="erklaerung">die Freundin</span></td>
-<td><span class="form">μια</span> <span class="erklaerung">eine</span></td>
-</tr>
-<tr><th class="zeilenkopf">Akk. Sg. maskulinum</th>
-<td><span class="form">το(ν)</span> <span class="erklaerung">τον φίλο (den Freund)</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: το(ν)*">≠</span></td>
-<td><span class="form">ένα(ν)</span> <span class="erklaerung">einen</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: ένα(ν) einen">≠</span></td>
-</tr>
-<tr><th class="zeilenkopf">Akk. Sg. femininum</th>
-<td><span class="form">τη(ν)</span> <span class="erklaerung">τη(ν) φίλη (die Freundin)</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: τη(ν) φίλη">≠</span></td>
-<td><span class="form">μια</span> <span class="erklaerung">eine</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: μια / μια">≠</span></td>
-</tr>
-<tr><th class="zeilenkopf">Akk. Sg. neutrum</th>
-<td><span class="form">το</span> <span class="erklaerung">το παιδί (das Kind)</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: το παιδί">≠</span></td>
-<td><span class="form">ένα</span> <span class="erklaerung">ein</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: ένα ein">≠</span></td>
-</tr>
-<tr><th class="zeilenkopf">Akk. Sg.</th>
-<td><span class="form">το(ν) φίλο / τη(ν) φίλη / το παιδί</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: το(ν)* φίλο">≠</span></td>
-<td><span class="form">ένα(ν) / μια / ένα</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: ένα(ν)">≠</span></td>
-</tr>
-<tr><th class="zeilenkopf">Akk. Sg.</th>
-<td><span class="form">τη(ν) φίλη</span></td>
+<tr><th class="zeilenkopf">Akk. Sg. Unbestimmt Maskulinum</th>
 <td class="leer">·</td>
-</tr>
-<tr><th class="zeilenkopf">Akk. Sg.</th>
-<td><span class="form">το παιδί</span></td>
 <td class="leer">·</td>
+<td><span class="form">σε ένα(ν)</span></td>
 </tr>
-<tr><th class="zeilenkopf">Akk. Sg.</th>
+<tr><th class="zeilenkopf">Akk. Sg. Unbestimmt Femininum</th>
 <td class="leer">·</td>
-<td><span class="form">μια</span></td>
+<td class="leer">·</td>
+<td><span class="form">σε μια</span></td>
 </tr>
-<tr><th class="zeilenkopf">Akk. Sg.</th>
+<tr><th class="zeilenkopf">Akk. Sg. Unbestimmt Neutrum</th>
 <td class="leer">·</td>
-<td><span class="form">ένα</span></td>
+<td class="leer">·</td>
+<td><span class="form">σε ένα</span></td>
+</tr>
+<tr><th class="zeilenkopf">Akk. Pl. mask.</th>
+<td><span class="form">τους φίλους</span> <span class="erklaerung">die Freunde</span></td>
+<td class="leer">·</td>
+<td><span class="form">στους</span></td>
+</tr>
+<tr><th class="zeilenkopf">Akk. Pl. fem.</th>
+<td><span class="form">τις φίλες</span> <span class="erklaerung">die Freundinnen</span></td>
+<td class="leer">·</td>
+<td><span class="form">στις</span></td>
 </tr>
 <tr><th class="zeilenkopf">Akk. Pl. neutr.</th>
 <td><span class="form">τα παιδιά</span> <span class="erklaerung">die Kinder</span></td>
 <td class="leer">·</td>
+<td><span class="form">στα</span></td>
 </tr>
-<tr><th class="zeilenkopf">Akk. Pl. maskulinum</th>
-<td><span class="form">τους φίλους</span> <span class="erklaerung">die Freunde</span></td>
+<tr><th class="zeilenkopf">Vok. Sg. mask.</th>
+<td><span class="form">φίλε</span> <span class="erklaerung">Freund</span></td>
+<td class="leer">·</td>
 <td class="leer">·</td>
 </tr>
-<tr><th class="zeilenkopf">Akk. Pl. femininum</th>
-<td><span class="form">τις φίλες</span> <span class="erklaerung">die Freundinnen</span></td>
+<tr><th class="zeilenkopf">Vok. Sg. fem.</th>
+<td><span class="form">φίλη</span> <span class="erklaerung">Freundin</span></td>
 <td class="leer">·</td>
-</tr>
-<tr><th class="zeilenkopf">Akk. Pl. maskulinum</th>
-<td><span class="form">τους</span> <span class="erklaerung">τους φίλους (die Freunde)</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: τους φίλους">≠</span></td>
-<td class="leer">·</td>
-</tr>
-<tr><th class="zeilenkopf">Akk. Pl. femininum</th>
-<td><span class="form">τις</span> <span class="erklaerung">τις φίλες (die Freundinnen)</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: τις φίλες">≠</span></td>
-<td class="leer">·</td>
-</tr>
-<tr><th class="zeilenkopf">Akk. Pl. neutrum</th>
-<td><span class="form">τα</span> <span class="erklaerung">τα παιδιά (die Kinder)</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: τα παιδιά">≠</span></td>
-<td class="leer">·</td>
-</tr>
-<tr><th class="zeilenkopf">Akk. Pl.</th>
-<td><span class="form">τους φίλους / τις φίλες / τα παιδιά</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: τους φίλους">≠</span></td>
-<td class="leer">·</td>
-</tr>
-<tr><th class="zeilenkopf">Akk. Pl.</th>
-<td><span class="form">τις φίλες</span></td>
-<td class="leer">·</td>
-</tr>
-<tr><th class="zeilenkopf">Akk. Pl.</th>
-<td><span class="form">τα παιδιά</span></td>
 <td class="leer">·</td>
 </tr>
 <tr><th class="zeilenkopf">Vok. Sg. neutr.</th>
 <td><span class="form">παιδί</span> <span class="erklaerung">Kind</span></td>
 <td class="leer">·</td>
-</tr>
-<tr><th class="zeilenkopf">Vok. Sg. maskulinum</th>
-<td><span class="form">φίλε</span> <span class="erklaerung">Freund</span></td>
 <td class="leer">·</td>
 </tr>
-<tr><th class="zeilenkopf">Vok. Sg. femininum</th>
-<td><span class="form">φίλη</span> <span class="erklaerung">Freundin</span></td>
+<tr><th class="zeilenkopf">Vok. Pl. mask.</th>
+<td><span class="form">φίλοι</span> <span class="erklaerung">Freunde</span></td>
+<td class="leer">·</td>
 <td class="leer">·</td>
 </tr>
-<tr><th class="zeilenkopf">Vok. Sg. maskulinum</th>
-<td><span class="form">-</span> <span class="erklaerung">φίλε (Freund)</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: φίλε">≠</span></td>
+<tr><th class="zeilenkopf">Vok. Pl. fem.</th>
+<td><span class="form">φίλες</span> <span class="erklaerung">Freundinnen</span></td>
 <td class="leer">·</td>
-</tr>
-<tr><th class="zeilenkopf">Vok. Sg. femininum</th>
-<td><span class="form">-</span> <span class="erklaerung">φίλη (Freundin)</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: φίλη">≠</span></td>
-<td class="leer">·</td>
-</tr>
-<tr><th class="zeilenkopf">Vok. Sg. neutrum</th>
-<td><span class="form">-</span> <span class="erklaerung">παιδί (Kind)</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: παιδί">≠</span></td>
-<td class="leer">·</td>
-</tr>
-<tr><th class="zeilenkopf">Vok. Sg.</th>
-<td><span class="form">φίλε / φίλη / παιδί</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: φίλε">≠</span></td>
-<td class="leer">·</td>
-</tr>
-<tr><th class="zeilenkopf">Vok. Sg.</th>
-<td><span class="form">φίλη</span></td>
-<td class="leer">·</td>
-</tr>
-<tr><th class="zeilenkopf">Vok. Sg.</th>
-<td><span class="form">παιδί</span></td>
 <td class="leer">·</td>
 </tr>
 <tr><th class="zeilenkopf">Vok. Pl. neutr.</th>
 <td><span class="form">παιδιά</span> <span class="erklaerung">Kinder</span></td>
 <td class="leer">·</td>
-</tr>
-<tr><th class="zeilenkopf">Vok. Pl. maskulinum</th>
-<td><span class="form">φίλοι</span> <span class="erklaerung">Freunde</span></td>
-<td class="leer">·</td>
-</tr>
-<tr><th class="zeilenkopf">Vok. Pl. femininum</th>
-<td><span class="form">φίλες</span> <span class="erklaerung">Freundinnen</span></td>
-<td class="leer">·</td>
-</tr>
-<tr><th class="zeilenkopf">Vok. Pl. maskulinum</th>
-<td><span class="form">-</span> <span class="erklaerung">φίλοι (Freunde)</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: φίλοι">≠</span></td>
-<td class="leer">·</td>
-</tr>
-<tr><th class="zeilenkopf">Vok. Pl. femininum</th>
-<td><span class="form">-</span> <span class="erklaerung">φίλες (Freundinnen)</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: φίλες">≠</span></td>
-<td class="leer">·</td>
-</tr>
-<tr><th class="zeilenkopf">Vok. Pl. neutrum</th>
-<td><span class="form">-</span> <span class="erklaerung">παιδιά (Kinder)</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: παιδιά">≠</span></td>
-<td class="leer">·</td>
-</tr>
-<tr><th class="zeilenkopf">Vok. Pl.</th>
-<td><span class="form">φίλοι / φίλες / παιδιά</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: φίλοι">≠</span></td>
-<td class="leer">·</td>
-</tr>
-<tr><th class="zeilenkopf">Vok. Pl.</th>
-<td><span class="form">φίλες</span></td>
-<td class="leer">·</td>
-</tr>
-<tr><th class="zeilenkopf">Vok. Pl.</th>
-<td><span class="form">παιδιά</span></td>
 <td class="leer">·</td>
 </tr>
 </tbody></table></div>
@@ -770,149 +768,62 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <dl>
 <dt>Bestimmter Artikel<span class="art">Wortart</span></dt><dd>Der Artikel für etwas Bekanntes: el, la, los, las – „der, die, das“.</dd>
 <dt>Unbestimmter Artikel<span class="art">Wortart</span></dt><dd>Der Artikel für etwas Unbekanntes: un, una – „ein, eine“.</dd>
+<dt>Singular<span class="art">Numerus</span></dt><dd>Einzahl.</dd>
 <dt>Nominativ<span class="art">Kasus</span></dt><dd>Wer oder was? – der Fall des Subjekts.</dd>
-<dt>Singular<span class="art">Numerus</span></dt><dd>Einzahl.</dd>
-<dt>Akkusativ<span class="art">Kasus</span></dt><dd>Wen oder was? – der Fall des direkten Objekts.</dd>
-<dt>Plural<span class="art">Numerus</span></dt><dd>Mehrzahl.</dd>
 <dt>Neutrum<span class="art">Genus</span></dt><dd>Sächliches grammatisches Geschlecht.</dd>
+<dt>Akkusativ<span class="art">Kasus</span></dt><dd>Wen oder was? – der Fall des direkten Objekts.</dd>
 <dt>Feminin<span class="art">Genus</span></dt><dd>Weibliches grammatisches Geschlecht.</dd>
+<dt>Maskulin<span class="art">Genus</span></dt><dd>Männliches grammatisches Geschlecht.</dd>
+<dt>Plural<span class="art">Numerus</span></dt><dd>Mehrzahl.</dd>
 <dt>Vokativ<span class="art">Kasus</span></dt><dd>Der Anredefall: „Marce!“ – Marcus!</dd>
-<dt>Maskulin<span class="art">Genus</span></dt><dd>Männliches grammatisches Geschlecht.</dd>
 <dt>Genitiv<span class="art">Kasus</span></dt><dd>Wessen? – zeigt Zugehörigkeit. In Latein verrät er außerdem die Deklinationsklasse.</dd>
 </dl></details>
+<p class="quelle">≠ Zwei Fotos zeigen hier Verschiedenes. Vorn steht die neuere Lesung, hinter ≠ die ältere. Im Zweifel gilt dein Blatt.</p>
 </article>
-<article class="thema" id="griechisch-artikel-und-substantive-2" data-suche="artikel mit praeposition / zusammengesetzter artikel mit im ins am artikel und substantive artikel mit der präposition σε (singular) zusammengesetzter artikel mit σε (im/ins/am...)">
-<header class="themakopf">
-<h3>artikel mit praeposition / zusammengesetzter artikel mit im ins am</h3>
-<button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
-</header>
-<section class="lernen">
-<p class="worum">σε verschmilzt mit dem Artikel.</p>
-<div class="regelkasten"><h4>Die Regel</h4><ul>
-<li><strong>σε + τον → στον</strong>, <strong>σε + την → στη(ν)</strong>, <strong>σε + το → στο</strong>.</li>
-<li>Im Plural: <strong>στους, στις, στα</strong>. Im Genitiv: <strong>στου, στης, στων</strong>.</li>
-<li>σε heißt je nach Zusammenhang <em>in, auf, an, zu, nach</em>.</li>
-</ul></div>
-<p class="anwenden"><span class="etikett">So wendest du es an</span>Die getrennte Form <em>σε τον</em> schreibt man nicht — verschmolzen ist die normale Schreibweise.</p>
-<p class="achtung"><span class="etikett">Achtung</span><em>στο</em> kann „in dem“ <strong>und</strong> „in das“ heißen. Welches gemeint ist, sagt das Verb, nicht die Form.</p>
-</section>
-<div class="tabellenrahmen"><table>
-<thead><tr><th class="zeilenkopf"></th>
-<th>artikel mit praeposition</th>
-<th>zusammengesetzter artikel mit im ins am</th>
-</tr></thead><tbody>
-<tr><th class="zeilenkopf">Gen. Sg. maskulinum</th>
-<td><span class="form">στου</span></td>
-<td><span class="form">στου</span></td>
-</tr>
-<tr><th class="zeilenkopf">Gen. Sg. femininum</th>
-<td><span class="form">στης</span></td>
-<td><span class="form">στης</span></td>
-</tr>
-<tr><th class="zeilenkopf">Gen. Sg. neutrum</th>
-<td><span class="form">στου</span></td>
-<td><span class="form">στου</span></td>
-</tr>
-<tr><th class="zeilenkopf">Gen. Pl. maskulinum</th>
-<td><span class="form">στων</span></td>
-<td><span class="form">στων</span></td>
-</tr>
-<tr><th class="zeilenkopf">Gen. Pl. femininum</th>
-<td><span class="form">στων</span></td>
-<td><span class="form">στων</span></td>
-</tr>
-<tr><th class="zeilenkopf">Gen. Pl. neutrum</th>
-<td><span class="form">στων</span></td>
-<td><span class="form">στων</span></td>
-</tr>
-<tr><th class="zeilenkopf">Akk. Sg. maskulinum</th>
-<td><span class="form">στο(ν)</span> <span class="erklaerung">in einen / zu einem</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: σε ένα(ν)">≠</span></td>
-<td><span class="form">στο(ν)</span></td>
-</tr>
-<tr><th class="zeilenkopf">Akk. Sg. femininum</th>
-<td><span class="form">στη(ν)</span> <span class="erklaerung">in eine / zu einer</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: σε μια">≠</span></td>
-<td><span class="form">στη(ν)</span></td>
-</tr>
-<tr><th class="zeilenkopf">Akk. Sg. neutrum</th>
-<td><span class="form">στο</span> <span class="erklaerung">in ein / zu einem</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: σε ένα">≠</span></td>
-<td><span class="form">στο</span></td>
-</tr>
-<tr><th class="zeilenkopf">Akk. Sg. Unbestimmt Maskulinum</th>
-<td><span class="form">σε ένα(ν)</span></td>
-<td class="leer">·</td>
-</tr>
-<tr><th class="zeilenkopf">Akk. Sg. Unbestimmt Femininum</th>
-<td><span class="form">σε μια</span></td>
-<td class="leer">·</td>
-</tr>
-<tr><th class="zeilenkopf">Akk. Sg. Unbestimmt Neutrum</th>
-<td><span class="form">σε ένα</span></td>
-<td class="leer">·</td>
-</tr>
-<tr><th class="zeilenkopf">Akk. Pl. maskulinum</th>
-<td><span class="form">στους</span></td>
-<td><span class="form">στους</span></td>
-</tr>
-<tr><th class="zeilenkopf">Akk. Pl. femininum</th>
-<td><span class="form">στις</span></td>
-<td><span class="form">στις</span></td>
-</tr>
-<tr><th class="zeilenkopf">Akk. Pl. neutrum</th>
-<td><span class="form">στα</span></td>
-<td><span class="form">στα</span></td>
-</tr>
-</tbody></table></div>
-<details class="begriffe">
-<summary>Fachbegriffe erklärt <span>(7)</span></summary>
-<dl>
-<dt>Singular<span class="art">Numerus</span></dt><dd>Einzahl.</dd>
-<dt>Genitiv<span class="art">Kasus</span></dt><dd>Wessen? – zeigt Zugehörigkeit. In Latein verrät er außerdem die Deklinationsklasse.</dd>
-<dt>Feminin<span class="art">Genus</span></dt><dd>Weibliches grammatisches Geschlecht.</dd>
-<dt>Akkusativ<span class="art">Kasus</span></dt><dd>Wen oder was? – der Fall des direkten Objekts.</dd>
-<dt>Plural<span class="art">Numerus</span></dt><dd>Mehrzahl.</dd>
-<dt>Neutrum<span class="art">Genus</span></dt><dd>Sächliches grammatisches Geschlecht.</dd>
-<dt>Maskulin<span class="art">Genus</span></dt><dd>Männliches grammatisches Geschlecht.</dd>
-</dl></details>
-</article>
-<article class="thema" id="griechisch-artikel-und-substantive-3" data-suche="verschmelzung von präposition σε und bestimmtem artikel (singular) artikel und substantive verschmelzung von präposition σε und bestimmtem artikel (singular)">
-<header class="themakopf">
-<h3>Verschmelzung von Präposition σε und bestimmtem Artikel (Singular)</h3>
-<button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
-</header>
-<section class="lernen">
-<p class="worum">σε verschmilzt mit dem Artikel.</p>
-<div class="regelkasten"><h4>Die Regel</h4><ul>
-<li><strong>σε + τον → στον</strong>, <strong>σε + την → στη(ν)</strong>, <strong>σε + το → στο</strong>.</li>
-<li>Im Plural: <strong>στους, στις, στα</strong>. Im Genitiv: <strong>στου, στης, στων</strong>.</li>
-<li>σε heißt je nach Zusammenhang <em>in, auf, an, zu, nach</em>.</li>
-</ul></div>
-<p class="anwenden"><span class="etikett">So wendest du es an</span>Die getrennte Form <em>σε τον</em> schreibt man nicht — verschmolzen ist die normale Schreibweise.</p>
-<p class="achtung"><span class="etikett">Achtung</span><em>στο</em> kann „in dem“ <strong>und</strong> „in das“ heißen. Welches gemeint ist, sagt das Verb, nicht die Form.</p>
-</section>
-<div class="tabellenrahmen"><table>
-<tr><th class="zeilenkopf">Gen. Sg.</th><td><span class="form">στου</span></td></tr>
-<tr><th class="zeilenkopf">Akk. Sg.</th><td><span class="form">στο(ν)</span></td></tr>
-<tr><th class="zeilenkopf">Gen. Sg.</th><td><span class="form">στης</span></td></tr>
-<tr><th class="zeilenkopf">Akk. Sg.</th><td><span class="form">στη(ν)</span></td></tr>
-<tr><th class="zeilenkopf">Gen. Sg.</th><td><span class="form">στου</span></td></tr>
-<tr><th class="zeilenkopf">Akk. Sg.</th><td><span class="form">στο</span></td></tr>
-<tr><th class="zeilenkopf">Gen. Pl.</th><td><span class="form">στων</span></td></tr>
-<tr><th class="zeilenkopf">Akk. Pl.</th><td><span class="form">στους</span></td></tr>
-<tr><th class="zeilenkopf">Gen. Pl.</th><td><span class="form">στων</span></td></tr>
-<tr><th class="zeilenkopf">Akk. Pl.</th><td><span class="form">στις</span></td></tr>
-<tr><th class="zeilenkopf">Gen. Pl.</th><td><span class="form">στων</span></td></tr>
-<tr><th class="zeilenkopf">Akk. Pl.</th><td><span class="form">στα</span></td></tr>
-</table></div>
-<details class="begriffe">
-<summary>Fachbegriffe erklärt <span>(4)</span></summary>
-<dl>
-<dt>Singular<span class="art">Numerus</span></dt><dd>Einzahl.</dd>
-<dt>Akkusativ<span class="art">Kasus</span></dt><dd>Wen oder was? – der Fall des direkten Objekts.</dd>
-<dt>Plural<span class="art">Numerus</span></dt><dd>Mehrzahl.</dd>
-<dt>Genitiv<span class="art">Kasus</span></dt><dd>Wessen? – zeigt Zugehörigkeit. In Latein verrät er außerdem die Deklinationsklasse.</dd>
-</dl></details>
-</article>
-<article class="thema" id="griechisch-artikel-und-substantive-4" data-suche="deklination maskulinum auf -ος artikel und substantive deklination maskulinum auf -ος">
+<article class="thema" id="griechisch-artikel-und-substantive-2" data-suche="deklination maskulinum auf -ος artikel und substantive deklination maskulinum auf -ος  
+ der artikel verrät das geschlecht — und beugt sich mit. 
+  die regel  
+ drei geschlechter, je eigener artikel:  ο  (männlich),  η  (weiblich),  το  (sächlich). 
+ artikel und substantiv ändern sich gemeinsam nach dem fall:  ο φίλος  →  του φίλου  →  το(ν) φίλο . 
+ im nominativ singular enden maskulina auf  -ς  — daran erkennst du sie fast immer. 
+ der  vokativ  ist die anredeform und steht ohne artikel:  φίλε!  
+  
+  so wendest du es an lerne jedes substantiv  mit artikel : nicht  φίλος , sondern  ο φίλος . ohne artikel kennst du das geschlecht nicht, und ohne geschlecht die formen nicht. 
+  achtung das  ν  in  το(ν)  und  τη(ν)  steht nur vor bestimmten lauten — die klammer heißt: mal ja, mal nein. 
+    
+  nom. sg.    γιατρ  ός    
+  gen. sg.    γιατρ  ού    
+  akk. sg.    γιατρ  ό    
+  vok. sg.    γιατρ  έ    
+  nom. pl.    γιατρ  οί    
+  gen. pl.    γιατρ  ών    
+  akk. pl.    γιατρ  ούς    
+  vok. pl.    γιατρ  οί    
+  nom. sg. -ης    μαθητ  ής    
+  gen. sg. -ης    μαθητ  ή    
+  akk. sg. -ης    μαθητ  ή    
+  nom. pl. -ης    μαθητ  ές    
+  gen. pl. -ης    μαθητ  ών    
+  akk. pl. -ης    μαθητ  ές    
+  nom. sg. -ας    μήν  ας    
+  gen. sg. -ας    μήν  α    
+  akk. sg. -ας    μήν  α    
+  nom. pl. -ας    μήν  ες    
+  gen. pl. -ας    μην  ών    
+  akk. pl. -ας    μήν  ες    
+  nom. sg. -ες    καφ  ές    
+  gen. sg. -ες    καφ  έ    
+  akk. sg. -ες    καφ  έ    
+  nom. pl. -ες   καφέδες   -edes   
+  gen. pl. -ες   καφέδων   -edon   
+  akk. pl. -ες   καφέδες   -edes   
+  nom. sg. -ους    παππ  ούς    
+  gen. sg. -ους    παππ  ού    
+  akk. sg. -ους    παππ  ού    
+  nom. pl. -ους   παππούδες   -oudes   
+  gen. pl. -ους   παππούδων   -oudon   
+  akk. pl. -ους   παππούδες   -oudes   
+      fachbegriffe erklärt  (8)      maskulin genus   männliches grammatisches geschlecht.   deklination formenlehre   das beugen von substantiven, adjektiven und pronomen nach fall, zahl und geschlecht.   nominativ kasus   wer oder was? – der fall des subjekts.   singular numerus   einzahl.   genitiv kasus   wessen? – zeigt zugehörigkeit. in latein verrät er außerdem die deklinationsklasse.   plural numerus   mehrzahl.   akkusativ kasus   wen oder was? – der fall des direkten objekts.   vokativ kasus   der anredefall: „marce!“ – marcus!     nominativ genitiv akkusativ vokativ singular plural">
 <header class="themakopf">
 <h3>Deklination Maskulinum auf -ος</h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
@@ -928,45 +839,36 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <p class="anwenden"><span class="etikett">So wendest du es an</span>Lerne jedes Substantiv <strong>mit Artikel</strong>: nicht <em>φίλος</em>, sondern <em>ο φίλος</em>. Ohne Artikel kennst du das Geschlecht nicht, und ohne Geschlecht die Formen nicht.</p>
 <p class="achtung"><span class="etikett">Achtung</span>Das <strong>ν</strong> in <em>το(ν)</em> und <em>τη(ν)</em> steht nur vor bestimmten Lauten — die Klammer heißt: mal ja, mal nein.</p>
 </section>
-<section class="lernen">
-<p class="worum">Zwei Vokale, ein Laut — und bei αυ/ευ hängt er vom nächsten Buchstaben ab.</p>
-<div class="regelkasten"><h4>Die Regel</h4><ul>
-<li><strong>οι</strong> und <strong>ει</strong> → <strong>i</strong>, <strong>αι</strong> → <strong>e</strong>, <strong>ου</strong> → <strong>u</strong>.</li>
-<li><strong>αυ</strong> und <strong>ευ</strong> haben zwei Aussprachen: vor einem stimmhaften Laut <strong>aw / ew</strong> (<em>αυλή</em> = awli, <em>ευγενικός</em> = ewjenikos), vor einem stimmlosen <strong>af / ef</strong> (<em>αυτοκίνητο</em> = aftokinito, <em>ευχαριστώ</em> = efcharisto).</li>
-</ul></div>
-<p class="anwenden"><span class="etikett">So wendest du es an</span>Bei αυ/ευ nicht raten: schau auf den Buchstaben danach. Folgt κ, π, τ, σ, φ, χ, θ — dann f. Sonst w.</p>
-<p class="achtung"><span class="etikett">Achtung</span>Drei Schreibweisen ergeben denselben i-Laut: <strong>ι, η, οι, ει</strong>. Beim Schreiben hilft nur Vokabellernen.</p>
-</section>
 <div class="tabellenrahmen"><table>
-<tr><th class="zeilenkopf">Nom. Sg.</th><td><span class="form"><span class="stamm">βιβλί</span><span class="end">ο</span></span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: γιατρός">≠</span></td></tr>
-<tr><th class="zeilenkopf">Gen. Sg.</th><td><span class="form"><span class="stamm">βιβλί</span><span class="end">ου</span></span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: γιατρού">≠</span></td></tr>
-<tr><th class="zeilenkopf">Akk. Sg.</th><td><span class="form"><span class="stamm">βιβλί</span><span class="end">ο</span></span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: γιατρό">≠</span></td></tr>
-<tr><th class="zeilenkopf">Vok. Sg.</th><td><span class="form">γιατρέ</span> <span class="endung">-ε</span></td></tr>
-<tr><th class="zeilenkopf">Nom. Pl.</th><td><span class="form"><span class="stamm">βιβλί</span><span class="end">α</span></span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: γιατροί">≠</span></td></tr>
-<tr><th class="zeilenkopf">Gen. Pl.</th><td><span class="form"><span class="stamm">βιβλί</span><span class="end">ων</span></span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: γιατρών">≠</span></td></tr>
-<tr><th class="zeilenkopf">Akk. Pl.</th><td><span class="form"><span class="stamm">βιβλί</span><span class="end">α</span></span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: γιατρούς">≠</span></td></tr>
-<tr><th class="zeilenkopf">Vok. Pl.</th><td><span class="form">γιατροί</span> <span class="endung">-οι</span></td></tr>
-<tr><th class="zeilenkopf">Nom. Sg. -ης</th><td><span class="form">μαθητής</span> <span class="endung">-ης</span></td></tr>
-<tr><th class="zeilenkopf">Gen. Sg. -ης</th><td><span class="form">μαθητή</span> <span class="endung">-η</span></td></tr>
-<tr><th class="zeilenkopf">Akk. Sg. -ης</th><td><span class="form">μαθητή</span> <span class="endung">-η</span></td></tr>
-<tr><th class="zeilenkopf">Nom. Pl. -ης</th><td><span class="form">μαθητές</span> <span class="endung">-ες</span></td></tr>
-<tr><th class="zeilenkopf">Gen. Pl. -ης</th><td><span class="form">μαθητών</span> <span class="endung">-ων</span></td></tr>
-<tr><th class="zeilenkopf">Akk. Pl. -ης</th><td><span class="form">μαθητές</span> <span class="endung">-ες</span></td></tr>
+<tr><th class="zeilenkopf">Nom. Sg.</th><td><span class="form"><span class="stamm">γιατρ</span><span class="end">ός</span></span></td></tr>
+<tr><th class="zeilenkopf">Gen. Sg.</th><td><span class="form"><span class="stamm">γιατρ</span><span class="end">ού</span></span></td></tr>
+<tr><th class="zeilenkopf">Akk. Sg.</th><td><span class="form"><span class="stamm">γιατρ</span><span class="end">ό</span></span></td></tr>
+<tr><th class="zeilenkopf">Vok. Sg.</th><td><span class="form"><span class="stamm">γιατρ</span><span class="end">έ</span></span></td></tr>
+<tr><th class="zeilenkopf">Nom. Pl.</th><td><span class="form"><span class="stamm">γιατρ</span><span class="end">οί</span></span></td></tr>
+<tr><th class="zeilenkopf">Gen. Pl.</th><td><span class="form"><span class="stamm">γιατρ</span><span class="end">ών</span></span></td></tr>
+<tr><th class="zeilenkopf">Akk. Pl.</th><td><span class="form"><span class="stamm">γιατρ</span><span class="end">ούς</span></span></td></tr>
+<tr><th class="zeilenkopf">Vok. Pl.</th><td><span class="form"><span class="stamm">γιατρ</span><span class="end">οί</span></span></td></tr>
+<tr><th class="zeilenkopf">Nom. Sg. -ης</th><td><span class="form"><span class="stamm">μαθητ</span><span class="end">ής</span></span></td></tr>
+<tr><th class="zeilenkopf">Gen. Sg. -ης</th><td><span class="form"><span class="stamm">μαθητ</span><span class="end">ή</span></span></td></tr>
+<tr><th class="zeilenkopf">Akk. Sg. -ης</th><td><span class="form"><span class="stamm">μαθητ</span><span class="end">ή</span></span></td></tr>
+<tr><th class="zeilenkopf">Nom. Pl. -ης</th><td><span class="form"><span class="stamm">μαθητ</span><span class="end">ές</span></span></td></tr>
+<tr><th class="zeilenkopf">Gen. Pl. -ης</th><td><span class="form"><span class="stamm">μαθητ</span><span class="end">ών</span></span></td></tr>
+<tr><th class="zeilenkopf">Akk. Pl. -ης</th><td><span class="form"><span class="stamm">μαθητ</span><span class="end">ές</span></span></td></tr>
 <tr><th class="zeilenkopf">Nom. Sg. -ας</th><td><span class="form"><span class="stamm">μήν</span><span class="end">ας</span></span></td></tr>
 <tr><th class="zeilenkopf">Gen. Sg. -ας</th><td><span class="form"><span class="stamm">μήν</span><span class="end">α</span></span></td></tr>
 <tr><th class="zeilenkopf">Akk. Sg. -ας</th><td><span class="form"><span class="stamm">μήν</span><span class="end">α</span></span></td></tr>
 <tr><th class="zeilenkopf">Nom. Pl. -ας</th><td><span class="form"><span class="stamm">μήν</span><span class="end">ες</span></span></td></tr>
-<tr><th class="zeilenkopf">Gen. Pl. -ας</th><td><span class="form">μηνών</span> <span class="endung">-ων</span></td></tr>
+<tr><th class="zeilenkopf">Gen. Pl. -ας</th><td><span class="form"><span class="stamm">μην</span><span class="end">ών</span></span></td></tr>
 <tr><th class="zeilenkopf">Akk. Pl. -ας</th><td><span class="form"><span class="stamm">μήν</span><span class="end">ες</span></span></td></tr>
-<tr><th class="zeilenkopf">Nom. Sg. -ες</th><td><span class="form">καφές</span> <span class="endung">-ες</span></td></tr>
-<tr><th class="zeilenkopf">Gen. Sg. -ες</th><td><span class="form">καφέ</span> <span class="endung">-ε</span></td></tr>
-<tr><th class="zeilenkopf">Akk. Sg. -ες</th><td><span class="form">καφέ</span> <span class="endung">-ε</span></td></tr>
+<tr><th class="zeilenkopf">Nom. Sg. -ες</th><td><span class="form"><span class="stamm">καφ</span><span class="end">ές</span></span></td></tr>
+<tr><th class="zeilenkopf">Gen. Sg. -ες</th><td><span class="form"><span class="stamm">καφ</span><span class="end">έ</span></span></td></tr>
+<tr><th class="zeilenkopf">Akk. Sg. -ες</th><td><span class="form"><span class="stamm">καφ</span><span class="end">έ</span></span></td></tr>
 <tr><th class="zeilenkopf">Nom. Pl. -ες</th><td><span class="form">καφέδες</span> <span class="endung">-edes</span></td></tr>
 <tr><th class="zeilenkopf">Gen. Pl. -ες</th><td><span class="form">καφέδων</span> <span class="endung">-edon</span></td></tr>
 <tr><th class="zeilenkopf">Akk. Pl. -ες</th><td><span class="form">καφέδες</span> <span class="endung">-edes</span></td></tr>
-<tr><th class="zeilenkopf">Nom. Sg. -ους</th><td><span class="form">παππούς</span> <span class="endung">-ους</span></td></tr>
-<tr><th class="zeilenkopf">Gen. Sg. -ους</th><td><span class="form">παππού</span> <span class="endung">-ου</span></td></tr>
-<tr><th class="zeilenkopf">Akk. Sg. -ους</th><td><span class="form">παππού</span> <span class="endung">-ου</span></td></tr>
+<tr><th class="zeilenkopf">Nom. Sg. -ους</th><td><span class="form"><span class="stamm">παππ</span><span class="end">ούς</span></span></td></tr>
+<tr><th class="zeilenkopf">Gen. Sg. -ους</th><td><span class="form"><span class="stamm">παππ</span><span class="end">ού</span></span></td></tr>
+<tr><th class="zeilenkopf">Akk. Sg. -ους</th><td><span class="form"><span class="stamm">παππ</span><span class="end">ού</span></span></td></tr>
 <tr><th class="zeilenkopf">Nom. Pl. -ους</th><td><span class="form">παππούδες</span> <span class="endung">-oudes</span></td></tr>
 <tr><th class="zeilenkopf">Gen. Pl. -ους</th><td><span class="form">παππούδων</span> <span class="endung">-oudon</span></td></tr>
 <tr><th class="zeilenkopf">Akk. Pl. -ους</th><td><span class="form">παππούδες</span> <span class="endung">-oudes</span></td></tr>
@@ -978,13 +880,13 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <dt>Deklination<span class="art">Formenlehre</span></dt><dd>Das Beugen von Substantiven, Adjektiven und Pronomen nach Fall, Zahl und Geschlecht.</dd>
 <dt>Nominativ<span class="art">Kasus</span></dt><dd>Wer oder was? – der Fall des Subjekts.</dd>
 <dt>Singular<span class="art">Numerus</span></dt><dd>Einzahl.</dd>
+<dt>Genitiv<span class="art">Kasus</span></dt><dd>Wessen? – zeigt Zugehörigkeit. In Latein verrät er außerdem die Deklinationsklasse.</dd>
+<dt>Plural<span class="art">Numerus</span></dt><dd>Mehrzahl.</dd>
 <dt>Akkusativ<span class="art">Kasus</span></dt><dd>Wen oder was? – der Fall des direkten Objekts.</dd>
 <dt>Vokativ<span class="art">Kasus</span></dt><dd>Der Anredefall: „Marce!“ – Marcus!</dd>
-<dt>Plural<span class="art">Numerus</span></dt><dd>Mehrzahl.</dd>
-<dt>Genitiv<span class="art">Kasus</span></dt><dd>Wessen? – zeigt Zugehörigkeit. In Latein verrät er außerdem die Deklinationsklasse.</dd>
 </dl></details>
 </article>
-<article class="thema" id="griechisch-artikel-und-substantive-regeln" data-suche="regeln artikel und substantive">
+<article class="thema" id="griechisch-artikel-und-substantive-regeln" data-suche="regeln artikel und substantive      als artikel bezeichnet man ein wort, das ein anderes begleitet.   der genitiv ist im griechischen häufiger als im deutschen.   das ζ wird wie ein stimmhaftes s ausgesprochen, wie zum beispiel bei den wörtern: siegfried, silke, seele, siegel.   endet ein wort auf -s, so wird dieses immer als schluss-ς geschrieben; das σ steht nie am ende eines wortes.   personennamen, städte- und ländernamen werden vom bestimmten artikel begleitet.   der artikel ο steht für das männliche geschlecht, η für das weibliche und το für das neutrale geschlecht.   folgt dem αυ und ευ θ, κ, ξ, π, σ, τ, φ, χ, oder ψ, werden sie als af bzw. ef ausgesprochen.   will man auf einen bestimmten tag, monat oder eine bestimmte jahreszeit hinweisen, verwendet man den artikel im akkusativ.   in verbindung mit dem unbestimmten artikel bleiben präposition und artikel getrennt.   der vokativ wird nur bei wörtern auf -ος extra aufgeführt, da er dort unterschiede aufweist. bei allen anderen substantiven ist der vokativ gleich wie der akkusativ.   im griechischen werden fast alle wörter kleingeschrieben; ausnahmen sind satzanfänge, eigennamen, länder/städte, feiertage und kunstwerke.   der genitiv plural endet bei allen substantiven und adjektiven auf -ων.   das ζ wird wie ein stimmhaftes s ausgesprochen, wie zum beispiel bei den wörtern: siegfried, silke, seele, siegel. griechische beispiele: ζωή, ζώο, ζευγάρι.   endet ein wort auf -s, so wird dieses immer als schluss-ς geschrieben; das σ steht nie am ende eines wortes. beispiele: κόσμος, ελέφαντας.   in verbindung mit dem unbestimmten artikel bleiben präposition und artikel getrennt (σε ένα, σε μια).   in verbindung mit dem unbestimmten artikel bleiben präposition σε und artikel getrennt.   der vokativ wird nur bei wörtern auf -ος extra aufgeführt (-ε). bei allen anderen substantiven ist der vokativ gleich wie der akkusativ.   im nominativ singular enden alle maskulina auf -ς.   alle diese substantive [der maskulin-deklination] enden im genitiv plural auf -ων.   das schluss-ν beim artikel (τον, την, έναν) bleibt vor vokalen und den konsonanten κ, π, τ, γκ, μπ, ντ, τσ, τζ, ξ, ψ erhalten.   in verbindung mit dem unbestimmten artikel bleiben präposition σε und artikel getrennt (σε έναν, σε μια, σε ένα).   alle substantive und adjektive haben im genitiv plural für alle genera die endung -ων.   das schluss-ν beim bestimmten artikel (τον, την) entfällt häufig vor bestimmten konsonanten.   bestimmte artikel begleiten auch personennamen, städte- und ländernamen (z.b. ο γιώργος, η αθήνα).   in verbindung mit dem unbestimmten artikel bleiben präposition und artikel getrennt (z.b. σε ένα).   unbestimmte artikel: ένας, μια, ένα (ein, eine, ein).   in verbindung mit dem unbestimmten artikel bleiben präposition und artikel getrennt: σε ένα(ν), σε μια, σε ένα.      zuletzt ergänzt am 01.10.2026 · 4 blätter ">
 <header class="themakopf">
 <h3>Regeln von deinem Blatt</h3>
 </header>
@@ -992,72 +894,57 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <ul>
 <li>Als Artikel bezeichnet man ein Wort, das ein anderes begleitet.</li>
 <li>Der Genitiv ist im Griechischen häufiger als im Deutschen.</li>
-<li>Wenn auf das γ ein i-Laut oder e-Laut folgt, wird das γ wie ein j ausgesprochen.</li>
-<li>Das ζ wird wie ein stimmhaftes s ausgesprochen.</li>
-<li>Wenn auf ein χ ein i- oder e-Laut folgt, wird das χ wie in ich, Milch ausgesprochen.</li>
+<li>Das ζ wird wie ein stimmhaftes s ausgesprochen, wie zum Beispiel bei den Wörtern: Siegfried, Silke, Seele, Siegel.</li>
 <li>Endet ein Wort auf -s, so wird dieses immer als Schluss-ς geschrieben; das σ steht nie am Ende eines Wortes.</li>
-<li>Folgt dem αυ und ευ ein Vokal oder ein stimmhafter Konsonant (β, γ, δ, ζ, λ, μ, ν, ρ), ist die Aussprache aw bzw. ew.</li>
 <li>Personennamen, Städte- und Ländernamen werden vom bestimmten Artikel begleitet.</li>
 <li>Der Artikel ο steht für das männliche Geschlecht, η für das weibliche und το für das neutrale Geschlecht.</li>
-<li>Folgt auf γ ein a-, o-Laut oder ein Konsonant, so wird das γ als Mischung aus ungerolltem r und g ausgesprochen.</li>
-<li>Wenn auf ein χ ein i- oder e-Laut folgt, wird das χ wie ein ich-Laut ausgesprochen.</li>
-<li>Folgt auf χ ein a-, o-, ou-Laut oder ein Konsonant, wird das χ wie ein ach-Laut ausgesprochen.</li>
-<li>Folgt dem αυ und ευ ein Vokal oder einer der Konsonanten β, γ, δ, ζ, λ, μ, ν, ρ, ist die Aussprache aw bzw. ew.</li>
 <li>Folgt dem αυ und ευ θ, κ, ξ, π, σ, τ, φ, χ, oder ψ, werden sie als af bzw. ef ausgesprochen.</li>
 <li>Will man auf einen bestimmten Tag, Monat oder eine bestimmte Jahreszeit hinweisen, verwendet man den Artikel im Akkusativ.</li>
 <li>In Verbindung mit dem unbestimmten Artikel bleiben Präposition und Artikel getrennt.</li>
-<li>Will man auf einen bestimmten Tag, Monat oder eine Jahreszeit hinweisen, verwendet man den Artikel im Akkusativ.</li>
-<li>Der Vokativ wird nur bei Wörtern auf -ος extra aufgeführt; bei allen anderen Substantiven ist er gleich dem Akkusativ.</li>
+<li>Der Vokativ wird nur bei Wörtern auf -ος extra aufgeführt, da er dort Unterschiede aufweist. Bei allen anderen Substantiven ist der Vokativ gleich wie der Akkusativ.</li>
 <li>Im Griechischen werden fast alle Wörter kleingeschrieben; Ausnahmen sind Satzanfänge, Eigennamen, Länder/Städte, Feiertage und Kunstwerke.</li>
 <li>Der Genitiv Plural endet bei allen Substantiven und Adjektiven auf -ων.</li>
-<li>Die schwachen Formen der Personalpronomen sind gebräuchlicher; starke Formen dienen der Hervorhebung.</li>
-<li>Das σ am Wortende wird immer als Schluss-ς geschrieben.</li>
-<li>Wenn auf das γ ein i-Laut oder e-Laut folgt, wird das γ wie ein j ausgesprochen. Beispiele: Γιώργος, γεια σου, Γερμανία.</li>
-<li>Folgt jedoch ein a-, o-Laut oder ein Konsonant, so wird das γ wie ein stimmhaftes ch ausgesprochen. Es ist wie eine Mischung aus einem nicht gerollten r und einem g, ein Reibelaut, wie er etwa beim Gurgeln entsteht. Beispiele: γάτα, παγωτό, γόνατο.</li>
 <li>Das ζ wird wie ein stimmhaftes s ausgesprochen, wie zum Beispiel bei den Wörtern: Siegfried, Silke, Seele, Siegel. Griechische Beispiele: ζωή, ζώο, ζευγάρι.</li>
-<li>Wenn auf ein χ ein i- oder e-Laut folgt, wird das χ wie ein ich-Laut (wie in Milch) ausgesprochen. Beispiele: χειρούργος, χέρι.</li>
-<li>Folgt jedoch ein a-, o-, ou-Laut oder ein Konsonant, wird das χ wie in Achtung oder machen ausgesprochen. Beispiele: ευχαριστώ, χορεύω.</li>
 <li>Endet ein Wort auf -s, so wird dieses immer als Schluss-ς geschrieben; das σ steht nie am Ende eines Wortes. Beispiele: κόσμος, ελέφαντας.</li>
-<li>Folgt dem αυ und ευ ein Vokal oder einer der stimmhaften Konsonanten (β, γ, δ, ζ, λ, μ, ν, ρ), ist die Aussprache aw bzw. ew.</li>
-<li>Folgt jedoch ein stimmloser Konsonant (θ, κ, ξ, π, σ, τ, φ, χ, ψ), werden αυ und ευ als af bzw. ef ausgesprochen.</li>
 <li>In Verbindung mit dem unbestimmten Artikel bleiben Präposition und Artikel getrennt (σε ένα, σε μια).</li>
-<li>Wenn auf das γ ein i-Laut oder e-Laut folgt, wird das γ wie ein j ausgesprochen. Folgt jedoch ein a-, o-Laut oder ein Konsonant, so wird das γ wie ein stimmhaftes ch ausgesprochen.</li>
-<li>Das ζ wird wie ein stimmhaftes s ausgesprochen, wie zum Beispiel bei den Wörtern: Siegfried, Silke, Seele, Siegel.</li>
-<li>Wenn auf ein χ ein i- oder e-Laut folgt, wird das χ wie in ich/Milch ausgesprochen. Folgt jedoch ein a-, o-, ou-Laut oder ein Konsonant, wird das χ wie in Achtung/machen ausgesprochen.</li>
-<li>Das Griechische kennt fünf unterschiedliche Schreibweisen für den Laut i (η, ι, υ, ει, οι), zwei unterschiedliche Schreibweisen für den Laut e (ε, αι) und zwei unterschiedliche Schreibweisen für den Laut o (ο, ω).</li>
-<li>Folgt dem αυ und ευ ein Vokal oder einer der Konsonanten β, γ, δ, ζ, λ, μ, ν, ρ, ist die Aussprache aw bzw. ew. Folgt jedoch θ, κ, ξ, π, σ, τ, φ, χ, ψ, werden αυ und ευ als af bzw. ef ausgesprochen.</li>
 <li>In Verbindung mit dem unbestimmten Artikel bleiben Präposition σε und Artikel getrennt.</li>
 <li>Der Vokativ wird nur bei Wörtern auf -ος extra aufgeführt (-ε). Bei allen anderen Substantiven ist der Vokativ gleich wie der Akkusativ.</li>
 <li>Im Nominativ Singular enden alle Maskulina auf -ς.</li>
 <li>Alle diese Substantive [der Maskulin-Deklination] enden im Genitiv Plural auf -ων.</li>
-<li>Die Grundzahlen werden im Griechischen nicht dekliniert, mit Ausnahme der Zahlen: ένας, μια/μία, ένα; τρεις, εις, τρία; τέσσερις, ις, τέσσερα sowie einiger weiterer.</li>
-<li>Die starken Formen der Personalpronomen werden verwendet, wenn man die Person, über die man spricht, hervorheben will.</li>
-<li>Der Vokativ wird nur bei Wörtern auf -ος extra aufgeführt; bei allen anderen Substantiven ist der Vokativ gleich wie der Akkusativ.</li>
-<li>Die starken Formen der Personalpronomen werden verwendet, wenn man die Person besonders hervorheben will.</li>
-<li>Grundzahlen werden im Griechischen nicht dekliniert, mit Ausnahme der Zahlen ένας/μία/ένα (1), τρεις/τρία (3), τέσσερις/τέσσερα (4) sowie einiger weiterer wie διακόσιοι (200).</li>
 <li>Das Schluss-ν beim Artikel (τον, την, έναν) bleibt vor Vokalen und den Konsonanten κ, π, τ, γκ, μπ, ντ, τσ, τζ, ξ, ψ erhalten.</li>
-<li>Folgt dem γ ein a-, o-, u-Laut oder ein Konsonant, so wird das γ wie ein stimmhaftes ch ausgesprochen (Gurgellaut).</li>
-<li>Wenn auf ein χ ein i- oder e-Laut folgt, wird das χ wie ein ich-Laut ausgesprochen. Folgt ein a-, o-, u-Laut oder ein Konsonant, wird es wie ein ach-Laut ausgesprochen.</li>
-<li>Folgt dem αυ und ευ ein stimmloser Konsonant (θ, κ, ξ, π, σ, τ, φ, χ, ψ), werden sie af bzw. ef ausgesprochen.</li>
 <li>In Verbindung mit dem unbestimmten Artikel bleiben Präposition σε und Artikel getrennt (σε έναν, σε μια, σε ένα).</li>
-<li>Die Grundzahlen werden im Griechischen nicht dekliniert, mit Ausnahme der Zahlen ένας/μία/ένα, τρεις/τρία, τέσσερις/τέσσερα sowie einiger weiterer hunderter Zahlen.</li>
-<li>Der Vokativ wird nur bei Wörtern auf -ος extra aufgeführt; bei allen anderen Substantiven entspricht der Vokativ dem Akkusativ.</li>
 <li>Alle Substantive und Adjektive haben im Genitiv Plural für alle Genera die Endung -ων.</li>
 <li>Das Schluss-ν beim bestimmten Artikel (τον, την) entfällt häufig vor bestimmten Konsonanten.</li>
-<li>Die starken Formen der Personalpronomen werden verwendet, wenn man die Person besonders hervorheben möchte.</li>
-<li>Das Griechische kennt fünf unterschiedliche Schreibweisen für den Laut i (η, ι, υ, ει, οι), zwei für e (ε, αι) und zwei für o (ο, ω).</li>
-<li>Der Vokativ wird nur bei Wörtern auf -ος extra aufgeführt, da er dort Unterschiede aufweist. Bei allen anderen Substantiven ist der Vokativ gleich wie der Akkusativ.</li>
 <li>Bestimmte Artikel begleiten auch Personennamen, Städte- und Ländernamen (z.B. Ο Γιώργος, Η Αθήνα).</li>
-<li>Im Genitiv Plural haben alle Substantive die Endung -ων.</li>
-<li>Starke Formen der Personalpronomen werden verwendet, um die Person hervorzuheben (z.B. Εσένα θέλω - Dich will ich).</li>
-<li>Das Wort γιατί bedeutet &#x27;warum&#x27; in Fragen und &#x27;weil&#x27; in Aussagesätzen.</li>
+<li>In Verbindung mit dem unbestimmten Artikel bleiben Präposition und Artikel getrennt (z.B. σε ένα).</li>
+<li>Unbestimmte Artikel: ένας, μια, ένα (ein, eine, ein).</li>
+<li>In Verbindung mit dem unbestimmten Artikel bleiben Präposition und Artikel getrennt: σε ένα(ν), σε μια, σε ένα.</li>
 </ul></aside>
 <p class="quelle">Zuletzt ergänzt am 01.10.2026 · 4 Blätter</p>
 </article>
 </section>
 <section class="bereich" id="griechisch-bereich-pronomen">
 <h2>Pronomen<span class="bereichunter">Fürwörter</span><span class="bereichzahl">2</span></h2>
-<article class="thema" id="griechisch-fragewoerter" data-suche="fragewörter übersicht der wichtigsten fragewörter">
+<article class="thema" id="griechisch-fragewoerter" data-suche="fragewörter übersicht der wichtigsten fragewörter  
+ die fragewörter — ein teil davon beugt sich. 
+  die regel  
+ unveränderlich:  τι  (was),  πού  (wo),  πότε  (wann),  γιατί  (warum),  πώς  (wie). 
+ veränderlich, weil sie sich nach dem substantiv richten:  ποιος, -η, -ο  (wer/welcher) und  πόσος, -η, -ο  (wie viel). 
+  πόσο  ohne endung ist das adverb:  πόσο κάνει;  — wie viel kostet es? 
+  
+  so wendest du es an steht ein substantiv dahinter, muss sich das fragewort angleichen:  ποια φίλη;  — welche freundin? 
+  achtung im griechischen steht am satzende ein  semikolon  als fragezeichen:  τι κάνεις;  
+   übersicht der wichtigsten fragewörter 
+  
+  τι   was   τι κάνετε εκεί; (was macht ihr da?)   
+  ποιος, -α, -ο   wer   ποιος είναι αυτός; (wer ist das;)   
+  πόσος, -η, -ο   wie viel(e), wie groß (pronomen)   πόσα ξαδέλφια έχεις; (wie viele cousins hast du?)   
+  πόσο   wie viel, wie groß (adverb)   πόσο μεγάλη είναι η οικογένειά σου; (wie groß ist deine familie?)   
+  πού   wo   πού είναι η αδελφή σου; (wo ist deine schwester?)   
+  πότε   wann   πότε έχεις γενέθλια; (wann hast du geburtstag?)   
+  πώς   wie   πώς παει; (wie geht&#x27;s;)   
+  γιατί   warum   γιατί έχουν όλοι το ίδιο όνομα; (warum haben alle denselben namen?)   
+      regeln von deinem blatt     das wort γιατί bedeutet &#x27;warum&#x27; in fragen und &#x27;weil&#x27; in aussagesätzen.      zuletzt ergänzt am 01.10.2026 · 1 blatt ">
 <header class="themakopf">
 <h3>Fragewörter</h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
@@ -1083,9 +970,55 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <tr><th class="zeilenkopf">πώς</th><td><span class="form">wie</span> <span class="erklaerung">Πώς παει; (Wie geht&#x27;s;)</span></td></tr>
 <tr><th class="zeilenkopf">γιατί</th><td><span class="form">warum</span> <span class="erklaerung">Γιατί έχουν όλοι το ίδιο όνομα; (Warum haben alle denselben Namen?)</span></td></tr>
 </table></div>
+<aside class="regelblock">
+<h4>Regeln von deinem Blatt</h4>
+<ul>
+<li>Das Wort γιατί bedeutet &#x27;warum&#x27; in Fragen und &#x27;weil&#x27; in Aussagesätzen.</li>
+</ul></aside>
 <p class="quelle">Zuletzt ergänzt am 01.10.2026 · 1 Blatt</p>
 </article>
-<article class="thema" id="griechisch-personalpronomen" data-suche="personalpronomen personalpronomen (starke und schwache formen)">
+<article class="thema" id="griechisch-personalpronomen" data-suche="personalpronomen personalpronomen (starke und schwache formen)  
+ personalpronomen gibt es in einer starken und einer schwachen form. 
+  die regel  
+  εγώ, εσύ, αυτός/αυτή/αυτό  sind die subjektformen — sie stehen nur zur betonung. 
+ objektformen gibt es doppelt:  stark  ( εμένα, εσένα ) und  schwach  ( μου, σου, με, σε ). 
+ die schwache form steht  vor  dem verb:  με βλέπει  — er sieht mich. 
+  
+  so wendest du es an im normalfall die schwache form. die starke nimmst du, wenn es auf die person ankommt:  εμένα με βλέπει  —  mich  sieht er. 
+  achtung die schwache form hängt sich an den satz, nicht ans verb — verschiebt sich das verb, wandert sie mit. 
+   personalpronomen (starke und schwache formen) 
+  
+  1sg (ich)   εγώ   nominativ   
+  1sg (mir)   εμένα / μου   genitiv (stark / schwach)   
+  1sg (mich)   εμένα / με   akkusativ (stark / schwach)   
+  2sg (du)   εσύ   nominativ   
+  2sg (dir)   εσένα / σου   genitiv (stark / schwach)   
+  2sg (dich)   εσένα / σε   akkusativ (stark / schwach)   
+  3sg m (er)   αυτός   nominativ   
+  3sg m (ihm)   αυτού / του   genitiv (stark / schwach)   
+  3sg m (ihn)   αυτόν / τον   akkusativ (stark / schwach)   
+  3sg f (sie)   αυτή   nominativ   
+  3sg f (ihr)   αυτής / της   genitiv (stark / schwach)   
+  3sg f (sie)   αυτήν / την   akkusativ (stark / schwach)   
+  3sg n (es)   αυτό   nominativ   
+  3sg n (ihm)   αυτού / του   genitiv (stark / schwach)   
+  3sg n (es)   αυτό / το   akkusativ (stark / schwach)   
+  1pl (wir)   εμείς   nominativ   
+  1pl (uns)   εμάς / μας   genitiv (stark / schwach)   
+  1pl (uns)   εμάς / μας   akkusativ (stark / schwach)   
+  2pl (ihr)   εσείς   nominativ   
+  2pl (euch)   εσάς / σας   genitiv (stark / schwach)   
+  2pl (euch)   εσάς / σας   akkusativ (stark / schwach)   
+  3pl m (sie)   αυτοί   nominativ   
+  3pl m (ihnen)   αυτών / τους   genitiv (stark / schwach)   
+  3pl m (sie)   αυτούς / τους   akkusativ (stark / schwach)   
+  3pl f (sie)   αυτές   nominativ   
+  3pl f (ihnen)   αυτών / τους   genitiv (stark / schwach)   
+  3pl f (sie)   αυτές / τις (τες)   akkusativ (stark / schwach)   
+  3pl n (sie)   αυτά   nominativ   
+  3pl n (ihnen)   αυτών / τους   genitiv (stark / schwach)   
+  3pl n (sie)   αυτά / τα   akkusativ (stark / schwach)   
+      regeln von deinem blatt     die schwachen formen der personalpronomen sind gebräuchlicher; starke formen dienen der hervorhebung.   die starken formen der personalpronomen werden verwendet, wenn man die person, über die man spricht, hervorheben will.   starke formen der personalpronomen werden verwendet, um die person hervorzuheben (z.b. εσένα θέλω - dich will ich).      zuletzt ergänzt am 01.10.2026 · 1 blatt ">
 <header class="themakopf">
 <h3>Personalpronomen</h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
@@ -1133,12 +1066,36 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <tr><th class="zeilenkopf">3pl n (ihnen)</th><td><span class="form">αυτών / τους</span> <span class="erklaerung">Genitiv (stark / schwach)</span></td></tr>
 <tr><th class="zeilenkopf">3pl n (sie)</th><td><span class="form">αυτά / τα</span> <span class="erklaerung">Akkusativ (stark / schwach)</span></td></tr>
 </table></div>
+<aside class="regelblock">
+<h4>Regeln von deinem Blatt</h4>
+<ul>
+<li>Die schwachen Formen der Personalpronomen sind gebräuchlicher; starke Formen dienen der Hervorhebung.</li>
+<li>Die starken Formen der Personalpronomen werden verwendet, wenn man die Person, über die man spricht, hervorheben will.</li>
+<li>Starke Formen der Personalpronomen werden verwendet, um die Person hervorzuheben (z.B. Εσένα θέλω - Dich will ich).</li>
+</ul></aside>
 <p class="quelle">Zuletzt ergänzt am 01.10.2026 · 1 Blatt</p>
 </article>
 </section>
 <section class="bereich" id="griechisch-bereich-zahlen">
 <h2>Zahlen<span class="bereichunter">Zählen, Mengen und Reihenfolge</span><span class="bereichzahl">1</span></h2>
-<article class="thema" id="griechisch-zahlen" data-suche="zahlen kardinal- und ordinalzahlen">
+<article class="thema" id="griechisch-zahlen" data-suche="zahlen kardinal- und ordinalzahlen  
+ die zahlen — drei davon beugen sich. 
+  die regel  
+  1, 3, 4  richten sich nach dem geschlecht:  ένας / μία / ένα ,  τρεις / τρία ,  τέσσερις / τέσσερα . 
+ alle übrigen zahlen bleiben unverändert. 
+  
+  so wendest du es an  ένας φίλος , aber  μία φίλη  und  ένα παιδί  — die zahl übernimmt das geschlecht des substantivs. 
+  achtung genau diese drei sind die ausnahme. bei 2, 5, 6 … musst du nichts anpassen. 
+   kardinal- und ordinalzahlen 
+  
+  1   ένας, μια/μία, ένα   eins (m, f, n)   
+  1.   πρώτος, η, ο   erster   
+  2   δυο/δύο   zwei   
+  2.   δεύτερος, η, ο   zweiter   
+  10   δέκα   zehn   
+  20   είκοσι   zwanzig   
+  100   εκατό(ν)   hundert   
+      regeln von deinem blatt     die grundzahlen werden im griechischen nicht dekliniert, mit ausnahme der zahlen: ένας, μια/μία, ένα; τρεις, εις, τρία; τέσσερις, ις, τέσσερα sowie einiger weiterer.   grundzahlen werden im griechischen nicht dekliniert, mit ausnahme der zahlen ένας/μία/ένα (1), τρεις/τρία (3), τέσσερις/τέσσερα (4) sowie einiger weiterer wie διακόσιοι (200).   die grundzahlen werden im griechischen nicht dekliniert, mit ausnahme der zahlen ένας/μία/ένα, τρεις/τρία, τέσσερις/τέσσερα sowie einiger weiterer hunderter zahlen.      zuletzt ergänzt am 01.10.2026 · 1 blatt ">
 <header class="themakopf">
 <h3>Zahlen</h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
@@ -1162,12 +1119,54 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <tr><th class="zeilenkopf">20</th><td><span class="form">είκοσι</span> <span class="erklaerung">zwanzig</span></td></tr>
 <tr><th class="zeilenkopf">100</th><td><span class="form">εκατό(ν)</span> <span class="erklaerung">hundert</span></td></tr>
 </table></div>
+<aside class="regelblock">
+<h4>Regeln von deinem Blatt</h4>
+<ul>
+<li>Die Grundzahlen werden im Griechischen nicht dekliniert, mit Ausnahme der Zahlen: ένας, μια/μία, ένα; τρεις, εις, τρία; τέσσερις, ις, τέσσερα sowie einiger weiterer.</li>
+<li>Grundzahlen werden im Griechischen nicht dekliniert, mit Ausnahme der Zahlen ένας/μία/ένα (1), τρεις/τρία (3), τέσσερις/τέσσερα (4) sowie einiger weiterer wie διακόσιοι (200).</li>
+<li>Die Grundzahlen werden im Griechischen nicht dekliniert, mit Ausnahme der Zahlen ένας/μία/ένα, τρεις/τρία, τέσσερις/τέσσερα sowie einiger weiterer hunderter Zahlen.</li>
+</ul></aside>
 <p class="quelle">Zuletzt ergänzt am 01.10.2026 · 1 Blatt</p>
 </article>
 </section>
 <section class="bereich" id="griechisch-bereich-aussprache">
 <h2>Aussprache<span class="bereichunter">Wie die Buchstaben klingen</span><span class="bereichzahl">5</span></h2>
-<article class="thema" id="griechisch-aussprache-1" data-suche="das alphabet aussprache das alphabet">
+<article class="thema" id="griechisch-aussprache-1" data-suche="das alphabet aussprache das alphabet  
+ das griechische alphabet — 24 buchstaben, von denen du die meisten schon kennst. 
+  die regel  
+ acht buchstaben sehen aus wie lateinische und klingen auch so:  α ε ζ ι κ μ ο τ . 
+ sieben sehen vertraut aus, klingen aber anders — das sind die stolperfallen:  β  = w,  η  = i,  ν  = n,  ρ  = r,  υ  = i,  χ  = ch,  ω  = o. 
+ die übrigen neun sind neu:  γ δ θ λ ξ π σ φ ψ . 
+  σ  steht im wort,  ς  nur am wortende:  σπίτι , aber  φίλος . 
+  
+  so wendest du es an lerne nicht 24 buchstaben, sondern die sieben falschen freunde. wer  β  als b liest, sagt „baros“ statt „waros“. 
+  achtung es gibt drei buchstaben für den i-laut ( η, ι, υ ) und zwei für o ( ο, ω ). beim hören kannst du sie nicht unterscheiden — die schreibweise musst du pro wort lernen. 
+    
+  α α (alfa)   a   wie amerika   
+  β β (wita)   w   wie wein   
+  γ γ (gamma)   j &amp; γ*   wie jeder &amp; γ*   
+  δ δ (delta)   engl. th   wie engl. there   
+  ε ε (epsilon)   e   wie essen   
+  ζ ζ (sita)   z   wie sand**   
+  η η (ita)   i   wie inhalt   
+  θ θ (thita)   engl. th   wie engl. think   
+  ι ι (jota)   i   wie inhalt   
+  κ κ (kappa)   k   wie koffer   
+  λ λ (lamda)   l   wie laden   
+  μ μ (mi)   m   wie milch   
+  ν ν (ni)   n   wie nachbar   
+  ξ ξ (ksi)   ks, x   wie xylophon   
+  ο ο (omikron)   o   wie opfer   
+  π π (pi)   p   wie partner   
+  ρ ρ (ro)   r   ital. roma   
+  σ σ, ς (sigma)   s, ß   wie klaus   
+  τ τ (taf)   t   wie tanne   
+  υ υ (ypsilon)   i   wie inhalt   
+  φ φ (fi)   f   wie fotograf   
+  χ χ (chi)   chi   wie ich, ach***   
+  ψ ψ (psi)   psi   wie psychologie   
+  ω ω (omega)   o   wie opfer   
+      fachbegriffe erklärt  (1)      aussprache lautlehre   wie die buchstaben klingen. die zeichen zwischen schrägstrichen wie /k/ sind lautschrift, nicht schreibweise.    ">
 <header class="themakopf">
 <h3>Das Alphabet</h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
@@ -1184,61 +1183,6 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <p class="achtung"><span class="etikett">Achtung</span>Es gibt drei Buchstaben für den i-Laut (<strong>η, ι, υ</strong>) und zwei für o (<strong>ο, ω</strong>). Beim Hören kannst du sie nicht unterscheiden — die Schreibweise musst du pro Wort lernen.</p>
 </section>
 <div class="tabellenrahmen"><table>
-<tr><th class="zeilenkopf">Α, α</th><td><span class="form">alfa</span> <span class="erklaerung">a (Amerika)</span></td></tr>
-<tr><th class="zeilenkopf">Β, β</th><td><span class="form">wita</span> <span class="erklaerung">w</span></td></tr>
-<tr><th class="zeilenkopf">Α α</th><td><span class="form">alfa</span> <span class="erklaerung">wie Amerika</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: άλφα (alfa)">≠</span></td></tr>
-<tr><th class="zeilenkopf">Δ δ</th><td><span class="form">delta</span> <span class="erklaerung">wie englisch th (there)</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: δέλτα (delta)">≠</span></td></tr>
-<tr><th class="zeilenkopf">Ε, ε</th><td><span class="form">epsilon</span> <span class="erklaerung">e</span></td></tr>
-<tr><th class="zeilenkopf">Ζ, ζ</th><td><span class="form">zita</span> <span class="erklaerung">z</span></td></tr>
-<tr><th class="zeilenkopf">Η, η</th><td><span class="form">ita</span> <span class="erklaerung">i</span></td></tr>
-<tr><th class="zeilenkopf">Θ θ</th><td><span class="form">thita</span> <span class="erklaerung">wie englisch th (think)</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: θήτα (thita)">≠</span></td></tr>
-<tr><th class="zeilenkopf">Ι, ι</th><td><span class="form">jiota</span> <span class="erklaerung">i</span></td></tr>
-<tr><th class="zeilenkopf">Κ, κ</th><td><span class="form">kappa</span> <span class="erklaerung">k</span></td></tr>
-<tr><th class="zeilenkopf">Λ λ</th><td><span class="form">lamda</span> <span class="erklaerung">wie Laden</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: λάμδα (lamda)">≠</span></td></tr>
-<tr><th class="zeilenkopf">Μ, μ</th><td><span class="form">mi</span> <span class="erklaerung">m</span></td></tr>
-<tr><th class="zeilenkopf">Ν, ν</th><td><span class="form">ni</span> <span class="erklaerung">n</span></td></tr>
-<tr><th class="zeilenkopf">Ξ ξ</th><td><span class="form">ksi</span> <span class="erklaerung">wie Xylophon (ks, x)</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: ξι (ksi)">≠</span></td></tr>
-<tr><th class="zeilenkopf">Ο, ο</th><td><span class="form">omikron</span> <span class="erklaerung">o</span></td></tr>
-<tr><th class="zeilenkopf">Π π</th><td><span class="form">pi</span> <span class="erklaerung">wie Partner</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: πι (pi)">≠</span></td></tr>
-<tr><th class="zeilenkopf">Ρ, ρ</th><td><span class="form">ro</span> <span class="erklaerung">r</span></td></tr>
-<tr><th class="zeilenkopf">Σ σ, ς</th><td><span class="form">sigma</span> <span class="erklaerung">wie Klaus (s, ß)</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: σίγμα (sigma)">≠</span></td></tr>
-<tr><th class="zeilenkopf">Τ, τ</th><td><span class="form">taf</span> <span class="erklaerung">t</span></td></tr>
-<tr><th class="zeilenkopf">Υ, υ</th><td><span class="form">ypsilon</span> <span class="erklaerung">i</span></td></tr>
-<tr><th class="zeilenkopf">Φ φ</th><td><span class="form">fi</span> <span class="erklaerung">wie Fotograf (f)</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: φι (fi)">≠</span></td></tr>
-<tr><th class="zeilenkopf">Χ, χ</th><td><span class="form">chi</span> <span class="erklaerung">ich, ach</span></td></tr>
-<tr><th class="zeilenkopf">Ψ ψ</th><td><span class="form">psi</span> <span class="erklaerung">wie Psychologie</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: ψι (psi)">≠</span></td></tr>
-<tr><th class="zeilenkopf">Ω ω</th><td><span class="form">omega</span> <span class="erklaerung">wie Opfer</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: ωμέγα (omega)">≠</span></td></tr>
-<tr><th class="zeilenkopf">Γ γ</th><td><span class="form">gamma</span> <span class="erklaerung">wie j oder γ*</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: γάμα (gamma)">≠</span></td></tr>
-<tr><th class="zeilenkopf">Ε ε</th><td><span class="form">epsilon</span> <span class="erklaerung">wie Essen</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: έψιλον (epsilon)">≠</span></td></tr>
-<tr><th class="zeilenkopf">Ζ ζ</th><td><span class="form">sita</span> <span class="erklaerung">wie z (Sand**)</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: ζήτα (sita)">≠</span></td></tr>
-<tr><th class="zeilenkopf">Η η</th><td><span class="form">ita</span> <span class="erklaerung">wie Inhalt (i)</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: ήτα (ita)">≠</span></td></tr>
-<tr><th class="zeilenkopf">Ι ι</th><td><span class="form">jota</span> <span class="erklaerung">wie Inhalt (i)</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: γιώτα (jota)">≠</span></td></tr>
-<tr><th class="zeilenkopf">Κ κ</th><td><span class="form">kappa</span> <span class="erklaerung">wie Koffer</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: κάππα (kappa)">≠</span></td></tr>
-<tr><th class="zeilenkopf">Μ μ</th><td><span class="form">mi</span> <span class="erklaerung">wie Milch</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: μι (mi)">≠</span></td></tr>
-<tr><th class="zeilenkopf">Ν ν</th><td><span class="form">ni</span> <span class="erklaerung">wie Nachbar</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: νι (ni)">≠</span></td></tr>
-<tr><th class="zeilenkopf">Ο ο</th><td><span class="form">omikron</span> <span class="erklaerung">wie Opfer</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: όμικρον (omikron)">≠</span></td></tr>
-<tr><th class="zeilenkopf">Ρ ρ</th><td><span class="form">ro</span> <span class="erklaerung">wie ital. Roma</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: ρο (ro)">≠</span></td></tr>
-<tr><th class="zeilenkopf">Τ τ</th><td><span class="form">taf</span> <span class="erklaerung">wie Tanne</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: ταυ (taf)">≠</span></td></tr>
-<tr><th class="zeilenkopf">Υ υ</th><td><span class="form">ypsilon</span> <span class="erklaerung">wie Inhalt (i)</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: ύψιλον (ypsilon)">≠</span></td></tr>
-<tr><th class="zeilenkopf">Χ χ</th><td><span class="form">chi</span> <span class="erklaerung">wie ich, ach***</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: χι (chi)">≠</span></td></tr>
-<tr><th class="zeilenkopf">Β β</th><td><span class="form">wita</span> <span class="erklaerung">wie Wein (w)</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: βήτα (wita)">≠</span></td></tr>
-<tr><th class="zeilenkopf">Β β</th><td><span class="form">w</span> <span class="erklaerung">Wein</span></td></tr>
-<tr><th class="zeilenkopf">Γ γ</th><td><span class="form">j &amp; γ*</span> <span class="erklaerung">Jeder &amp; γ*</span></td></tr>
-<tr><th class="zeilenkopf">Θ θ</th><td><span class="form">engl. th</span> <span class="erklaerung">engl. think</span></td></tr>
-<tr><th class="zeilenkopf">Ε ε</th><td><span class="form">e</span> <span class="erklaerung">Essen</span></td></tr>
-<tr><th class="zeilenkopf">Ζ ζ</th><td><span class="form">z</span> <span class="erklaerung">Sand**</span></td></tr>
-<tr><th class="zeilenkopf">Υ υ</th><td><span class="form">i</span> <span class="erklaerung">Inhalt</span></td></tr>
-<tr><th class="zeilenkopf">Κ κ</th><td><span class="form">k</span> <span class="erklaerung">Koffer</span></td></tr>
-<tr><th class="zeilenkopf">Λ λ</th><td><span class="form">l</span> <span class="erklaerung">Laden</span></td></tr>
-<tr><th class="zeilenkopf">Μ μ</th><td><span class="form">m</span> <span class="erklaerung">Milch</span></td></tr>
-<tr><th class="zeilenkopf">Ν ν</th><td><span class="form">n</span> <span class="erklaerung">Nachbar</span></td></tr>
-<tr><th class="zeilenkopf">Ξ ξ</th><td><span class="form">ks, x</span> <span class="erklaerung">Xylophon</span></td></tr>
-<tr><th class="zeilenkopf">Ω ω</th><td><span class="form">o</span> <span class="erklaerung">Opfer</span></td></tr>
-<tr><th class="zeilenkopf">Π π</th><td><span class="form">p</span> <span class="erklaerung">Partner</span></td></tr>
-<tr><th class="zeilenkopf">Ρ ρ</th><td><span class="form">r</span> <span class="erklaerung">ital. Roma</span></td></tr>
-<tr><th class="zeilenkopf">Σ σ, ς</th><td><span class="form">s, ß</span> <span class="erklaerung">Klaus</span></td></tr>
-<tr><th class="zeilenkopf">Τ τ</th><td><span class="form">t</span> <span class="erklaerung">Tanne</span></td></tr>
-<tr><th class="zeilenkopf">Φ φ</th><td><span class="form">f</span> <span class="erklaerung">Fotograf</span></td></tr>
 <tr><th class="zeilenkopf">Α α (alfa)</th><td><span class="form">a</span> <span class="erklaerung">wie Amerika</span></td></tr>
 <tr><th class="zeilenkopf">Β β (wita)</th><td><span class="form">w</span> <span class="erklaerung">wie Wein</span></td></tr>
 <tr><th class="zeilenkopf">Γ γ (gamma)</th><td><span class="form">j &amp; γ*</span> <span class="erklaerung">wie Jeder &amp; γ*</span></td></tr>
@@ -1270,9 +1214,24 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <dt>Aussprache<span class="art">Lautlehre</span></dt><dd>Wie die Buchstaben klingen. Die Zeichen zwischen Schrägstrichen wie /k/ sind Lautschrift, nicht Schreibweise.</dd>
 </dl></details>
 </article>
-<article class="thema" id="griechisch-aussprache-2" data-suche="vokalkombinationen / vokalkombinationen diphthonge aussprache vokalkombinationen vokalkombinationen (diphthonge)">
+<article class="thema" id="griechisch-aussprache-2" data-suche="vokalkombinationen aussprache vokalkombinationen  
+ zwei vokale, ein laut — und bei αυ/ευ hängt er vom nächsten buchstaben ab. 
+  die regel  
+  οι  und  ει  →  i ,  αι  →  e ,  ου  →  u . 
+  αυ  und  ευ  haben zwei aussprachen: vor einem stimmhaften laut  aw / ew  ( αυλή  = awli,  ευγενικός  = ewjenikos), vor einem stimmlosen  af / ef  ( αυτοκίνητο  = aftokinito,  ευχαριστώ  = efcharisto). 
+  
+  so wendest du es an bei αυ/ευ nicht raten: schau auf den buchstaben danach. folgt κ, π, τ, σ, φ, χ, θ — dann f. sonst w. 
+  achtung drei schreibweisen ergeben denselben i-laut:  ι, η, οι, ει . beim schreiben hilft nur vokabellernen. 
+    
+  οι   i   aussprache wie i in inhalt   
+  αι   e   aussprache wie e in essen   
+  ου   u   aussprache wie u in uhr   
+  αυ*   af &amp; aw   abhängig vom folgelaut   
+  ευ*   ef &amp; ew   abhängig vom folgelaut   
+  ει   i   
+      fachbegriffe erklärt  (1)      aussprache lautlehre   wie die buchstaben klingen. die zeichen zwischen schrägstrichen wie /k/ sind lautschrift, nicht schreibweise.    ">
 <header class="themakopf">
-<h3>vokalkombinationen / vokalkombinationen diphthonge</h3>
+<h3>Vokalkombinationen</h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
@@ -1285,44 +1244,36 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <p class="achtung"><span class="etikett">Achtung</span>Drei Schreibweisen ergeben denselben i-Laut: <strong>ι, η, οι, ει</strong>. Beim Schreiben hilft nur Vokabellernen.</p>
 </section>
 <div class="tabellenrahmen"><table>
-<thead><tr><th class="zeilenkopf"></th>
-<th>vokalkombinationen</th>
-<th>vokalkombinationen diphthonge</th>
-</tr></thead><tbody>
-<tr><th class="zeilenkopf">Α α</th>
-<td><span class="form">i</span> <span class="erklaerung">Aussprache wie i in Inhalt</span></td>
-<td><span class="form">i</span></td>
-</tr>
-<tr><th class="zeilenkopf">Ε ε</th>
-<td><span class="form">e</span> <span class="erklaerung">Aussprache wie e in Essen</span></td>
-<td><span class="form">e</span></td>
-</tr>
-<tr><th class="zeilenkopf">Υ υ</th>
-<td><span class="form">i</span></td>
-<td class="leer">·</td>
-</tr>
-<tr><th class="zeilenkopf">ου</th>
-<td><span class="form">u</span> <span class="erklaerung">Aussprache wie u in Uhr</span></td>
-<td><span class="form">u</span></td>
-</tr>
-<tr><th class="zeilenkopf">αυ*</th>
-<td><span class="form">af &amp; aw</span> <span class="erklaerung">abhängig vom Folgelaut</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: af / aw">≠</span></td>
-<td><span class="form">af &amp; aw</span></td>
-</tr>
-<tr><th class="zeilenkopf">ευ*</th>
-<td><span class="form">ef &amp; ew</span> <span class="erklaerung">abhängig vom Folgelaut</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: ef / ew">≠</span></td>
-<td><span class="form">ef &amp; ew</span></td>
-</tr>
-</tbody></table></div>
+<tr><th class="zeilenkopf">οι</th><td><span class="form">i</span> <span class="erklaerung">Aussprache wie i in Inhalt</span></td></tr>
+<tr><th class="zeilenkopf">αι</th><td><span class="form">e</span> <span class="erklaerung">Aussprache wie e in Essen</span></td></tr>
+<tr><th class="zeilenkopf">ου</th><td><span class="form">u</span> <span class="erklaerung">Aussprache wie u in Uhr</span></td></tr>
+<tr><th class="zeilenkopf">αυ*</th><td><span class="form">af &amp; aw</span> <span class="erklaerung">abhängig vom Folgelaut</span></td></tr>
+<tr><th class="zeilenkopf">ευ*</th><td><span class="form">ef &amp; ew</span> <span class="erklaerung">abhängig vom Folgelaut</span></td></tr>
+<tr><th class="zeilenkopf">ει</th><td><span class="form">i</span></td></tr>
+</table></div>
 <details class="begriffe">
 <summary>Fachbegriffe erklärt <span>(1)</span></summary>
 <dl>
 <dt>Aussprache<span class="art">Lautlehre</span></dt><dd>Wie die Buchstaben klingen. Die Zeichen zwischen Schrägstrichen wie /k/ sind Lautschrift, nicht Schreibweise.</dd>
 </dl></details>
 </article>
-<article class="thema" id="griechisch-aussprache-3" data-suche="konsonantenkombinationen / konsonantendehnungen kombinationen aussprache konsonantenkombinationen konsonantendehnungen und -kombinationen">
+<article class="thema" id="griechisch-aussprache-3" data-suche="konsonantenkombinationen aussprache konsonantenkombinationen  
+ laute, die es als einzelnen buchstaben nicht gibt. 
+  die regel  
+  μπ  → b ( μπαμπάς  = babás) ·  ντ  → d ·  γγ / γκ  → g ·  τζ  → dz ·  τς  → ts 
+ am wortanfang klingen sie rein: b, d, g. in der wortmitte oft mit nasal davor: mb, nd, ng. 
+  
+  so wendest du es an griechisch hat keine eigenen zeichen für b, d und g — diese paare füllen die lücke. fremdwörter werden darum so geschrieben:  μπαρ  = bar. 
+  achtung  γγ  und  γκ  klingen gleich; welches man schreibt, gehört zum wort dazu. 
+    
+  μπ   b, mb   beispiel: μπάλα (ball)   
+  ντ   d, nd   beispiel: ντομάτα (tomate)   
+  γγ, γκ   g, ng   beispiel: λόξυγγας (schluckauf)   
+  τσ   ts   beispiel: τσαι (tee)   
+  τζ   dz   beispiel: τζάκι (kamin)   
+      fachbegriffe erklärt  (1)      aussprache lautlehre   wie die buchstaben klingen. die zeichen zwischen schrägstrichen wie /k/ sind lautschrift, nicht schreibweise.    ">
 <header class="themakopf">
-<h3>konsonantenkombinationen / konsonantendehnungen kombinationen</h3>
+<h3>Konsonantenkombinationen</h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
@@ -1335,38 +1286,29 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <p class="achtung"><span class="etikett">Achtung</span><strong>γγ</strong> und <strong>γκ</strong> klingen gleich; welches man schreibt, gehört zum Wort dazu.</p>
 </section>
 <div class="tabellenrahmen"><table>
-<thead><tr><th class="zeilenkopf"></th>
-<th>konsonantenkombinationen</th>
-<th>konsonantendehnungen kombinationen</th>
-</tr></thead><tbody>
-<tr><th class="zeilenkopf">Α α</th>
-<td><span class="form">b, mb</span> <span class="erklaerung">Beispiel: μπάλα (Ball)</span></td>
-<td><span class="form">b, mb</span></td>
-</tr>
-<tr><th class="zeilenkopf">ντ</th>
-<td><span class="form">d, nd</span> <span class="erklaerung">Beispiel: ντομάτα (Tomate)</span></td>
-<td><span class="form">d, nd</span></td>
-</tr>
-<tr><th class="zeilenkopf">γγ, γκ</th>
-<td><span class="form">g, ng</span> <span class="erklaerung">Beispiel: λόξυγγας (Schluckauf)</span></td>
-<td><span class="form">g, ng</span></td>
-</tr>
-<tr><th class="zeilenkopf">τσ</th>
-<td><span class="form">ts</span> <span class="erklaerung">Beispiel: τσαι (Tee)</span></td>
-<td><span class="form">ts</span></td>
-</tr>
-<tr><th class="zeilenkopf">τζ</th>
-<td><span class="form">dz</span> <span class="erklaerung">Beispiel: τζάκι (Kamin)</span></td>
-<td><span class="form">dz</span></td>
-</tr>
-</tbody></table></div>
+<tr><th class="zeilenkopf">μπ</th><td><span class="form">b, mb</span> <span class="erklaerung">Beispiel: μπάλα (Ball)</span></td></tr>
+<tr><th class="zeilenkopf">ντ</th><td><span class="form">d, nd</span> <span class="erklaerung">Beispiel: ντομάτα (Tomate)</span></td></tr>
+<tr><th class="zeilenkopf">γγ, γκ</th><td><span class="form">g, ng</span> <span class="erklaerung">Beispiel: λόξυγγας (Schluckauf)</span></td></tr>
+<tr><th class="zeilenkopf">τσ</th><td><span class="form">ts</span> <span class="erklaerung">Beispiel: τσαι (Tee)</span></td></tr>
+<tr><th class="zeilenkopf">τζ</th><td><span class="form">dz</span> <span class="erklaerung">Beispiel: τζάκι (Kamin)</span></td></tr>
+</table></div>
 <details class="begriffe">
 <summary>Fachbegriffe erklärt <span>(1)</span></summary>
 <dl>
 <dt>Aussprache<span class="art">Lautlehre</span></dt><dd>Wie die Buchstaben klingen. Die Zeichen zwischen Schrägstrichen wie /k/ sind Lautschrift, nicht Schreibweise.</dd>
 </dl></details>
 </article>
-<article class="thema" id="griechisch-aussprache-4" data-suche="schreibweisen für vokallaute aussprache schreibweisen für vokallaute">
+<article class="thema" id="griechisch-aussprache-4" data-suche="schreibweisen für vokallaute aussprache schreibweisen für vokallaute   
+  laut i   η   
+  laut i   ι   
+  laut i   υ   
+  laut i   ει   
+  laut i   οι   
+  laut e   ε   
+  laut e   αι   
+  laut o   ο   
+  laut o   ω   
+      fachbegriffe erklärt  (1)      aussprache lautlehre   wie die buchstaben klingen. die zeichen zwischen schrägstrichen wie /k/ sind lautschrift, nicht schreibweise.    ">
 <header class="themakopf">
 <h3>Schreibweisen für Vokallaute</h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
@@ -1388,7 +1330,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <dt>Aussprache<span class="art">Lautlehre</span></dt><dd>Wie die Buchstaben klingen. Die Zeichen zwischen Schrägstrichen wie /k/ sind Lautschrift, nicht Schreibweise.</dd>
 </dl></details>
 </article>
-<article class="thema" id="griechisch-aussprache-regeln" data-suche="regeln aussprache">
+<article class="thema" id="griechisch-aussprache-regeln" data-suche="regeln aussprache      im griechischen werden alle wörter kleingeschrieben, außer eigennamen, länder, städte, flüsse, berge, nationalitäten, wochentage, monate, feiertage, religiöse ursprünge und kunstwerke/literarische werke.   ποῦ und πῶς sind zwei der drei einsilbigen wörter, die im griechischen einen akzent tragen.   wenn auf das γ ein i-laut oder e-laut folgt, wird das γ wie ein j ausgesprochen. folgt jedoch ein a-, o-laut oder ein konsonant, so wird das γ wie ein stimmhaftes ch ausgesprochen (mischung aus r und g).   das ζ wird wie ein stimmhaftes s ausgesprochen, wie zum beispiel bei den wörtern: siegfried, silke, seele, siegel.   wenn auf ein χ ein i- oder e-laut folgt, wird das χ wie ein ich, milch ausgesprochen. folgt jedoch ein a-, o-, ou- laut oder ein konsonant, wird das χ wie in achtung, machen ausgesprochen.   endet ein wort auf -s, so wird dieses immer als schluss-ς geschrieben; das σ steht nie am ende eines wortes.   folgt dem αυ und ευ ein vokal oder einer der konsonanten β, γ, δ, ζ, λ, μ, ν, ρ, ist die aussprache aw bzw. ew. folgt jedoch θ, κ, ξ, π, σ, τ, φ, χ, ψ, werden αυ und ευ als af bzw. ef ausgesprochen.   folgt dem αυ und ευ ein vokal oder einer der stimmhaften konsonanten (β, γ, δ, ζ, λ, μ, ν, ρ), ist die aussprache aw bzw. ew.   folgt jedoch ein stimmloser konsonant (θ, κ, ξ, π, σ, τ, φ, χ, ψ), werden αυ und ευ als af bzw. ef ausgesprochen.   wenn auf das γ ein i-laut oder e-laut folgt, wird das γ wie ein j ausgesprochen. (beispiele: γιώργος, γεια σου, γερμανία)   der artikel ο steht für das männliche geschlecht, η steht für das weibliche geschlecht und το steht für das neutrale geschlecht.   folgt jedoch ein a-, o-laut oder ein konsonant, so wird das γ wie ein stimmhaftes ch ausgesprochen. es ist wie eine mischung aus einem nicht gerollten r und einem g, ein reibelaut, wie er etwa beim gurgeln entsteht. beispiele: γάτα, παγωτό, γόνατο.   wenn auf ein χ ein i- oder e-laut folgt, wird das χ wie ein ich-laut (wie in milch) ausgesprochen. beispiele: χειρούργος, χέρι.   folgt jedoch ein a-, o-, ou-laut oder ein konsonant, wird das χ wie in achtung oder machen ausgesprochen. beispiele: ευχαριστώ, χορεύω.   das griechische kennt fünf unterschiedliche schreibweisen für den laut i (η, ι, υ, ει, οι), zwei unterschiedliche schreibweisen für den laut e (ε, αι) und zwei unterschiedliche schreibweisen für den laut o (ο, ω).      zuletzt ergänzt am 01.10.2026 · 4 blätter ">
 <header class="themakopf">
 <h3>Regeln von deinem Blatt</h3>
 </header>
@@ -1396,29 +1338,19 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <ul>
 <li>Im Griechischen werden alle Wörter kleingeschrieben, außer Eigennamen, Länder, Städte, Flüsse, Berge, Nationalitäten, Wochentage, Monate, Feiertage, religiöse Ursprünge und Kunstwerke/literarische Werke.</li>
 <li>ποῦ und πῶς sind zwei der drei einsilbigen Wörter, die im Griechischen einen Akzent tragen.</li>
-<li>Γιατί bedeutet &#x27;warum&#x27; in Fragesätzen und &#x27;weil&#x27; in Aussagesätzen.</li>
 <li>Wenn auf das γ ein i-Laut oder e-Laut folgt, wird das γ wie ein j ausgesprochen. Folgt jedoch ein a-, o-Laut oder ein Konsonant, so wird das γ wie ein stimmhaftes ch ausgesprochen (Mischung aus r und g).</li>
-<li>Das ζ wird wie ein stimmhaftes s ausgesprochen (wie in Siegfried).</li>
-<li>Wenn auf ein χ ein i- oder e-Laut folgt, wird das χ wie in &#x27;ich&#x27; ausgesprochen. Folgt jedoch ein a-, o-, ou-Laut oder ein Konsonant, wird das χ wie in &#x27;Achtung&#x27; ausgesprochen.</li>
-<li>Endet ein Wort auf -s, so wird dieses immer als Schluss-ς geschrieben; das σ steht nie am Ende eines Wortes.</li>
-<li>Folgt dem αυ und ευ ein Vokal oder einer der Konsonanten β, γ, δ, ζ, λ, μ, ν, ρ, ist die Aussprache aw bzw. ew. Folgt jedoch θ, κ, ξ, π, σ, τ, φ, χ, oder ψ, werden sie als af bzw. ef ausgesprochen.</li>
-<li>Personennamen, Städte- und Ländernamen werden vom bestimmten Artikel begleitet.</li>
-<li>Will man auf einen bestimmten Tag, Monat oder eine bestimmte Jahreszeit hinweisen, verwendet man den Artikel im Akkusativ.</li>
-<li>In Verbindung mit dem unbestimmten Artikel bleiben Präposition und Artikel getrennt (z.B. σε ένα).</li>
-<li>Wenn auf das γ ein i-Laut oder e-Laut folgt, wird das γ wie ein j ausgesprochen.</li>
-<li>Folgt dem γ ein a-, o-Laut oder ein Konsonant, so wird das γ wie ein stimmhaftes γ ausgesprochen (Reibelaut aus Gurgeln).</li>
-<li>Wenn auf ein χ ein i- oder e-Laut folgt, wird das χ wie ein &#x27;ich-Laut&#x27; ausgesprochen.</li>
-<li>Folgt dem χ ein a-, o-, ou-Laut oder ein Konsonant, wird das χ wie in &#x27;Achtung&#x27; ausgesprochen.</li>
-<li>Folgt dem αυ und ευ ein Vokal oder stimmhafter Konsonant (β, γ, δ, ζ, λ, μ, ν, ρ), ist die Aussprache aw bzw. ew.</li>
-<li>Folgt dem αυ und ευ ein stimmloser Konsonant (θ, κ, ξ, π, σ, τ, φ, χ, ψ), werden sie af bzw. ef ausgesprochen.</li>
-<li>Will man auf einen bestimmten Tag, Monat oder eine Jahreszeit hinweisen, verwendet man den Artikel im Akkusativ.</li>
-<li>Wenn auf das γ ein i-Laut oder e-Laut folgt, wird das γ wie ein j ausgesprochen. (Beispiele: Γιώργος, γεια σου, Γερμανία)</li>
-<li>Folgt jedoch ein a-, o-Laut oder ein Konsonant, so wird das γ wie ein ch ausgesprochen. Es ist wie eine Mischung aus einem nicht gerollten r und einem g, ein Reibelaut, wie er etwa beim Gurgeln entsteht.</li>
 <li>Das ζ wird wie ein stimmhaftes s ausgesprochen, wie zum Beispiel bei den Wörtern: Siegfried, Silke, Seele, Siegel.</li>
 <li>Wenn auf ein χ ein i- oder e-Laut folgt, wird das χ wie ein ich, Milch ausgesprochen. Folgt jedoch ein a-, o-, ou- Laut oder ein Konsonant, wird das χ wie in Achtung, machen ausgesprochen.</li>
+<li>Endet ein Wort auf -s, so wird dieses immer als Schluss-ς geschrieben; das σ steht nie am Ende eines Wortes.</li>
+<li>Folgt dem αυ und ευ ein Vokal oder einer der Konsonanten β, γ, δ, ζ, λ, μ, ν, ρ, ist die Aussprache aw bzw. ew. Folgt jedoch θ, κ, ξ, π, σ, τ, φ, χ, ψ, werden αυ und ευ als af bzw. ef ausgesprochen.</li>
+<li>Folgt dem αυ und ευ ein Vokal oder einer der stimmhaften Konsonanten (β, γ, δ, ζ, λ, μ, ν, ρ), ist die Aussprache aw bzw. ew.</li>
+<li>Folgt jedoch ein stimmloser Konsonant (θ, κ, ξ, π, σ, τ, φ, χ, ψ), werden αυ und ευ als af bzw. ef ausgesprochen.</li>
+<li>Wenn auf das γ ein i-Laut oder e-Laut folgt, wird das γ wie ein j ausgesprochen. (Beispiele: Γιώργος, γεια σου, Γερμανία)</li>
 <li>Der Artikel ο steht für das männliche Geschlecht, η steht für das weibliche Geschlecht und το steht für das neutrale Geschlecht.</li>
-<li>Unbestimmte Artikel: ένας, μια, ένα (ein, eine, ein).</li>
-<li>In Verbindung mit dem unbestimmten Artikel bleiben Präposition und Artikel getrennt: σε ένα(ν), σε μια, σε ένα.</li>
+<li>Folgt jedoch ein a-, o-Laut oder ein Konsonant, so wird das γ wie ein stimmhaftes ch ausgesprochen. Es ist wie eine Mischung aus einem nicht gerollten r und einem g, ein Reibelaut, wie er etwa beim Gurgeln entsteht. Beispiele: γάτα, παγωτό, γόνατο.</li>
+<li>Wenn auf ein χ ein i- oder e-Laut folgt, wird das χ wie ein ich-Laut (wie in Milch) ausgesprochen. Beispiele: χειρούργος, χέρι.</li>
+<li>Folgt jedoch ein a-, o-, ou-Laut oder ein Konsonant, wird das χ wie in Achtung oder machen ausgesprochen. Beispiele: ευχαριστώ, χορεύω.</li>
+<li>Das Griechische kennt fünf unterschiedliche Schreibweisen für den Laut i (η, ι, υ, ει, οι), zwei unterschiedliche Schreibweisen für den Laut e (ε, αι) und zwei unterschiedliche Schreibweisen für den Laut o (ο, ω).</li>
 </ul></aside>
 <p class="quelle">Zuletzt ergänzt am 01.10.2026 · 4 Blätter</p>
 </article>
@@ -1440,7 +1372,49 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <main class="inhalt">
 <section class="bereich" id="latein-bereich-verb">
 <h2>Verben<span class="bereichunter">Formen, Zeiten und Modi</span><span class="bereichzahl">1</span></h2>
-<article class="thema" id="latein-konjunktiv" data-suche="konjunktiv konjunktiv präsens aktiv — laudare konjunktiv imperfekt aktiv — laudare">
+<article class="thema" id="latein-konjunktiv" data-suche="konjunktiv konjunktiv präsens aktiv — laudare konjunktiv imperfekt aktiv — laudare  
+ der konjunktiv — die form für alles, was nicht einfach tatsache ist. 
+  die regel  
+  konjunktiv präsens  der a-konjugation: präsensstamm, das stamm- a  fällt weg, dafür kommt ein  -e- , dann die personalendung:  laud-e-m, laud-e-s, laud-e-t …  
+ bei den übrigen konjugationen steht stattdessen ein  -a- :  mone-a-m, reg-a-m, audi-a-m . 
+  konjunktiv imperfekt  ist bequem:  infinitiv präsens + endung  —  laudare  →  laudare-m, laudare-s, laudare-t …  das gilt für alle konjugationen, auch für  esse  →  esse-m . 
+  
+  so wendest du es an du brauchst ihn für wünsche ( utinam laudet!  – hoffentlich lobt er!), für aufforderungen an „wir“ ( eamus!  – gehen wir!) und vor allem in nebensätzen nach  ut, ne, cum  und in indirekten fragen. 
+  achtung übersetze den konjunktiv im nebensatz meistens  nicht  mit einem deutschen konjunktiv — nach  ut  wird daraus ein „dass“- oder „damit“-satz im indikativ. der lateinische konjunktiv ist dort nur ein signal, kein bedeutungsträger. 
+   konjunktiv · aktiv    
+    
+ laudare · präsens 
+ laudare · imperfekt 
+   
+  1. sg. 
+   laude  m   
+   laudare  m   
+ 
+  2. sg. 
+   laude  s   
+   laudare  s   
+ 
+  3. sg. 
+   laude  t   
+   laudare  t   
+ 
+  1. pl. 
+   laude  mus   
+   laudare  mus   
+ 
+  2. pl. 
+   laude  tis   
+   laudare  tis   
+ 
+  3. pl. 
+   laude  nt   
+   laudare  nt   
+ 
+   
+ 
+ laudare · präsens  präsensstamm + -e- + personalendung (bei der a-konjugation entfällt das stamm-a) 
+ laudare · imperfekt  infinitiv präsens + personalendung 
+     fachbegriffe erklärt  (5)      präsens tempus   gegenwart: was jetzt geschieht.   konjunktiv modus   die möglichkeitsform: etwas ist gewünscht, vorgestellt oder nur möglich. im deutschen oft mit „würde“ oder „möge“ wiedergegeben. „utinam laudet!“ – hoffentlich lobt er!   aktiv genus verbi   das subjekt handelt selbst: „er lobt.“   imperfekt tempus   vergangenheit für vorgänge, die andauerten oder sich wiederholten – der hintergrund einer erzählung.   perfekt tempus   vergangenheit für abgeschlossene ereignisse – das, was die handlung vorantreibt.      zuletzt ergänzt am 22.09.2026 · 1 blatt  praesens imperfekt perfekt aktiv indikativ konjunktiv singular plural">
 <header class="themakopf">
 <h3>Konjunktiv</h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
@@ -1510,7 +1484,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <a href="#spanisch-bereich-substantiv">Substantive<span class="anzahl">1</span></a>
 <a href="#spanisch-bereich-pronomen">Pronomen<span class="anzahl">2</span></a>
 <a href="#spanisch-bereich-zahlen">Zahlen<span class="anzahl">1</span></a>
-<a href="#spanisch-bereich-aussprache">Aussprache<span class="anzahl">8</span></a>
+<a href="#spanisch-bereich-aussprache">Aussprache<span class="anzahl">9</span></a>
 </nav>
 <details class="verzeichnisklappe"><summary>Inhalt</summary>
 <nav class="verzeichnis" data-sprache="spanisch">
@@ -1544,7 +1518,79 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <main class="inhalt">
 <section class="bereich" id="spanisch-bereich-verb">
 <h2>Verben<span class="bereichunter">Formen, Zeiten und Modi</span><span class="bereichzahl">1</span></h2>
-<article class="thema" id="spanisch-praesens" data-suche="präsens präsens von ser (sein) verben auf -er (comer) verben auf -ir (vivir) regelmäßige verben auf -ar">
+<article class="thema" id="spanisch-praesens" data-suche="präsens präsens von ser (sein) verben auf -er (comer) verben auf -ir (vivir) regelmäßige verben auf -ar  
+ das regelmäßige muster der verben auf  -ar . 
+  die regel  
+ du nimmst den stamm ( hablar  →  habl- ) und hängst an: 
+  -o, -as, -a, -amos, -áis, -an  
+ das gilt für alle regelmäßigen -ar-verben:  trabajar, estudiar, cantar, escuchar  … 
+  
+  so wendest du es an ein einziges muster öffnet dir hunderte verben. wenn du  hablo  kannst, kannst du auch  trabajo ,  estudio ,  canto . 
+  achtung die endung allein sagt schon, wer handelt — darum lässt man  yo, tú, él  meistens weg.  hablo español  reicht. 
+   
+  ser  – „sein“, das wichtigste unregelmäßige verb. 
+  die regel  
+ die formen folgen keinem muster, sie müssen sitzen:  soy, eres, es, somos, sois, son . 
+  ser  benutzt du für das, was jemand  ist : name, herkunft, beruf, aussehen, charakter — für dauerhaftes. 
+  
+  so wendest du es an  soy johan. soy de alemania. somos estudiantes.  — immer dann, wenn du jemanden oder etwas  einordnest . 
+  achtung für ort und zustand nimmt man  estar , nicht ser:  estoy en casa  („ich bin zu hause“),  estoy cansado  („ich bin müde“). dieselbe deutsche übersetzung, zwei verben. 
+   
+ die verben auf  -er  und  -ir  — fast dasselbe muster. 
+  die regel  
+  -er  ( comer ): -o, -es, -e, - emos , - éis , -en 
+  -ir  ( vivir ): -o, -es, -e, - imos , - ís , -en 
+ die beiden unterscheiden sich  nur  in der 1. und 2. person plural. alles andere ist gleich. 
+  
+  so wendest du es an mit -ar, -er und -ir hast du alle drei gruppen. vier von sechs formen sind bei -er und -ir identisch — du lernst also eigentlich nur zwei endungen dazu. 
+  achtung verwechsle die gruppen nicht am infinitiv-ende allein:  ser ,  ir  und  tener  sehen regelmäßig aus, sind es aber nicht. 
+   indikativ · präsens · aktiv    
+    
+ ser 
+ comer 
+ vivir 
+ hablar 
+   
+  1. sg. 
+  soy  
+   com  o   
+   viv  o   
+   habl  o   
+ 
+  2. sg. 
+  eres  
+   com  es   
+   viv  es   
+   habl  as   
+ 
+  3. sg. 
+  es  
+   com  e   
+   viv  e   
+   habl  a   
+ 
+  1. pl. 
+  somos  
+   com  emos   
+   viv  imos   
+   habl  amos   
+ 
+  2. pl. 
+  sois  
+   com  éis   
+   viv  ís   
+   habl  áis   
+ 
+  3. pl. 
+  son  
+   com  en   
+   viv  en   
+   habl  an   
+ 
+   
+ 
+ hablar  verbstamm + personalendung 
+     regeln von deinem blatt     2 verbos   die endungen der -ar-verben werden an den stamm (hier: habl-) angehängt.   hay bedeutet &#x27;es gibt&#x27;   ser bedeutet übersetzt &#x27;sein&#x27;.        fachbegriffe erklärt  (3)      präsens tempus   gegenwart: was jetzt geschieht.   indikativ modus   die normale wirklichkeitsform: etwas ist so. „er lobt.“   aktiv genus verbi   das subjekt handelt selbst: „er lobt.“      zuletzt ergänzt am 23.09.2026 · 10 blätter  praesens aktiv indikativ singular plural">
 <header class="themakopf">
 <h3>Präsens</h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
@@ -1629,23 +1675,10 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <aside class="regelblock">
 <h4>Regeln von deinem Blatt</h4>
 <ul>
-<li>Personalpronomen: yo, tú, él/ella/usted, nosotros/nosotras, vosotros/vosotras, ellos/ellas/ustedes</li>
-<li>unos / unas bedeutet &quot;einige&quot;</li>
-<li>hay bedeutet &quot;es gibt&quot; und bleibt unverändert (kombiniert mit un, una oder Nomen im Plural ohne Artikel)</li>
-<li>Personalpronomen: yo, tú, él / ella (usted), nosotros / nosotras, vosotros / vosotras, ellos / ellas (ustedes)</li>
-<li>hay bedeutet &quot;es gibt&quot; und steht vor un/una oder direkt vor Substantiven im Plural ohne Artikel</li>
-<li>Personalpronomen: yo, tú, él/ella (usted), nosotros/nosotras, vosotros/vosotras, ellos/ellas (ustedes)</li>
-<li>hay bedeutet &quot;es gibt&quot; und wird mit unbestimmter Artikel oder im Plural ohne Artikel verwendet</li>
 <li>2 verbos</li>
 <li>Die Endungen der -ar-Verben werden an den Stamm (hier: habl-) angehängt.</li>
-<li>unos / unas bedeutet &#x27;einige&#x27;</li>
 <li>hay bedeutet &#x27;es gibt&#x27;</li>
-<li>Pronomen: yo, tú, él/ella (usted), nosotros/nosotras, vosotros/vosotras, ellos/ellas (ustedes)</li>
-<li>hay bedeutet &quot;es gibt&quot; und wird mit un/una oder direkt mit Substantiven im Plural verwendet</li>
-<li>Personalpronomen: yo, tú, él / ella / usted, nosotros / nosotras, vosotros / vosotras, ellos / ellas / ustedes</li>
 <li>ser bedeutet übersetzt &#x27;sein&#x27;.</li>
-<li>Die farbliche Kennzeichnung (blau/pink) unterscheidet zwischen maskulinen und femininen Formen.</li>
-<li>Die Pronomen in Klammern (usted, ustedes) werden mit der 3. Person konjugiert (Höflichkeitsform).</li>
 </ul></aside>
 <details class="begriffe">
 <summary>Fachbegriffe erklärt <span>(3)</span></summary>
@@ -1659,7 +1692,65 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 </section>
 <section class="bereich" id="spanisch-bereich-substantiv">
 <h2>Substantive<span class="bereichunter">Fälle, Zahl und Geschlecht</span><span class="bereichzahl">1</span></h2>
-<article class="thema" id="spanisch-articulos-y-sustantivos" data-suche="artículos y sustantivos maskuline artikel und substantive feminine artikel und substantive unbestimmter artikel und pluralbildung bei substantiven verwendung von hay">
+<article class="thema" id="spanisch-articulos-y-sustantivos" data-suche="artículos y sustantivos maskuline artikel und substantive feminine artikel und substantive unbestimmter artikel und pluralbildung bei substantiven verwendung von hay  
+ der bestimmte artikel — „der, die, das“ auf spanisch. 
+  die regel  
+ jedes substantiv hat ein geschlecht, und der artikel richtet sich danach: 
+ männlich:  el  (einzahl) →  los  (mehrzahl) 
+ weiblich:  la  (einzahl) →  las  (mehrzahl) 
+ plural: endet das wort auf einen  vokal , hängst du  -s  an ( amigo → amigos ). endet es auf einen  konsonanten , hängst du  -es  an ( profesor → profesores ,  ciudad → ciudades ). 
+  
+  so wendest du es an lerne jedes substantiv immer  mit artikel  —  el profesor ,  la ciudad . das geschlecht allein am wort zu erraten geht oft schief, und ohne geschlecht ist der plural auch nicht sicher. 
+  achtung meistens ist  -o  männlich und  -a  weiblich, aber  la ciudad  und  la universidad  enden auf konsonant und sind trotzdem weiblich. wörter auf  -dad  und  -ción  sind praktisch immer weiblich. 
+   
+ der unbestimmte artikel — „ein, eine“ und „einige“. 
+  die regel  
+ männlich:  un  (einzahl) →  unos  (mehrzahl) 
+ weiblich:  una  (einzahl) →  unas  (mehrzahl) 
+  unos / unas  heißt „einige“ und wird oft ganz weggelassen:  hay cafeterías  – „es gibt cafés“. 
+  
+  so wendest du es an im deutschen gibt es keinen plural von „ein“ — darum fühlt sich  unos  fremd an. nimm es, wenn du „ein paar“ meinst, und lass es weg, wenn du nur „cafés“ sagen willst. 
+  achtung der unbestimmte artikel hat dieselbe endung wie das substantiv dahinter:  un a  amig a  . das ist eine gute kontrolle beim schreiben. 
+   
+  hay  – „es gibt“. 
+  die regel  
+  hay  ändert sich nie: nicht nach person, nicht nach zahl. 
+  hay un parque  – es gibt einen park.  hay cafeterías  – es gibt cafés. 
+ es steht mit  un/una , mit zahlen oder ganz ohne artikel. 
+  
+  so wendest du es an immer wenn du sagen willst, dass etwas  existiert  oder  vorhanden ist  — egal ob eins oder viele. 
+  achtung nach  hay  steht  nie  el/la/los/las. „der park ist dort“ ist  el parque está allí  — dafür brauchst du  estar , nicht hay. 
+   maskuline artikel und substantive 
+  
+  sg.    el amig  o    
+  sg.   el profesor   
+  pl.    los amig  os    
+  pl.    los profesor  es    
+    feminine artikel und substantive 
+  
+  sg.    la amig  a    
+  sg.   la ciudad   
+  pl.    las amig  as    
+  pl.    las ciudad  es    
+  pl.    las universidad  es    
+    unbestimmter artikel und pluralbildung bei substantiven 
+  
+  nom. sg.    un amig  o    männlich singular auf vokal   
+  nom. pl.    amig  os    männlich plural auf vokal   
+  nom. sg.   un profesor   männlich singular auf konsonant   
+  nom. pl.    profesor  es    männlich plural auf konsonant   
+  nom. sg.    una amig  a    weiblich singular auf vokal   
+  nom. pl.    amig  as    weiblich plural auf vokal   
+  nom. sg.   una ciudad   weiblich singular auf konsonant   
+  nom. pl.    ciudad  es    weiblich plural auf konsonant   
+  unos / unas   unos / unas   einige   
+    verwendung von hay 
+  
+  hay   hay   es gibt   
+  hay + un   hay un parque   es gibt einen park   
+  hay + una   hay una tiendas   es gibt ein geschäft   
+  hay + plural   hay cafeterías   es gibt cafés   
+      regeln von deinem blatt     unos / unas bedeutet &quot;einige&quot;   hay bedeutet &quot;es gibt&quot; und bleibt unverändert (kombiniert mit un, una oder nomen im plural ohne artikel)   hay bedeutet &quot;es gibt&quot; und steht vor un/una oder direkt vor substantiven im plural ohne artikel   hay bedeutet &quot;es gibt&quot; und wird mit unbestimmter artikel oder im plural ohne artikel verwendet   hay bedeutet &quot;es gibt&quot; und wird mit un/una oder direkt mit substantiven im plural verwendet   die farbliche kennzeichnung (blau/pink) unterscheidet zwischen maskulinen und femininen formen.        fachbegriffe erklärt  (7)      maskulin genus   männliches grammatisches geschlecht.   feminin genus   weibliches grammatisches geschlecht.   plural numerus   mehrzahl.   bestimmter artikel wortart   der artikel für etwas bekanntes: el, la, los, las – „der, die, das“.   unbestimmter artikel wortart   der artikel für etwas unbekanntes: un, una – „ein, eine“.   nominativ kasus   wer oder was? – der fall des subjekts.   singular numerus   einzahl.      zuletzt ergänzt am 23.09.2026 · 2 blätter  nominativ singular plural">
 <header class="themakopf">
 <h3>artículos y sustantivos</h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
@@ -1732,8 +1823,12 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <aside class="regelblock">
 <h4>Regeln von deinem Blatt</h4>
 <ul>
-<li>unos / unas = „einige“</li>
-<li>hay = „es gibt“</li>
+<li>unos / unas bedeutet &quot;einige&quot;</li>
+<li>hay bedeutet &quot;es gibt&quot; und bleibt unverändert (kombiniert mit un, una oder Nomen im Plural ohne Artikel)</li>
+<li>hay bedeutet &quot;es gibt&quot; und steht vor un/una oder direkt vor Substantiven im Plural ohne Artikel</li>
+<li>hay bedeutet &quot;es gibt&quot; und wird mit unbestimmter Artikel oder im Plural ohne Artikel verwendet</li>
+<li>hay bedeutet &quot;es gibt&quot; und wird mit un/una oder direkt mit Substantiven im Plural verwendet</li>
+<li>Die farbliche Kennzeichnung (blau/pink) unterscheidet zwischen maskulinen und femininen Formen.</li>
 </ul></aside>
 <details class="begriffe">
 <summary>Fachbegriffe erklärt <span>(7)</span></summary>
@@ -1751,7 +1846,31 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 </section>
 <section class="bereich" id="spanisch-bereich-pronomen">
 <h2>Pronomen<span class="bereichunter">Fürwörter</span><span class="bereichzahl">2</span></h2>
-<article class="thema" id="spanisch-fragewoerter" data-suche="fragewörter die fragewörter | las palabras interrogativas wendung ¿qué tal?">
+<article class="thema" id="spanisch-fragewoerter" data-suche="fragewörter die fragewörter | las palabras interrogativas wendung ¿qué tal?  
+ die fragewörter — und warum sie einen akzent tragen. 
+  die regel  
+  ¿qué?  was ·  ¿quién?  wer ·  ¿cómo?  wie ·  ¿dónde?  wo ·  ¿de dónde?  woher ·  ¿cuándo?  wann ·  ¿por qué?  warum 
+ in der frage tragen sie  immer  einen akzent. dasselbe wort ohne akzent ist kein fragewort:  que  = dass. 
+  ¿qué tal …?  heißt „wie ist/war …?“ und braucht kein verb:  ¿qué tal el verano?  
+  
+  so wendest du es an die frage steht zwischen  zwei  zeichen:  ¿…?  das umgekehrte am anfang sagt beim lesen vorab, dass eine frage kommt. 
+  achtung  ¿por qué?  (zwei wörter, mit akzent) heißt „warum“,  porque  (ein wort, ohne) heißt „weil“. 
+   die fragewörter | las palabras interrogativas 
+  
+  cómo   ¿cómo te llamas?   wie ...?   
+  de dónde   ¿de dónde eres?   woher ...?   
+  dónde   ¿dónde quedamos?   wo ...?   
+  qué   ¿qué lenguas hablas?   welche ...?   
+  qué   ¿qué hay en tu barrio?   was ...?   
+  quién   ¿quién es la chica?   wer ...?   
+  quiénes   y ellos, ¿quiénes son?   wer ...?   
+    wendung ¿qué tal? 
+  
+  qué tal   ¿qué tal?   wie geht&#x27;s?   
+  qué tal   ¿qué tal tu vecina?   wie geht&#x27;s deiner nachbarin?   
+  qué tal   ¿qué tal el verano?   wie war der sommer?   
+  qué tal   ¿qué tal el instituto?   wie läuft&#x27;s in der schule?   
+      regeln von deinem blatt     alle spanischen fragewörter tragen einen akzent.   das fragewort ¿quién? hat im spanischen eine pluralform: ¿quiénes?   ¿qué tal? ist eine feste wendung. wenn sie alleine steht, bedeutet sie „wie geht&#x27;s?“. wenn ein substantiv folgt, bedeutet sie „wie ist/war ...?“ oder auch „wie läuft&#x27;s in/mit ...?“.      zuletzt ergänzt am 01.10.2026 · 1 blatt ">
 <header class="themakopf">
 <h3>Fragewörter</h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
@@ -1765,35 +1884,6 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 </ul></div>
 <p class="anwenden"><span class="etikett">So wendest du es an</span>Die Frage steht zwischen <strong>zwei</strong> Zeichen: <em>¿…?</em> Das umgekehrte am Anfang sagt beim Lesen vorab, dass eine Frage kommt.</p>
 <p class="achtung"><span class="etikett">Achtung</span><em>¿Por qué?</em> (zwei Wörter, mit Akzent) heißt „warum“, <em>porque</em> (ein Wort, ohne) heißt „weil“.</p>
-</section>
-<section class="lernen">
-<p class="worum">Das regelmäßige Muster der Verben auf <strong>-ar</strong>.</p>
-<div class="regelkasten"><h4>Die Regel</h4><ul>
-<li>Du nimmst den Stamm (<em>hablar</em> → <strong>habl-</strong>) und hängst an:</li>
-<li><strong>-o, -as, -a, -amos, -áis, -an</strong></li>
-<li>Das gilt für alle regelmäßigen -ar-Verben: <em>trabajar, estudiar, cantar, escuchar</em> …</li>
-</ul></div>
-<p class="anwenden"><span class="etikett">So wendest du es an</span>Ein einziges Muster öffnet dir hunderte Verben. Wenn du <em>hablo</em> kannst, kannst du auch <em>trabajo</em>, <em>estudio</em>, <em>canto</em>.</p>
-<p class="achtung"><span class="etikett">Achtung</span>Die Endung allein sagt schon, wer handelt — darum lässt man <em>yo, tú, él</em> meistens weg. <em>Hablo español</em> reicht.</p>
-</section>
-<section class="lernen">
-<p class="worum"><strong>ser</strong> – „sein“, das wichtigste unregelmäßige Verb.</p>
-<div class="regelkasten"><h4>Die Regel</h4><ul>
-<li>Die Formen folgen keinem Muster, sie müssen sitzen: <strong>soy, eres, es, somos, sois, son</strong>.</li>
-<li><strong>ser</strong> benutzt du für das, was jemand <em>ist</em>: Name, Herkunft, Beruf, Aussehen, Charakter — für Dauerhaftes.</li>
-</ul></div>
-<p class="anwenden"><span class="etikett">So wendest du es an</span><em>Soy Johan. Soy de Alemania. Somos estudiantes.</em> — Immer dann, wenn du jemanden oder etwas <strong>einordnest</strong>.</p>
-<p class="achtung"><span class="etikett">Achtung</span>Für Ort und Zustand nimmt man <strong>estar</strong>, nicht ser: <em>estoy en casa</em> („ich bin zu Hause“), <em>estoy cansado</em> („ich bin müde“). Dieselbe deutsche Übersetzung, zwei Verben.</p>
-</section>
-<section class="lernen">
-<p class="worum"><strong>hay</strong> – „es gibt“.</p>
-<div class="regelkasten"><h4>Die Regel</h4><ul>
-<li><strong>hay</strong> ändert sich nie: nicht nach Person, nicht nach Zahl.</li>
-<li><em>Hay un parque</em> – es gibt einen Park. <em>Hay cafeterías</em> – es gibt Cafés.</li>
-<li>Es steht mit <strong>un/una</strong>, mit Zahlen oder ganz ohne Artikel.</li>
-</ul></div>
-<p class="anwenden"><span class="etikett">So wendest du es an</span>Immer wenn du sagen willst, dass etwas <strong>existiert</strong> oder <strong>vorhanden ist</strong> — egal ob eins oder viele.</p>
-<p class="achtung"><span class="etikett">Achtung</span>Nach <em>hay</em> steht <strong>nie</strong> el/la/los/las. „Der Park ist dort“ ist <em>el parque está allí</em> — dafür brauchst du <strong>estar</strong>, nicht hay.</p>
 </section>
 <h4 class="untertabelle">Die Fragewörter | Las palabras interrogativas</h4>
 <div class="tabellenrahmen"><table>
@@ -1821,7 +1911,24 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 </ul></aside>
 <p class="quelle">Zuletzt ergänzt am 01.10.2026 · 1 Blatt</p>
 </article>
-<article class="thema" id="spanisch-personalpronomen" data-suche="personalpronomen subjektpronomen">
+<article class="thema" id="spanisch-personalpronomen" data-suche="personalpronomen subjektpronomen  
+ die personalpronomen — und warum du sie meistens weglässt. 
+  die regel  
+  yo  – ich ·  tú  – du ·  él / ella / usted  – er / sie / sie 
+  nosotros / nosotras  – wir ·  vosotros / vosotras  – ihr ·  ellos / ellas / ustedes  – sie / sie 
+ bei „wir“ und „ihr“ gibt es eine  weibliche form : besteht die gruppe nur aus frauen, heißt es  nosotras ,  vosotras . 
+  
+  so wendest du es an die verbendung verrät schon, wer handelt — darum steht das pronomen nur, wenn du betonen willst,  wer  es ist:  yo hablo español, él no.  
+  achtung  usted  heißt „sie“ (höflich), steht aber in der  3. person :  usted habla , nicht  usted hablas . in lateinamerika ersetzt  ustedes  das  vosotros  komplett. 
+   subjektpronomen 
+  
+  1. sg.   yo   
+  2. sg.   tú   
+  3. sg.   él, ella (usted)   
+  1. pl.   nosotros, nosotras   
+  2. pl.   vosotros, vosotras   
+  3. pl.   ellos, ellas (ustedes)   
+      regeln von deinem blatt     personalpronomen: yo, tú, él / ella (usted), nosotros / nosotras, vosotros / vosotras, ellos / ellas (ustedes)   die pronomen in klammern (usted, ustedes) werden mit der 3. person konjugiert (höflichkeitsform).      zuletzt ergänzt am 23.09.2026 · 1 blatt  singular plural">
 <header class="themakopf">
 <h3>Personalpronomen</h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
@@ -1845,12 +1952,111 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <tr><th class="zeilenkopf">2. Pl.</th><td><span class="form">vosotros, vosotras</span></td></tr>
 <tr><th class="zeilenkopf">3. Pl.</th><td><span class="form">ellos, ellas (ustedes)</span></td></tr>
 </table></div>
+<aside class="regelblock">
+<h4>Regeln von deinem Blatt</h4>
+<ul>
+<li>Personalpronomen: yo, tú, él / ella (usted), nosotros / nosotras, vosotros / vosotras, ellos / ellas (ustedes)</li>
+<li>Die Pronomen in Klammern (usted, ustedes) werden mit der 3. Person konjugiert (Höflichkeitsform).</li>
+</ul></aside>
 <p class="quelle">Zuletzt ergänzt am 23.09.2026 · 1 Blatt</p>
 </article>
 </section>
 <section class="bereich" id="spanisch-bereich-zahlen">
 <h2>Zahlen<span class="bereichunter">Zählen, Mengen und Reihenfolge</span><span class="bereichzahl">1</span></h2>
-<article class="thema" id="spanisch-los-numeros" data-suche="los números grundzahlen 0-9 zahlen 10-19 zahlen 20-29 zahlen 30-41 zehnerzahlen 50-90 hunderterzahlen große zahlen schreibweise der zahlen">
+<article class="thema" id="spanisch-los-numeros" data-suche="los números grundzahlen 0-9 zahlen 10-19 zahlen 20-29 zahlen 30-41 zehnerzahlen 50-90 hunderterzahlen große zahlen schreibweise der zahlen  
+ die zahlen — bis 29 zusammen, ab 31 getrennt. 
+  die regel  
+ 0–15 sind eigene wörter:  cero, uno … quince . 
+ 16–29 schreibt man  zusammen :  dieciséis, veintiuno, veintinueve . 
+ ab 31  getrennt mit y :  treinta y uno, noventa y nueve . 
+  cien  steht allein ( cien euros ),  ciento  vor kleineren zahlen ( ciento uno ). 
+  
+  so wendest du es an die bruchstelle liegt bei 30: davor ein wort, danach drei. das  y  steht nur zwischen zehner und einer — nie zwischen hunderter und zehner. 
+  achtung  uno  wird vor einem substantiv gekürzt:  un amigo , nicht  uno amigo . weiblich:  una amiga . 
+   grundzahlen 0-9 
+  
+  0   cero   
+  1   uno   
+  2   dos   
+  3   tres   
+  4   cuatro   
+  5   cinco   
+  6   seis   
+  7   siete   
+  8   ocho   
+  9   nueve   
+    zahlen 10-19 
+  
+  10   diez   
+  11   once   
+  12   doce   
+  13   trece   
+  14   catorce   
+  15   quince   
+  16   dieciséis   
+  17   diecisiete   
+  18   dieciocho   
+  19   diecinueve   
+    zahlen 20-29 
+  
+  20    veint  e    
+  21    veint  iuno    
+  22    veint  idós    
+  23    veint  itrés    
+  24    veint  icuatro    
+  25    veint  icinco    
+  26    veint  iséis    
+  27    veint  isiete    
+  28    veint  iocho    
+  29    veint  inueve    
+    zahlen 30-41 
+  
+  30   treinta   
+  31   treinta y uno   
+  32   treinta y dos   
+  33   treinta y tres   
+  34   treinta y cuatro   
+  35   treinta y cinco   
+  36   treinta y seis   
+  37   treinta y siete   
+  38   treinta y ocho   
+  39   treinta y nueve   
+  40   cuarenta   
+  41   cuarenta y uno   
+  ...   ...   
+    zehnerzahlen 50-90 
+  
+  50   cincuenta   
+  60   sesenta   
+  70   setenta   
+  80   ochenta   
+  90   noventa   
+    hunderterzahlen 
+  
+  100   cien   
+  101   ciento uno   
+  ...   ...   
+  200   doscientos   
+  300   trescientos   
+  400   cuatrocientos   
+  500   quinientos   stammänderung quin-   
+  600   seiscientos   
+  700   setecientos   stammänderung sete-   
+  800   ochocientos   
+  900   novecientos   stammänderung nove-   
+    große zahlen 
+  
+  1000   mil   
+  2000   dos mil   
+  10000   diez mil   
+  100000   cien mil   
+  1000000   un millón   
+  2000000   dos millones   
+    schreibweise der zahlen 
+  
+  21 - 29   veinti...   zahlen von 21-29 werden in einem wort geschrieben.   
+  31 - 99   ... y ...   zahlen ab 31 werden mit &#x27;y&#x27; getrennt (drei wörter).   
+      regeln von deinem blatt     die zehnerzahlen von 21 bis 29 werden zusammengeschrieben (veinti...).   die zahlen von 31 bis 99 werden getrennt mit &#x27;y&#x27; geschrieben.   die hunderter 500 (quinientos), 700 (setecientos) und 900 (novecientos) sind unregelmäßig.      zuletzt ergänzt am 01.10.2026 · 1 blatt ">
 <header class="themakopf">
 <h3>Los números</h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
@@ -1865,25 +2071,6 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 </ul></div>
 <p class="anwenden"><span class="etikett">So wendest du es an</span>Die Bruchstelle liegt bei 30: davor ein Wort, danach drei. Das <em>y</em> steht nur zwischen Zehner und Einer — nie zwischen Hunderter und Zehner.</p>
 <p class="achtung"><span class="etikett">Achtung</span><em>uno</em> wird vor einem Substantiv gekürzt: <em>un amigo</em>, nicht <em>uno amigo</em>. Weiblich: <em>una amiga</em>.</p>
-</section>
-<section class="lernen">
-<p class="worum">Wann klingt geschriebenes c wie ein k?</p>
-<div class="regelkasten"><h4>Die Regel</h4><ul>
-<li><strong>c + a, o, u</strong> → k-Laut: <em>casa, comer, cuatro</em>.</li>
-<li>Vor <strong>e</strong> und <strong>i</strong> geht das nicht — dort schreibt man <strong>qu</strong>: <em>queso, quince</em>. Das <strong>u</strong> ist dabei stumm, man hört nur /k/.</li>
-</ul></div>
-<p class="anwenden"><span class="etikett">So wendest du es an</span>Willst du einen k-Laut schreiben, entscheidet der folgende Vokal die Schreibweise: vor a/o/u nimmst du c, vor e/i nimmst du qu.</p>
-<p class="achtung"><span class="etikett">Achtung</span><em>queso</em> spricht man „keso“, nicht „kweso“. Ein hörbares w gibt es nur bei <strong>cu</strong>: <em>cuatro</em> = „kwatro“.</p>
-</section>
-<section class="lernen">
-<p class="worum">Der Lispel-Laut — geschrieben mal z, mal c.</p>
-<div class="regelkasten"><h4>Die Regel</h4><ul>
-<li><strong>z + a, o, u</strong> → /θ/: <em>zapato, zoo, zumo</em>.</li>
-<li><strong>c + e, i</strong> → derselbe Laut /θ/: <em>centro, cien</em>.</li>
-<li>Zusammen decken z und c alle fünf Vokale ab: za – ce – ci – zo – zu.</li>
-</ul></div>
-<p class="anwenden"><span class="etikett">So wendest du es an</span>Merke dir die Reihe <strong>za, ce, ci, zo, zu</strong>. Wo ein e oder i folgt, steht c; sonst z. <em>ze</em> und <em>zi</em> kommen fast nie vor.</p>
-<p class="achtung"><span class="etikett">Achtung</span>/θ/ ist der englische th-Laut in <em>think</em>. In Lateinamerika spricht man an dieser Stelle einfach ein s — beides ist richtig, aber bleib bei einer Variante.</p>
 </section>
 <h4 class="untertabelle">Grundzahlen 0-9</h4>
 <div class="tabellenrahmen"><table>
@@ -1988,7 +2175,21 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 </section>
 <section class="bereich" id="spanisch-bereich-aussprache">
 <h2>Aussprache<span class="bereichunter">Wie die Buchstaben klingen</span><span class="bereichzahl">9</span></h2>
-<article class="thema" id="spanisch-aussprache-1" data-suche="aussprache von /k/ aussprache aussprache von /k/">
+<article class="thema" id="spanisch-aussprache-1" data-suche="aussprache von /k/ aussprache aussprache von /k/  
+ wann klingt geschriebenes c wie ein k? 
+  die regel  
+  c + a, o, u  → k-laut:  casa, comer, cuatro . 
+ vor  e  und  i  geht das nicht — dort schreibt man  qu :  queso, quince . das  u  ist dabei stumm, man hört nur /k/. 
+  
+  so wendest du es an willst du einen k-laut schreiben, entscheidet der folgende vokal die schreibweise: vor a/o/u nimmst du c, vor e/i nimmst du qu. 
+  achtung  queso  spricht man „keso“, nicht „kweso“. ein hörbares w gibt es nur bei  cu :  cuatro  = „kwatro“. 
+    
+  ca   casa   
+  que   queso   
+  qui   quince   
+  co   comer   
+  cu   cuatro   
+      fachbegriffe erklärt  (1)      aussprache lautlehre   wie die buchstaben klingen. die zeichen zwischen schrägstrichen wie /k/ sind lautschrift, nicht schreibweise.    ">
 <header class="themakopf">
 <h3>Aussprache von /k/</h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
@@ -2001,16 +2202,6 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 </ul></div>
 <p class="anwenden"><span class="etikett">So wendest du es an</span>Willst du einen k-Laut schreiben, entscheidet der folgende Vokal die Schreibweise: vor a/o/u nimmst du c, vor e/i nimmst du qu.</p>
 <p class="achtung"><span class="etikett">Achtung</span><em>queso</em> spricht man „keso“, nicht „kweso“. Ein hörbares w gibt es nur bei <strong>cu</strong>: <em>cuatro</em> = „kwatro“.</p>
-</section>
-<section class="lernen">
-<p class="worum">Die Verben auf <strong>-er</strong> und <strong>-ir</strong> — fast dasselbe Muster.</p>
-<div class="regelkasten"><h4>Die Regel</h4><ul>
-<li><strong>-er</strong> (<em>comer</em>): -o, -es, -e, -<strong>emos</strong>, -<strong>éis</strong>, -en</li>
-<li><strong>-ir</strong> (<em>vivir</em>): -o, -es, -e, -<strong>imos</strong>, -<strong>ís</strong>, -en</li>
-<li>Die beiden unterscheiden sich <strong>nur</strong> in der 1. und 2. Person Plural. Alles andere ist gleich.</li>
-</ul></div>
-<p class="anwenden"><span class="etikett">So wendest du es an</span>Mit -ar, -er und -ir hast du alle drei Gruppen. Vier von sechs Formen sind bei -er und -ir identisch — du lernst also eigentlich nur zwei Endungen dazu.</p>
-<p class="achtung"><span class="etikett">Achtung</span>Verwechsle die Gruppen nicht am Infinitiv-Ende allein: <em>ser</em>, <em>ir</em> und <em>tener</em> sehen regelmäßig aus, sind es aber nicht.</p>
 </section>
 <div class="tabellenrahmen"><table>
 <tr><th class="zeilenkopf">ca</th><td><span class="form">casa</span></td></tr>
@@ -2025,7 +2216,22 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <dt>Aussprache<span class="art">Lautlehre</span></dt><dd>Wie die Buchstaben klingen. Die Zeichen zwischen Schrägstrichen wie /k/ sind Lautschrift, nicht Schreibweise.</dd>
 </dl></details>
 </article>
-<article class="thema" id="spanisch-aussprache-2" data-suche="aussprache von /θ/ aussprache aussprache von /θ/">
+<article class="thema" id="spanisch-aussprache-2" data-suche="aussprache von /θ/ aussprache aussprache von /θ/  
+ der lispel-laut — geschrieben mal z, mal c. 
+  die regel  
+  z + a, o, u  → /θ/:  zapato, zoo, zumo . 
+  c + e, i  → derselbe laut /θ/:  centro, cien . 
+ zusammen decken z und c alle fünf vokale ab: za – ce – ci – zo – zu. 
+  
+  so wendest du es an merke dir die reihe  za, ce, ci, zo, zu . wo ein e oder i folgt, steht c; sonst z.  ze  und  zi  kommen fast nie vor. 
+  achtung /θ/ ist der englische th-laut in  think . in lateinamerika spricht man an dieser stelle einfach ein s — beides ist richtig, aber bleib bei einer variante. 
+    
+  za   zapato   
+  ce   centro   
+  ci   cien   
+  zo   zoo   
+  zu   zumo   
+      fachbegriffe erklärt  (1)      aussprache lautlehre   wie die buchstaben klingen. die zeichen zwischen schrägstrichen wie /k/ sind lautschrift, nicht schreibweise.    ">
 <header class="themakopf">
 <h3>Aussprache von /θ/</h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
@@ -2040,17 +2246,6 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <p class="anwenden"><span class="etikett">So wendest du es an</span>Merke dir die Reihe <strong>za, ce, ci, zo, zu</strong>. Wo ein e oder i folgt, steht c; sonst z. <em>ze</em> und <em>zi</em> kommen fast nie vor.</p>
 <p class="achtung"><span class="etikett">Achtung</span>/θ/ ist der englische th-Laut in <em>think</em>. In Lateinamerika spricht man an dieser Stelle einfach ein s — beides ist richtig, aber bleib bei einer Variante.</p>
 </section>
-<section class="lernen">
-<p class="worum">Die Zahlen — bis 29 zusammen, ab 31 getrennt.</p>
-<div class="regelkasten"><h4>Die Regel</h4><ul>
-<li>0–15 sind eigene Wörter: <em>cero, uno … quince</em>.</li>
-<li>16–29 schreibt man <strong>zusammen</strong>: <em>dieciséis, veintiuno, veintinueve</em>.</li>
-<li>Ab 31 <strong>getrennt mit y</strong>: <em>treinta y uno, noventa y nueve</em>.</li>
-<li><strong>cien</strong> steht allein (<em>cien euros</em>), <strong>ciento</strong> vor kleineren Zahlen (<em>ciento uno</em>).</li>
-</ul></div>
-<p class="anwenden"><span class="etikett">So wendest du es an</span>Die Bruchstelle liegt bei 30: davor ein Wort, danach drei. Das <em>y</em> steht nur zwischen Zehner und Einer — nie zwischen Hunderter und Zehner.</p>
-<p class="achtung"><span class="etikett">Achtung</span><em>uno</em> wird vor einem Substantiv gekürzt: <em>un amigo</em>, nicht <em>uno amigo</em>. Weiblich: <em>una amiga</em>.</p>
-</section>
 <div class="tabellenrahmen"><table>
 <tr><th class="zeilenkopf">za</th><td><span class="form">zapato</span></td></tr>
 <tr><th class="zeilenkopf">ce</th><td><span class="form">centro</span></td></tr>
@@ -2064,7 +2259,22 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <dt>Aussprache<span class="art">Lautlehre</span></dt><dd>Wie die Buchstaben klingen. Die Zeichen zwischen Schrägstrichen wie /k/ sind Lautschrift, nicht Schreibweise.</dd>
 </dl></details>
 </article>
-<article class="thema" id="spanisch-aussprache-3" data-suche="aussprache von /x/ aussprache aussprache von /x/">
+<article class="thema" id="spanisch-aussprache-3" data-suche="aussprache von /x/ aussprache aussprache von /x/  
+ der rachenlaut wie in „bach“ — geschrieben j oder g. 
+  die regel  
+  j  klingt immer so, vor jedem vokal:  jamón, joven, jugar . 
+  g + e, i  klingt genauso:  gente, girasol . 
+ deshalb gibt es paare, die gleich klingen:  je / ge ,  ji / gi . 
+  
+  so wendest du es an hörst du den laut, musst du wissen, ob j oder g geschrieben wird — das lässt sich nicht ableiten, das lernt man pro wort. 
+  achtung vor  a, o, u  klingt g  nicht  so, sondern wie unser g:  gato, gol, guapo . der rachenlaut kommt bei g nur vor e und i. 
+    
+  ja   jamón   
+  je / ge   jefe / gente   
+  ji / gi   jirafa / girasol   
+  jo   joven   
+  ju   jugar   
+      fachbegriffe erklärt  (1)      aussprache lautlehre   wie die buchstaben klingen. die zeichen zwischen schrägstrichen wie /k/ sind lautschrift, nicht schreibweise.    ">
 <header class="themakopf">
 <h3>Aussprache von /x/</h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
@@ -2092,7 +2302,22 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <dt>Aussprache<span class="art">Lautlehre</span></dt><dd>Wie die Buchstaben klingen. Die Zeichen zwischen Schrägstrichen wie /k/ sind Lautschrift, nicht Schreibweise.</dd>
 </dl></details>
 </article>
-<article class="thema" id="spanisch-aussprache-4" data-suche="aussprache von /g/ aussprache aussprache von /g/">
+<article class="thema" id="spanisch-aussprache-4" data-suche="aussprache von /g/ aussprache aussprache von /g/  
+ wann klingt g wie unser g? 
+  die regel  
+  g + a, o, u  → g-laut:  gato, gol, guapo . 
+ vor  e, i  brauchst du ein stummes  u  dazwischen:  gue, gui  →  juguete, guitarra . 
+ soll das u doch gesprochen werden, bekommt es zwei punkte:  güe, güi  →  vergüenza, pingüino . 
+  
+  so wendest du es an dieselbe logik wie bei c/qu: vor e und i schiebt man einen stummen buchstaben ein, damit der harte laut erhalten bleibt. 
+  achtung ohne u wird aus  gue  ein  ge  — und das klingt wie „che“. das u ist also kein schmuck, es verändert den laut. 
+    
+  ga   gato   
+  gue   juguete   
+  gui   guitarra   
+  go   gol   
+  gu   guapo   
+      fachbegriffe erklärt  (1)      aussprache lautlehre   wie die buchstaben klingen. die zeichen zwischen schrägstrichen wie /k/ sind lautschrift, nicht schreibweise.    ">
 <header class="themakopf">
 <h3>Aussprache von /g/</h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
@@ -2120,7 +2345,16 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <dt>Aussprache<span class="art">Lautlehre</span></dt><dd>Wie die Buchstaben klingen. Die Zeichen zwischen Schrägstrichen wie /k/ sind Lautschrift, nicht Schreibweise.</dd>
 </dl></details>
 </article>
-<article class="thema" id="spanisch-aussprache-5" data-suche="aussprache von h aussprache aussprache von h">
+<article class="thema" id="spanisch-aussprache-5" data-suche="aussprache von h aussprache aussprache von h  
+ das h wird nie gesprochen. 
+  die regel  
+  h  ist immer stumm:  hola  klingt wie „ola“,  hay  wie „ai“,  hermano  wie „ermano“. 
+  
+  so wendest du es an beim hören verrät dir nichts, ob ein wort mit h beginnt — das musst du dir beim schreiben merken. 
+  achtung ausnahme ist die verbindung  ch : die klingt wie tsch,  chico  = „tschiko“. 
+    
+  h   hola   no se pronuncia   
+      fachbegriffe erklärt  (1)      aussprache lautlehre   wie die buchstaben klingen. die zeichen zwischen schrägstrichen wie /k/ sind lautschrift, nicht schreibweise.    ">
 <header class="themakopf">
 <h3>Aussprache von h</h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
@@ -2142,7 +2376,17 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <dt>Aussprache<span class="art">Lautlehre</span></dt><dd>Wie die Buchstaben klingen. Die Zeichen zwischen Schrägstrichen wie /k/ sind Lautschrift, nicht Schreibweise.</dd>
 </dl></details>
 </article>
-<article class="thema" id="spanisch-aussprache-6" data-suche="aussprache von /rr/ aussprache aussprache von /rr/">
+<article class="thema" id="spanisch-aussprache-6" data-suche="aussprache von /rr/ aussprache aussprache von /rr/  
+ wann wird das r gerollt? 
+  die regel  
+ gerollt wird es in drei fällen: bei  rr  ( perro ), am  wortanfang  ( roma ) und nach  l, n, s  ( alrededor ). 
+ sonst ist es ein kurzer schlag mit der zungenspitze:  pero, caro . 
+  
+  so wendest du es an der unterschied trägt bedeutung:  pero  heißt „aber“,  perro  heißt „hund“. einmal zu wenig gerollt, und der satz kippt. 
+  achtung am wortanfang schreibt man nur  ein  r, rollt es aber trotzdem —  roma , nicht  rroma . 
+    
+  rr   perro   
+      fachbegriffe erklärt  (1)      aussprache lautlehre   wie die buchstaben klingen. die zeichen zwischen schrägstrichen wie /k/ sind lautschrift, nicht schreibweise.    ">
 <header class="themakopf">
 <h3>Aussprache von /rr/</h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
@@ -2165,7 +2409,19 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <dt>Aussprache<span class="art">Lautlehre</span></dt><dd>Wie die Buchstaben klingen. Die Zeichen zwischen Schrägstrichen wie /k/ sind Lautschrift, nicht Schreibweise.</dd>
 </dl></details>
 </article>
-<article class="thema" id="spanisch-aussprache-7" data-suche="regeln für c und g (handschriftlich) aussprache regeln für c und g (handschriftlich)">
+<article class="thema" id="spanisch-aussprache-7" data-suche="regeln für c und g (handschriftlich) aussprache regeln für c und g (handschriftlich)  
+ deine merknotiz: c verzweigt je nach folgendem vokal. 
+  die regel  
+  c + e, i  → /θ/, der lispel-laut:  centro, cien . 
+  c + a, o, u  → /k/, der harte laut:  casa, comer, cuatro . 
+  
+  so wendest du es an ein buchstabe, zwei laute — welcher es ist, entscheidet allein der vokal dahinter. dieselbe verzweigung gibt es bei g. 
+    
+  c   e, i   
+  c   a, o, u   
+  g   e, i   
+  g   a, o, u   
+      fachbegriffe erklärt  (1)      aussprache lautlehre   wie die buchstaben klingen. die zeichen zwischen schrägstrichen wie /k/ sind lautschrift, nicht schreibweise.    ">
 <header class="themakopf">
 <h3>Regeln für c und g (handschriftlich)</h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
@@ -2190,7 +2446,20 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <dt>Aussprache<span class="art">Lautlehre</span></dt><dd>Wie die Buchstaben klingen. Die Zeichen zwischen Schrägstrichen wie /k/ sind Lautschrift, nicht Schreibweise.</dd>
 </dl></details>
 </article>
-<article class="thema" id="spanisch-aussprache-8" data-suche="schreibung von lauten vor e und i (handschriftlich) aussprache schreibung von lauten vor e und i (handschriftlich)">
+<article class="thema" id="spanisch-aussprache-8" data-suche="schreibung von lauten vor e und i (handschriftlich) aussprache schreibung von lauten vor e und i (handschriftlich)  
+ deine merknotiz: die schreibtricks vor e und i. 
+  die regel  
+  ge, gi  → weicher rachenlaut. 
+  gue, gui  → hartes g, das  u  bleibt stumm. 
+  güe, güi  → hartes g  plus  hörbares u. 
+  
+  so wendest du es an drei stufen, eine logik: ohne u weich, mit u hart, mit pünktchen hart und hörbar. 
+  achtung genau dieselben drei stufen gibt es bei c nicht — dort gibt es nur  ce/ci  (weich) und  que/qui  (hart). 
+    
+  ge   gi   
+  gue   gui   
+  güe   güi   
+      fachbegriffe erklärt  (1)      aussprache lautlehre   wie die buchstaben klingen. die zeichen zwischen schrägstrichen wie /k/ sind lautschrift, nicht schreibweise.    ">
 <header class="themakopf">
 <h3>Schreibung von Lauten vor e und i (handschriftlich)</h3>
 <button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
@@ -2207,7 +2476,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 </section>
 <div class="tabellenrahmen"><table>
 <tr><th class="zeilenkopf">ge</th><td><span class="form">gi</span></td></tr>
-<tr><th class="zeilenkopf">que</th><td><span class="form">gui</span></td></tr>
+<tr><th class="zeilenkopf">gue</th><td><span class="form">gui</span></td></tr>
 <tr><th class="zeilenkopf">güe</th><td><span class="form">güi</span></td></tr>
 </table></div>
 <details class="begriffe">
@@ -2216,13 +2485,12 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <dt>Aussprache<span class="art">Lautlehre</span></dt><dd>Wie die Buchstaben klingen. Die Zeichen zwischen Schrägstrichen wie /k/ sind Lautschrift, nicht Schreibweise.</dd>
 </dl></details>
 </article>
-<article class="thema" id="spanisch-aussprache-regeln" data-suche="regeln aussprache">
+<article class="thema" id="spanisch-aussprache-regeln" data-suche="regeln aussprache      se pronuncia &#x27;r&#x27; fuerte: cuando hay dos: &#x27;rr&#x27;. ej: perro   se pronuncia &#x27;r&#x27; fuerte: a principio de palabra: ej: roma   se pronuncia &#x27;r&#x27; fuerte: después de l, n, s: ej: alrededor      zuletzt ergänzt am 23.09.2026 · 1 blatt ">
 <header class="themakopf">
 <h3>Regeln von deinem Blatt</h3>
 </header>
 <aside class="regelblock">
 <ul>
-<li>h no se pronuncia</li>
 <li>Se pronuncia &#x27;r&#x27; fuerte: Cuando hay dos: &#x27;rr&#x27;. Ej: perro</li>
 <li>Se pronuncia &#x27;r&#x27; fuerte: A principio de palabra: Ej: Roma</li>
 <li>Se pronuncia &#x27;r&#x27; fuerte: Después de L, N, S: Ej: alrededor</li>
@@ -2274,17 +2542,44 @@ Modus „Grammatik“ dazu und werden in bestehende Themen eingefügt.<br>
     });
   }
 
+  // Suche ohne Akzente: "como" findet "cómo", "γιατρος" findet "γιατρός".
+  const ohneAkzent = (t) => (t || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+  document.querySelectorAll(".thema").forEach((t) => { t.dataset.s = ohneAkzent(t.dataset.suche); });
+  const andere = document.getElementById("andere");
+
   function filtern() {
-    const begriff = suche.value.trim().toLowerCase();
+    const begriff = ohneAkzent(suche.value.trim());
     const block = sichtbarerBlock();
     if (!block) return;
     let treffer = 0;
 
     block.querySelectorAll(".thema").forEach((t) => {
-      const passt = !begriff || (t.dataset.suche || "").includes(begriff);
+      const passt = !begriff || t.dataset.s.includes(begriff);
       t.hidden = !passt;
       if (passt) treffer++;
     });
+    // Treffer in den anderen Sprachen anbieten, statt sie zu verschweigen.
+    if (andere) {
+      andere.textContent = "";
+      const knoepfe = [];
+      document.querySelectorAll(".sprachblock").forEach((b) => {
+        if (!begriff || b === block) return;
+        const n = [...b.querySelectorAll(".thema")].filter((t) => t.dataset.s.includes(begriff)).length;
+        if (!n) return;
+        const knopf = wahl && wahl.querySelector(`button[data-sprache="${b.dataset.sprache}"]`);
+        const k = document.createElement("button");
+        k.type = "button";
+        k.className = "anderesprache";
+        k.dataset.sprache = b.dataset.sprache;
+        k.textContent = (knopf ? knopf.firstChild.textContent : b.dataset.sprache) + " (" + n + ")";
+        k.addEventListener("click", () => knopf && knopf.click());
+        knoepfe.push(k);
+      });
+      if (knoepfe.length) {
+        andere.append(treffer ? "Auch in: " : "Dafür in: ", ...knoepfe);
+      }
+      andere.hidden = !knoepfe.length;
+    }
     // Ein Bereich ohne sichtbares Thema verschwindet mit.
     block.querySelectorAll(".bereich").forEach((b) => {
       b.hidden = !b.querySelector(".thema:not([hidden])");
