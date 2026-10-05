@@ -58,7 +58,7 @@
   }
   .sprachwahl button:hover { border-color: var(--tinte-3); }
   .sprachwahl button[aria-pressed="true"] {
-    background: var(--tinte); color: var(--grund); border-color: var(--tinte);
+    background: var(--sprache); color: var(--flaeche); border-color: var(--sprache);
   }
   .anzahl {
     font-size: .72rem; font-weight: 600; opacity: .65;
@@ -138,7 +138,7 @@
   .bereich { margin-bottom: 34px; }
   .bereich h2 {
     font-family: "IBM Plex Serif", Georgia, serif; font-size: 1.22rem; font-weight: 600;
-    margin: 0 0 12px; padding-bottom: 8px; border-bottom: 2px solid var(--linie);
+    margin: 0 0 12px; padding-bottom: 8px; border-bottom: 2px solid var(--sprache);
     display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px;
   }
   .bereichunter {
@@ -211,7 +211,30 @@
     th, td { padding-right: 16px; }
   }
   .form { font-family: "IBM Plex Serif", Georgia, serif; font-weight: 600; }
-  .endung { font-family: "IBM Plex Serif", Georgia, serif; color: var(--endung); font-weight: 600; }
+  .form .stamm { color: var(--tinte-2); font-weight: 400; }
+  .form .end, .endung { color: var(--sprache); font-weight: 700; }
+  .endung { font-family: "IBM Plex Serif", Georgia, serif; }
+
+  /* Abdecken: Formen verstecken, Antippen deckt eine auf */
+  .themakopf { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .themakopf h3 { margin-right: auto; }
+  .abdecken {
+    font: inherit; font-size: .78rem; font-weight: 600; cursor: pointer;
+    border: 1px solid var(--linie); background: var(--flaeche-2); color: var(--tinte-2);
+    border-radius: 999px; padding: 4px 12px;
+  }
+  .abdecken:hover { border-color: var(--sprache); color: var(--sprache); }
+  .abdecken[aria-pressed="true"] { background: var(--sprache); border-color: var(--sprache); color: var(--flaeche); }
+  .verdeckt td:not(.leer):not(.offen) { cursor: pointer; }
+  .verdeckt td:not(.offen) .form, .verdeckt td:not(.offen) .form *, .verdeckt td:not(.offen) > .endung {
+    color: transparent !important; background: var(--linie-2); border-radius: 5px;
+    user-select: none;
+  }
+  .verdeckt td:not(.offen) .form { box-shadow: inset 0 0 0 1px var(--linie); }
+  .verdeckt td.offen .form { animation: aufdecken .25s ease-out; }
+  @keyframes aufdecken { from { opacity: 0; } to { opacity: 1; } }
+  .abdeckstand { font-size: .75rem; color: var(--tinte-3); font-variant-numeric: tabular-nums; }
+  @media (prefers-reduced-motion: reduce) { .verdeckt td.offen .form { animation: none; } }
   .erklaerung { color: var(--tinte-2); font-size: .85em; }
   td.leer { color: var(--tinte-3); }
   .konflikt { color: var(--warn); background: var(--warn-bg); border-radius: 4px; padding: 0 4px; cursor: help; }
@@ -324,6 +347,31 @@
   }
   footer a { color: var(--akzent); font-weight: 600; text-decoration: none; }
 
+  :root { --sprache: var(--akzent); }
+  [data-sprache="latein"] { --sprache: #a8322b; --akzent: #a8322b; }
+  [data-sprache="spanisch"] { --sprache: #a65800; --akzent: #a65800; }
+  [data-sprache="griechisch"] { --sprache: #1f5ea8; --akzent: #1f5ea8; }
+  [data-sprache="neugriechisch"] { --sprache: #1f5ea8; --akzent: #1f5ea8; }
+  [data-sprache="altgriechisch"] { --sprache: #1f5ea8; --akzent: #1f5ea8; }
+  [data-sprache="englisch"] { --sprache: #0f6e66; --akzent: #0f6e66; }
+  [data-sprache="franzoesisch"] { --sprache: #6a3fa0; --akzent: #6a3fa0; }
+  @media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) [data-sprache="latein"] { --sprache: #f0897d; --akzent: #f0897d; }
+  :root:not([data-theme="light"]) [data-sprache="spanisch"] { --sprache: #f2a744; --akzent: #f2a744; }
+  :root:not([data-theme="light"]) [data-sprache="griechisch"] { --sprache: #7fb1f0; --akzent: #7fb1f0; }
+  :root:not([data-theme="light"]) [data-sprache="neugriechisch"] { --sprache: #7fb1f0; --akzent: #7fb1f0; }
+  :root:not([data-theme="light"]) [data-sprache="altgriechisch"] { --sprache: #7fb1f0; --akzent: #7fb1f0; }
+  :root:not([data-theme="light"]) [data-sprache="englisch"] { --sprache: #5ccfc2; --akzent: #5ccfc2; }
+  :root:not([data-theme="light"]) [data-sprache="franzoesisch"] { --sprache: #b99bea; --akzent: #b99bea; }
+  }
+  :root[data-theme="dark"] [data-sprache="latein"] { --sprache: #f0897d; --akzent: #f0897d; }
+  :root[data-theme="dark"] [data-sprache="spanisch"] { --sprache: #f2a744; --akzent: #f2a744; }
+  :root[data-theme="dark"] [data-sprache="griechisch"] { --sprache: #7fb1f0; --akzent: #7fb1f0; }
+  :root[data-theme="dark"] [data-sprache="neugriechisch"] { --sprache: #7fb1f0; --akzent: #7fb1f0; }
+  :root[data-theme="dark"] [data-sprache="altgriechisch"] { --sprache: #7fb1f0; --akzent: #7fb1f0; }
+  :root[data-theme="dark"] [data-sprache="englisch"] { --sprache: #5ccfc2; --akzent: #5ccfc2; }
+  :root[data-theme="dark"] [data-sprache="franzoesisch"] { --sprache: #b99bea; --akzent: #b99bea; }
+
   @media print {
     body { background: #fff; }
     .sprachwahl, .suchfeld, .verzeichnisklappe, footer { display: none; }
@@ -386,6 +434,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <article class="thema" id="griechisch-artikel-und-substantive-1" data-suche="bestimmter artikel artikel und substantive bestimmter artikel unbestimmter artikel">
 <header class="themakopf">
 <h3>Bestimmter Artikel</h3>
+<button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
 <p class="worum">Der Artikel verrät das Geschlecht — und beugt sich mit.</p>
@@ -721,20 +770,21 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <dl>
 <dt>Bestimmter Artikel<span class="art">Wortart</span></dt><dd>Der Artikel für etwas Bekanntes: el, la, los, las – „der, die, das“.</dd>
 <dt>Unbestimmter Artikel<span class="art">Wortart</span></dt><dd>Der Artikel für etwas Unbekanntes: un, una – „ein, eine“.</dd>
-<dt>Nominativ<span class="art">Kasus</span></dt><dd>Wer oder was? – der Fall des Subjekts.</dd>
-<dt>Singular<span class="art">Numerus</span></dt><dd>Einzahl.</dd>
-<dt>Genitiv<span class="art">Kasus</span></dt><dd>Wessen? – zeigt Zugehörigkeit. In Latein verrät er außerdem die Deklinationsklasse.</dd>
-<dt>Plural<span class="art">Numerus</span></dt><dd>Mehrzahl.</dd>
-<dt>Neutrum<span class="art">Genus</span></dt><dd>Sächliches grammatisches Geschlecht.</dd>
-<dt>Vokativ<span class="art">Kasus</span></dt><dd>Der Anredefall: „Marce!“ – Marcus!</dd>
-<dt>Maskulin<span class="art">Genus</span></dt><dd>Männliches grammatisches Geschlecht.</dd>
 <dt>Akkusativ<span class="art">Kasus</span></dt><dd>Wen oder was? – der Fall des direkten Objekts.</dd>
+<dt>Singular<span class="art">Numerus</span></dt><dd>Einzahl.</dd>
+<dt>Maskulin<span class="art">Genus</span></dt><dd>Männliches grammatisches Geschlecht.</dd>
+<dt>Genitiv<span class="art">Kasus</span></dt><dd>Wessen? – zeigt Zugehörigkeit. In Latein verrät er außerdem die Deklinationsklasse.</dd>
+<dt>Neutrum<span class="art">Genus</span></dt><dd>Sächliches grammatisches Geschlecht.</dd>
+<dt>Nominativ<span class="art">Kasus</span></dt><dd>Wer oder was? – der Fall des Subjekts.</dd>
+<dt>Plural<span class="art">Numerus</span></dt><dd>Mehrzahl.</dd>
+<dt>Vokativ<span class="art">Kasus</span></dt><dd>Der Anredefall: „Marce!“ – Marcus!</dd>
 <dt>Feminin<span class="art">Genus</span></dt><dd>Weibliches grammatisches Geschlecht.</dd>
 </dl></details>
 </article>
 <article class="thema" id="griechisch-artikel-und-substantive-2" data-suche="artikel mit praeposition / zusammengesetzter artikel mit im ins am artikel und substantive artikel mit der präposition σε (singular) zusammengesetzter artikel mit σε (im/ins/am...)">
 <header class="themakopf">
 <h3>artikel mit praeposition / zusammengesetzter artikel mit im ins am</h3>
+<button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
 <p class="worum">σε verschmilzt mit dem Artikel.</p>
@@ -818,15 +868,16 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <dt>Singular<span class="art">Numerus</span></dt><dd>Einzahl.</dd>
 <dt>Genitiv<span class="art">Kasus</span></dt><dd>Wessen? – zeigt Zugehörigkeit. In Latein verrät er außerdem die Deklinationsklasse.</dd>
 <dt>Plural<span class="art">Numerus</span></dt><dd>Mehrzahl.</dd>
+<dt>Neutrum<span class="art">Genus</span></dt><dd>Sächliches grammatisches Geschlecht.</dd>
 <dt>Maskulin<span class="art">Genus</span></dt><dd>Männliches grammatisches Geschlecht.</dd>
 <dt>Akkusativ<span class="art">Kasus</span></dt><dd>Wen oder was? – der Fall des direkten Objekts.</dd>
-<dt>Neutrum<span class="art">Genus</span></dt><dd>Sächliches grammatisches Geschlecht.</dd>
 <dt>Feminin<span class="art">Genus</span></dt><dd>Weibliches grammatisches Geschlecht.</dd>
 </dl></details>
 </article>
 <article class="thema" id="griechisch-artikel-und-substantive-3" data-suche="verschmelzung von präposition σε und bestimmtem artikel (singular) artikel und substantive verschmelzung von präposition σε und bestimmtem artikel (singular)">
 <header class="themakopf">
 <h3>Verschmelzung von Präposition σε und bestimmtem Artikel (Singular)</h3>
+<button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
 <p class="worum">σε verschmilzt mit dem Artikel.</p>
@@ -864,6 +915,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <article class="thema" id="griechisch-artikel-und-substantive-4" data-suche="deklination maskulinum auf -ος artikel und substantive deklination maskulinum auf -ος">
 <header class="themakopf">
 <h3>Deklination Maskulinum auf -ος</h3>
+<button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
 <p class="worum">Der Artikel verrät das Geschlecht — und beugt sich mit.</p>
@@ -886,13 +938,13 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <p class="achtung"><span class="etikett">Achtung</span>Drei Schreibweisen ergeben denselben i-Laut: <strong>ι, η, οι, ει</strong>. Beim Schreiben hilft nur Vokabellernen.</p>
 </section>
 <div class="tabellenrahmen"><table>
-<tr><th class="zeilenkopf">Nom. Sg.</th><td><span class="form">βιβλίο</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: γιατρός">≠</span></td></tr>
-<tr><th class="zeilenkopf">Gen. Sg.</th><td><span class="form">βιβλίου</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: γιατρού">≠</span></td></tr>
-<tr><th class="zeilenkopf">Akk. Sg.</th><td><span class="form">βιβλίο</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: γιατρό">≠</span></td></tr>
+<tr><th class="zeilenkopf">Nom. Sg.</th><td><span class="form"><span class="stamm">βιβλί</span><span class="end">ο</span></span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: γιατρός">≠</span></td></tr>
+<tr><th class="zeilenkopf">Gen. Sg.</th><td><span class="form"><span class="stamm">βιβλί</span><span class="end">ου</span></span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: γιατρού">≠</span></td></tr>
+<tr><th class="zeilenkopf">Akk. Sg.</th><td><span class="form"><span class="stamm">βιβλί</span><span class="end">ο</span></span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: γιατρό">≠</span></td></tr>
 <tr><th class="zeilenkopf">Vok. Sg.</th><td><span class="form">γιατρέ</span> <span class="endung">-ε</span></td></tr>
-<tr><th class="zeilenkopf">Nom. Pl.</th><td><span class="form">βιβλία</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: γιατροί">≠</span></td></tr>
-<tr><th class="zeilenkopf">Gen. Pl.</th><td><span class="form">βιβλίων</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: γιατρών">≠</span></td></tr>
-<tr><th class="zeilenkopf">Akk. Pl.</th><td><span class="form">βιβλία</span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: γιατρούς">≠</span></td></tr>
+<tr><th class="zeilenkopf">Nom. Pl.</th><td><span class="form"><span class="stamm">βιβλί</span><span class="end">α</span></span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: γιατροί">≠</span></td></tr>
+<tr><th class="zeilenkopf">Gen. Pl.</th><td><span class="form"><span class="stamm">βιβλί</span><span class="end">ων</span></span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: γιατρών">≠</span></td></tr>
+<tr><th class="zeilenkopf">Akk. Pl.</th><td><span class="form"><span class="stamm">βιβλί</span><span class="end">α</span></span> <span class="konflikt" title="Weicht von einer früheren Lieferung ab: γιατρούς">≠</span></td></tr>
 <tr><th class="zeilenkopf">Vok. Pl.</th><td><span class="form">γιατροί</span> <span class="endung">-οι</span></td></tr>
 <tr><th class="zeilenkopf">Nom. Sg. -ης</th><td><span class="form">μαθητής</span> <span class="endung">-ης</span></td></tr>
 <tr><th class="zeilenkopf">Gen. Sg. -ης</th><td><span class="form">μαθητή</span> <span class="endung">-η</span></td></tr>
@@ -900,12 +952,12 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <tr><th class="zeilenkopf">Nom. Pl. -ης</th><td><span class="form">μαθητές</span> <span class="endung">-ες</span></td></tr>
 <tr><th class="zeilenkopf">Gen. Pl. -ης</th><td><span class="form">μαθητών</span> <span class="endung">-ων</span></td></tr>
 <tr><th class="zeilenkopf">Akk. Pl. -ης</th><td><span class="form">μαθητές</span> <span class="endung">-ες</span></td></tr>
-<tr><th class="zeilenkopf">Nom. Sg. -ας</th><td><span class="form">μήνας</span></td></tr>
-<tr><th class="zeilenkopf">Gen. Sg. -ας</th><td><span class="form">μήνα</span></td></tr>
-<tr><th class="zeilenkopf">Akk. Sg. -ας</th><td><span class="form">μήνα</span></td></tr>
-<tr><th class="zeilenkopf">Nom. Pl. -ας</th><td><span class="form">μήνες</span></td></tr>
+<tr><th class="zeilenkopf">Nom. Sg. -ας</th><td><span class="form"><span class="stamm">μήν</span><span class="end">ας</span></span></td></tr>
+<tr><th class="zeilenkopf">Gen. Sg. -ας</th><td><span class="form"><span class="stamm">μήν</span><span class="end">α</span></span></td></tr>
+<tr><th class="zeilenkopf">Akk. Sg. -ας</th><td><span class="form"><span class="stamm">μήν</span><span class="end">α</span></span></td></tr>
+<tr><th class="zeilenkopf">Nom. Pl. -ας</th><td><span class="form"><span class="stamm">μήν</span><span class="end">ες</span></span></td></tr>
 <tr><th class="zeilenkopf">Gen. Pl. -ας</th><td><span class="form">μηνών</span> <span class="endung">-ων</span></td></tr>
-<tr><th class="zeilenkopf">Akk. Pl. -ας</th><td><span class="form">μήνες</span></td></tr>
+<tr><th class="zeilenkopf">Akk. Pl. -ας</th><td><span class="form"><span class="stamm">μήν</span><span class="end">ες</span></span></td></tr>
 <tr><th class="zeilenkopf">Nom. Sg. -ες</th><td><span class="form">καφές</span> <span class="endung">-ες</span></td></tr>
 <tr><th class="zeilenkopf">Gen. Sg. -ες</th><td><span class="form">καφέ</span> <span class="endung">-ε</span></td></tr>
 <tr><th class="zeilenkopf">Akk. Sg. -ες</th><td><span class="form">καφέ</span> <span class="endung">-ε</span></td></tr>
@@ -924,12 +976,12 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <dl>
 <dt>Maskulin<span class="art">Genus</span></dt><dd>Männliches grammatisches Geschlecht.</dd>
 <dt>Deklination<span class="art">Formenlehre</span></dt><dd>Das Beugen von Substantiven, Adjektiven und Pronomen nach Fall, Zahl und Geschlecht.</dd>
-<dt>Vokativ<span class="art">Kasus</span></dt><dd>Der Anredefall: „Marce!“ – Marcus!</dd>
-<dt>Singular<span class="art">Numerus</span></dt><dd>Einzahl.</dd>
 <dt>Genitiv<span class="art">Kasus</span></dt><dd>Wessen? – zeigt Zugehörigkeit. In Latein verrät er außerdem die Deklinationsklasse.</dd>
 <dt>Plural<span class="art">Numerus</span></dt><dd>Mehrzahl.</dd>
 <dt>Akkusativ<span class="art">Kasus</span></dt><dd>Wen oder was? – der Fall des direkten Objekts.</dd>
+<dt>Singular<span class="art">Numerus</span></dt><dd>Einzahl.</dd>
 <dt>Nominativ<span class="art">Kasus</span></dt><dd>Wer oder was? – der Fall des Subjekts.</dd>
+<dt>Vokativ<span class="art">Kasus</span></dt><dd>Der Anredefall: „Marce!“ – Marcus!</dd>
 </dl></details>
 </article>
 <article class="thema" id="griechisch-artikel-und-substantive-regeln" data-suche="regeln artikel und substantive">
@@ -1008,6 +1060,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <article class="thema" id="griechisch-fragewoerter" data-suche="fragewörter übersicht der wichtigsten fragewörter">
 <header class="themakopf">
 <h3>Fragewörter</h3>
+<button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
 <p class="worum">Die Fragewörter — ein Teil davon beugt sich.</p>
@@ -1035,6 +1088,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <article class="thema" id="griechisch-personalpronomen" data-suche="personalpronomen personalpronomen (starke und schwache formen)">
 <header class="themakopf">
 <h3>Personalpronomen</h3>
+<button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
 <p class="worum">Personalpronomen gibt es in einer starken und einer schwachen Form.</p>
@@ -1087,6 +1141,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <article class="thema" id="griechisch-zahlen" data-suche="zahlen kardinal- und ordinalzahlen">
 <header class="themakopf">
 <h3>Zahlen</h3>
+<button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
 <p class="worum">Die Zahlen — drei davon beugen sich.</p>
@@ -1115,6 +1170,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <article class="thema" id="griechisch-aussprache-1" data-suche="das alphabet aussprache das alphabet">
 <header class="themakopf">
 <h3>Das Alphabet</h3>
+<button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
 <p class="worum">Das griechische Alphabet — 24 Buchstaben, von denen du die meisten schon kennst.</p>
@@ -1217,6 +1273,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <article class="thema" id="griechisch-aussprache-2" data-suche="vokalkombinationen / vokalkombinationen diphthonge aussprache vokalkombinationen vokalkombinationen (diphthonge)">
 <header class="themakopf">
 <h3>vokalkombinationen / vokalkombinationen diphthonge</h3>
+<button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
 <p class="worum">Zwei Vokale, ein Laut — und bei αυ/ευ hängt er vom nächsten Buchstaben ab.</p>
@@ -1266,6 +1323,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <article class="thema" id="griechisch-aussprache-3" data-suche="konsonantenkombinationen / konsonantendehnungen kombinationen aussprache konsonantenkombinationen konsonantendehnungen und -kombinationen">
 <header class="themakopf">
 <h3>konsonantenkombinationen / konsonantendehnungen kombinationen</h3>
+<button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
 <p class="worum">Laute, die es als einzelnen Buchstaben nicht gibt.</p>
@@ -1311,6 +1369,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <article class="thema" id="griechisch-aussprache-4" data-suche="schreibweisen für vokallaute aussprache schreibweisen für vokallaute">
 <header class="themakopf">
 <h3>Schreibweisen für Vokallaute</h3>
+<button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <div class="tabellenrahmen"><table>
 <tr><th class="zeilenkopf">Laut i</th><td><span class="form">η</span></td></tr>
@@ -1384,6 +1443,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <article class="thema" id="latein-konjunktiv" data-suche="konjunktiv konjunktiv präsens aktiv — laudare konjunktiv imperfekt aktiv — laudare">
 <header class="themakopf">
 <h3>Konjunktiv</h3>
+<button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
 <p class="worum">Der Konjunktiv — die Form für alles, was nicht einfach Tatsache ist.</p>
@@ -1402,28 +1462,28 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <th>laudare · Imperfekt</th>
 </tr></thead><tbody>
 <tr><th class="zeilenkopf">1. Sg.</th>
-<td><span class="form">laudem</span></td>
-<td><span class="form">laudarem</span></td>
+<td><span class="form"><span class="stamm">laude</span><span class="end">m</span></span></td>
+<td><span class="form"><span class="stamm">laudare</span><span class="end">m</span></span></td>
 </tr>
 <tr><th class="zeilenkopf">2. Sg.</th>
-<td><span class="form">laudes</span></td>
-<td><span class="form">laudares</span></td>
+<td><span class="form"><span class="stamm">laude</span><span class="end">s</span></span></td>
+<td><span class="form"><span class="stamm">laudare</span><span class="end">s</span></span></td>
 </tr>
 <tr><th class="zeilenkopf">3. Sg.</th>
-<td><span class="form">laudet</span></td>
-<td><span class="form">laudaret</span></td>
+<td><span class="form"><span class="stamm">laude</span><span class="end">t</span></span></td>
+<td><span class="form"><span class="stamm">laudare</span><span class="end">t</span></span></td>
 </tr>
 <tr><th class="zeilenkopf">1. Pl.</th>
-<td><span class="form">laudemus</span></td>
-<td><span class="form">laudaremus</span></td>
+<td><span class="form"><span class="stamm">laude</span><span class="end">mus</span></span></td>
+<td><span class="form"><span class="stamm">laudare</span><span class="end">mus</span></span></td>
 </tr>
 <tr><th class="zeilenkopf">2. Pl.</th>
-<td><span class="form">laudetis</span></td>
-<td><span class="form">laudaretis</span></td>
+<td><span class="form"><span class="stamm">laude</span><span class="end">tis</span></span></td>
+<td><span class="form"><span class="stamm">laudare</span><span class="end">tis</span></span></td>
 </tr>
 <tr><th class="zeilenkopf">3. Pl.</th>
-<td><span class="form">laudent</span></td>
-<td><span class="form">laudarent</span></td>
+<td><span class="form"><span class="stamm">laude</span><span class="end">nt</span></span></td>
+<td><span class="form"><span class="stamm">laudare</span><span class="end">nt</span></span></td>
 </tr>
 </tbody></table></div>
 <dl class="regeln">
@@ -1487,6 +1547,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <article class="thema" id="spanisch-praesens" data-suche="präsens präsens von ser (sein) verben auf -er (comer) verben auf -ir (vivir) regelmäßige verben auf -ar">
 <header class="themakopf">
 <h3>Präsens</h3>
+<button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
 <p class="worum">Das regelmäßige Muster der Verben auf <strong>-ar</strong>.</p>
@@ -1527,39 +1588,39 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 </tr></thead><tbody>
 <tr><th class="zeilenkopf">1. Sg.</th>
 <td><span class="form">soy</span></td>
-<td><span class="form">como</span></td>
-<td><span class="form">vivo</span></td>
-<td><span class="form">hablo</span></td>
+<td><span class="form"><span class="stamm">com</span><span class="end">o</span></span></td>
+<td><span class="form"><span class="stamm">viv</span><span class="end">o</span></span></td>
+<td><span class="form"><span class="stamm">habl</span><span class="end">o</span></span></td>
 </tr>
 <tr><th class="zeilenkopf">2. Sg.</th>
 <td><span class="form">eres</span></td>
-<td><span class="form">comes</span></td>
-<td><span class="form">vives</span></td>
-<td><span class="form">hablas</span></td>
+<td><span class="form"><span class="stamm">com</span><span class="end">es</span></span></td>
+<td><span class="form"><span class="stamm">viv</span><span class="end">es</span></span></td>
+<td><span class="form"><span class="stamm">habl</span><span class="end">as</span></span></td>
 </tr>
 <tr><th class="zeilenkopf">3. Sg.</th>
 <td><span class="form">es</span></td>
-<td><span class="form">come</span></td>
-<td><span class="form">vive</span></td>
-<td><span class="form">habla</span></td>
+<td><span class="form"><span class="stamm">com</span><span class="end">e</span></span></td>
+<td><span class="form"><span class="stamm">viv</span><span class="end">e</span></span></td>
+<td><span class="form"><span class="stamm">habl</span><span class="end">a</span></span></td>
 </tr>
 <tr><th class="zeilenkopf">1. Pl.</th>
 <td><span class="form">somos</span></td>
-<td><span class="form">comemos</span></td>
-<td><span class="form">vivimos</span></td>
-<td><span class="form">hablamos</span></td>
+<td><span class="form"><span class="stamm">com</span><span class="end">emos</span></span></td>
+<td><span class="form"><span class="stamm">viv</span><span class="end">imos</span></span></td>
+<td><span class="form"><span class="stamm">habl</span><span class="end">amos</span></span></td>
 </tr>
 <tr><th class="zeilenkopf">2. Pl.</th>
 <td><span class="form">sois</span></td>
-<td><span class="form">coméis</span></td>
-<td><span class="form">vivís</span></td>
-<td><span class="form">habláis</span></td>
+<td><span class="form"><span class="stamm">com</span><span class="end">éis</span></span></td>
+<td><span class="form"><span class="stamm">viv</span><span class="end">ís</span></span></td>
+<td><span class="form"><span class="stamm">habl</span><span class="end">áis</span></span></td>
 </tr>
 <tr><th class="zeilenkopf">3. Pl.</th>
 <td><span class="form">son</span></td>
-<td><span class="form">comen</span></td>
-<td><span class="form">viven</span></td>
-<td><span class="form">hablan</span></td>
+<td><span class="form"><span class="stamm">com</span><span class="end">en</span></span></td>
+<td><span class="form"><span class="stamm">viv</span><span class="end">en</span></span></td>
+<td><span class="form"><span class="stamm">habl</span><span class="end">an</span></span></td>
 </tr>
 </tbody></table></div>
 <dl class="regeln">
@@ -1601,6 +1662,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <article class="thema" id="spanisch-articulos-y-sustantivos" data-suche="artículos y sustantivos maskuline artikel und substantive feminine artikel und substantive unbestimmter artikel und pluralbildung bei substantiven verwendung von hay">
 <header class="themakopf">
 <h3>artículos y sustantivos</h3>
+<button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
 <p class="worum">Der bestimmte Artikel — „der, die, das“ auf Spanisch.</p>
@@ -1635,29 +1697,29 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 </section>
 <h4 class="untertabelle">Maskuline Artikel und Substantive</h4>
 <div class="tabellenrahmen"><table>
-<tr><th class="zeilenkopf">Sg.</th><td><span class="form">el amigo</span></td></tr>
+<tr><th class="zeilenkopf">Sg.</th><td><span class="form"><span class="stamm">el amig</span><span class="end">o</span></span></td></tr>
 <tr><th class="zeilenkopf">Sg.</th><td><span class="form">el profesor</span></td></tr>
-<tr><th class="zeilenkopf">Pl.</th><td><span class="form">los amigos</span></td></tr>
-<tr><th class="zeilenkopf">Pl.</th><td><span class="form">los profesores</span></td></tr>
+<tr><th class="zeilenkopf">Pl.</th><td><span class="form"><span class="stamm">los amig</span><span class="end">os</span></span></td></tr>
+<tr><th class="zeilenkopf">Pl.</th><td><span class="form"><span class="stamm">los profesor</span><span class="end">es</span></span></td></tr>
 </table></div>
 <h4 class="untertabelle">Feminine Artikel und Substantive</h4>
 <div class="tabellenrahmen"><table>
-<tr><th class="zeilenkopf">Sg.</th><td><span class="form">la amiga</span></td></tr>
+<tr><th class="zeilenkopf">Sg.</th><td><span class="form"><span class="stamm">la amig</span><span class="end">a</span></span></td></tr>
 <tr><th class="zeilenkopf">Sg.</th><td><span class="form">la ciudad</span></td></tr>
-<tr><th class="zeilenkopf">Pl.</th><td><span class="form">las amigas</span></td></tr>
-<tr><th class="zeilenkopf">Pl.</th><td><span class="form">las ciudades</span></td></tr>
-<tr><th class="zeilenkopf">Pl.</th><td><span class="form">las universidades</span></td></tr>
+<tr><th class="zeilenkopf">Pl.</th><td><span class="form"><span class="stamm">las amig</span><span class="end">as</span></span></td></tr>
+<tr><th class="zeilenkopf">Pl.</th><td><span class="form"><span class="stamm">las ciudad</span><span class="end">es</span></span></td></tr>
+<tr><th class="zeilenkopf">Pl.</th><td><span class="form"><span class="stamm">las universidad</span><span class="end">es</span></span></td></tr>
 </table></div>
 <h4 class="untertabelle">Unbestimmter Artikel und Pluralbildung bei Substantiven</h4>
 <div class="tabellenrahmen"><table>
-<tr><th class="zeilenkopf">Nom. Sg.</th><td><span class="form">un amigo</span> <span class="erklaerung">männlich Singular auf Vokal</span></td></tr>
-<tr><th class="zeilenkopf">Nom. Pl.</th><td><span class="form">amigos</span> <span class="erklaerung">männlich Plural auf Vokal</span></td></tr>
+<tr><th class="zeilenkopf">Nom. Sg.</th><td><span class="form"><span class="stamm">un amig</span><span class="end">o</span></span> <span class="erklaerung">männlich Singular auf Vokal</span></td></tr>
+<tr><th class="zeilenkopf">Nom. Pl.</th><td><span class="form"><span class="stamm">amig</span><span class="end">os</span></span> <span class="erklaerung">männlich Plural auf Vokal</span></td></tr>
 <tr><th class="zeilenkopf">Nom. Sg.</th><td><span class="form">un profesor</span> <span class="erklaerung">männlich Singular auf Konsonant</span></td></tr>
-<tr><th class="zeilenkopf">Nom. Pl.</th><td><span class="form">profesores</span> <span class="erklaerung">männlich Plural auf Konsonant</span></td></tr>
-<tr><th class="zeilenkopf">Nom. Sg.</th><td><span class="form">una amiga</span> <span class="erklaerung">weiblich Singular auf Vokal</span></td></tr>
-<tr><th class="zeilenkopf">Nom. Pl.</th><td><span class="form">amigas</span> <span class="erklaerung">weiblich Plural auf Vokal</span></td></tr>
+<tr><th class="zeilenkopf">Nom. Pl.</th><td><span class="form"><span class="stamm">profesor</span><span class="end">es</span></span> <span class="erklaerung">männlich Plural auf Konsonant</span></td></tr>
+<tr><th class="zeilenkopf">Nom. Sg.</th><td><span class="form"><span class="stamm">una amig</span><span class="end">a</span></span> <span class="erklaerung">weiblich Singular auf Vokal</span></td></tr>
+<tr><th class="zeilenkopf">Nom. Pl.</th><td><span class="form"><span class="stamm">amig</span><span class="end">as</span></span> <span class="erklaerung">weiblich Plural auf Vokal</span></td></tr>
 <tr><th class="zeilenkopf">Nom. Sg.</th><td><span class="form">una ciudad</span> <span class="erklaerung">weiblich Singular auf Konsonant</span></td></tr>
-<tr><th class="zeilenkopf">Nom. Pl.</th><td><span class="form">ciudades</span> <span class="erklaerung">weiblich Plural auf Konsonant</span></td></tr>
+<tr><th class="zeilenkopf">Nom. Pl.</th><td><span class="form"><span class="stamm">ciudad</span><span class="end">es</span></span> <span class="erklaerung">weiblich Plural auf Konsonant</span></td></tr>
 <tr><th class="zeilenkopf">unos / unas</th><td><span class="form">unos / unas</span> <span class="erklaerung">einige</span></td></tr>
 </table></div>
 <h4 class="untertabelle">Verwendung von hay</h4>
@@ -1681,8 +1743,8 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <dt>Plural<span class="art">Numerus</span></dt><dd>Mehrzahl.</dd>
 <dt>Bestimmter Artikel<span class="art">Wortart</span></dt><dd>Der Artikel für etwas Bekanntes: el, la, los, las – „der, die, das“.</dd>
 <dt>Unbestimmter Artikel<span class="art">Wortart</span></dt><dd>Der Artikel für etwas Unbekanntes: un, una – „ein, eine“.</dd>
-<dt>Nominativ<span class="art">Kasus</span></dt><dd>Wer oder was? – der Fall des Subjekts.</dd>
 <dt>Singular<span class="art">Numerus</span></dt><dd>Einzahl.</dd>
+<dt>Nominativ<span class="art">Kasus</span></dt><dd>Wer oder was? – der Fall des Subjekts.</dd>
 </dl></details>
 <p class="quelle">Zuletzt ergänzt am 23.09.2026 · 2 Blätter</p>
 </article>
@@ -1692,6 +1754,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <article class="thema" id="spanisch-fragewoerter" data-suche="fragewörter die fragewörter | las palabras interrogativas wendung ¿qué tal?">
 <header class="themakopf">
 <h3>Fragewörter</h3>
+<button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
 <p class="worum">Die Fragewörter — und warum sie einen Akzent tragen.</p>
@@ -1761,6 +1824,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <article class="thema" id="spanisch-personalpronomen" data-suche="personalpronomen subjektpronomen">
 <header class="themakopf">
 <h3>Personalpronomen</h3>
+<button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
 <p class="worum">Die Personalpronomen — und warum du sie meistens weglässt.</p>
@@ -1789,6 +1853,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <article class="thema" id="spanisch-los-numeros" data-suche="los números grundzahlen 0-9 zahlen 10-19 zahlen 20-29 zahlen 30-41 zehnerzahlen 50-90 hunderterzahlen große zahlen schreibweise der zahlen">
 <header class="themakopf">
 <h3>Los números</h3>
+<button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
 <p class="worum">Die Zahlen — bis 29 zusammen, ab 31 getrennt.</p>
@@ -1848,16 +1913,16 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 </table></div>
 <h4 class="untertabelle">Zahlen 20-29</h4>
 <div class="tabellenrahmen"><table>
-<tr><th class="zeilenkopf">20</th><td><span class="form">veinte</span></td></tr>
-<tr><th class="zeilenkopf">21</th><td><span class="form">veintiuno</span></td></tr>
-<tr><th class="zeilenkopf">22</th><td><span class="form">veintidós</span></td></tr>
-<tr><th class="zeilenkopf">23</th><td><span class="form">veintitrés</span></td></tr>
-<tr><th class="zeilenkopf">24</th><td><span class="form">veinticuatro</span></td></tr>
-<tr><th class="zeilenkopf">25</th><td><span class="form">veinticinco</span></td></tr>
-<tr><th class="zeilenkopf">26</th><td><span class="form">veintiséis</span></td></tr>
-<tr><th class="zeilenkopf">27</th><td><span class="form">veintisiete</span></td></tr>
-<tr><th class="zeilenkopf">28</th><td><span class="form">veintiocho</span></td></tr>
-<tr><th class="zeilenkopf">29</th><td><span class="form">veintinueve</span></td></tr>
+<tr><th class="zeilenkopf">20</th><td><span class="form"><span class="stamm">veint</span><span class="end">e</span></span></td></tr>
+<tr><th class="zeilenkopf">21</th><td><span class="form"><span class="stamm">veint</span><span class="end">iuno</span></span></td></tr>
+<tr><th class="zeilenkopf">22</th><td><span class="form"><span class="stamm">veint</span><span class="end">idós</span></span></td></tr>
+<tr><th class="zeilenkopf">23</th><td><span class="form"><span class="stamm">veint</span><span class="end">itrés</span></span></td></tr>
+<tr><th class="zeilenkopf">24</th><td><span class="form"><span class="stamm">veint</span><span class="end">icuatro</span></span></td></tr>
+<tr><th class="zeilenkopf">25</th><td><span class="form"><span class="stamm">veint</span><span class="end">icinco</span></span></td></tr>
+<tr><th class="zeilenkopf">26</th><td><span class="form"><span class="stamm">veint</span><span class="end">iséis</span></span></td></tr>
+<tr><th class="zeilenkopf">27</th><td><span class="form"><span class="stamm">veint</span><span class="end">isiete</span></span></td></tr>
+<tr><th class="zeilenkopf">28</th><td><span class="form"><span class="stamm">veint</span><span class="end">iocho</span></span></td></tr>
+<tr><th class="zeilenkopf">29</th><td><span class="form"><span class="stamm">veint</span><span class="end">inueve</span></span></td></tr>
 </table></div>
 <h4 class="untertabelle">Zahlen 30-41</h4>
 <div class="tabellenrahmen"><table>
@@ -1926,6 +1991,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <article class="thema" id="spanisch-aussprache-1" data-suche="aussprache von /k/ aussprache aussprache von /k/">
 <header class="themakopf">
 <h3>Aussprache von /k/</h3>
+<button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
 <p class="worum">Wann klingt geschriebenes c wie ein k?</p>
@@ -1962,6 +2028,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <article class="thema" id="spanisch-aussprache-2" data-suche="aussprache von /θ/ aussprache aussprache von /θ/">
 <header class="themakopf">
 <h3>Aussprache von /θ/</h3>
+<button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
 <p class="worum">Der Lispel-Laut — geschrieben mal z, mal c.</p>
@@ -2000,6 +2067,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <article class="thema" id="spanisch-aussprache-3" data-suche="aussprache von /x/ aussprache aussprache von /x/">
 <header class="themakopf">
 <h3>Aussprache von /x/</h3>
+<button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
 <p class="worum">Der Rachenlaut wie in „Bach“ — geschrieben j oder g.</p>
@@ -2027,6 +2095,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <article class="thema" id="spanisch-aussprache-4" data-suche="aussprache von /g/ aussprache aussprache von /g/">
 <header class="themakopf">
 <h3>Aussprache von /g/</h3>
+<button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
 <p class="worum">Wann klingt g wie unser g?</p>
@@ -2054,6 +2123,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <article class="thema" id="spanisch-aussprache-5" data-suche="aussprache von h aussprache aussprache von h">
 <header class="themakopf">
 <h3>Aussprache von h</h3>
+<button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
 <p class="worum">Das h wird nie gesprochen.</p>
@@ -2075,6 +2145,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <article class="thema" id="spanisch-aussprache-6" data-suche="aussprache von /rr/ aussprache aussprache von /rr/">
 <header class="themakopf">
 <h3>Aussprache von /rr/</h3>
+<button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
 <p class="worum">Wann wird das r gerollt?</p>
@@ -2097,6 +2168,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <article class="thema" id="spanisch-aussprache-7" data-suche="regeln für c und g (handschriftlich) aussprache regeln für c und g (handschriftlich)">
 <header class="themakopf">
 <h3>Regeln für c und g (handschriftlich)</h3>
+<button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
 <p class="worum">Deine Merknotiz: c verzweigt je nach folgendem Vokal.</p>
@@ -2121,6 +2193,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 <article class="thema" id="spanisch-aussprache-8" data-suche="schreibung von lauten vor e und i (handschriftlich) aussprache schreibung von lauten vor e und i (handschriftlich)">
 <header class="themakopf">
 <h3>Schreibung von Lauten vor e und i (handschriftlich)</h3>
+<button type="button" class="abdecken" aria-pressed="false" title="Formen verstecken und einzeln aufdecken">Abdecken</button>
 </header>
 <section class="lernen">
 <p class="worum">Deine Merknotiz: die Schreibtricks vor e und i.</p>
@@ -2162,7 +2235,7 @@ zusammengeführt. Gleiche Themen wachsen zusammen, statt sich zu vermehren.</p>
 </div>
 
 <footer>
-Automatisch erzeugt am 03.10.2026. Neue Tabellen kommen über die Upload-Seite im
+Automatisch erzeugt am 05.10.2026. Neue Tabellen kommen über die Upload-Seite im
 Modus „Grammatik“ dazu und werden in bestehende Themen eingefügt.<br>
 <a href="index.html">← Zum Scanner</a>
 </footer>
@@ -2230,6 +2303,39 @@ Modus „Grammatik“ dazu und werden in bestehende Themen eingefügt.<br>
   }
 
   if (suche) suche.addEventListener("input", filtern);
+
+  // Abdecken: Formen einer Karte verstecken, Antippen deckt eine auf.
+  function abdeckstand(karte) {
+    const knopf = karte.querySelector(".abdecken");
+    const alle = karte.querySelectorAll("td:not(.leer)");
+    const offen = karte.querySelectorAll("td.offen:not(.leer)");
+    let stand = karte.querySelector(".abdeckstand");
+    if (!karte.classList.contains("verdeckt")) { if (stand) stand.remove(); return; }
+    if (!stand) {
+      stand = document.createElement("span");
+      stand.className = "abdeckstand";
+      knopf.before(stand);
+    }
+    stand.textContent = offen.length + " / " + alle.length + " aufgedeckt";
+  }
+  document.addEventListener("click", (ev) => {
+    const knopf = ev.target.closest(".abdecken");
+    if (knopf) {
+      const karte = knopf.closest(".thema");
+      const an = !karte.classList.contains("verdeckt");
+      karte.classList.toggle("verdeckt", an);
+      karte.querySelectorAll("td.offen").forEach((td) => td.classList.remove("offen"));
+      knopf.setAttribute("aria-pressed", String(an));
+      knopf.textContent = an ? "Alle zeigen" : "Abdecken";
+      abdeckstand(karte);
+      return;
+    }
+    const zelle = ev.target.closest(".verdeckt td:not(.leer)");
+    if (zelle) {
+      zelle.classList.toggle("offen");
+      abdeckstand(zelle.closest(".thema"));
+    }
+  });
 
   // Am Handy nach dem Sprung das Verzeichnis zuklappen, damit der Inhalt
   // nicht hinter der Liste steht.
